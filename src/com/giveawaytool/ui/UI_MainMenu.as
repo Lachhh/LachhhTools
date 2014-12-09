@@ -49,6 +49,8 @@ package com.giveawaytool.ui {
 			registerClick(lachhhBtn, onLachhh);
 			registerClick(shareBtn, onShare);
 			registerClick(backBtn, onBack);
+			registerClick(githubBtn, onGitHub);
+			
 			
 			refresh();
 			SwfExporterToFileOnDisk.errorCallback = new Callback(onError, this, null);
@@ -57,6 +59,10 @@ package com.giveawaytool.ui {
 			AnimationManager.factoryCache.ClearCache();
 			renderComponent.animView.gotoAndStop(1);
 			//flashNewWinner();
+		}
+
+		private function onGitHub() : void {
+			Utils.navigateToURLAndRecord("https://github.com/Lachhh/LachhhGiveawayTool");
 		}
 
 		private function onShare() : void {
@@ -137,6 +143,7 @@ package com.giveawaytool.ui {
 			setNameOfDynamicBtn(tutorialBtn, "Tutorial");
 			setNameOfDynamicBtn(musicBtn, "Music From\nFamilyJules7x");
 			setNameOfDynamicBtn(lachhhBtn, "Lachhh's\nTwitch");
+			setNameOfDynamicBtn(githubBtn, "Open Source\nOn Github");	
 			
 			//trace(visual.stage.nativeWindow.width);
     		//trace(visual.stage.nativeWindow.height);
@@ -155,7 +162,6 @@ package com.giveawaytool.ui {
 			}
 			
 			versionTxt.text = "Version " + VersionUtils.getApplicationVersion();
-			
 		}
 		
 		public function flashNewWinner():void {
@@ -185,6 +191,8 @@ package com.giveawaytool.ui {
 		
 		public function get backBtn() : MovieClip { return visual.getChildByName("backBtn") as MovieClip;}
 		public function get shareBtn() : MovieClip { return visual.getChildByName("shareBtn") as MovieClip;}
+		public function get githubBtn() : MovieClip { return visual.getChildByName("githubBtn") as MovieClip;}
+		
 		
 		
 		public function get versionTxt() : TextField { return visual.getChildByName("versionTxt") as TextField;}

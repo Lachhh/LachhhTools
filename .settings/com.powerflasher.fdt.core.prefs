@@ -19,7 +19,7 @@ com.powerflasher.fdt.core.mobile.AirDesktop.AVAILABLE.EXTENSIONS=
 com.powerflasher.fdt.core.mobile.AirDesktop.CUSTOM.ADT.CMD.LINE=${package} ${signing} ${target} ${connection} ${sampler} ${provision} ${output} ${content} ${icons}
 com.powerflasher.fdt.core.mobile.AirDesktop.CUSTOMIZE.ADT.ARGS=false
 com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.LOCATION=release/TwitchGiveawayTool.air
-com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.PRE.PACKAGE.LAUNCHER=TT_Updater
+com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.PRE.PACKAGE.LAUNCHER=LGT-Updater
 com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.TYPE.AIR.DESKTOP=AIR
 com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.114x114=docs/Logos/Logos1140003.png
 com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.128x128=docs/Logos/Logos1280002.png
@@ -32,7 +32,7 @@ com.powerflasher.fdt.core.mobile.AirDesktop.MOBILE.DESCRIPTOR=bin/TwitchGiveaway
 com.powerflasher.fdt.core.mobile.AirDesktop.PACKAGE.CONTENT=bin/TwitchGiveawayTool-app.xml > TwitchGiveawayTool-app.xml;bin/TwitchGiveawayTool.swf > TwitchGiveawayTool.swf;bin/CustomAnimationExamples;
 com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.CERTIFICATE=docs/certificates/lachhhCertificates.p12
 com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.PWD=KFOcIIbyXcQdmx2bZQM3/g\=\=
-com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.REMEMBER.PWD=true
+com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.REMEMBER.PWD=false
 com.powerflasher.fdt.core.mobile.AirDesktop.SWFPATH=
 com.powerflasher.fdt.core.mobile.Android.ACTIVE=false
 com.powerflasher.fdt.core.mobile.Android.AVAILABLE.EXTENSIONS=
