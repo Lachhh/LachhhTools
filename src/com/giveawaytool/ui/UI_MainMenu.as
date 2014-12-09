@@ -102,7 +102,7 @@ package com.giveawaytool.ui {
 		}
 		
 		private function onCredits() : void {
-			Utils.navigateToURLAndRecord(VersionInfo.URL_TWITCH_FAMILYJULES_7X);
+			Utils.navigateToURLAndRecord(VersionInfo.URL_TWITCH_LF);
 
 		}
 

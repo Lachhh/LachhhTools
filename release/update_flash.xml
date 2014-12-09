@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
-	<versionNumber>1.1.6</versionNumber> 
+	<versionNumber>1.1.7</versionNumber> 
 	<url>http://lachhhAndFriends.com/twitchTool/TwitchGiveawayTool.air</url>
 	<id>com.lachhh.twitchgiveaway</id>
 	<description><![CDATA[
