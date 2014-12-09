@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
+	<versionNumber>1.1.5</versionNumber> 
+	<url>http://lachhhAndFriends.com/twitchTool/TwitchGiveawayTool.air</url>
+	<id>com.lachhh.twitchgiveaway</id>
+	<description><![CDATA[
+What's new:
+-You can now send tweet directly from the application. 
+-Added Custom Animation 
+  ]]></description>
+</update>
