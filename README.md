@@ -1,6 +1,6 @@
 Lachhh Giveaway Tool
 ==================
-This is the tool to giveaway stuff to your fans that I talked on my Indie Your Face December update https://www.youtube.com/watch?v=nnqyePQeXqs
+This is the tool to giveaway stuff to your fans that I talked on my Indie Your Face december update https://www.youtube.com/watch?v=nnqyePQeXqs
 
 You can download the build in the /release folder: https://github.com/Lachhh/LachhhGiveawayTool/blob/master/release/TwitchGiveawayTool.air
 
