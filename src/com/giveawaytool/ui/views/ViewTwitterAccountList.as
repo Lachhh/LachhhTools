@@ -66,7 +66,7 @@ package com.giveawaytool.ui.views {
 				var metaTwitterAccount:MetaTwitterAccount = metaAccountList.accounts[i];
 				var newView:ViewTwitterAccount = new ViewTwitterAccount(screen);
 				newView.metaTwitterAccount = metaTwitterAccount;
-				newView.metaTwitterAccount.callbackRefresh = new Callback(newView.refresh, newView, null);
+				newView.metaTwitterAccount.callbackRefresh.addCallback(new Callback(newView.refresh, newView, null));
 				newView.refresh();
 				newView.visual.x = 0;
 				newView.visual.y = i*50;
@@ -83,8 +83,6 @@ package com.giveawaytool.ui.views {
 		protected function tweet(v:ViewTwitterAccount) : void {
 			v.tweet();
 		}
-		
-		
 				        
 		protected function removeView(v:ViewTwitterAccount) : void {
 			var index:int = views.indexOf(v);

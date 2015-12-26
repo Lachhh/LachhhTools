@@ -56,7 +56,7 @@ package com.lachhh.lachhhengine {
 					case child is Number :
 					case child is int :  
 					case child is String : 
-					case child is Boolean : result[index] = child; break;
+					case child is Boolean : result[index] = child; break; 
 					case child is Object : result[index] = objToDictionary(child); break;  
 				}
 			}
@@ -72,6 +72,7 @@ package com.lachhh.lachhhengine {
 					case child is int :  
 					case child is String : 
 					case child is Boolean : result[index] = child; break;
+					//case child is Array : result[index] = child; break;
 					case child is Dictionary : result[index] = dictToObject(child as Dictionary); break;  
 				}
 			}

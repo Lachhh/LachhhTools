@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.lachhh.utils.Utils;
 	import com.giveawaytool.DefaultMainGame;
 	import com.giveawaytool.effect.EffectFadeOut;
 	import com.giveawaytool.effect.ui.EffectShakeRotateUI;
@@ -75,6 +76,7 @@ package com.giveawaytool.ui {
 		override public function refresh() : void {
 			super.refresh();
 			descTxt.text = msg;
+			Utils.SetMaxSizeOfTxtField(descTxt, 24);
 		}
 		
 		
@@ -95,6 +97,10 @@ package com.giveawaytool.ui {
 		public function get panel():MovieClip { return (visual.getChildByName("panel")) as MovieClip;}
 		
 		public function get descTxt() : TextField { return panel.getChildByName("descTxt") as TextField;}
+		
+		static public function createOkOnlySimple(msg:String):UIPopUp {
+			return createOkOnly(msg, null);
+		}
 		
 		static public function createOkOnly(msg:String, callback:Callback):UIPopUp {
 			var result:UIPopUp = new UIPopUp(msg);

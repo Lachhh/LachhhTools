@@ -1,6 +1,4 @@
 package com.giveawaytool.ui {
-	import com.lachhh.lachhhengine.ui.UIBase;
-	import flash.display.DisplayObject;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaSelectAnimation;
 	import com.lachhh.ResolutionManager;
@@ -8,8 +6,10 @@ package com.giveawaytool.ui {
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.SwfLoaderManager;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
+	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.UIOpenClose;
 
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 

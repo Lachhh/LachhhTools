@@ -324,6 +324,8 @@ package com.lachhh.lachhhengine.animation {
 		}
 		
 		public function setChildToFrame(classes:Array, frame:int):void {
+			if(!hasAnim()) return ;
+			
 			addChildrenClassToNotUpdate(classes);
 			
 			while(tempArray.length > 0) tempArray.pop();

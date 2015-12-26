@@ -1,5 +1,4 @@
 package com.giveawaytool.ui {
-	import flash.display.NativeWindowRenderMode;
 	import isle.susisu.twitter.Twitter;
 	import isle.susisu.twitter.TwitterRequest;
 	import isle.susisu.twitter.events.TwitterRequestEvent;
@@ -14,6 +13,7 @@ package com.giveawaytool.ui {
 	import com.lachhh.lachhhengine.ui.UIBase;
 
 	import flash.display.NativeWindowInitOptions;
+	import flash.display.NativeWindowRenderMode;
 	import flash.display.NativeWindowSystemChrome;
 	import flash.display.NativeWindowType;
 	import flash.events.Event;
@@ -82,7 +82,7 @@ package com.giveawaytool.ui {
 			newAccount.twitter = twitter;
 			newAccount.accessToken = twitter.accessToken;
 			newAccount.accessTokenSecret = twitter.accessTokenSecret;
-			newAccount.fetchInfo()
+			newAccount.fetchInfo();
 			MetaGameProgress.instance.metaShareOnTwitter.twitterAccounts.addAccount(newAccount);
 			
 			htmlLoader.stage.nativeWindow.close();

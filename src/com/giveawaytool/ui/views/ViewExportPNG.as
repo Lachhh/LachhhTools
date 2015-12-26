@@ -2,7 +2,7 @@ package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.UIPopUp;
-	import com.giveawaytool.ui.UI_MainMenu;
+	import com.giveawaytool.ui.UI_GiveawayMenu;
 	import com.giveawaytool.ui.UI_SelectAnimation;
 	import com.giveawaytool.ui.UI_WinnerPreview;
 	import com.lachhh.draw.SwfExporterToFileOnDisk;
@@ -50,7 +50,7 @@ package com.giveawaytool.ui.views {
 			MetaGameProgress.instance.metaExportPNGConfig.text2 = text2Txt.text;
 			MetaGameProgress.instance.metaExportPNGConfig.text3 = text3Txt.text;
 			MetaGameProgress.instance.saveToLocal();
-			(screen as UI_MainMenu).viewShareOnTwitter.refresh();
+			(screen as UI_GiveawayMenu).viewShareOnTwitter.refresh();
 			
 			refresh();
 		}		

@@ -35,8 +35,8 @@ package com.giveawaytool.ui.views {
 		
 		override public function refresh() : void {
 			super.refresh();
-			text1Txt.text = MetaGameProgress.instance.metaGiveawayConfig.text1;
-			text2Txt.text = MetaGameProgress.instance.metaGiveawayConfig.text2;
+			text1Txt.text = MetaGameProgress.instance.metaGiveawayConfig.text1+"";
+			text2Txt.text = MetaGameProgress.instance.metaGiveawayConfig.text2+"";
 		}
 		
 		public function get text1Txt() : TextField { return visual.getChildByName("text1Txt") as TextField;}

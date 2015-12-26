@@ -67,11 +67,23 @@ package com.giveawaytool.ui.views {
 		}
 		
 		private function randomizeNames():void {
-			names.sort(randomize);
+			//names.sort(randomize);
+			var m:int = names.length;
+			var temp:String;
+			var i:int;
+
+			while(m > 0){
+				i = Math.floor(Math.random() * m);
+				m--;
+				temp = names[m];
+				names[m] = names[i];
+				names[i] = temp;
+			}
 		}
 		
 		private function randomize ( a : *, b : * ) : int {
 		    return ( Math.random() > .5 ) ? 1 : -1;
+		
 		}
 		
 		private function duplicateNames():void {

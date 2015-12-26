@@ -173,7 +173,7 @@ package com.giveawaytool.ui {
 		
 		private function toMenu():void {
 			destroy();
-			new UI_MainMenu();
+			new UI_GiveawayMenu();
 			var fx:EffectFlashColor = EffectFlashColor.create(0, 5);
 			fx.start();
 		}

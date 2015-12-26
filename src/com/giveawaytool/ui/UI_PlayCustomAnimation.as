@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.giveawaytool.meta.MetaSelectAnimation;
@@ -35,7 +36,7 @@ package com.giveawaytool.ui {
 			
 		
 			
-			visual.stage.focus = null;
+			visual.stage.focus = MainGame.instance;
 			SwfLoaderManager.loadSwf(metaSelectAnimation.pathToSwf, new Callback(onSwfLoaded, this, null), new Callback(onSwfLoadedError, this, null));
 		}
 
@@ -98,7 +99,7 @@ package com.giveawaytool.ui {
 		
 		private function backToMenu():void {
 			destroy();
-			new UI_MainMenu();
+			new UI_GiveawayMenu();
 			var fx:EffectFlashColor = EffectFlashColor.create(0, 10);
 			fx.start();
 		}

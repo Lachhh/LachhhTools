@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.lachhh.io.CallbackGroup;
 	import isle.susisu.twitter.Twitter;
 	import isle.susisu.twitter.TwitterRequest;
 	import isle.susisu.twitter.events.TwitterErrorEvent;
@@ -19,7 +20,7 @@ package com.giveawaytool.meta {
 		public var accessTokenSecret:String = "";
 		public var twitter:Twitter ;
 		public var twitterRequest:TwitterRequest ;
-		public var callbackRefresh:Callback ;
+		public var callbackRefresh:CallbackGroup = new CallbackGroup();
 		public var isLoading:Boolean = false;
 		public var infos:Object;
 		public var bmp:Bitmap ;

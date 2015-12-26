@@ -72,8 +72,8 @@ package com.giveawaytool.ui.views {
 		override public function refresh() : void {
 			super.refresh();
 			countdownTxt.text = MetaGameProgress.instance.metaCountdownConfig.countdown+"";
-			targetTxt.text = MetaGameProgress.instance.metaCountdownConfig.target;
-			text1Txt.text = MetaGameProgress.instance.metaCountdownConfig.text1 ;
+			targetTxt.text = MetaGameProgress.instance.metaCountdownConfig.target+"";
+			text1Txt.text = MetaGameProgress.instance.metaCountdownConfig.text1+"" ;
 		}
 		
 		public function get targetTxt() : TextField { return visual.getChildByName("targetTxt") as TextField;}

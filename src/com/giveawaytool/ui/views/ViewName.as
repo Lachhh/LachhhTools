@@ -3,6 +3,7 @@ package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.EffectKickBack;
 	import com.giveawaytool.effect.ui.EffectShakeRotateUI;
 	import com.giveawaytool.effect.ui.EffectSquashUI;
+	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.flash.FlashAnimation;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.animation.AnimationManager;
@@ -39,6 +40,8 @@ package com.giveawaytool.ui.views {
 		override public function refresh() : void {
 			super.refresh();
 			if(visual == null) return ;
+			var frame:int = (isModerator ? 2 : 1);
+			nameMc.gotoAndStop(frame);
 			nameTxt.text = name;
 		}
 		
@@ -47,6 +50,10 @@ package com.giveawaytool.ui.views {
 			//EffectFadeOut.addToActorWithSpecificMc(screen, visual, 5, 0x000000);
 			EffectShakeRotateUI.addToActor(actor, visual, 30);
 			//EffectSquashUI.addToActorWithSpecificDisplayObjAndRevolution(actor, visual, 1);
+		}
+		
+		public function get isModerator():Boolean {
+			return (MetaGameProgress.instance.isModerator(name));
 		}
 		
 		public function get nameBtn() : MovieClip { return visual.getChildByName("nameBtn") as MovieClip;}

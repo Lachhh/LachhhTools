@@ -194,6 +194,15 @@ package com.lachhh.utils {
 			
 			return (PutZero(min) + ":" + PutZero(sec) + ":" + PutZero(ms));
 		}
+		
+		static public function secondsToTime(seconds:int):String {
+			var min:int = Math.floor(seconds / (60));
+			seconds-= (60)*min;
+			var sec:int = Math.floor(seconds);
+			seconds-= sec;
+			
+			return (PutZero(min) + ":" + PutZero(sec)) ;
+		}
 			
 		static public function LazyRemoveFromParent(d:DisplayObject):void {
 			if(d == null) return ;
@@ -330,6 +339,31 @@ package com.lachhh.utils {
 		
 		static public function minMax(n:Number, min:Number, max:Number):Number {
 			return (Math.max(Math.min(max, n), min));
+		}
+		
+		
+		static public function parseDateYYYYMMDDHHMMSS(dateString:String):Date {
+		    if ( dateString == null ) {
+		        return null;
+		    }
+		
+		    var year:int = int(dateString.substr(0,4));
+		    var month:int = int(dateString.substr(5,2))-1;
+		    var day:int = int(dateString.substr(8,2));
+		
+		    if ( year == 0 && month == 0 && day == 0 ) {
+		        return null;
+		    }
+		
+		    if ( dateString.length == 10 ) {
+		        return new Date(year, month, day);
+		    }
+		
+		    var hour:int = int(dateString.substr(11,2));
+		    var minute:int = int(dateString.substr(14,2));
+		    var second:int = int(dateString.substr(17,2));
+		
+		    return new Date(year, month, day, hour, minute, second);
 		}
 		
 		

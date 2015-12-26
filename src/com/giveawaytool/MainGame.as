@@ -1,4 +1,5 @@
 package com.giveawaytool {
+	import com.lachhh.lachhhengine.VersionInfo;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.scenes.GameSceneManager;
 	import com.giveawaytool.ui.UIPopUp;
@@ -16,7 +17,8 @@ package com.giveawaytool {
 		static public var instance:MainGame;
 		public var gameSceneManager:GameSceneManager = new GameSceneManager();
 		
-		static public var dummyActor:Actor = new Actor();
+		static public var dummyActor : Actor = new Actor();
+		static public var debugShortCut : DebugShortcut ;
 		
 		public function MainGame() {
 			
@@ -27,23 +29,8 @@ package com.giveawaytool {
 			instance = this;
 						
 			UIBase.manager.add(dummyActor);
-			
-			
-			/*if(VersionInfo.isDebug) {
-				MetaGameProgress.instance.DEBUGDummyValues();
-				
-				gameSceneManager.loadScene(new GameScene());
-				
-			} else {
-				MetaGameProgress.instance.loadFromLocal();
-				stage.quality = StageQuality.MEDIUM;				
-			}*/
-			
-			//stage.frameRate = 60;
-			//new UI_LoterySpin();
-			
+						
 			stage.scaleMode = StageScaleMode.NO_BORDER;
-			//stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.color = 0x000000;
 			
 			new UIFontLoopkup();
@@ -53,27 +40,16 @@ package com.giveawaytool {
 			} catch(e:Error) {
 				UIPopUp.createOkOnly("Error Loading config :(", null);
 			}
-		}
-		
-		/*public function loadExternalNamesForLotery():void {
-			var myTextLoader:URLLoader = new URLLoader();
-
-			myTextLoader.addEventListener(Event.COMPLETE, onLoaded);
 			
-			function onLoaded(e:Event):void {
-				var names:String = e.target.data;
-				var arrayOfNames:Array = nameToArray(names);
-				new UI_LoterySpin(arrayOfNames);
+			if(VersionInfo.isDebug) {
+				debugShortCut = dummyActor.addComponent(new DebugShortcut()) as DebugShortcut;
 			}
-			
-			myTextLoader.load(new URLRequest("names.txt"));
-		}*/
-				
+		}				
 		
 		override public function update():void {
 			super.update();
 			gameSceneManager.update();
-			KeyManager.update();	
+			KeyManager.update();
 		}
 		
 		

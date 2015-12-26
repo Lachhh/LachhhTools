@@ -11,6 +11,8 @@ package com.lachhh.lachhhengine.sfx {
 		static public var ID_MUSIC_COUNTDOWN_BEATEN:int = pushClassLink(MUSIC_COUNTDOWN_BEATEN);
 		static public var ID_MUSIC_COUNTDOWN_WAIT:int = pushClassLink(MUSIC_COUNTDOWN_WAIT);
 		
+		
+		
 		static public var ID_SFX_UI_SLOT_MACHINE_BEEP_2:int = pushClassLink(SFX_UI_SLOT_MACHINE_BEEP_2);
 		static public var ID_SFX_UI_MEDAL_MINIGAME:int = pushClassLink(SFX_UI_MEDAL_MINIGAME);
 		static public var ID_SFX_CROWD:int = pushClassLink(SFX_CROWD);

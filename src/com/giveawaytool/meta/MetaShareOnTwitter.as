@@ -20,11 +20,11 @@ package com.giveawaytool.meta {
 			return saveData; 
 		}
 		
-		public function decode(obj:Dictionary):void {
-			if(obj == null) return ;
-			attachImage = obj["attachImage"];
-			tweet = obj["tweet"];
-			twitterAccounts.decode(obj["twitterAccounts"]);
+		public function decode(loadData:Dictionary):void {
+			if(loadData == null) return ;
+			attachImage = loadData["attachImage"];
+			tweet = loadData["tweet"];
+			twitterAccounts.decode(loadData["twitterAccounts"]);
 			if(tweet == null) tweet = "";
 		}
 		

@@ -109,5 +109,19 @@ package com.lachhh.lachhhengine {
 			}
 			return result;
 		}
+		
+		
+		public function getFirst(theClass:Class):Actor{
+			var i:int = 0 ;
+			var actor:Actor; 
+			for (i = 0; i < actorList.length; i++) {
+				actor = actorList[i];
+				if(actor.destroyed) continue;
+				if(Utils.myIsInstanceOfClass(actor, theClass)) {
+					return actor;
+				}
+			}
+			return null;
+		}
 	}
 }

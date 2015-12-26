@@ -100,8 +100,6 @@ package com.giveawaytool.ui {
 					 skipAnim();
 				}
 			}
-			
-			
 		}
 
 		private function skipAnim() : void {
@@ -114,7 +112,7 @@ package com.giveawaytool.ui {
 			var fx:EffectFlashColor  = EffectFlashColor.create(0x000000, 5);
 			fx.start();
 			destroy();
-			var m:UI_MainMenu = new UI_MainMenu();
+			var m:UI_GiveawayMenu = new UI_GiveawayMenu();
 			if(newWinner) {
 				m.flashNewWinner();	
 			}

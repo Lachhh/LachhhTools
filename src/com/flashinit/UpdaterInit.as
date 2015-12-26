@@ -1,6 +1,6 @@
 package com.flashinit {
 	import com.giveawaytool.MainGame;
-	import com.giveawaytool.ui.UI_MainMenu;
+	import com.giveawaytool.ui.UI_GiveawayMenu;
 	import com.giveawaytool.ui.UI_Updater;
 	import com.lachhh.lachhhengine.VersionInfo;
 
@@ -19,7 +19,7 @@ package com.flashinit {
 			new UI_Updater();
 		}
 
-				
+
 				
 	}
 }

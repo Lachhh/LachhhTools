@@ -35,6 +35,7 @@ package com.giveawaytool.scenes {
 			ammoManager = createManagers("ammos");
 			fxManager = createManagers("FXs");
 			
+			
 			camera.start();
 		}
 		

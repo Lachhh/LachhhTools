@@ -51,6 +51,10 @@ package com.giveawaytool.meta {
 			accounts.splice(i, 1);
 		}
 		
+		public function removeFirst():void {
+			accounts.shift();
+		}
+		
 		private function DEBUG_AddDummyValue():void {
 			var newREsult:MetaTwitterAccount = new MetaTwitterAccount();
 			newREsult.accountName = "LachhhhhTest";

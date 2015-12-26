@@ -2,12 +2,13 @@ package com.giveawaytool.ui.views {
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.UIPopUp;
 	import com.giveawaytool.ui.UIPopupInsert;
-	import com.giveawaytool.ui.UI_MainMenu;
+	import com.giveawaytool.ui.UI_GiveawayMenu;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.DataManager;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
+	import com.lachhh.utils.Utils;
 
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -17,11 +18,11 @@ package com.giveawaytool.ui.views {
 	 */
 	public class ViewNameListEdit extends ViewBase {
 		private var popupInsert:UIPopupInsert;
-		private var uiMainMenu:UI_MainMenu;
+		private var uiMainMenu:UI_GiveawayMenu;
 		
 		public function ViewNameListEdit(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
-			uiMainMenu = (screen as UI_MainMenu);
+			uiMainMenu = (screen as UI_GiveawayMenu);
 			pScreen.registerClick(addFromListBtn, onAddFromList);
 			pScreen.registerClick(fetchFromIRCBtn, onIRC);
 		}
@@ -49,7 +50,7 @@ package com.giveawaytool.ui.views {
 		}
 		
 		private function loadDataFromChannel(channelName:String):void {
-			DataManager.loadExternalNames(channelName, new Callback(onDataLoaded, this, null), new Callback(onDataLoadedError, this, null));
+			DataManager.loadExternalNames(channelName, new Callback(onDataLoaded, this, [channelName]), new Callback(onDataLoadedError, this, null));
 			uiMainMenu.viewNameList.showLoading(true);
 			uiMainMenu.viewNameList.clear();
 			MetaGameProgress.instance.participants = [];
@@ -62,14 +63,30 @@ package com.giveawaytool.ui.views {
 			refresh();
 		}
 
-		private function onDataLoaded() : void {
+		private function onDataLoaded(channelName:String) : void {
 			var obj:Object = JSON.parse(DataManager.loadedData);
 		   	var arrayOfNames:Array = obj.chatters.viewers;
+			var arrayOfMods:Array = obj.chatters.moderators;
+			
+			arrayOfNames = arrayOfNames.concat(arrayOfMods);
+			removeNameFromList(arrayOfNames, channelName);
+			
 			uiMainMenu.viewNameList.showLoading(false);
 			uiMainMenu.viewNameList.setNames(arrayOfNames);
 			MetaGameProgress.instance.participants = arrayOfNames;
+			MetaGameProgress.instance.moderators = arrayOfMods;
 			uiMainMenu.viewNameList.refresh();
 			refresh();
+		}
+		
+		private function removeNameFromList(list:Array, name:String):void {
+			for (var i : int = 0; i < list.length; i++) {
+				var crnt:String = list[i];
+				if(crnt.toLowerCase() == name.toLowerCase()) {
+					list.splice(i, 1);
+					return ;
+				}
+			}
 		}
 
 		private function onDataLoadedError() : void {

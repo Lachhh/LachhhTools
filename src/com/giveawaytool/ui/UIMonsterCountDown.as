@@ -1,4 +1,9 @@
 package com.giveawaytool.ui {
+	import flash.display.Stage;
+	import flash.events.MouseEvent;
+	import com.giveawaytool.DefaultMainGame;
+	import flash.events.KeyboardEvent;
+	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.effect.EffectFadeOut;
 	import com.giveawaytool.effect.EffectFlashColor;
@@ -31,13 +36,15 @@ package com.giveawaytool.ui {
 			super(AnimationFactory.ID_UI_MONSTER_COUNTDOWN);
 			viewMonsterCountdown = new ViewMonsterCountdown(this, monsterEatMc);
 			viewMonsterCountdown.name = MetaGameProgress.instance.metaCountdownConfig.target;
+			
 			CallbackTimerEffect.addWaitCallFctToActor(this, tick, 1000);
 			
 			countDown = MetaGameProgress.instance.metaCountdownConfig.countdown;
 			countDownStart = countDown ;
 			quickMsg = MetaGameProgress.instance.metaCountdownConfig.text1;
-			UI_Overlay.hide();
+			//UI_Overlay.hide();
 			renderComponent.animView.fps = 60;
+			
 			
 			JukeBox.fadeToMusic(SfxFactory.ID_MUSIC_COUNTDOWN_WAIT, 1);
 			
@@ -45,7 +52,24 @@ package com.giveawaytool.ui {
 			fx.start();
 			
 			refresh();
+			
+			//visual.stage.focus = visual.stage;
+
+			//visual.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			DefaultMainGame.UI_CONTAINER_ABOVE_NO_CLICK.visible = false;
+			//registerClick(visual.stage, saveTheGuy);
+			visual.buttonMode = true;
+			visual.stage.focus = visual.stage;
 		}
+
+		private function onClick(event : MouseEvent) : void {
+			backToMenu();
+		}
+		
+		
+		override public function start() : void {
+			super.start();
+		}		
 		
 		private function tick():void {
 			countDown--;
@@ -68,7 +92,7 @@ package com.giveawaytool.ui {
 		private function backToMenu():void {
 			JukeBox.fadeAllMusicToDestroy(15);
 			destroy();
-			new UI_MainMenu();
+			new UI_GiveawayMenu();
 			var fx:EffectFlashColor = EffectFlashColor.create(0, 10);
 			fx.start();
 		}
@@ -108,6 +132,7 @@ package com.giveawaytool.ui {
 		
 		override public function update() : void {
 			super.update();
+			
 			if(KeyManager.IsKeyPressed(Keyboard.ESCAPE)) {
 				backToMenu();
 			} else if(KeyManager.IsAnyKeyPressed()) {
