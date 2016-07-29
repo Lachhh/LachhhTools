@@ -16,12 +16,12 @@ package com.giveawaytool.ui.views {
 		private var totalPages:int = 1;
 		private var crntPage:int = 1;
 		private var namesTotal : Array = EMPTY_ARRAY;
-		private var viewGiveawayConfig : ViewGiveawayConfig;
+		
 		
 		public function ViewNameListWithPages(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			
-			viewGiveawayConfig = new ViewGiveawayConfig(pScreen, pVisual);
+			
 			crntPageTxt.addEventListener(FocusEvent.FOCUS_OUT, onEditPage);
 			pScreen.registerClick(prevBtn, onPrev);
 			pScreen.registerClick(nextBtn, onNext);
@@ -128,9 +128,6 @@ package com.giveawaytool.ui.views {
 		public function get totalPagesTxt() : TextField { return pageMc.getChildByName("totalTxt") as TextField;}
 		public function get prevBtn() : ButtonSelect { return pageMc.getChildByName("prevBtn") as ButtonSelect;}
 		public function get nextBtn() : ButtonSelect { return pageMc.getChildByName("nextBtn") as ButtonSelect;}
-		public function get startAnimBtn() : MovieClip { return visual.getChildByName("startAnimBtn") as MovieClip;}
-		//public function get introPresentationBtn() : MovieClip { return visual.getChildByName("introPresentationBtn") as MovieClip;}
-		
 		
 		public function get text1Txt() : TextField { return visual.getChildByName("text1Txt") as TextField;}
 		public function get text2Txt() : TextField { return visual.getChildByName("text2Txt") as TextField;}

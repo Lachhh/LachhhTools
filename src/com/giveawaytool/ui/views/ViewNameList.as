@@ -1,4 +1,6 @@
 package com.giveawaytool.ui.views {
+	import flash.geom.Point;
+	import com.lachhh.utils.Utils;
 	import com.giveawaytool.effect.CallbackWaitEffect;
 	import com.giveawaytool.effect.EffectFadeOut;
 	import com.giveawaytool.effect.EffectKickBack;
@@ -6,7 +8,6 @@ package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.LogicDestroyOutsideOfBounds;
 	import com.giveawaytool.effect.LogicRotate;
 	import com.giveawaytool.effect.ui.EffectShakeUI;
-	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
@@ -17,7 +18,6 @@ package com.giveawaytool.ui.views {
 
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
-	import flash.net.registerClassAlias;
 	import flash.text.TextField;
 
 	/**
@@ -28,21 +28,18 @@ package com.giveawaytool.ui.views {
 		private var names:Array = EMPTY_ARRAY;
 		public var views:Vector.<ViewName> = new Vector.<ViewName>();
 		public var viewScrollBar:ViewScrollBar;
-		public var viewNameListEdit:ViewNameListEdit;
+		
 		
 		public function ViewNameList(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			viewScrollBar = new ViewScrollBar(pScreen, scrollbarMc);
 			viewScrollBar.callbackOnChange = new Callback(refreshScollBar, this, null);
 			
-			viewNameListEdit = new ViewNameListEdit(pScreen, pVisual);
-			pScreen.registerClick(cancelBtn, onCancel);
 			loadingMc.visible = false;
+			emptyMc.visible = false;
 		}
 
-		private function onCancel() : void {
-			viewNameListEdit.cancelLoading();
-		}
+		
 		
 		public function clear():void {
 			names = EMPTY_ARRAY;
@@ -61,6 +58,14 @@ package com.giveawaytool.ui.views {
 				view.destroy();
 				
 			}
+		}
+		
+		public function getViewFromName(pName:String):ViewName {
+			for (var i : int = 0; i < views.length; i++) {
+				var v:ViewName = views[i];
+				if(v.name == pName) return v;
+			}
+			return null;
 		}
 		
 		private function cleanNames():void {
@@ -85,24 +90,45 @@ package com.giveawaytool.ui.views {
 			names.sort();
 			for (var i : int = 0; i < names.length; i++) {
 				var name:String = names[i];
-				var newView:ViewName = new ViewName(screen);
+				var newView:ViewName = new ViewName(screen, contentMc);
 				newView.name = name;
 				newView.refresh();
 				newView.visual.x = 0;
 				newView.visual.y = i*17;
 				screen.registerClickWithCallback(newView.visual, new Callback(removeViewWithFx, this, [newView]));
-				contentMc.addChild(newView.visual);
+
 				views.push(newView);
 			}	
 		}
 		
 		public function flash():void {
-			
 			for (var i : int = 0; i < views.length; i++) {
 				var newView:ViewName = views[i];
 				CallbackWaitEffect.addWaitCallFctToActor(actor, newView.flash, i);
 				if(i > 20) return;
 			}
+		}
+		
+		public function removeViewFromNames(lstToREmove:Array):void {
+			var numFx:int = 0;
+			for (var i : int = 0; i < lstToREmove.length; i++) {
+				var name:String = lstToREmove[i];
+				var v:ViewName = getViewFromName(name);
+				if(v == null) continue;
+				
+				if(numFx < 20) {
+					var fx:UIEffect = createNameTossed(v.name);
+					var p:Point = new Point();
+					p = v.visual.localToGlobal(p);
+					fx.px = p.x+100;
+					fx.py = p.y+Math.random()*400-200;
+					var l:LogicRotate = fx.getComponent(LogicRotate) as LogicRotate;
+					if(l) l.rotateSpeed += Math.random()*15;
+					removeView(v);
+					numFx++;
+				}
+			}
+			
 		}
 		
 		private function removeViewWithFx(v:ViewName):void {
@@ -124,7 +150,7 @@ package com.giveawaytool.ui.views {
 			quickRefresh();
 		}
 		
-		private function createNameTossed(name:String):void {
+		private function createNameTossed(name:String):UIEffect {
 			var fx:UIEffect = UIEffect.createStaticUiFxOnMouseCursor(AnimationFactory.ID_FX_NAME_CENTERED);
 			fx.physicComponent = PhysicComponent.addToActor(fx);
 			fx.physicComponent.gravY = 0.5;
@@ -141,9 +167,10 @@ package com.giveawaytool.ui.views {
 		
 			LogicDestroyOutsideOfBounds.addToActorBasedOnUI(fx);
 			var animId:int = (Math.random() < 0.5 ? AnimationFactory.ID_FX_IMPACT1 : AnimationFactory.ID_FX_IMPACT2);
-			fx = UIEffect.createStaticUiFxOnMouseCursor(animId);
-			fx.renderComponent.animView.fps = 30;
+			var fxImpact:UIEffect = UIEffect.createStaticUiFxOnMouseCursor(animId);
+			fxImpact.renderComponent.animView.fps = 30;
 			EffectShakeUI.addToActor(screen, contentMc, 5, 5);
+			return fx;
 		}
 		
 		public function quickRefresh():void {
@@ -174,6 +201,8 @@ package com.giveawaytool.ui.views {
 		
 		public function showLoading(b:Boolean):void {
 			loadingMc.visible = b;
+			contentMc.alpha = (b ? 0.2 : 1);
+			if(b) emptyMc.visible = false; 
 		}
         
         public function isLoading():Boolean {

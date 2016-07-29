@@ -1,35 +1,44 @@
 package com.giveawaytool.ui {
 	import com.MetaIRCMessage;
+
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
 	 */
 	public class MetaSubcriberAlert {
-		public var numMonthInARow:int = 0 ;
-		public var name:String = "Dummy" ;
+		public var metaSubscriber:MetaSubscriber;
+		
 		private var saveData : Dictionary = new Dictionary();
 				
 		public function encode():Dictionary {
-			saveData["numMonthInARow"] = numMonthInARow;
-			saveData["name"] = name;
+			saveData["metaSubscriber"] = metaSubscriber.encode();
 			
 			return saveData; 
 		}
 		
+		public function encodeForWidget():Dictionary {
+			return metaSubscriber.encode();
+		}
+		
 		public function decode(loadData:Dictionary):void {
 			if(loadData == null) return ;
-			numMonthInARow = loadData["numMonthInARow"];
-			name = loadData["name"];
+			metaSubscriber.decode(loadData["metaSubscriber"]);
+			
 		}
 		
 		public function isNewSubscriber():Boolean {
-			return (numMonthInARow <= 1);
+			return metaSubscriber.isNewSubscriber();
 		}
 		
 		static public function createFromIRCMsg(m:MetaIRCMessage):MetaSubcriberAlert {
 			var result:MetaSubcriberAlert = new MetaSubcriberAlert();
-			result.name = m.getSubName();
-			result.numMonthInARow = m.getResubMonth();
+			result.metaSubscriber = MetaSubscriber.createFromIRCMsg(m);
+			return result;
+		}
+		
+		static public function createFromSub(m:MetaSubscriber):MetaSubcriberAlert {
+			var result:MetaSubcriberAlert = new MetaSubcriberAlert();
+			result.metaSubscriber = m;
 			return result;
 		}
 	}

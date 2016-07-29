@@ -2,8 +2,8 @@ package com.giveawaytool.ui.views {
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.donations.MetaCharityConfig;
 	import com.giveawaytool.meta.donations.MetaCharityDonation;
-	import com.giveawaytool.ui.UIPopUp;
-	import com.giveawaytool.ui.UI_Donation;
+	import com.giveawaytool.ui.UI_PopUp;
+	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.flash.FlashUtils;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
@@ -21,13 +21,13 @@ package com.giveawaytool.ui.views {
 	 */
 	public class ViewCharity extends ViewBase {
 		public var metaCharity : MetaCharityConfig;
-		public var viewCharityList : ViewCharityDonationsList;
+		public var viewCharityList : ViewCharityList;
 		public var viewCharityExamples : ViewCharityOrganizationExampleGroup;
 
 		public function ViewCharity(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			
-			viewCharityList = new ViewCharityDonationsList(screen, lastCharityMc);
+			viewCharityList = new ViewCharityList(screen, lastCharityMc);
 			
 			viewCharityExamples = new ViewCharityOrganizationExampleGroup(pScreen, organizationsListMc);
 			
@@ -40,13 +40,11 @@ package com.giveawaytool.ui.views {
 			pScreen.registerClick(applySaveBtn, onRefreshConfig);
 
 			screen.setNameOfDynamicBtn(addBtn, "Record");
-			screen.setNameOfDynamicBtn(applySaveBtn, "Apply & Save");
-			
+			screen.setNameOfDynamicBtn(applySaveBtn, "Apply & Save");	
 		}
 
 		private function onRefreshConfig() : void {
-			var ui:UI_Donation = (screen as UI_Donation);
-			ui.sendDonationConfig(MetaGameProgress.instance.metaDonationsConfig);
+			UI_Menu.instance.logicNotification.logicSendToWidget.sendDonationConfig(MetaGameProgress.instance.metaDonationsConfig);
 			
 			MetaGameProgress.instance.metaDonationsConfig.isDirty = false;
 			screen.doBtnPressAnim(applySaveBtn);
@@ -68,9 +66,9 @@ package com.giveawaytool.ui.views {
 			var msg:String = "Record that you have given [x] to [y]?";
 			msg = FlashUtils.myReplace(msg, "[x]", metaCharity.settings.getAmountTxt());
 			msg = FlashUtils.myReplace(msg, "[y]", result.nameOfOrganisation);
-			UIPopUp.createYesNo(msg, new Callback(onYes, this, [result]), null);
+			UI_PopUp.createYesNo(msg, new Callback(onYes, this, [result]), null);
 			
-			MetaGameProgress.instance.saveToLocal();
+			onEdit();
 			
 		}
 
@@ -78,17 +76,17 @@ package com.giveawaytool.ui.views {
 			metaCharity.addCharityDonation(m);
 			UIBase.manager.refresh();
 			
-			UIPopUp.createOkOnly("Donation added!  Congrats! That's super awesome of you :).", null);
+			UI_PopUp.createOkOnly("Donation added!  Congrats! That's super awesome of you :).", null);
 		}
 		
 		private function validateAmountToDonate():Boolean {
 			if(organisationTxt.text == "") {
-				UIPopUp.createOkOnly("The name or the organisation is empty.  Don't you want to remember who you gave it to?", null);
+				UI_PopUp.createOkOnly("The name or the organisation is empty.  Don't you want to remember who you gave it to?", null);
 				return false;
 			}
 			
 			if(metaCharity.settings.crntAmount <= 0) {
-				UIPopUp.createOkOnly("The amount of money you want to give to that organisation is '0'.  That's kind of a jerk move isn't it?", null);
+				UI_PopUp.createOkOnly("The amount of money you want to give to that organisation is '0'.  That's kind of a jerk move isn't it?", null);
 				return false;
 			}
 			return true;
@@ -102,7 +100,9 @@ package com.giveawaytool.ui.views {
 			if(!isNaN(prct)) metaCharity.settings.prct = Utils.minMax(prct, 1, 100);
 			if(!isNaN(crntAmount)) metaCharity.settings.crntAmount = Math.max(crntAmount, 0);
 			metaCharity.settings.title = titleTxt.text;
-			metaCharity.settings.enabled = enableBtn.isSelected; 
+			metaCharity.settings.enabled = enableBtn.isSelected;
+			
+			metaCharity.charityOrganization.name = organisationTxt.text; 
 						
 			MetaGameProgress.instance.saveToLocal();
 			MetaGameProgress.instance.metaDonationsConfig.isDirty = true;
@@ -112,7 +112,7 @@ package com.giveawaytool.ui.views {
 		override public function refresh() : void {
 			super.refresh();
 			if(metaCharity == null) return;
-			viewCharityList.metaDonations = metaCharity.listOfPastDonations;
+			viewCharityList.setData(metaCharity.listOfPastDonations.charityDonation);
 			viewCharityList.refresh();
 			
 			prctTxt.text = metaCharity.settings.prct+"";

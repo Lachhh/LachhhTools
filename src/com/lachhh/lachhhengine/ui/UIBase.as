@@ -78,7 +78,6 @@ package com.lachhh.lachhhengine.ui {
 			}
 		}
 		
-		
 		public function doBtnPressAnim(btn:MovieClip):void {
 			EffectFadeOut.addToActorWithSpecificMc(this, btn, 5, 0xFFFFFF);
 			EffectShakeRotateUI.addToActor(this, btn, 15);
@@ -91,6 +90,11 @@ package com.lachhh.lachhhengine.ui {
 		
 		public function getTextFieldOfDynamicBtn(btn:MovieClip):TextField {
 			return btn.getChildByName("txt") as TextField;
+		}
+		
+		public function setCheckBox(value : Boolean, btn : MovieClip) : void {
+			var checkedMc : MovieClip = btn.getChildByName("checkedMc") as MovieClip;
+			if(checkedMc) checkedMc.visible = value;
 		}
 	}
 }

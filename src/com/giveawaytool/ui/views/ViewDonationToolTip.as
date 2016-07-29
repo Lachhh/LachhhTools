@@ -1,10 +1,10 @@
 package com.giveawaytool.ui.views {
-	import com.giveawaytool.ui.UIPopupEditDonations;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.donations.MetaDonation;
 	import com.giveawaytool.ui.LogicOnOffNextFrame;
-	import com.giveawaytool.ui.UIPopUp;
-	import com.giveawaytool.ui.UI_Donation;
+	import com.giveawaytool.ui.UI_PopUp;
+	import com.giveawaytool.ui.UIPopupEditDonations;
+	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
@@ -22,7 +22,7 @@ package com.giveawaytool.ui.views {
 	public class ViewDonationToolTip extends ViewBase {
 		public var logicOpen : LogicOnOffNextFrame;
 		public var metaDonation:MetaDonation = MetaDonation.NULL;
-		public var viewDonation:ViewDonationBtn;
+		public var viewDonation:ViewFollowerBtn;
 		public function ViewDonationToolTip(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			logicOpen = LogicOnOffNextFrame.addToActor(actor, visualMc);
@@ -35,25 +35,29 @@ package com.giveawaytool.ui.views {
 			screen.registerClick(btn2, onClickMarkAsNew);
 			screen.registerClick(btn3, onClickEdit);
 			screen.registerClick(btn4, onClickDelete);
-			screen.registerClick(screen.visual, close);
+			screen.registerClick(screen.visual, closeIfOpen);
+		}
+
+		private function closeIfOpen() : void {
+			if(logicOpen.isOnLastFrame()) close();
 		}
 		
 		public function registerDonationViewList(vList:Array):void  {
 			for (var i : int = 0; i < vList.length; i++) {
-				var v:ViewDonationBtn = vList[i];
+				var v:ViewFollowerBtn = vList[i];
 				registerDonationView(v);
 			}
 		}
 		
-		public function registerDonationView(v:ViewDonationBtn):void  {
+		public function registerDonationView(v:ViewFollowerBtn):void  {
 			screen.registerEventWithCallback(v.visual, MouseEvent.MOUSE_UP, new Callback(onClickDonationView, this, [v]));
 		}
 		
-		private function onClickDonationView(view:ViewDonationBtn):void {
-			if(view.metaDonation.isNull()) return ;
+		public function onClickDonationView(view:ViewFollowerBtn):void {
+			if(view.getMetaDonation().isNull()) return ;
 			viewDonation = view;
 			view.visualBtn.select();
-			openWithDonation(view.metaDonation);
+			openWithDonation(view.getMetaDonation());
 			var p:Point = new Point(-visual.parent.x, -visual.parent.y);
 			p = view.visual.localToGlobal(p);
 			visual.x = p.x;
@@ -77,8 +81,8 @@ package com.giveawaytool.ui.views {
 
 		private function onClickCollect() : void {
 			if(metaDonation.modelSource.isCalculated()) return ;
-			var uiDonation:UI_Donation = (screen as UI_Donation);
-			uiDonation.sendAddDonation(metaDonation);
+
+			UI_Menu.instance.logicNotification.logicSendToWidget.sendAddDonation(metaDonation);
 			if(metaDonation.isNew) MetaGameProgress.instance.metaDonationsConfig.addDonationToGoalsAndCharity(metaDonation);
 			metaDonation.isNew = false;
 			MetaGameProgress.instance.saveToLocal();
@@ -106,7 +110,7 @@ package com.giveawaytool.ui.views {
 
 		private function onClickDelete() : void {
 			if(metaDonation.modelSource.isCalculated()) return ;
-			UIPopUp.createYesNo("Delete this donation? (If this donation is still on the server, it will appear again as new)", new Callback(onYesDelete, this, null), null);
+			UI_PopUp.createYesNo("Delete this donation? (If this donation is still on the server, it will appear again as new)", new Callback(onYesDelete, this, null), null);
 		}
 		
 		private function onYesDelete():void {

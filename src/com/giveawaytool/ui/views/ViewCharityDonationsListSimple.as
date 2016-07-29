@@ -11,10 +11,10 @@ package com.giveawaytool.ui.views {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ViewCharityDonationsList extends ViewGroupBase {
+	public class ViewCharityDonationsListSimple extends ViewGroupBase {
 		public var metaDonations : MetaCharityDonationList ;
 
-		public function ViewCharityDonationsList(pScreen : UIBase, pVisual : DisplayObject) {
+		public function ViewCharityDonationsListSimple(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			for (var i : int = 0; i < 6; i++) {
 				addView(createView(getDonationVisual(i)));	

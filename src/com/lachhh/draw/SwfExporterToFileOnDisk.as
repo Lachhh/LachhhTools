@@ -1,5 +1,5 @@
 package com.lachhh.draw {
-	import com.giveawaytool.ui.UIPopUp;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.lachhh.io.Callback;
 
 	import flash.events.Event;
@@ -64,7 +64,7 @@ package com.lachhh.draw {
 		static public function saveTexture(swfTexture:SwfTexture):void {
 			var onSelectFolder:Function = function(evt:Event) : void {
 				SwfExporterToFileOnDisk.pathOnDisk = tempFile.nativePath ;
-				var popup:UIPopUp = UIPopUp.createLoading("Alright, let me create that png for you.\n(Please wait)");
+				var popup:UI_PopUp = UI_PopUp.createLoading("Alright, let me create that png for you.\n(Please wait)");
 				popup.renderComponent.animView.addCallbackOnFrame(new Callback(onPopupIdle, this, [popup, swfTexture]), popup.idleFrame);
 			} ;
 			
@@ -76,7 +76,7 @@ package com.lachhh.draw {
 			
 		}
 		
-		static private function onPopupIdle(popup:UIPopUp, swfTexture:SwfTexture):void {
+		static private function onPopupIdle(popup:UI_PopUp, swfTexture:SwfTexture):void {
 			var completePath:String = pathOnDisk ;
 			var index:int = completePath.indexOf(".png");
 			var l:int = completePath.length;

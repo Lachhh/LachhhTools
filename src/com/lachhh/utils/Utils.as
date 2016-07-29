@@ -50,9 +50,9 @@ package com.lachhh.utils {
 			}	
 			return false;
 		}
-		
-		static public function AddInArrayIfNotIn(array:Array, elem:Object):void {
-			for (var i:int = 0 ; i < array.length ; i++) {
+
+		static public function AddInArrayIfNotIn(array : Array, elem : Object) : void {
+			for (var i : int = 0; i < array.length; i++) {
 				if(array[i] == elem) {
 					return ;
 				}
@@ -364,6 +364,12 @@ package com.lachhh.utils {
 		    var second:int = int(dateString.substr(17,2));
 		
 		    return new Date(year, month, day, hour, minute, second);
+		}
+
+		public static function removeTextNewLine(pCmd : String) : String {
+			pCmd = pCmd.split("\r").join("");
+			pCmd = pCmd.split("\n").join("");
+			return pCmd;
 		}
 		
 		

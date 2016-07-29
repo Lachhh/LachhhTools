@@ -22,10 +22,6 @@ package com.flashinit {
 			var m:MainGame = new MainGame();
 			stage.addChild(m);
 			m.init();
-			new UI_IntroPresentationAnim();
 		}
-		
-		
-		
 	}
 }

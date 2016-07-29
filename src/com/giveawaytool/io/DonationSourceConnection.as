@@ -14,7 +14,6 @@ package com.giveawaytool.io {
 		public var lastDonations:Array = new Array();
 		public var lastError:IOErrorEvent;
 		
-		
 		public function DonationSourceConnection() {
 			active = false;
 		}

@@ -1,5 +1,6 @@
 package com.giveawaytool.effect {
 	import com.giveawaytool.MainGame;
+	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.GameSpeed;
 	import com.lachhh.lachhhengine.components.ActorComponent;
 	import com.lachhh.utils.Utils;
@@ -17,7 +18,8 @@ package com.giveawaytool.effect {
 		
 		private var _sprite:Sprite ;
 		public var useGameSpeed:Boolean = true;
-		
+		public var callback:Callback;
+		public var autoDestroy:Boolean = true;
 		public function EffectFlashColor() {
 			super();
 			_sprite = new Sprite();
@@ -28,9 +30,9 @@ package com.giveawaytool.effect {
 			
 			_sprite.graphics.clear();
 			_sprite.graphics.beginFill(color, 1);
-			_sprite.graphics.drawRect(-1000,-1000, 3000, 2000);
+			_sprite.graphics.drawRect(-1000,-1000, 3000, 3000);
 			_sprite.graphics.endFill();
-			_sprite.alpha = 1;
+			_sprite.alpha = prct;
 			MainGame.instance.addChild(_sprite);
 		}
 		
@@ -43,8 +45,9 @@ package com.giveawaytool.effect {
 			
 			prct -= (useGameSpeed ? GameSpeed.getSpeed() : 1) *prctDelta;
 			_sprite.alpha = prct;
-			if(prct <= 0) {
-				destroyAndRemoveFromActor();
+			if(prct <= 0 || prct > 1) {
+				if(callback) callback.call();
+				if(autoDestroy) destroyAndRemoveFromActor();
 			}	
 			
 			//blinkingTime -= SK_Game.instance.speedManager.GetSpeed();
@@ -65,6 +68,17 @@ package com.giveawaytool.effect {
 			result.prct = 1;
 			result.prctDelta = 1/fadeOutTime;
 			result.color = color;
+			MainGame.dummyActor.addComponent(result);
+			return result;
+		}
+		
+		static public function create2(color:uint, fadeOutTime:int, prct:Number):EffectFlashColor {
+			var result:EffectFlashColor = new EffectFlashColor();
+			result.prct = 1;
+			result.prctDelta = 1/fadeOutTime;
+			result.color = color;
+			result.prct = prct;
+			result.start();
 			MainGame.dummyActor.addComponent(result);
 			return result;
 		}

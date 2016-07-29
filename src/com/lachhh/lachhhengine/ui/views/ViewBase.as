@@ -1,4 +1,5 @@
 package com.lachhh.lachhhengine.ui.views {
+	import com.giveawaytool.meta.donations.MetaData;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.lachhhengine.components.ActorComponent;
 	import com.lachhh.lachhhengine.ui.UIBase;
@@ -18,6 +19,8 @@ package com.lachhh.lachhhengine.ui.views {
 		public var visualMc:MovieClip;
 		public var visualTxt:TextField;
 		public var visualBtn:ButtonSelect;
+		
+		public var metaData:MetaData;
 		
 		public function ViewBase(pScreen : UIBase, pVisual:DisplayObject) {
 			super();

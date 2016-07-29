@@ -4,11 +4,11 @@ package com.giveawaytool.meta.donations {
 	 * @author LachhhSSD
 	 */
 	public class MetaCharityDonationList {
-		public var charityDonation:Vector.<MetaCharityDonation> = new Vector.<MetaCharityDonation>();
+		public var charityDonation:Array = new Array();
 		private var saveData : Dictionary = new Dictionary();
 		
 		public function clear():void {
-			charityDonation = new Vector.<MetaCharityDonation>();
+			charityDonation = new Array();
 		}
 		
 		public function addDonation(m:MetaCharityDonation):void {

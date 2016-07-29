@@ -7,7 +7,7 @@ package com.giveawaytool.ui {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class UIPopupDonationsSettings extends UIPopUp {
+	public class UIPopupDonationsSettings extends UI_PopUp {
 		public function UIPopupDonationsSettings(pMsg : String) {
 			super(pMsg);
 		}

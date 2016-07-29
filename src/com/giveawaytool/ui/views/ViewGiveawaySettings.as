@@ -12,9 +12,9 @@ package com.giveawaytool.ui.views {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ViewGiveawayConfig extends ViewBase {
+	public class ViewGiveawaySettings extends ViewBase {
 		public var viewCustomBtn:ViewCustomAnimBtn;
-		public function ViewGiveawayConfig(pScreen : UIBase, pVisual : DisplayObject) {
+		public function ViewGiveawaySettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			pScreen.registerEvent(text1Txt, FocusEvent.FOCUS_OUT, onEdit);
 			pScreen.registerEvent(text2Txt, FocusEvent.FOCUS_OUT, onEdit);

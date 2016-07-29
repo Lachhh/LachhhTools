@@ -1,7 +1,7 @@
 package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.giveawaytool.meta.MetaGameProgress;
-	import com.giveawaytool.ui.UIMonsterCountDown;
+	import com.giveawaytool.ui.UI_MonsterCountDown;
 	import com.giveawaytool.ui.UI_Overlay;
 	import com.giveawaytool.ui.UI_PlayCustomAnimation;
 	import com.giveawaytool.ui.UI_SelectAnimation;
@@ -24,16 +24,25 @@ package com.giveawaytool.ui.views {
 		
 		public function ViewCountdownEdit(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
+			new ViewNeedToBeOnline(screen, needOnlineMc);
 			pScreen.registerClick(playBtn, onPlay);
 			targetTxt.addEventListener(FocusEvent.FOCUS_OUT, onEdit);
 			text1Txt.addEventListener(FocusEvent.FOCUS_OUT, onEdit);
 			countdownTxt.addEventListener(FocusEvent.FOCUS_OUT, onEdit);
 			pScreen.registerClick(selectBtn, onSelect);
-			pScreen.setNameOfDynamicBtn(playBtn, "Start");
+			pScreen.registerClick(autoClaimBtn, onAutoClaim);
+
+			pScreen.setNameOfDynamicBtn(playBtn, "Start");		
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, selectBtn, MetaGameProgress.instance.metaCountdownConfig.metaAnimation);
 			
 			refresh();  
+		}
+
+		private function onAutoClaim() : void {
+			MetaGameProgress.instance.metaCountdownConfig.autoChatClaim = !MetaGameProgress.instance.metaCountdownConfig.autoChatClaim;
+			refresh();
+			
 		}
 		
 		private function onSelect() : void {
@@ -60,20 +69,19 @@ package com.giveawaytool.ui.views {
 		private function toCountdownUI() : void {
 			screen.destroy();
 			
-			
 			if(MetaGameProgress.instance.metaCountdownConfig.metaAnimation.useDefault) {
-				new UIMonsterCountDown();
+				new UI_MonsterCountDown();
 			} else {
 				new UI_PlayCustomAnimation(MetaGameProgress.instance.metaCountdownConfig.metaAnimation, MetaGameProgress.instance.metaCountdownConfig.encode());
 			}
 		}
-		
 		
 		override public function refresh() : void {
 			super.refresh();
 			countdownTxt.text = MetaGameProgress.instance.metaCountdownConfig.countdown+"";
 			targetTxt.text = MetaGameProgress.instance.metaCountdownConfig.target+"";
 			text1Txt.text = MetaGameProgress.instance.metaCountdownConfig.text1+"" ;
+			screen.setCheckBox(MetaGameProgress.instance.metaCountdownConfig.autoChatClaim, autoClaimBtn);
 		}
 		
 		public function get targetTxt() : TextField { return visual.getChildByName("targetTxt") as TextField;}
@@ -81,6 +89,9 @@ package com.giveawaytool.ui.views {
 		public function get countdownTxt() : TextField { return visual.getChildByName("countdownTxt") as TextField;}
 		public function get playBtn() : MovieClip { return visual.getChildByName("playBtn") as MovieClip;}
 		public function get selectBtn() : MovieClip { return visual.getChildByName("selectBtn") as MovieClip;}
+		public function get autoClaimBtn() : MovieClip { return visual.getChildByName("autoClaimBtn") as MovieClip;}
+		
+		public function get needOnlineMc() : MovieClip { return visual.getChildByName("needOnlineMc") as MovieClip;}
 		
 	}
 }

@@ -2,7 +2,7 @@ package com.giveawaytool.ui.views {
 	import com.lachhh.lachhhengine.VersionInfo;
 	import com.giveawaytool.io.DonationSourceConnection;
 	import com.giveawaytool.meta.donations.MetaDonationSourceConnection;
-	import com.giveawaytool.ui.UIPopUp;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.giveawaytool.ui.UIPopupDonationsSettings;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
@@ -16,22 +16,20 @@ package com.giveawaytool.ui.views {
 	 * @author LachhhSSD
 	 */
 	public class ViewStreamTipConnection extends ViewBase {
-		public var streamTip:DonationSourceConnection;
+		public var donationSourceConnection:DonationSourceConnection;
 		public var metaConnection:MetaDonationSourceConnection;
 		private var uiSettings:UIPopupDonationsSettings ;
 		public var onNewSettings:Callback;
 		public function ViewStreamTipConnection(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
-			streamTip = new DonationSourceConnection();
-			
+			donationSourceConnection = new DonationSourceConnection();
+
 			statusMsgMc.gotoAndStop(1);
 			screen.setNameOfDynamicBtn(settingsBtn, "Settings");
 			screen.registerClick(settingsBtn, onSettings);
 		}
 		
-		
 		///test_479c924413fe9168952891e9a30 
-		
 		private function onSettings() : void {
 			uiSettings = UIPopupDonationsSettings.createInsertDonationSettings(VersionInfo.donationSource.name + " Settings", new Callback(onApply, this, null), new Callback(onHelp, this, null));
 			uiSettings.clientIdTxt.text = metaConnection.clientId;
@@ -39,7 +37,7 @@ package com.giveawaytool.ui.views {
 		}
 	
 		private function onHelp() : void {
-			UIPopUp.createOkOnlySimple("Go on your StreamTip account to check for something called 'API Client ID' and 'API Access Token'.  It's in your account information. (Button on top right). You can do it! I believe in you! :D");
+			UI_PopUp.createOkOnlySimple("Go on your StreamTip account to check for something called 'API Client ID' and 'API Access Token'.  It's in your account information. (Button on top right). You can do it! I believe in you! :D");
 		}
 
 		private function onApply() : void {
@@ -50,8 +48,8 @@ package com.giveawaytool.ui.views {
 		
 		override public function refresh() : void {
 			super.refresh();
-			streamTip.metaStreamTipConnection = metaConnection;
-			if(streamTip.active) {
+			donationSourceConnection.metaStreamTipConnection = metaConnection;
+			if(donationSourceConnection.active) {
 				statusMsgMc.gotoAndStop(3);
 			} else {
 				statusMsgMc.gotoAndStop(1);

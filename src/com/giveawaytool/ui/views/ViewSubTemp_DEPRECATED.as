@@ -12,8 +12,8 @@ package com.giveawaytool.ui.views {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ViewSubTemp extends ViewBase {
-		public function ViewSubTemp(pScreen : UIBase, pVisual : DisplayObject) {
+	public class ViewSubTemp_DEPRECATED extends ViewBase {
+		public function ViewSubTemp_DEPRECATED(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			pScreen.registerEvent(crntTxt, FocusEvent.FOCUS_OUT, onEdit);			
 		}

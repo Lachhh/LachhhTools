@@ -5,7 +5,7 @@ package com.giveawaytool.meta.donations {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class MetaDonation {
+	public class MetaDonation extends MetaData {
 		static public var NULL:MetaDonation = new MetaDonation(ModelDonationSourceEnum.NULL);
 		static public var MSG_NULL:String = "<No Messsage>";
 		public var donatorName:String = "";

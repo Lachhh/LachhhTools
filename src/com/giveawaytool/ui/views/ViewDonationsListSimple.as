@@ -10,9 +10,9 @@ package com.giveawaytool.ui.views {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ViewDonationsList extends ViewGroupBase {
+	public class ViewDonationsListSimple extends ViewGroupBase {
 		public var metaDonations:MetaDonationList ;
-		public function ViewDonationsList(pScreen : UIBase, pVisual : DisplayObject) {
+		public function ViewDonationsListSimple(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			for (var i : int = 0; i < 6; i++) {
 				addView(createView(getDonationVisual(i)));	
@@ -21,8 +21,8 @@ package com.giveawaytool.ui.views {
 			showLoading(true);
 		}
 		
-		private function createView(visual:MovieClip):ViewDonationBtn {
-			var result:ViewDonationBtn = new ViewDonationBtn(screen, visual);
+		private function createView(visual:MovieClip):ViewFollowerBtn {
+			var result:ViewFollowerBtn = new ViewFollowerBtn(screen, visual);
 			return result;
 		}
 		
@@ -35,7 +35,7 @@ package com.giveawaytool.ui.views {
 			super.refresh();
 			metaDonations.sortByDate();
 			for (var i : int = 0; i < views.length; i++) {
-				var v:ViewDonationBtn = views[i] as ViewDonationBtn;
+				var v:ViewFollowerBtn = views[i] as ViewFollowerBtn;
 				v.metaDonation = metaDonations.getMetaDonation(i);
 				v.refresh(); 
 			}

@@ -28,7 +28,7 @@ package com.giveawaytool.effect {
 			super();
 			fadeOutTime = _fadeOutTimeStart = pFadeOutTime;
 			prct = 1;
-					
+			prctMod = 1/_fadeOutTimeStart;
 		}
 
 		override public function start() : void {
@@ -38,7 +38,7 @@ package com.giveawaytool.effect {
 			_g = (((color >> 8) & 0xFF)+0.0);//255;
 			_b = (((color >> 0) & 0xFF)+0.0);//255;
 			Utils.SetColor(visualToModify, _r*prct, _g*prct, _b*prct);
-			prctMod = 1/_fadeOutTimeStart;
+			
 		}
 		
 		override public function update() : void {
@@ -61,6 +61,13 @@ package com.giveawaytool.effect {
 
 		static public function addToActor(actor:Actor, fadeOutTime:int, color:uint):EffectFadeOut {
 			return addToActorWithSpecificMc(actor, actor.renderComponent.animView.anim, fadeOutTime, color);
+		}
+		
+		static public function addToActorWithPrct(actor:Actor, fadeOutTime:int, color:uint, prctStart:Number):EffectFadeOut {
+			var result:EffectFadeOut = addToActor(actor, fadeOutTime, color);
+			result.prct = prctStart;
+			result.start(); 
+			return result; 
 		}
 		
 		static public function addToActorWithSpecificMc(actor:Actor, displayObject:DisplayObject, fadeOutTime:int, color:uint):EffectFadeOut {

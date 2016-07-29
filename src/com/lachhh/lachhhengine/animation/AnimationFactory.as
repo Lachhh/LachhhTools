@@ -32,6 +32,8 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_SELECTANIMATION:int = pushClassLink(UI_SELECTANIMATION);
 		static public var ID_UI_DONATION:int = pushClassLink(UI_DONATION);
 		static public var ID_UI_PLAYMOVIE:int = pushClassLink(UI_PLAYMOVIE);
+		static public var ID_UI_LOADING:int = pushClassLink(UI_LOADING);
+		
 		static public var ID_FX_TWITTERSMALL:int = pushClassLink(FX_TWITTERSMALL);
 		
 		
@@ -55,6 +57,7 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_MONSTER_COUNTDOWN:int = pushClassLink(UI_MONSTER_COUNTDOWN);
 		static public var ID_UI_UPDATE:int = pushClassLink(UI_UPDATE);
 		static public var ID_UI_POPUPEDITDONATION:int = pushClassLink(UI_POPUPEDITDONATION);
+		static public var ID_UI_FOLLOWSUBALERT:int = pushClassLink(UI_FOLLOWSUBALERT);
 		
 		
 		static public var ID_FX_LOTERYNAME:int = pushClassLink(FX_LOTERYNAME);
@@ -91,6 +94,15 @@ package com.lachhh.lachhhengine.animation {
 		static public var ZZ_BTN_SAVETHEGUY:int = pushBtnLink(BTN_SAVETHEGUY);
 		static public var ZZ_BTN_CHECKBOX2:int = pushBtnLink(BTN_CHECKBOX2);
 		static public var ZZ_BTN_DYNAMICNAMESMALL2:int = pushBtnLink(BTN_DYNAMICNAMESMALL2);
+		static public var ZZ_BTN_FOLLOWERS:int = pushBtnLink(BTN_FOLLOWERS);
+		static public var ZZ_BTN_DONATIONS:int = pushBtnLink(BTN_DONATIONS);
+		static public var ZZ_BTN_GIVEAWAY:int = pushBtnLink(BTN_GIVEAWAY);
+		static public var ZZ_BTN_TWITTER:int = pushBtnLink(BTN_TWITTER);
+		static public var ZZ_BTN_HOST:int = pushBtnLink(BTN_HOST);
+		static public var ZZ_BTN_INFORMATION:int = pushBtnLink(BTN_INFORMATION);
+		static public var ZZ_BTN_PLAYMOVIE:int = pushBtnLink(BTN_PLAYMOVIE);
+		static public var ZZ_BTN_LISTENTOCHAT:int = pushBtnLink(BTN_LISTENTOCHAT);
+		
 
 		static public function pushClassLink(pClass:Class):int {
 			allAnimationClass.push(pClass);

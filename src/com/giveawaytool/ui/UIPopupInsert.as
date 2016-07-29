@@ -8,7 +8,7 @@ package com.giveawaytool.ui {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class UIPopupInsert extends UIPopUp {
+	public class UIPopupInsert extends UI_PopUp {
 		
 		public function UIPopupInsert(pMsg : String) {
 			super(pMsg);

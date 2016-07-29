@@ -1,8 +1,8 @@
 package com.giveawaytool.components {
 	import com.MetaIRCMessage;
-	import com.SimpleIRCBot;
 	import com.giveawaytool.ui.MetaHostAlert;
 	import com.giveawaytool.ui.UI_Donation;
+	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.actor.Actor;
 	import com.lachhh.lachhhengine.components.ActorComponent;
@@ -11,19 +11,16 @@ package com.giveawaytool.components {
 	 * @author LachhhSSD
 	 */
 	public class LogicHostAlert extends ActorComponent {
-		private var simpleIRCBot : SimpleIRCBot;
-		public var uiDonation : UI_Donation;
+		private var logicChat : LogicTwitchChat;
 
-		public function LogicHostAlert(pSimpleIRCBot : SimpleIRCBot) {
+		public function LogicHostAlert(pLogicChat : LogicTwitchChat) {
 			super();
-			simpleIRCBot = pSimpleIRCBot; 
-			simpleIRCBot.callbackMsgReceived.addCallback(new Callback(onMsgReceived, this, null));
-			
+			logicChat = pLogicChat;
+			logicChat.callbackMsgReceived.addCallback(new Callback(onMsgReceived, this, null));
 		}
 
 		private function onMsgReceived() : void {
-			if(uiDonation == null) return ;
-			var lastMsg:MetaIRCMessage = simpleIRCBot.lastMsgReceived;
+			var lastMsg:MetaIRCMessage = logicChat.lastMsgReceived;
 			processIRCMsg(lastMsg);
 		}
 		
@@ -31,14 +28,14 @@ package com.giveawaytool.components {
 			if(ircMsg == null) return ;
 			if(ircMsg.isHostAlert()) {
 				var newHost:MetaHostAlert = MetaHostAlert.createFromIRCMsg(ircMsg);
-				uiDonation.sendHostAlert(newHost);
+				UI_Menu.instance.logicNotification.logicSendToWidget.sendHostAlert(newHost);
 			}
 		}
 
 		
 		
-		static public function addToActor(actor: Actor, irc:SimpleIRCBot): LogicHostAlert {
-			var result: LogicHostAlert = new LogicHostAlert(irc);
+		static public function addToActor(actor: Actor, chat:LogicTwitchChat): LogicHostAlert {
+			var result: LogicHostAlert = new LogicHostAlert(chat);
 			actor.addComponent(result);
 			return result;
 		}

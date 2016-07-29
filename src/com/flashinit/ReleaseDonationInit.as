@@ -1,7 +1,6 @@
 package com.flashinit {
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.ui.UI_Donation;
-	import com.giveawaytool.ui.UI_GiveawayMenu;
 	import com.lachhh.lachhhengine.VersionInfo;
 
 	import flash.display.Sprite;

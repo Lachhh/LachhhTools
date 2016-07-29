@@ -48,7 +48,7 @@ package com.giveawaytool.meta.donations {
 			saveData["metaRecurrentGoal"] = metaRecurrentGoal.encode();
 			saveData["metaBigGoal"] = metaBigGoal.encode();
 			saveData["metaStreamTipConnection"] = metaStreamTipConnection.encode();
-			saveData["numSubs"] = MetaGameProgress.instance.metaSubsConfig.crntSub.value;;
+			
 			saveData["metaAutoFetch"] = metaAutoFetch.encode();
 			saveData["metaCharity"] = metaCharity.encode();
 			
@@ -67,7 +67,8 @@ package com.giveawaytool.meta.donations {
 			saveData["lastDonators"] = allDonations.encodeForWidget(this);
 			saveData["metaRecurrentGoal"] = metaRecurrentGoal.encode();
 			saveData["metaBigGoal"] = metaBigGoal.encode();
-			saveData["numSubs"] = MetaGameProgress.instance.metaSubsConfig.crntSub.value;
+			saveData["numSubs"] = MetaGameProgress.instance.metaSubsConfig.getCrntSub();
+			saveData["numSubsGoal"] = MetaGameProgress.instance.metaSubsConfig.goalSub;
 			saveData["metaCharity"] = metaCharity.settings.encode();
 			
 			

@@ -11,8 +11,9 @@ package com.giveawaytool.ui {
 		public var isOn:Boolean = false;
 		public var visualToToggle:MovieClip;
 		public var invisibleOnFirstFrame:Boolean = true;
-		public function LogicOnOffNextFrame() {
+		public function LogicOnOffNextFrame(visual:MovieClip) {
 			super();
+			visualToToggle = visual;
 		}
 
 		override public function update() : void {
@@ -32,10 +33,13 @@ package com.giveawaytool.ui {
 		public function gotoLastframe():void {
 			visualToToggle.gotoAndStop(visualToToggle.totalFrames);
 		}
+		
+		public function isOnLastFrame():Boolean {
+			return (visualToToggle.currentFrame >= visualToToggle.totalFrames);
+		}
 
 		static public function addToActor(actor: Actor, theVisual:MovieClip): LogicOnOffNextFrame {
-			var result: LogicOnOffNextFrame = new LogicOnOffNextFrame ();
-			result.visualToToggle = theVisual;
+			var result: LogicOnOffNextFrame = new LogicOnOffNextFrame (theVisual);
 			actor.addComponent(result);
 			return result;
 		}

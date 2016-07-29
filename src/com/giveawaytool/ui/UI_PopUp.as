@@ -20,7 +20,7 @@ package com.giveawaytool.ui {
 /**
  * @author Lachhh
  */
-	public class UIPopUp extends UIOpenClose {
+	public class UI_PopUp extends UIOpenClose {
 		public var btn1Callback:Callback;
 		public var btn2Callback:Callback;
 		public var btn3Callback:Callback;
@@ -28,7 +28,7 @@ package com.giveawaytool.ui {
 		public var msg:String;
 		public var btnOnEnter:MovieClip;
 
-		public function UIPopUp(pMsg : String) {
+		public function UI_PopUp(pMsg : String) {
 			super(AnimationFactory.ID_UI_POPUP, 20, 35);
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_ABOVE);
 			registerClicks();
@@ -98,12 +98,12 @@ package com.giveawaytool.ui {
 		
 		public function get descTxt() : TextField { return panel.getChildByName("descTxt") as TextField;}
 		
-		static public function createOkOnlySimple(msg:String):UIPopUp {
+		static public function createOkOnlySimple(msg:String):UI_PopUp {
 			return createOkOnly(msg, null);
 		}
 		
-		static public function createOkOnly(msg:String, callback:Callback):UIPopUp {
-			var result:UIPopUp = new UIPopUp(msg);
+		static public function createOkOnly(msg:String, callback:Callback):UI_PopUp {
+			var result:UI_PopUp = new UI_PopUp(msg);
 			result.btn3.visible = false;
 			result.btn1.visible = false;
 			result.btn2Callback = callback;
@@ -114,8 +114,8 @@ package com.giveawaytool.ui {
 			return result; 
 		}
 		
-		static public function createYesNo(msg:String, yes:Callback, no:Callback):UIPopUp {
-			var result:UIPopUp = new UIPopUp(msg);
+		static public function createYesNo(msg:String, yes:Callback, no:Callback):UI_PopUp {
+			var result:UI_PopUp = new UI_PopUp(msg);
 			result.btn2.visible = false;
 			result.btn1Callback = yes;
 			result.btn3Callback = no;
@@ -126,13 +126,20 @@ package com.giveawaytool.ui {
 			return result; 
 		}
 		
-		static public function createLoading(msg:String):UIPopUp {
-			var result:UIPopUp = new UIPopUp(msg);
+		static public function createLoading(msg:String):UI_PopUp {
+			var result:UI_PopUp = new UI_PopUp(msg);
 			result.btn1.visible = false;
 			result.btn2.visible = false;
 			result.btn3.visible = false;
 			
 			return result; 
 		}
+		
+		static public function createTwitchLoginRequired():UI_PopUp {
+			
+			return UI_PopUp.createOkOnly("You need to be logged in to Twitch for that!", null);; 
+		}
+		
+		
 	}
 }

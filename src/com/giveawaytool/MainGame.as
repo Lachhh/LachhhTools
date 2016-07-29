@@ -2,7 +2,7 @@ package com.giveawaytool {
 	import com.lachhh.lachhhengine.VersionInfo;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.scenes.GameSceneManager;
-	import com.giveawaytool.ui.UIPopUp;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.giveawaytool.ui.UI_LoterySpin;
 	import com.lachhh.flash.debug.UIFontLoopkup;
 	import com.lachhh.io.KeyManager;
@@ -38,7 +38,7 @@ package com.giveawaytool {
 			try {
 				MetaGameProgress.instance.loadFromLocal();
 			} catch(e:Error) {
-				UIPopUp.createOkOnly("Error Loading config :(", null);
+				UI_PopUp.createOkOnly("Error Loading config :(", null);
 			}
 			
 			if(VersionInfo.isDebug) {

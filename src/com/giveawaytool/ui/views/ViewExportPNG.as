@@ -1,7 +1,7 @@
 package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.meta.MetaGameProgress;
-	import com.giveawaytool.ui.UIPopUp;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.giveawaytool.ui.UI_GiveawayMenu;
 	import com.giveawaytool.ui.UI_SelectAnimation;
 	import com.giveawaytool.ui.UI_WinnerPreview;
@@ -82,7 +82,7 @@ package com.giveawaytool.ui.views {
 		
 		private function saveComplete(ui:UI_WinnerPreview):void {
 			if(ui) ui.destroy();
-			UIPopUp.createOkOnly("Image saved with success!", null);
+			UI_PopUp.createOkOnly("Image saved with success!", null);
 		}
 		
 		private function createPreview():UI_WinnerPreview {

@@ -147,7 +147,7 @@ package com.giveawaytool.ui {
 		//sets the state of the window in error display mode
 		function displayWindowError(errorId:int, errorText:String):void {
 			loadingSpinMc.visible = false;
-			UIPopUp.createOkOnly("Oops, something went wrong with the update.\n(" + errorText + ")", new Callback(onSkip, this, null));
+			UI_PopUp.createOkOnly("Oops, something went wrong with the update.\n(" + errorText + ")", new Callback(onSkip, this, null));
 			/*windowContent.title = "Error";
 			windowContent.enableDescription = true;
 			windowContent.description = "Error ID: " + errorId + ". " + errorText;

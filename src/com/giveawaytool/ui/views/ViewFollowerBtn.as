@@ -9,10 +9,10 @@ package com.giveawaytool.ui.views {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ViewDonationBtn extends ViewBase {
+	public class ViewFollowerBtn extends ViewBase {
 		private var viewDonation:ViewDonation;
-		public var metaDonation:MetaDonation;
-		public function ViewDonationBtn(pScreen : UIBase, pVisual : DisplayObject) {
+		//public var metaDonation:MetaDonation;
+		public function ViewFollowerBtn(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			viewDonation = new ViewDonation(pScreen, donationMc);
 		}
@@ -20,9 +20,11 @@ package com.giveawaytool.ui.views {
 		
 		override public function refresh() : void {
 			super.refresh();
-			viewDonation.metaDonation = metaDonation;
+			viewDonation.metaDonation = getMetaDonation();
 			viewDonation.refresh();
 		}
+		
+		public function getMetaDonation():MetaDonation { return metaData as MetaDonation;}
 		
 		public function get donationMc() : MovieClip { return visual.getChildByName("donationMc") as MovieClip;}
 	}

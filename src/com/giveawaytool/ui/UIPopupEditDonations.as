@@ -12,7 +12,7 @@ package com.giveawaytool.ui {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class UIPopupEditDonations extends UIPopUp {
+	public class UIPopupEditDonations extends UI_PopUp {
 		public var metaDonationToChange:MetaDonation ;
 		public var metaDonationPending:MetaDonation ;
 		public var onSaveCallback:Callback; 

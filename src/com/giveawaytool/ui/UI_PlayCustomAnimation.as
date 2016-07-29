@@ -93,7 +93,7 @@ package com.giveawaytool.ui {
 		}
 		
 		private function onSwfLoadedError():void {
-			UIPopUp.createOkOnly("Couldn't load the swf :(", null);
+			UI_PopUp.createOkOnly("Couldn't load the swf :(", null);
 			backToMenu();
 		}
 		

@@ -1,6 +1,9 @@
 package com.lachhh.flash {
-	import flash.utils.getTimer;
 	import avmplus.getQualifiedClassName;
+
+	import com.adobe.serialization.json.JSON;
+
+	import flash.utils.getTimer;
 
 	/**
 	 * @author Lachhh
@@ -24,6 +27,10 @@ package com.lachhh.flash {
 		
 		static public function myGetTime():int {
 			return getTimer();
+		}
+		
+		static public function myJSONStringify(obj:Object):String {
+			return (com.adobe.serialization.json.JSON.encode(obj)); 
 		}
 	}
 }

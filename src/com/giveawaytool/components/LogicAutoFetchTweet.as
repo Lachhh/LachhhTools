@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.UI_Menu;
 	import com.giveawaytool.meta.MetaTwitterAlert;
 	import com.giveawaytool.ui.UI_Donation;
 	import com.giveawaytool.effect.CallbackTimerEffect;
@@ -17,10 +18,10 @@ package com.giveawaytool.components {
 		private var timer : CallbackTimerEffect;
 		public var metaTweetAlertConfig : MetaTweetAlertConfig;
 		public var metaTimer : MetaDonationFetchTimer;
-		public var collectCallback:Callback;
+		public var tickCallback:Callback;
 		private var tweetSearch : LogicCheckForNewTweets;
-		public var uiDonation : UI_Donation;
 		public var tweetSearch2 : LogicCheckForNewTweets;
+		
 
 		public function LogicAutoFetchTweet(m : MetaTweetAlertConfig) {
 			super();
@@ -45,7 +46,8 @@ package com.giveawaytool.components {
 			if(metaTimer.secondsLeft <= 0) {
 				onEndTimer();
 			}
-			uiDonation.viewDonationsEdit.viewTweetConnection.refresh();
+			
+			if(tickCallback) tickCallback.call();
 		}
 		
 		private function onEndTimer():void {
@@ -68,7 +70,7 @@ package com.giveawaytool.components {
 			var m:MetaTwitterAlert = MetaTwitterAlert.createFromMetaTweet(metaTweet);
 			m.searchedFor = "lachhh.tv";
 			
-			uiDonation.sendTwitterAlert(m);
+			UI_Menu.instance.logicNotification.logicSendToWidget.sendTwitterAlert(m);
 		}
 		
 		private function onNewTweet2(metaTweet:MetaTweet):void {
@@ -76,7 +78,7 @@ package com.giveawaytool.components {
 			var m:MetaTwitterAlert = MetaTwitterAlert.createFromMetaTweet(metaTweet);
 			m.searchedFor = "#Lachhhisters";
 			
-			uiDonation.sendTwitterAlert(m);
+			UI_Menu.instance.logicNotification.logicSendToWidget.sendTwitterAlert(m);
 		}
 
 		override public function destroy() : void {

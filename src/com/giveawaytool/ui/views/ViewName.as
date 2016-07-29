@@ -1,4 +1,9 @@
 package com.giveawaytool.ui.views {
+	import flash.display.DisplayObjectContainer;
+	import com.lachhh.lachhhengine.animation.FlashAnimationView;
+	import flash.display.BitmapData;
+	import com.giveawaytool.io.twitch.TwitchConnection;
+	import com.giveawaytool.ui.ViewAvatarLogo;
 	import com.animation.exported.BTN_NAME;
 	import com.giveawaytool.effect.EffectKickBack;
 	import com.giveawaytool.effect.ui.EffectShakeRotateUI;
@@ -18,31 +23,54 @@ package com.giveawaytool.ui.views {
 	 * @author LachhhSSD
 	 */
 	public class ViewName extends ViewBase {
-		public var name:String ;
+		public var name : String ;
+		private var viewSubBadge : ViewAvatarLogo;
+		private var flashAnim:FlashAnimationView;
 		
-		
-		public function ViewName(pScreen : UIBase) {
-			var anim:MovieClip = AnimationManager.createAnimation(AnimationFactory.ID_FX_NAME_BTN);
-			super(pScreen, anim);
+
+		public function ViewName(pScreen : UIBase, pVisual:DisplayObjectContainer) {
+			flashAnim = new FlashAnimationView(pVisual);
+			flashAnim.setAnim(AnimationFactory.ID_FX_NAME_BTN);
+			
+			super(pScreen, flashAnim.anim);
 			nameTxt.text = "Super Long Name";
+			viewSubBadge = new ViewAvatarLogo(pScreen, avatarMc);
+			viewSubBadge.rect.x = 2;
+			viewSubBadge.rect.y = 2;
+			viewSubBadge.rect.width = 14;
+			viewSubBadge.rect.height = 14;
+			nameMc.gotoAndStop(1);
 		}
 		
 		override public function destroy() : void {
 			super.destroy();
-			if(visual) {
-				screen.removeClickFromVisual(visual);
-				Utils.LazyRemoveFromParent(visual);
-				AnimationManager.destroy(visual as FlashAnimation);
-				visual = null;
-			}
+			screen.removeClickFromVisual(visual);
+			flashAnim.destroy();
 		}
 
 		override public function refresh() : void {
 			super.refresh();
 			if(visual == null) return ;
+			
 			var frame:int = (isModerator ? 2 : 1);
+			
+			viewSubBadge.bmpData = getSubBadgeBmpData();
+			viewSubBadge.refresh();
+			avatarMc.visible = false;
+			
+			if(TwitchConnection.isLoggedIn()){
+				if(TwitchConnection.instance.isSubscriber(name)) {
+					frame += 2;
+					avatarMc.visible = true;
+				}
+			}
 			nameMc.gotoAndStop(frame);
 			nameTxt.text = name;
+		}
+		
+		public function getSubBadgeBmpData():BitmapData {
+			if(!TwitchConnection.isLoggedIn()) return null;
+			return TwitchConnection.instance.channelData.logoSubBadge;
 		}
 		
 		public function flash():void {
@@ -53,11 +81,16 @@ package com.giveawaytool.ui.views {
 		}
 		
 		public function get isModerator():Boolean {
-			return (MetaGameProgress.instance.isModerator(name));
+			return (MetaGameProgress.instance.metaGiveawayConfig.isModerator(name));
 		}
 		
 		public function get nameBtn() : MovieClip { return visual.getChildByName("nameBtn") as MovieClip;}
 		public function get nameMc() : MovieClip { return nameBtn.getChildByName("nameMc") as MovieClip;}
-		public function get nameTxt() : TextField { return nameMc.getChildByName("nameTxt") as TextField;}
+		public function get nameTxtMc() : MovieClip { return nameMc.getChildByName("nameTxtMc") as MovieClip;}
+		public function get nameTxt() : TextField { return nameTxtMc.getChildByName("nameTxt") as TextField;}
+		public function get avatarMc() : MovieClip { return nameMc.getChildByName("avatarMc") as MovieClip;}
+		
+		
+		
 	}
 }

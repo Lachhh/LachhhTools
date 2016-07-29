@@ -1,6 +1,5 @@
 package com.giveawaytool.ui.views {
 	import com.giveawaytool.meta.donations.MetaCharityDonation;
-	import com.giveawaytool.meta.donations.MetaDonation;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
@@ -12,7 +11,7 @@ package com.giveawaytool.ui.views {
 	 */
 	public class ViewCharityDonationBtn extends ViewBase {
 		private var viewDonation:ViewCharityDonation;
-		public var metaDonation : MetaCharityDonation;
+		
 
 		public function ViewCharityDonationBtn(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
@@ -22,9 +21,10 @@ package com.giveawaytool.ui.views {
 		
 		override public function refresh() : void {
 			super.refresh();
-			viewDonation.metaDonation = metaDonation;
+			viewDonation.metaDonation = metaData as MetaCharityDonation;
 			viewDonation.refresh();
 		}
+		
 		
 		public function get donationMc() : MovieClip { return visual.getChildByName("donationMc") as MovieClip;}
 	}

@@ -25,14 +25,14 @@ package com.giveawaytool.ui {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class UIMonsterCountDown extends UIBase {
+	public class UI_MonsterCountDown extends UIBase {
 		
 		public var countDown:int = 30;
 		public var countDownStart:int = 30;
 		public var quickMsg:String = "";
 		public var viewMonsterCountdown:ViewMonsterCountdown;
 		
-		public function UIMonsterCountDown() {
+		public function UI_MonsterCountDown() {
 			super(AnimationFactory.ID_UI_MONSTER_COUNTDOWN);
 			viewMonsterCountdown = new ViewMonsterCountdown(this, monsterEatMc);
 			viewMonsterCountdown.name = MetaGameProgress.instance.metaCountdownConfig.target;
@@ -116,7 +116,9 @@ package com.giveawaytool.ui {
 			refreshCountDown();
 		}
 		
-		private function saveTheGuy():void {
+		public function saveTheGuy():void {
+			if(!inputEnabled) return;
+			inputEnabled = false;
 			viewMonsterCountdown.setBeaten(new Callback(animToBackToMenu, this, null));
 			countDownMc.visible = false;
 			quickLbl.visible = false;	
@@ -133,6 +135,7 @@ package com.giveawaytool.ui {
 		override public function update() : void {
 			super.update();
 			
+			if(!inputEnabled) return ;
 			if(KeyManager.IsKeyPressed(Keyboard.ESCAPE)) {
 				backToMenu();
 			} else if(KeyManager.IsAnyKeyPressed()) {

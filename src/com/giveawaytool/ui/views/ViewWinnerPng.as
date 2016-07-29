@@ -2,7 +2,7 @@ package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.CallbackWaitEffect;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaSelectAnimation;
-	import com.giveawaytool.ui.UIPopUp;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.lachhh.ResolutionManager;
 	import com.lachhh.draw.SwfExporterToFileOnDisk;
 	import com.lachhh.draw.SwfTexture;
@@ -69,7 +69,7 @@ package com.giveawaytool.ui.views {
 		}
 		
 		private function onLoadedError():void {
-			UIPopUp.createOkOnly("Couldn't load swf :(", null);
+			UI_PopUp.createOkOnly("Couldn't load swf :(", null);
 		}
 
 		override public function destroy() : void {

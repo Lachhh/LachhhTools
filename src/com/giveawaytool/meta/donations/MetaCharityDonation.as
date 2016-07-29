@@ -3,7 +3,7 @@ package com.giveawaytool.meta.donations {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class MetaCharityDonation {
+	public class MetaCharityDonation extends MetaData{
 		public static const NULL : MetaCharityDonation = new MetaCharityDonation();
 		public var date : Date = new Date();
 		public var nameOfOrganisation : String = "Child's play";

@@ -9,7 +9,7 @@ package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.ui.EffectShakeUI;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaTwitterAccount;
-	import com.giveawaytool.ui.UIPopUp;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.lachhh.draw.SwfTexture;
 	import com.lachhh.flash.FlashAnimation;
 	import com.lachhh.flash.ui.ButtonSelect;
@@ -66,7 +66,7 @@ package com.giveawaytool.ui.views {
 				return ;
 			}
 			if(MetaGameProgress.instance.metaShareOnTwitter.hasTooMuchChars()) {
-				UIPopUp.createOkOnly("Your tweets has too many characters!", null);
+				UI_PopUp.createOkOnly("Your tweets has too many characters!", null);
 				return ;
 			}
 			
@@ -78,7 +78,7 @@ package com.giveawaytool.ui.views {
 		
 		
 		private function showError():void {
-			var u:UIPopUp = UIPopUp.createYesNo(metaTwitterAccount.error.toString(), new Callback(retry, this, null), null);
+			var u:UI_PopUp = UI_PopUp.createYesNo(metaTwitterAccount.error.toString(), new Callback(retry, this, null), null);
 			u.setNameOfDynamicBtn(u.btn1, "Retry");
 			u.setNameOfDynamicBtn(u.btn3, "Cancel");
 		}
