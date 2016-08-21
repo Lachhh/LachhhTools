@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.views.MetaCheerAlert;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.ui.views.MetaSubscribersList;
 	import com.giveawaytool.ui.MetaSubscriber;
@@ -42,9 +43,9 @@ package com.giveawaytool.components {
 		}
 		
 		private function onConnect( event:ServerSocketConnectEvent ):void {
-			var clientSocket:Socket = event.socket;
+			var clientSocket : Socket = event.socket;
 			clientSockets.push(clientSocket);
-         
+
 			clientSocket.addEventListener(ProgressEvent.SOCKET_DATA, onClientSocketData);
 			clientSocket.addEventListener(Event.CLOSE, onClose);
          	trace( "Connection from " + clientSocket.remoteAddress + ":" + clientSocket.remotePort );
@@ -93,6 +94,12 @@ package com.giveawaytool.components {
 		public function sendFollowAlert(m : MetaFollowAlert) : void {
 			var d:Dictionary = m.encodeForWidget();
 			d.type = "followAlert";
+			sendData(d);
+		}
+		
+		public function sendCheerAlert(m : MetaCheerAlert) : void {
+			var d:Dictionary = m.encode();
+			d.type = "cheerAlert";
 			sendData(d);
 		}
 		
@@ -180,5 +187,7 @@ package com.giveawaytool.components {
 		public function hasAWidgetConnected():Boolean {
 			return clientSockets.length >= 1;
 		}
+
+		
 	}
 }

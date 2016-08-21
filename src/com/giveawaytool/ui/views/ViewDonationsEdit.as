@@ -17,7 +17,6 @@ package com.giveawaytool.ui.views {
 	 */
 	public class ViewDonationsEdit extends ViewBase {
 		public var viewStreamTip : ViewStreamTipConnection ;
-		//public var viewDonationsListSimple : ViewDonationsListSimple;
 		public var viewDonationsList : ViewDonationList;
 		
 		public var viewTopDonator : ViewFollowerBtn;
@@ -56,8 +55,6 @@ package com.giveawaytool.ui.views {
 			viewDonationToolTip.registerDonationView(viewTopDonatorThisWeek);
 			viewDonationToolTip.registerDonationView(viewTopDonatorThisDay);
 			viewDonationsList.toolTip = viewDonationToolTip;
-			 
-			//viewDonationToolTip.registerDonationViewList(viewDonationsList.views);
 			
 			viewRecurrentGoal = new ViewDonationGoal(pScreen, recurrentGoalMc);
 			viewBigGoal = new ViewDonationGoal(pScreen, bigGoalMc);
@@ -166,7 +163,7 @@ package com.giveawaytool.ui.views {
 		
 		public function get streamTipMc() : MovieClip { return settingsMc.getChildByName("streamTipMc") as MovieClip;}
 		public function get autoFetchMc() : MovieClip { return settingsMc.getChildByName("autoFetchMc") as MovieClip;}
-		public function get autoTwitterMc() : MovieClip { return settingsMc.getChildByName("autoTwitterMc") as MovieClip;}
+		//public function get autoTwitterMc() : MovieClip { return settingsMc.getChildByName("autoTwitterMc") as MovieClip;}
 		
 		public function get topDonationMc() : MovieClip { return listMc.getChildByName("topDonationMc") as MovieClip;}
 		public function get topDonationThisMonthMc() : MovieClip { return listMc.getChildByName("topDonationThisMonthMc") as MovieClip;}

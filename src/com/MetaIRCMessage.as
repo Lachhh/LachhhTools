@@ -40,6 +40,14 @@ package com {
 			return text.indexOf("is now hosting you") >= 0;
 		}
 		
+		public function isCheerAlert():Boolean {
+			if(isNotificationFromTwitch()) return false;
+			var numBits:int = getCheerBitCount();
+			 
+			return (numBits > 0);
+		}
+		
+		
 		public function isNewSubAlert():Boolean {
 			if(!isNotificationFromTwitch()) return false;
 			if(text.indexOf("subscribed for") >= 0) return true;
@@ -51,6 +59,33 @@ package com {
 			return resubMonths > 0;
 		}
 		
+		public function getCheerName():String {
+			if(!isCheerAlert()) return "";
+			return name;
+		}
+		
+		public function getCheerBitCount():int {
+			var data:Array = text.split(" ");
+			var result:int = 0;
+			for (var i : int = 0; i < data.length; i++) {
+				var word:String = data[i];
+				result += getCheerFromWord(word);
+			}
+			
+			return result;
+		}
+		
+		private function getCheerFromWord(word:String):int {
+			if(word.indexOf("cheer") != 0) return 0;
+			word = FlashUtils.myReplace(word, "\r", "");
+			word = FlashUtils.myReplace(word, "\n", "");
+			word = FlashUtils.myReplace(word, "cheer", "");
+			
+			var result:int = FlashUtils.myParseFloat(word);
+			if(isNaN(result)) return 0;
+			return result;
+		}
+		
 		public function getHostName():String {
 			if(!isHostAlert()) return "";
 			var data:Array = text.split(" ");
@@ -60,7 +95,7 @@ package com {
 		public function getHostViewerCount():int {
 			if(!isHostAlert()) return 0;
 			var data:Array = text.split(" ");
-			return FlashUtils.myParseFloat(data[6]);
+			return FlashUtils.myParseFloat(data[8]);
 		}
 		
 		public function getSubName():String {

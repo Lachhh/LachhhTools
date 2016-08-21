@@ -1,6 +1,6 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.ui.MetaHostAlert;
 	import com.giveawaytool.io.twitch.MetaTwithConnection;
-	import com.kojaktsl.TwitterAPI.MetaTweet;
 	import com.giveawaytool.meta.donations.MetaDonationsConfig;
 	import com.lachhh.lachhhengine.DataManager;
 	import com.lachhh.lachhhengine.sfx.JukeBox;
@@ -20,6 +20,9 @@ package com.giveawaytool.meta {
 		public var metaToolConfig: MetaToolConfig;
 		public var metaDonationsConfig : MetaDonationsConfig;
 		public var metaTweetAlertConfig : MetaTweetAlertConfig ;
+		public var metaCheerAlertConfig : MetaCheerConfig ;
+		public var metaHostAlertConfig : MetaHostConfig;
+		
 		public var metaSubsConfig : MetaSubsConfig;
 		public var metaFollowConfig : MetaFollowConfig;
 		public var metaTwitchConnection : MetaTwithConnection;
@@ -49,6 +52,8 @@ package com.giveawaytool.meta {
 			metaTwitchConnection = new MetaTwithConnection();
 			metaFollowConfig = new MetaFollowConfig();
 			metaTwitchChat = new MetaTwitchChat();
+			metaCheerAlertConfig = new MetaCheerConfig();
+			metaHostAlertConfig = new MetaHostConfig();
 		}
 		
 		public function encode():Dictionary {
@@ -64,6 +69,10 @@ package com.giveawaytool.meta {
 			saveData["metaTweetAlertConfig"] = metaTweetAlertConfig.encode();
 			saveData["metaTwitchConnection"] = metaTwitchConnection.encode();
 			saveData["metaFollowConfig"] = metaFollowConfig.encode();
+			
+			saveData["metaCheerAlertConfig"] = metaCheerAlertConfig.encode();
+			saveData["metaHostAlertConfig"] = metaHostAlertConfig.encode();
+			
 			
 			return saveData; 
 		}
@@ -82,7 +91,10 @@ package com.giveawaytool.meta {
 			metaTweetAlertConfig.decode(obj["metaTweetAlertConfig"]) ;
 			metaTwitchConnection.decode(obj["metaTwitchConnection"]) ;
 			metaFollowConfig.decode(obj["metaFollowConfig"]) ;
-
+			
+			metaHostAlertConfig.decode(obj["metaHostAlertConfig"]) ;
+			metaCheerAlertConfig.decode(obj["metaCheerAlertConfig"]) ;
+			
 			if(winners == null) winners = [];
 		}
 		

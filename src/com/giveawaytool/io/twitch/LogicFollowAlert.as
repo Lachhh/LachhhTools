@@ -1,37 +1,42 @@
 ﻿package com.giveawaytool.io.twitch {
-	import com.lachhh.lachhhengine.ui.UIBase;
-	import com.giveawaytool.ui.views.MetaFollowerList;
+	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.meta.MetaGameProgress;
-	import com.giveawaytool.ui.views.MetaFollower;
-	import com.giveawaytool.components.MetaFollowAlert;
+	import com.giveawaytool.ui.UI_FollowSubAlert;
 	import com.giveawaytool.ui.UI_Menu;
+	import com.giveawaytool.ui.views.MetaFollower;
+	import com.giveawaytool.ui.views.MetaFollowerList;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.components.ActorComponent;
-	import flash.utils.Timer;
-	import flash.events.TimerEvent;
-	import flash.events.Event;
+	import com.lachhh.lachhhengine.ui.UIBase;
 	
 	public class LogicFollowAlert extends ActorComponent {
 		
-		private var followerCheckDelay:int = 1 * 60 * 1000;
+		private var followerCheckDelay:int = 1 * 1000;
 		
-		private var timer:Timer = new Timer(followerCheckDelay);
+		private var timer:CallbackTimerEffect ;
 		
 		public function LogicFollowAlert() {
-			timer.addEventListener(TimerEvent.TIMER, OnTimer);
-			timer.start();
+		}
+
+		override public function start() : void {
+			super.start();
+			timer = CallbackTimerEffect.addWaitCallFctToActor(actor, tick, followerCheckDelay);
 		}
 		
-		public function refreshFollowers():void{
+		public function tick():void{
+			refreshFollowers();
+			timer = CallbackTimerEffect.addWaitCallFctToActor(actor, tick, 1000*60);
+			trace("LogicFollowAlert : tick");
+		}
+
+		public function refreshFollowers() : void {
 			if(!TwitchConnection.instance.isConnected()) return ;
 			TwitchConnection.instance.refreshFollowers(new Callback(OnDataLoaded, this, null), null);
-			timer.reset();
-			timer.start();
 		}
 		
 		public function OnDataLoaded():void{
 			var metaData:MetaFollowerList = TwitchConnection.instance.followersData;
-		
+			
 			HandleFollowers(metaData);
 			
 			trace("Looking for new followers...");
@@ -44,28 +49,32 @@
 			} else {
 				for (var i : int = 0; i < metaData.followers.length; i++) {
 					var m:MetaFollower = metaData.getMetaFollower(i);
-					MetaGameProgress.instance.metaFollowConfig.metaFollowers.addIfNameNotInList(m);
+					var isNew:Boolean = MetaGameProgress.instance.metaFollowConfig.metaFollowers.addIfNameNotInList(m);
+					m.isNew = isNew;
 				}
 			}
 			
 			MetaGameProgress.instance.metaFollowConfig.metaFollowers.sortByDate();
 			collectNew();
 			MetaGameProgress.instance.saveToLocal();
-			UIBase.manager.refresh();
+			UIBase.manager.refreshAll(UI_FollowSubAlert);
+			
 		}
 		
-		public function collectNew():void {
-			UI_Menu.instance.logicNotification.logicSendToWidget.sendAllNewFollow(MetaGameProgress.instance.metaFollowConfig.metaFollowers);
+		public function collectNew() : void {
+			if (canAlert()) UI_Menu.instance.logicNotification.logicSendToWidget.sendAllNewFollow(MetaGameProgress.instance.metaFollowConfig.metaFollowers);
 			MetaGameProgress.instance.metaFollowConfig.metaFollowers.setAllNew(false);
+		}
+
+		private function canAlert() : Boolean {
+			return MetaGameProgress.instance.metaFollowConfig.alertOnNewFollow;
 		}
 		
 		public function NotifyOfNewFollower(metaFollower:MetaFollower):void{
 			MetaGameProgress.instance.metaFollowConfig.metaFollowers.addIfNameNotInList(metaFollower);
 		}
 		
-		public function OnTimer(event:Event):void{
-			refreshFollowers();
-		}
+	
 	}
 	
 }

@@ -142,7 +142,8 @@ package com.giveawaytool.ui.views {
 		}
 		
 		public function addFromChat(name:String):void {
-			if(MetaGameProgress.instance.metaGiveawayConfig.participants.indexOf(name) != -1) return; 
+			if(MetaGameProgress.instance.metaGiveawayConfig.participants.indexOf(name) != -1) return;
+			if(name == "") return; 
 			MetaGameProgress.instance.metaGiveawayConfig.participants.unshift(name);
 			uiMainMenu.viewGiveaway.viewNameList.setNames(MetaGameProgress.instance.metaGiveawayConfig.participants);
 			uiMainMenu.viewGiveaway.viewNameList.refresh();

@@ -215,6 +215,10 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		public function isModerator(name:String):Boolean {
+			for (var i : int = 0; i < listOfMods.length; i++) {
+				var modName:String = listOfMods[i];
+				if(modName.toLowerCase() == name.toLowerCase()) return true;
+			}
 			return (listOfMods.indexOf(name) != -1);
 		}
 		
@@ -337,22 +341,23 @@ package com.giveawaytool.io.twitch {
 			if(callback) callback.call();
 		}
 		
-		public function isMeOrKojak():Boolean {
+		public function isLachhhAndFriends():Boolean {
+			if(!TwitchConnection.isLoggedIn()) return false;
 			var usernameLowerCase:String = username.toLocaleLowerCase();
             if (usernameLowerCase == "lachhhandfriends") return true;
-            if (usernameLowerCase == "kojaktsl") return true;
 			
             return false;
 		}
 		
 		public function isUserAmemberOfKOTS():Boolean {
+			if(!TwitchConnection.isLoggedIn()) return false;
 			var usernameLowerCase:String = username.toLocaleLowerCase();
-			if (usernameLowerCase == "twitchplayszombidle") return true;
+			//if (usernameLowerCase == "twitchplayszombidle") return true;
             if (usernameLowerCase == "lachhhandfriends") return true;
             if (usernameLowerCase == "kojaktsl") return true;
             if (usernameLowerCase == "weallplaycast") return true;
-            if (usernameLowerCase == "slickentertainmentinc") return true;
-            if (usernameLowerCase == "brawlhalla") return true;
+            //if (usernameLowerCase == "slickentertainmentinc") return true;
+            //if (usernameLowerCase == "brawlhalla") return true;
 			if (usernameLowerCase == "lachhhh") return true;
 			if (usernameLowerCase == "80pgaming") return true;
 			if (usernameLowerCase == "hiimmikegaming") return true;

@@ -45,6 +45,7 @@ package com.giveawaytool.ui {
 			setTextOnVisual(textMc);
 			setTextOnVisual(textShakeTextMc);
 			newWinner = false;
+			UI_Menu.instance.show(false);
 		}
 
 		
@@ -67,6 +68,7 @@ package com.giveawaytool.ui {
 		
 		override protected function onIdle() : void {
 			super.onIdle();
+			viewNamesGroup.createViews();
 			refresh();
 		}
 
@@ -113,6 +115,7 @@ package com.giveawaytool.ui {
 			fx.start();
 			destroy();
 			var m:UI_GiveawayMenu = new UI_GiveawayMenu();
+			UI_Menu.instance.show(true);
 			if(newWinner) {
 				m.flashNewWinner();	
 			}

@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.animation.exported.UI_MENU;
 	import air.update.utils.VersionUtils;
 
 	import com.giveawaytool.effect.EffectBlinking;
@@ -78,6 +79,7 @@ package com.giveawaytool.ui {
 		
 		private function onClose():void {
 			destroy();
+			
 			if(MetaGameProgress.instance.metaGiveawayConfig.metaAnimation.useDefault) {
 				new UI_LoterySpin(viewGiveaway.viewNameList.getNames());
 			} else {

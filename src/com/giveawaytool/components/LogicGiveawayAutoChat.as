@@ -2,7 +2,7 @@ package com.giveawaytool.components {
 	import com.MetaIRCMessage;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.UI_GiveawayMenu;
-	import com.giveawaytool.ui.UI_MonsterCountDown;
+	import com.giveawaytool.ui.UI_CountDown;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.actor.Actor;
 	import com.lachhh.lachhhengine.components.ActorComponent;
@@ -36,7 +36,7 @@ package com.giveawaytool.components {
 			if(!ircMsg.isCountdownAutoClaimCmd(MetaGameProgress.instance.metaCountdownConfig)) return ;
 			if(!MetaGameProgress.instance.metaCountdownConfig.autoChatClaim) return;
 			 
-			var ui:UI_MonsterCountDown = UIBase.manager.getFirst(UI_MonsterCountDown) as UI_MonsterCountDown;
+			var ui:UI_CountDown = UIBase.manager.getFirst(UI_CountDown) as UI_CountDown;
 			if(ui == null) return ;
 			ui.saveTheGuy();
 		}

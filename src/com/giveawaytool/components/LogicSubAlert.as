@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.UI_FollowSubAlert;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.giveawaytool.ui.MetaSubscriber;
 	import com.giveawaytool.ui.views.MetaSubscribersList;
@@ -32,12 +33,19 @@ package com.giveawaytool.components {
 		
 			if(lastMsg.isNewSubAlert() || lastMsg.isReSubAlert()) {
 				var newSub:MetaSubcriberAlert = MetaSubcriberAlert.createFromIRCMsg(lastMsg);
-				UI_Menu.instance.logicNotification.logicSendToWidget.sendSubscriberAlert(newSub);
+				
+				if(canAlert(lastMsg)) UI_Menu.instance.logicNotification.logicSendToWidget.sendSubscriberAlert(newSub);
 				newSub.metaSubscriber.isNew = false;
 				MetaGameProgress.instance.metaSubsConfig.listOfSubs.updateMetaSub(newSub.metaSubscriber);
 				MetaGameProgress.instance.metaSubsConfig.listOfSubs.sortByDate();
-				UIBase.manager.refresh();
+				UIBase.manager.refreshAll(UI_FollowSubAlert);
 			}	
+		}
+		
+		public function canAlert(mMsg:MetaIRCMessage):Boolean {
+			if(mMsg.isReSubAlert() && MetaGameProgress.instance.metaSubsConfig.alertOnReSub) return true;
+			if(mMsg.isNewSubAlert() && MetaGameProgress.instance.metaSubsConfig.alertOnNewSub) return true;
+			return false;
 		}
 
 		
@@ -53,7 +61,7 @@ package com.giveawaytool.components {
 		
 		private function mergeAndRefresh():void {
 			mergeTwitchSubsInSavedList();
-			UIBase.manager.refresh();
+			UIBase.manager.refreshAll(UI_FollowSubAlert);
 		}
 		
 		public function mergeTwitchSubsInSavedList():void {

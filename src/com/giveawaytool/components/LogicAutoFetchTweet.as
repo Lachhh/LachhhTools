@@ -1,4 +1,7 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.UI_PlayMovies;
+	import com.lachhh.lachhhengine.ui.UIBase;
+	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.giveawaytool.meta.MetaTwitterAlert;
 	import com.giveawaytool.ui.UI_Donation;
@@ -36,6 +39,7 @@ package com.giveawaytool.components {
 			super.start();
 			timer = CallbackTimerEffect.addWaitCallFctToActor(actor, tick, 1000);
 			metaTimer.resetTimer();
+			metaTimer.secondsLeft = 3;
 		}
 
 		private function tick() : void {
@@ -48,20 +52,20 @@ package com.giveawaytool.components {
 			}
 			
 			if(tickCallback) tickCallback.call();
+			var ui:UI_PlayMovies = UIBase.manager.getFirst(UI_PlayMovies) as UI_PlayMovies;
+			if(ui) ui.viewTwitter.refreshTimer();
 		}
 		
 		private function onEndTimer():void {
-			/*var r:StreamTipRequest = uiDonationEdit.loadNewData(true);
-			if(metaTimer.autoCollect) {
-				r.onSuccess.addCallback(new Callback(uiDonationEdit.collectAllNewDonations, this, [true]));
-			}*/
+			
+			if(!TwitchConnection.instance.isLachhhAndFriends()) return ;
+			
 			tweetSearch.twitter = metaTweetAlertConfig.getTwitter();
 			tweetSearch2.twitter = metaTweetAlertConfig.getTwitter();
-			//tweetSearch.searchTweets("#Lachhhisters");
-			//tweetSearch.searchTweets("@LachhhAndFriends");
+			
 			tweetSearch.searchTweets("lachhh.tv");
 			tweetSearch2.searchTweets("#Lachhhisters");
-			//tweetSearch.searchTweets("twitch.tv/LachhAndFriends");
+			
 			metaTimer.resetTimer();
 		}
 		

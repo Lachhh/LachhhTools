@@ -215,7 +215,7 @@ package com.giveawaytool.ui.views {
 
 		override public function refresh() : void {
 			super.refresh();
-			createViews();
+			
 		}
 	}
 }

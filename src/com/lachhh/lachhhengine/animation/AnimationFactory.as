@@ -14,6 +14,7 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_TODAYWINNER:int = pushClassLink(UI_TODAYWINNER);
 		static public var ID_UI_LOTERYSPINNING:int = pushClassLink(UI_LOTERYSPINNING);
 		static public var ID_UI_GIVEAWAY:int = pushClassLink(UI_GIVEAWAY);
+		static public var ID_UI_CHEERSALERTS:int = pushClassLink(UI_CHEERSALERTS);
 
 		static public var ID_UI_OVERLAY:int = pushClassLink(UI_OVERLAY);
 		static public var ID_UI_POPUP:int = pushClassLink(UI_POPUP);

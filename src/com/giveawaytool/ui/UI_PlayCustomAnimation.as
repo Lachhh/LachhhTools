@@ -100,6 +100,7 @@ package com.giveawaytool.ui {
 		private function backToMenu():void {
 			destroy();
 			new UI_GiveawayMenu();
+			UI_Menu.instance.show(true);
 			var fx:EffectFlashColor = EffectFlashColor.create(0, 10);
 			fx.start();
 		}

@@ -54,7 +54,7 @@ package com.giveawaytool.ui {
 		
 		private function allowAccessToDonations():Boolean {
 			if(!TwitchConnection.isLoggedIn()) return false;
-			if(!TwitchConnection.instance.isMeOrKojak()) return false;
+			if(!TwitchConnection.instance.isUserAmemberOfKOTS()) return false;
 			return true;
 		}
 
@@ -63,7 +63,14 @@ package com.giveawaytool.ui {
 		public function get creditsBtn() : MovieClip {return visual.getChildByName("creditsBtn") as MovieClip;}
 		public function get menuSelectMc() : MovieClip { return visual.getChildByName("menuSelectMc") as MovieClip;}
 		public function get chatConnectMc() : MovieClip { return visual.getChildByName("chatConnectMc") as MovieClip;}
-		public function get oldMenuMc() : MovieClip { return visual.getChildByName("oldMenuMc") as MovieClip;}
+
+		public function get oldMenuMc() : MovieClip {
+			return visual.getChildByName("oldMenuMc") as MovieClip;
+		}
+
+		public function show(b: Boolean) : void {
+			visual.visible = b;
+		}
 		
 		
 		

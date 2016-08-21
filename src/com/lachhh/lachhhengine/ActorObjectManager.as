@@ -7,6 +7,7 @@ package com.lachhh.lachhhengine {
 	public class ActorObjectManager {
 		public var debugName:String="";
 		public var actorList: Vector.<Actor> = new Vector.<Actor>();
+		private var tempActor : Array = new Array();
 		public function ActorObjectManager() {
 			actorList = new Vector.<Actor>();
 		}
@@ -123,5 +124,14 @@ package com.lachhh.lachhhengine {
 			}
 			return null;
 		}
+		
+		public function refreshAll(theClass:Class):void {
+			while(tempActor.length > 0) tempActor.pop();
+			tempActor = appendAllInstanceOf(theClass, tempActor);
+			for (var i : int = 0; i < tempActor.length; i++) {
+				var v:Actor = tempActor[i];
+				v.refresh();
+			}
+		}	
 	}
 }

@@ -58,6 +58,7 @@ package com.giveawaytool.ui.views {
 		
 		override public function update() : void {
 			super.update();
+			if(visual == null) return ;
 			if(fadingOut) {
 				if(phase2Fade) {
 					if(visual.visible) {

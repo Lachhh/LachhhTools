@@ -1,7 +1,7 @@
 package com.giveawaytool.ui.views {
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.giveawaytool.meta.MetaGameProgress;
-	import com.giveawaytool.ui.UI_MonsterCountDown;
+	import com.giveawaytool.ui.UI_CountDown;
 	import com.giveawaytool.ui.UI_Overlay;
 	import com.giveawaytool.ui.UI_PlayCustomAnimation;
 	import com.giveawaytool.ui.UI_SelectAnimation;
@@ -70,7 +70,7 @@ package com.giveawaytool.ui.views {
 			screen.destroy();
 			
 			if(MetaGameProgress.instance.metaCountdownConfig.metaAnimation.useDefault) {
-				new UI_MonsterCountDown();
+				new UI_CountDown();
 			} else {
 				new UI_PlayCustomAnimation(MetaGameProgress.instance.metaCountdownConfig.metaAnimation, MetaGameProgress.instance.metaCountdownConfig.encode());
 			}

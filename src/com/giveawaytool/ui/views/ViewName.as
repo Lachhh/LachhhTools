@@ -25,14 +25,15 @@ package com.giveawaytool.ui.views {
 	public class ViewName extends ViewBase {
 		public var name : String ;
 		private var viewSubBadge : ViewAvatarLogo;
-		private var flashAnim:FlashAnimationView;
-		
+		private var flashAnim : FlashAnimationView;
+		private var rotateEffect : EffectShakeRotateUI;
 
-		public function ViewName(pScreen : UIBase, pVisual:DisplayObjectContainer) {
+		public function ViewName(pScreen : UIBase, pVisual : DisplayObjectContainer) {
 			flashAnim = new FlashAnimationView(pVisual);
 			flashAnim.setAnim(AnimationFactory.ID_FX_NAME_BTN);
 			
 			super(pScreen, flashAnim.anim);
+			
 			nameTxt.text = "Super Long Name";
 			viewSubBadge = new ViewAvatarLogo(pScreen, avatarMc);
 			viewSubBadge.rect.x = 2;
@@ -40,12 +41,16 @@ package com.giveawaytool.ui.views {
 			viewSubBadge.rect.width = 14;
 			viewSubBadge.rect.height = 14;
 			nameMc.gotoAndStop(1);
+			visual.rotation = 0;
 		}
 		
 		override public function destroy() : void {
 			super.destroy();
 			screen.removeClickFromVisual(visual);
 			flashAnim.destroy();
+			if(rotateEffect && !rotateEffect.destroyed) {
+				rotateEffect.destroyAndRemoveFromActor();
+			}
 		}
 
 		override public function refresh() : void {
@@ -64,6 +69,7 @@ package com.giveawaytool.ui.views {
 					avatarMc.visible = true;
 				}
 			}
+			
 			nameMc.gotoAndStop(frame);
 			nameTxt.text = name;
 		}
@@ -76,7 +82,7 @@ package com.giveawaytool.ui.views {
 		public function flash():void {
 			if(destroyed) return ;
 			//EffectFadeOut.addToActorWithSpecificMc(screen, visual, 5, 0x000000);
-			EffectShakeRotateUI.addToActor(actor, visual, 30);
+			rotateEffect = EffectShakeRotateUI.addToActor(actor, visual, 30);
 			//EffectSquashUI.addToActorWithSpecificDisplayObjAndRevolution(actor, visual, 1);
 		}
 		

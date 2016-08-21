@@ -21,8 +21,16 @@ package com.giveawaytool.ui {
 			screen.registerClick(donationsBtn, onDonations);
 			screen.registerClick(followBtn, onFollow);
 			screen.registerClick(playMovieBtn, onPlayMovie);
-			
+			screen.registerClick(cheersBtn, onCheers);
+
 			onGiveaway();
+		}
+
+		private function onCheers() : void {
+			if(uiCrnt as UI_CheerAlert) return ;
+			closeCurrent();
+			uiCrnt = new UI_CheerAlert();
+			animUIOpen(cheersBtn);
 		}
 
 		private function onGiveaway() : void {
@@ -92,6 +100,8 @@ package com.giveawaytool.ui {
 		public function get donationsBtn() : ButtonSelect { return visual.getChildByName("donationsBtn") as ButtonSelect;}
 		public function get followBtn() : ButtonSelect {return visual.getChildByName("followBtn") as ButtonSelect;}
 		public function get playMovieBtn() : ButtonSelect { return visual.getChildByName("playMovieBtn") as ButtonSelect;}
+		public function get cheersBtn() : ButtonSelect { return visual.getChildByName("cheersBtn") as ButtonSelect;}
+		
 
 		public function isUIneedsWidget() : Boolean {
 			if((uiCrnt as UI_Donation)) return true;

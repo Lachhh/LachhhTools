@@ -80,12 +80,16 @@ package com.giveawaytool.ui.views {
 			super.refresh();
 			if(metaTweetAlertConfig == null)
 			if(editing) return ;
-			secondsTxt.text = metaTweetAlertConfig.metaAutoFetch.seconds+"";
+			
 			timerNextTxt.text = Utils.secondsToTime(metaTweetAlertConfig.metaAutoFetch.secondsLeft);
 			
 			logicOnOff.isOn = metaTweetAlertConfig.metaAutoFetch.enabled;
+			refreshTimer();
 			refreshTwitAccount();
-			
+		}
+		
+		public function refreshTimer():void {
+			secondsTxt.text = metaTweetAlertConfig.metaAutoFetch.seconds+"";
 		}
 		
 		private function refreshTwitAccount():void {
