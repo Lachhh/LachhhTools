@@ -148,13 +148,8 @@ package com.giveawaytool.ui {
 		function displayWindowError(errorId:int, errorText:String):void {
 			loadingSpinMc.visible = false;
 			UI_PopUp.createOkOnly("Oops, something went wrong with the update.\n(" + errorText + ")", new Callback(onSkip, this, null));
-			/*windowContent.title = "Error";
-			windowContent.enableDescription = true;
-			windowContent.description = "Error ID: " + errorId + ". " + errorText;
-			windowContent.buttonLeft.visible = false;
-			windowContent.buttonRight.label = "Close";
-			windowContent.bar.visible = false;
-			addEventToButton(windowContent.buttonRight, MouseEvent.CLICK, closeWindow);*/
+			
+
 		}
 		
 		//close the window
@@ -173,7 +168,7 @@ package com.giveawaytool.ui {
 		
 		private function toMenu():void {
 			destroy();
-			new UI_GiveawayMenu();
+			new UI_Menu();
 			var fx:EffectFlashColor = EffectFlashColor.create(0, 5);
 			fx.start();
 		}

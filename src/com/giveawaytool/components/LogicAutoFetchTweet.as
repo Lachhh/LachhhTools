@@ -57,8 +57,8 @@ package com.giveawaytool.components {
 		}
 		
 		private function onEndTimer():void {
-			
-			if(!TwitchConnection.instance.isLachhhAndFriends()) return ;
+
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessTweets()) return ;
 			
 			tweetSearch.twitter = metaTweetAlertConfig.getTwitter();
 			tweetSearch2.twitter = metaTweetAlertConfig.getTwitter();

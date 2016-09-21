@@ -1,9 +1,8 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.DefaultMainGame;
 	import com.giveawaytool.components.LogicNotifications;
+	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
-	import com.lachhh.io.KeyManager;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.ui.UIBase;
 
@@ -14,7 +13,7 @@ package com.giveawaytool.ui {
 	 */
 	public class UI_Menu extends UIBase {
 		private var viewCredits : ViewCredits;
-		//private var logicOnOff :LogicOnOffNextFrame;
+		
 		private var wait:int = 0;
 		public var logicNotification : LogicNotifications;
 		public var viewMenuUISelect : ViewMenuUISelect;
@@ -51,8 +50,13 @@ package com.giveawaytool.ui {
 			
 			visual.gotoAndStop(allowAccessToDonations() ? 2 : 1);
 		}
-		
-		private function allowAccessToDonations():Boolean {
+
+		override public function refresh() : void {
+			super.refresh();
+			
+		}
+
+		private function allowAccessToDonations() : Boolean {
 			if(!TwitchConnection.isLoggedIn()) return false;
 			if(!TwitchConnection.instance.isUserAmemberOfKOTS()) return false;
 			return true;
@@ -64,16 +68,12 @@ package com.giveawaytool.ui {
 		public function get menuSelectMc() : MovieClip { return visual.getChildByName("menuSelectMc") as MovieClip;}
 		public function get chatConnectMc() : MovieClip { return visual.getChildByName("chatConnectMc") as MovieClip;}
 
-		public function get oldMenuMc() : MovieClip {
-			return visual.getChildByName("oldMenuMc") as MovieClip;
-		}
+		public function get oldMenuMc() : MovieClip {return visual.getChildByName("oldMenuMc") as MovieClip;}
+		
 
 		public function show(b: Boolean) : void {
 			visual.visible = b;
 		}
 		
-		
-		
-	
 	}
 }

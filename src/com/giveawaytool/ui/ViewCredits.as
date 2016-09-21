@@ -1,11 +1,14 @@
 package com.giveawaytool.ui {
-	import flash.events.MouseEvent;
+	import air.update.utils.VersionUtils;
+
 	import com.lachhh.lachhhengine.VersionInfo;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 	import com.lachhh.utils.Utils;
 
 	import flash.display.DisplayObject;
+	import flash.events.MouseEvent;
+	import flash.text.TextField;
 
 	/**
 	 * @author LachhhSSD
@@ -33,6 +36,15 @@ package com.giveawaytool.ui {
 
 		private function onClick() : void {
 			Utils.navigateToURLAndRecord(VersionInfo.URL_TWITCH_LF);
+		}
+
+		override public function refresh() : void {
+			super.refresh();
+			versionTxt.text = "v" + VersionUtils.getApplicationVersion();
+		}
+
+		public function get versionTxt() : TextField {
+			return visual.getChildByName("versionTxt") as TextField;
 		}
 	}
 }

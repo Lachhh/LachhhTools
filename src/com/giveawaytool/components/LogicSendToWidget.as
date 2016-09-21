@@ -55,7 +55,7 @@ package com.giveawaytool.components {
 		}
 		
 		private function onClose(event : Event) : void {
-			trace("Socket CLosed");
+			trace("Socket CLosed " + event);
 			cleanDeadSocket();
 			onWidgetChanged.call();
 		}

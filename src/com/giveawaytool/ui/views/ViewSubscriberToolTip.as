@@ -37,8 +37,6 @@ package com.giveawaytool.ui.views {
 			btn4.visible = false;
 			screen.registerClick(btn1, onClickAlert);
 			screen.registerClick(btn2, onClickMarkAsNew);
-			//screen.registerClick(btn3, onClickEdit);
-			//screen.registerClick(btn4, onClickDelete);
 			screen.registerClick(screen.visual, closeIfOpen);
 		}
 

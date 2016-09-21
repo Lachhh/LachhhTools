@@ -34,7 +34,7 @@ package com.giveawaytool.ui {
 			visual.visible = TwitchConnection.isLoggedIn();
 			 
 			if(!isConnected()) {
-				chatTxt.text = "OFFLINE";
+				chatTxt.text = "CHAT OFFLINE";
 				chatTxt.textColor = 0xCC0000;
 			} else {
 				chatTxt.text = "Connected to chat";

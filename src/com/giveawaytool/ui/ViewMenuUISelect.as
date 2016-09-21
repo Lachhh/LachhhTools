@@ -1,13 +1,15 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.io.twitch.TwitchConnection;
+	import com.giveawaytool.components.LogicNotifications;
 	import com.giveawaytool.effect.EffectKickBackUI;
 	import com.giveawaytool.effect.LogicAlphaOnOff;
+	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
 	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
 
 	/**
 	 * @author LachhhSSD
@@ -22,12 +24,24 @@ package com.giveawaytool.ui {
 			screen.registerClick(followBtn, onFollow);
 			screen.registerClick(playMovieBtn, onPlayMovie);
 			screen.registerClick(cheersBtn, onCheers);
+			screen.registerClick(chestBtn, onChest);
 
 			onGiveaway();
 		}
 
+		private function onChest() : void {
+			if(uiCrnt as UI_PatreonPromo) return ;
+			closeCurrent();
+			uiCrnt = new UI_PatreonPromo();
+			animUIOpen(chestBtn);
+		}
+
 		private function onCheers() : void {
 			if(uiCrnt as UI_CheerAlert) return ;
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) {
+				onChest();
+				return;
+			}
 			closeCurrent();
 			uiCrnt = new UI_CheerAlert();
 			animUIOpen(cheersBtn);
@@ -42,6 +56,10 @@ package com.giveawaytool.ui {
 		
 		private function onDonations() : void {
 			if(uiCrnt as UI_Donation) return ;
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation()) {
+				onChest();
+				return;
+			}
 			closeCurrent();
 			uiCrnt = new UI_Donation();
 			animUIOpen(donationsBtn);
@@ -50,6 +68,10 @@ package com.giveawaytool.ui {
 		
 		private function onFollow() : void {
 			if(uiCrnt as UI_FollowSubAlert) return ;
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) {
+				onChest();
+				return;
+			}
 			closeCurrent();
 			uiCrnt = new UI_FollowSubAlert();
 			animUIOpen(followBtn);
@@ -87,7 +109,14 @@ package com.giveawaytool.ui {
 			followBtn.selectIfBoolean((uiCrnt as UI_FollowSubAlert) != null);
 			playMovieBtn.selectIfBoolean((uiCrnt as UI_PlayMovies) != null);
 			playMovieBtn.visible = canPlayMovie();
+			
+			lockedMcCheers.visible = !UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers();
+			lockedMcDonation.visible = !UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation();
+			lockedMcFollow.visible = !UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow();
+			
 		}
+		
+		
 		
 		private function canPlayMovie():Boolean {
 			if(TwitchConnection.instance == null) return false;
@@ -101,6 +130,11 @@ package com.giveawaytool.ui {
 		public function get followBtn() : ButtonSelect {return visual.getChildByName("followBtn") as ButtonSelect;}
 		public function get playMovieBtn() : ButtonSelect { return visual.getChildByName("playMovieBtn") as ButtonSelect;}
 		public function get cheersBtn() : ButtonSelect { return visual.getChildByName("cheersBtn") as ButtonSelect;}
+		public function get chestBtn() : ButtonSelect { return visual.getChildByName("chestBtn") as ButtonSelect;}
+		
+		public function get lockedMcDonation() : MovieClip { return donationsBtn.getChildByName("lockedMc") as MovieClip;}
+		public function get lockedMcFollow() : MovieClip { return followBtn.getChildByName("lockedMc") as MovieClip;}
+		public function get lockedMcCheers() : MovieClip { return cheersBtn.getChildByName("lockedMc") as MovieClip;}
 		
 
 		public function isUIneedsWidget() : Boolean {

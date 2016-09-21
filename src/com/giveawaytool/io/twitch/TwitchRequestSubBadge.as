@@ -1,6 +1,7 @@
 package com.giveawaytool.io.twitch {
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.DataManager;
+	import com.lachhh.lachhhengine.VersionInfoDONTSTREAMTHIS;
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -8,6 +9,7 @@ package com.giveawaytool.io.twitch {
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestHeader;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -29,7 +31,10 @@ package com.giveawaytool.io.twitch {
 			
 			var url:String = getUrl();
 			var loader:URLLoader = new URLLoader() ;
-			loader.load(new URLRequest(url));
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var request:URLRequest = new URLRequest(url);
+			request.requestHeaders = headers;
+			loader.load(request);
 
 			loader.addEventListener(Event.COMPLETE, onBadgeURLoaded);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onIOError);

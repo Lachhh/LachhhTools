@@ -59,10 +59,10 @@ package com.giveawaytool.ui {
 			return result;
 		}
 		
-		public static function create2(name : String) : MetaSubscriber {
+		public static function create2(name : String, num:int) : MetaSubscriber {
 			var result:MetaSubscriber = new MetaSubscriber();
 			result.name = name;
-			result.numMonthInARow = 0;
+			result.numMonthInARow = num;
 			
 			return result;
 		}

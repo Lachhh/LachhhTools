@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.ui.views.MetaCheer;
 	import com.giveawaytool.ui.views.ViewGenericListWithPages;
 	import com.giveawaytool.ui.views.ViewSubscriberBtn;
 	import com.giveawaytool.ui.views.ViewSubscriberDynamic;
@@ -26,6 +27,16 @@ package com.giveawaytool.ui {
 			super.refresh();
 			titleTxt.text = "Subscribers";
 			
+		}
+		
+		override protected function sortData(d : Array) : void {
+			d.sort(sortOnDate);
+		}
+		
+		private function sortOnDate(a:MetaSubscriber, b:MetaSubscriber):int {
+			if(a.date.time < b.date.time) return -1;
+			if(a.date.time > b.date.time) return -1;
+			return 0;
 		}
 
 		override public function onClickView(v : ViewBase) : void {

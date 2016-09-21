@@ -35,19 +35,34 @@ package com.giveawaytool.ui {
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_ABOVE_NO_CLICK);
 			CallbackWaitEffect.addWaitCallFctToActor(this, playSounds1, 5);
 			CallbackWaitEffect.addWaitCallFctToActor(this, playSounds2, 23);
-			JukeBox.playSound(SfxFactory.ID_SFX_NEW_HOST);
+			
+			if(metaHostAlert.hasEnoughForRainbow()) {
+				JukeBox.playSound(SfxFactory.ID_SFX_NEW_HOST);
+			} else {
+				JukeBox.playSoundAtVolume(SfxFactory.ID_SFX_NEW_HOST, 0.1);
+			}
+			
 			refresh();
 		}
 
 		private function playSounds1() : void {
-			JukeBox.playSound(SfxFactory.ID_SFX_CHILD_YAY);
+			
 			if(metaHostAlert.hasEnoughForRainbow()) {
+				JukeBox.playSound(SfxFactory.ID_SFX_CHILD_YAY);
 				JukeBox.playSound(SfxFactory.ID_SFX_SPARKLES);
+			} else {
+				//JukeBox.playSoundAtVolume(SfxFactory.ID_SFX_CHILD_YAY, 0.1);
+				JukeBox.playSoundAtVolume(SfxFactory.ID_SFX_CROWD, 0.5);
+				JukeBox.playSoundAtVolume(SfxFactory.ID_SFX_SPARKLES, 0.25);
 			}
 		}
 		
 		private function playSounds2() : void {
-			JukeBox.playSound(SfxFactory.ID_SFX_CROWD);
+			if(metaHostAlert.hasEnoughForRainbow()) {
+				JukeBox.playSound(SfxFactory.ID_SFX_CROWD);
+			} else {
+				JukeBox.playSoundAtVolume(SfxFactory.ID_SFX_CROWD, 0.25);
+			}
 		}
 		
 		override public function destroy() : void {

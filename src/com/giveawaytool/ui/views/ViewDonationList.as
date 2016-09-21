@@ -23,5 +23,10 @@ package com.giveawaytool.ui.views {
 				
 			toolTip.onClickDonationView(v as ViewFollowerBtn);
 		}
+
+		override public function refresh() : void {
+			super.refresh();
+			titleTxt.text = "Last donations";
+		}
 	}
 }

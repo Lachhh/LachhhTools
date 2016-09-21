@@ -15,6 +15,8 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_LOTERYSPINNING:int = pushClassLink(UI_LOTERYSPINNING);
 		static public var ID_UI_GIVEAWAY:int = pushClassLink(UI_GIVEAWAY);
 		static public var ID_UI_CHEERSALERTS:int = pushClassLink(UI_CHEERSALERTS);
+		static public var ID_UI_PATREONPROMO:int = pushClassLink(UI_PATREONPROMO);
+		
 
 		static public var ID_UI_OVERLAY:int = pushClassLink(UI_OVERLAY);
 		static public var ID_UI_POPUP:int = pushClassLink(UI_POPUP);
@@ -59,6 +61,7 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_UPDATE:int = pushClassLink(UI_UPDATE);
 		static public var ID_UI_POPUPEDITDONATION:int = pushClassLink(UI_POPUPEDITDONATION);
 		static public var ID_UI_FOLLOWSUBALERT:int = pushClassLink(UI_FOLLOWSUBALERT);
+		static public var ID_UI_YOUTUBEPREVIEW:int = pushClassLink(UI_YOUTUBEPREVIEW);
 		
 		
 		static public var ID_FX_LOTERYNAME:int = pushClassLink(FX_LOTERYNAME);
@@ -103,7 +106,9 @@ package com.lachhh.lachhhengine.animation {
 		static public var ZZ_BTN_INFORMATION:int = pushBtnLink(BTN_INFORMATION);
 		static public var ZZ_BTN_PLAYMOVIE:int = pushBtnLink(BTN_PLAYMOVIE);
 		static public var ZZ_BTN_LISTENTOCHAT:int = pushBtnLink(BTN_LISTENTOCHAT);
-		
+		static public var ZZ_BTN_PATREON:int = pushBtnLink(BTN_PATREON);
+		static public var ZZ_BTN_PREVIEWYOUTUBE:int = pushBtnLink(BTN_PREVIEWYOUTUBE);
+		static public var ZZ_BTN_STREAMRPGPROMO:int = pushBtnLink(BTN_STREAMRPGPROMO);
 
 		static public function pushClassLink(pClass:Class):int {
 			allAnimationClass.push(pClass);

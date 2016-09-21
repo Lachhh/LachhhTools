@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.ui.views.MetaHost;
 	import com.giveawaytool.ui.views.ViewGenericListWithPages;
 	import com.giveawaytool.ui.views.ViewHostBtn;
 	import com.giveawaytool.ui.views.ViewHostDynamic;
@@ -26,6 +27,16 @@ package com.giveawaytool.ui {
 			super.refresh();
 			titleTxt.text = "Hosts";
 			
+		}
+		
+		override protected function sortData(d : Array) : void {
+			d.sort(sortOnDate);
+		}
+		
+		private function sortOnDate(a:MetaHost, b:MetaHost):int {
+			if(a.date.time < b.date.time) return -1;
+			if(a.date.time > b.date.time) return -1;
+			return 0;
 		}
 
 		override public function onClickView(v : ViewBase) : void {

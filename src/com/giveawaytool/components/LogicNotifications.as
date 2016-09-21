@@ -21,6 +21,7 @@ package com.giveawaytool.components {
 		public var logicFollowAlert : LogicFollowAlert;
 		
 		public var logicGiveAwayAutoChat : LogicGiveawayAutoChat;
+		public var logicPatreonAccess : LogicPatreonAccess;
 		
 		
 		public var metaGameProgress:MetaGameProgress;
@@ -45,6 +46,8 @@ package com.giveawaytool.components {
 			logicSendToWidgetPlayMovie = actor.addComponent(new LogicSendToWidget(9232)) as LogicSendToWidget;
 			logicFollowAlert = actor.addComponent(new LogicFollowAlert()) as LogicFollowAlert;
 			logicGiveAwayAutoChat = actor.addComponent(new LogicGiveawayAutoChat(logicListenToChat)) as LogicGiveawayAutoChat;
+			
+			logicPatreonAccess = actor.addComponent(new LogicPatreonAccess()) as LogicPatreonAccess;
 
 		}
 		

@@ -65,6 +65,8 @@ package com.giveawaytool.ui.views {
 			prevBtn.selectIfBoolean(isOnFirstPage());
 			nextBtn.selectIfBoolean(isOnLastPage());
 			
+			sortData(dataTotal);
+			
 			var startSlice:int = (crntPage-1)*numPerPage;
 			var endSlice:int = (crntPage)*numPerPage;
 			var copy:Array = dataTotal.slice(startSlice, endSlice);
@@ -72,6 +74,10 @@ package com.giveawaytool.ui.views {
 			viewScrollBar.setPrct(0);
 			//pageMc.visible = (totalPages > 1);
 			super.refresh();
+		}
+		
+		protected function sortData(d:Array):void {
+			
 		}
 
 		override protected function removeView(v : ViewBase) : void {

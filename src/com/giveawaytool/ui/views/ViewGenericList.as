@@ -42,6 +42,7 @@ package com.giveawaytool.ui.views {
 		private function destroyAllChildren():void {
 			while(views.length > 0) {
 				var view:ViewBase = views.shift();
+				screen.removeClickFromVisual(view.visual);
 				view.destroy();	
 			}
 		}

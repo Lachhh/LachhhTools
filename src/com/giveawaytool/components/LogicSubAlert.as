@@ -43,6 +43,7 @@ package com.giveawaytool.components {
 		}
 		
 		public function canAlert(mMsg:MetaIRCMessage):Boolean {
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessSub()) return false;
 			if(mMsg.isReSubAlert() && MetaGameProgress.instance.metaSubsConfig.alertOnReSub) return true;
 			if(mMsg.isNewSubAlert() && MetaGameProgress.instance.metaSubsConfig.alertOnNewSub) return true;
 			return false;

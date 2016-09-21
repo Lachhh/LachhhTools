@@ -185,7 +185,11 @@
 		}
 		
 		public function disconnect():void {
-			sock.close();
+			try {
+				sock.close();
+			} catch (e:Error) {
+				
+			}
 			_connected = false;
 		}
 		

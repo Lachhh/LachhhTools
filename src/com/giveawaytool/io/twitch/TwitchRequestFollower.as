@@ -1,14 +1,14 @@
 package com.giveawaytool.io.twitch {
 	import com.giveawaytool.ui.views.MetaFollowerList;
 	import com.lachhh.io.Callback;
-	import com.lachhh.lachhhengine.DataManager;
+	import com.lachhh.lachhhengine.VersionInfoDONTSTREAMTHIS;
 
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
-	import flash.utils.Dictionary;
+	import flash.net.URLRequestHeader;
 	/**
 	 * @author LachhhSSD
 	 */
@@ -43,7 +43,11 @@ package com.giveawaytool.io.twitch {
 			var request:URLRequest = new URLRequest(TWITCH_API_BASE + "channels/" + twitchConnection.getNameOfAccount() + "/follows" + parameters);
 			request.contentType = TWITCH_API_VERSION;
 			
-			loader = new URLLoader();
+			loader = new URLLoader() ;
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			
+			request.requestHeaders = headers;
+			
 			loader.dataFormat = URLLoaderDataFormat.TEXT;
 			loader.addEventListener(Event.COMPLETE, onLoadedGetFollowerRequest);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onIOError);

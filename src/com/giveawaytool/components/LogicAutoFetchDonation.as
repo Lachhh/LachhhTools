@@ -77,10 +77,17 @@ package com.giveawaytool.components {
 		public function collectAllNewDonations():void {
 			var collectedAmount:Number = MetaGameProgress.instance.metaDonationsConfig.allDonations.getAmountTotalOfNew();
 			if(collectedAmount > 0) {
-				UI_Menu.instance.logicNotification.logicSendToWidget.sendAllNewDonation(MetaGameProgress.instance.metaDonationsConfig.allDonations);
+				if(canAlert()) {
+					UI_Menu.instance.logicNotification.logicSendToWidget.sendAllNewDonation(MetaGameProgress.instance.metaDonationsConfig.allDonations);
+				}
 				MetaGameProgress.instance.metaDonationsConfig.addAllNewToGoal();
 				MetaGameProgress.instance.saveToLocal();
 			}
+		}
+		
+		private function canAlert():Boolean {
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation()) return false;
+			return true;
 		}
 
 		override public function destroy() : void {

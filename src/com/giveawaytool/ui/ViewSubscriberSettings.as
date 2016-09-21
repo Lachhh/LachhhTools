@@ -42,6 +42,7 @@ package com.giveawaytool.ui {
 		}
 
 		private function onRefresh() : void {
+			MetaGameProgress.instance.metaSubsConfig.listOfSubs.clear();
 			viewSubscriberList.showLoading(true);
 			UI_Menu.instance.logicNotification.logicSubAlert.refreshSubsFromTwitch(new Callback(refresh, this, null));
 		}

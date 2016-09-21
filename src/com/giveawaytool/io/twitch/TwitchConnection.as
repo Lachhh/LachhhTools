@@ -1,11 +1,12 @@
 package com.giveawaytool.io.twitch {
-	import com.giveawaytool.ui.MetaSubscriber;
-	import com.giveawaytool.components.TwitchRequestMods;
 	import com.giveawaytool.components.LogicTwitchChat;
-	import com.giveawaytool.ui.views.MetaSubscribersList;
+	import com.giveawaytool.components.TwitchRequestMods;
+	import com.giveawaytool.ui.MetaSubscriber;
 	import com.giveawaytool.ui.views.MetaFollowerList;
+	import com.giveawaytool.ui.views.MetaSubscribersList;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.DataManager;
+	import com.lachhh.lachhhengine.VersionInfoDONTSTREAMTHIS;
 
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.NativeWindowRenderMode;
@@ -18,6 +19,8 @@ package com.giveawaytool.io.twitch {
 	import flash.html.HTMLLoader;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestHeader;
+	import flash.net.URLRequestMethod;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -86,7 +89,14 @@ package com.giveawaytool.io.twitch {
 			htmlLoader.addEventListener(Event.LOCATION_CHANGE, onLocationChange);
 			htmlLoader.addEventListener(Event.COMPLETE, onComplete_htmlLoader);
 			
-			htmlLoader.load(new URLRequest(getConnectURL()));
+			var request : URLRequest = new URLRequest(); 
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			
+			request.requestHeaders = headers;
+			request.method = URLRequestMethod.GET; 
+			request.url = getConnectURL();
+			
+			htmlLoader.load(request);
 		}
 		
 		public function logout(c:Callback):void {
@@ -249,7 +259,10 @@ package com.giveawaytool.io.twitch {
 		public function connectStep2FetchUsername():void {
 			var url:String = "https://api.twitch.tv/kraken?oauth_token=" + accessToken + "&scope=user_read";
 			var loader:URLLoader = new URLLoader() ;
-			loader.load(new URLRequest(url));
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var request:URLRequest = new URLRequest(url);
+			request.requestHeaders = headers;
+			loader.load(request);
 			connectErrorMsg = "Problem fetching Twitch username";
 			loader.addEventListener(Event.COMPLETE, onFetchUsername);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onErrorConnectOnTwitch);
@@ -279,7 +292,12 @@ package com.giveawaytool.io.twitch {
 		private function checkIfPartnered():void  {
 			var url:String = "https://api.twitch.tv/kraken/channels/" + getNameOfAccount();
 			var loader:URLLoader = new URLLoader() ;
-			loader.load(new URLRequest(url));
+			var request : URLRequest = new URLRequest(); 
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			request.requestHeaders = headers;
+			request.method = URLRequestMethod.GET; 
+			request.url = url;
+			loader.load(request);
 			connectErrorMsg = "Problem looking if you're partnered";
 			loader.addEventListener(Event.COMPLETE, onCheckIfPartner);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onErrorConnectOnTwitch);

@@ -25,7 +25,7 @@ package com.giveawaytool.ui.views {
 			newDonation.isNew = true;
 			add(newDonation);
 		}
-		
+
 		public function add(metaSubscriber : MetaSubscriber) : void {
 			subscribers.push(metaSubscriber);
 		}
@@ -150,6 +150,10 @@ package com.giveawaytool.ui.views {
 				result.push(metaSub.name);
 			}
 			return result;
+		}
+
+		public function clear() : void {
+			subscribers = new Array();
 		}
 	}
 }

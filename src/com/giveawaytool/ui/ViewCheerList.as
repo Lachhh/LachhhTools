@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.ui.views.MetaCheer;
 	import com.giveawaytool.ui.views.ViewCheerBtn;
 	import com.giveawaytool.ui.views.ViewCheerDynamic;
 	import com.giveawaytool.ui.views.ViewCheerToolTip;
@@ -25,7 +26,16 @@ package com.giveawaytool.ui {
 		override public function refresh() : void {
 			super.refresh();
 			titleTxt.text = "Cheers";
-			
+		}
+
+		override protected function sortData(d : Array) : void {
+			d.sort(sortOnDate);
+		}
+		
+		private function sortOnDate(a:MetaCheer, b:MetaCheer):int {
+			if(a.date.time < b.date.time) return -1;
+			if(a.date.time > b.date.time) return -1;
+			return 0;
 		}
 
 		override public function onClickView(v : ViewBase) : void {

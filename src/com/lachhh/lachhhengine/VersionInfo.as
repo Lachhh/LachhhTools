@@ -17,8 +17,7 @@ package com.lachhh.lachhhengine {
 		static public var URL_TWITCH_FAMILYJULES_7X:String = "http://www.twitch.tv/FamilyJules7x";
 		static public var URL_YOUTUBE_FAMILYJULES_7X:String = "https://www.youtube.com/user/FamilyJules7X";
 		static public var URL_TUTORIAL:String = "https://www.youtube.com/watch?v=0wchRe2zQR8";
-		
-		
+		static public var URL_STREAMRPG:String = "https://www.patreon.com/StreamRPG";
 		
 		static public var DEFAULT_CHANNEL:String = "MyChannel";
 		

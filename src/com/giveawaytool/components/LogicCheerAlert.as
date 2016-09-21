@@ -40,7 +40,8 @@ package com.giveawaytool.components {
 		}
 
 		private function canAlert() : Boolean {
-			return MetaGameProgress.instance.metaHostAlertConfig.alertOnNewHost;
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) return false;
+			return MetaGameProgress.instance.metaCheerAlertConfig.alertOnNewCheer;
 		}
 		
 		

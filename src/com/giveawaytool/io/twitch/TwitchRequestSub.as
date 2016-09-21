@@ -3,11 +3,13 @@ package com.giveawaytool.io.twitch {
 	import com.giveawaytool.ui.views.MetaSubscribersList;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.DataManager;
+	import com.lachhh.lachhhengine.VersionInfoDONTSTREAMTHIS;
 
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestHeader;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -18,6 +20,7 @@ package com.giveawaytool.io.twitch {
 		private var twitchConnection : TwitchConnection;
 		public var onConnectCallback:Callback;
 		public var onErrorCallback:Callback;
+		static private var thisDate:Date = new Date();
 		
 		public function TwitchRequestSub(pTwitchConnection:TwitchConnection) {
 			twitchConnection = pTwitchConnection;
@@ -30,9 +33,12 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		private function fecthByBatchOf100():void {
-			var url:String = "https://api.twitch.tv/kraken/channels/" + twitchConnection.getNameOfAccount() + "/subscriptions?oauth_token=" + twitchConnection.accessToken + "&scope=user_read&limit=250&offset="+offSetSub;
+			var url:String = "https://api.twitch.tv/kraken/channels/" + twitchConnection.getNameOfAccount() + "/subscriptions?oauth_token=" + twitchConnection.accessToken + "&scope=user_read&limit=100&offset="+offSetSub;
 			var loader:URLLoader = new URLLoader() ;
-			loader.load(new URLRequest(url));
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var request:URLRequest = new URLRequest(url);
+			request.requestHeaders = headers;
+			loader.load(request);
 			loader.addEventListener(Event.COMPLETE, onFetchListOfSubsAdmin);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
 		}
@@ -52,7 +58,12 @@ package com.giveawaytool.io.twitch {
 				var aSub:Dictionary = subs[i];
 				var aUser:Dictionary = aSub.user;
 				var userName:String = aUser.name;
-				listOfSubs.add(MetaSubscriber.create2(userName));
+				var created_at:String = aSub.created_at;
+				created_at = created_at.substr(0, 10);
+				var a:Array = created_at.split("-");
+				var dateOfSubStart:Date = new Date(a[0], a[1], a[2]);
+				var numMonthInaRow:int = getNumMonth(dateOfSubStart, thisDate);  
+				listOfSubs.add(MetaSubscriber.create2(userName, numMonthInaRow+1));
 				i++;
 			}
 			
@@ -62,6 +73,14 @@ package com.giveawaytool.io.twitch {
 			} else {
 				if(onConnectCallback) onConnectCallback.call();
 			}	
+		}
+		
+		public function getNumMonth(d1:Date, d2:Date):int {
+			var months:int = 0;
+		    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+		    months -= d1.getMonth() + 1;
+		    months += d2.getMonth();
+		    return months <= 0 ? 0 : (months+1);
 		}
 		
 		public function getListOfSub():MetaSubscribersList {

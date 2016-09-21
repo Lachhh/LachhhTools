@@ -1,4 +1,5 @@
 ﻿package com.giveawaytool.io.twitch {
+	import com.animation.exported.UI_MENU;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.UI_FollowSubAlert;
@@ -67,6 +68,7 @@
 		}
 
 		private function canAlert() : Boolean {
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow()) return false;
 			return MetaGameProgress.instance.metaFollowConfig.alertOnNewFollow;
 		}
 		

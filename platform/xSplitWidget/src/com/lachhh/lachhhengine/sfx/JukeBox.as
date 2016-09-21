@@ -53,6 +53,7 @@ package com.lachhh.lachhhengine.sfx {
 		static public function playSoundAtVolume(iSfx:int, vol:Number):JukeboxSfxComponent {
 			var sfx:JukeboxSfxComponent = playSoundLoop(iSfx, instance, false);
 			sfx.sfxView.volume = vol ;
+			sfx.gotoVolume = vol;
 			sfx.sfxView.refresh();
 			return sfx;
 		}

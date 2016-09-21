@@ -98,13 +98,6 @@ package com.giveawaytool.ui {
 			}
 		}
 		
-		override public function refresh() : void {
-			super.refresh();
-			
-			
-			versionTxt.text = "Version " + VersionUtils.getApplicationVersion();
-		}
-		
 		public function flashNewWinner():void {
 			EffectBlinking.addToActorWithSpecificMc(this, viewExportPNG.winnersTxt, 60, 0x465A66);
 			EffectBlinking.addToActorWithSpecificMc(this, viewCountdown.targetTxt, 60, 0x465A66);
@@ -131,6 +124,6 @@ package com.giveawaytool.ui {
 		public function get backBtn() : MovieClip { return visual.getChildByName("backBtn") as MovieClip;}
 		public function get shareBtn() : MovieClip { return visual.getChildByName("shareBtn") as MovieClip;}
 		
-		public function get versionTxt() : TextField { return visual.getChildByName("versionTxt") as TextField;}
+		
 	}
 }
