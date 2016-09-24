@@ -25,7 +25,7 @@ package com.giveawaytool.ui {
 			logicNavigation.isOn = false;
 			
 			txt.text = "Charity";
-			lblTxt.text = "";
+			//lblTxt.text = "";
 			registerClick(backBtn, onBack);
 			registerClick(charityBtn, onClickCharity);
 
@@ -60,7 +60,7 @@ package com.giveawaytool.ui {
 		public function get charityBtn() : MovieClip { return donationsMc.getChildByName("charityBtn") as MovieClip;}
 		public function get backBtn() : MovieClip { return donationsMc.getChildByName("backBtn") as MovieClip;}
 		public function get txt() : TextField { return charityBtn.getChildByName("txt") as TextField;}
-		public function get lblTxt() : TextField { return charityBtn.getChildByName("lblTxt") as TextField;}
+		//public function get lblTxt() : TextField { return charityBtn.getChildByName("lblTxt") as TextField;}
 		
 			
 	}

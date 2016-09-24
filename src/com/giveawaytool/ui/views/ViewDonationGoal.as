@@ -30,8 +30,9 @@ package com.giveawaytool.ui.views {
 			pScreen.registerClick(showWidgetBtn, onClickShowWidget);
 			
 			pScreen.registerClick(activateBtn, onClickEnable);
-			pScreen.registerClick(enableBtn, onClickEnable);
+			pScreen.registerClick(desactivateBtn, onClickEnable);
 			pScreen.setNameOfDynamicBtn(activateBtn, "Activate");
+			pScreen.setNameOfDynamicBtn(desactivateBtn, "Deactivate");
 			
 			viewXP = new ViewXpBar(pScreen, progressMc);
 			logicOnOff = LogicOnOffNextFrame.addToActor(screen, visualMc);
@@ -87,10 +88,11 @@ package com.giveawaytool.ui.views {
 			crntTxt.text = metaGoal.crntAmount+"";
 			rewardTxt.text = metaGoal.reward;
 			checkedMc.visible = metaGoal.showWidget;
-			enableCheckedMc.visible = metaGoal.enabled;
+			//enableCheckedMc.visible = metaGoal.enabled;
 			logicOnOff.isOn = metaGoal.enabled;
 			tweenNumber.goto = metaGoal.crntAmount;
-			tweenNumber.ease = Math.abs((tweenNumber.goto-tweenNumber.value)/40); 
+			tweenNumber.ease = Math.abs((tweenNumber.goto-tweenNumber.value)/40);
+			desactivateBtn.visible = metaGoal.enabled;
 		}
 		
 		public function get targetTxt() : TextField { return panel.getChildByName("targetTxt") as TextField;}
@@ -102,7 +104,9 @@ package com.giveawaytool.ui.views {
 		
 		public function get panel() : MovieClip { return visual.getChildByName("panel") as MovieClip;}
 		public function get activateBtn() : MovieClip { return visual.getChildByName("activateBtn") as MovieClip;}
-		public function get enableBtn() : MovieClip { return panel.getChildByName("enableBtn") as MovieClip;}
-		public function get enableCheckedMc() : MovieClip { return enableBtn.getChildByName("checkedMc") as MovieClip;}		
+		public function get desactivateBtn() : MovieClip { return panel.getChildByName("desactivateBtn") as MovieClip;}
+		
+		//public function get enableBtn() : MovieClip { return panel.getChildByName("enableBtn") as MovieClip;}
+		//public function get enableCheckedMc() : MovieClip { return enableBtn.getChildByName("checkedMc") as MovieClip;}		
 	}
 }

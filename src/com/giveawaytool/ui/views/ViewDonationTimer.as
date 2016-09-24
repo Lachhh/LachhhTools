@@ -28,9 +28,11 @@ package com.giveawaytool.ui.views {
 			pScreen.registerClick(autoCollectBtn, onClickAutoCollect);
 			
 			pScreen.registerClick(activateBtn, onClickEnable);
-			pScreen.registerClick(enableBtn, onClickEnable);
+			pScreen.registerClick(desactivateBtn, onClickEnable);
 			pScreen.registerClick(secondsTxt, onClickSeconds);
 			pScreen.setNameOfDynamicBtn(activateBtn, "Activate");
+			pScreen.setNameOfDynamicBtn(desactivateBtn, "Deactivate");
+			
 			
 			logicOnOff = LogicOnOffNextFrame.addToActor(screen, visualMc);
 			logicOnOff.isOn = true;
@@ -77,6 +79,7 @@ package com.giveawaytool.ui.views {
 			timerNextTxt.text = Utils.secondsToTime(metaTimer.secondsLeft);
 			checkedMc.visible = metaTimer.autoCollect;
 			logicOnOff.isOn = metaTimer.enabled;
+			desactivateBtn.visible = metaTimer.enabled;
 		}
 		
 		public function get panel() : MovieClip { return visual.getChildByName("panel") as MovieClip;}
@@ -86,10 +89,6 @@ package com.giveawaytool.ui.views {
 		public function get checkedMc() : MovieClip { return autoCollectBtn.getChildByName("checkedMc") as MovieClip;}
 		
 		public function get activateBtn() : MovieClip { return visual.getChildByName("activateBtn") as MovieClip;}
-		public function get enableBtn() : MovieClip { return panel.getChildByName("enableBtn") as MovieClip;}
-
-		public function get enableCheckedMc() : MovieClip {
-			return enableBtn.getChildByName("checkedMc") as MovieClip;
-		}
+		public function get desactivateBtn() : MovieClip { return panel.getChildByName("desactivateBtn") as MovieClip;}
 	}
 }

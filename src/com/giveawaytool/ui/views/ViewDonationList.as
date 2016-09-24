@@ -11,6 +11,7 @@ package com.giveawaytool.ui.views {
 
 		public function ViewDonationList(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
+			
 		}
 
 		override public function createChildView() : ViewBase {

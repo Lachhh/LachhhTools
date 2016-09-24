@@ -17,8 +17,8 @@ package com.giveawaytool.ui {
 			super(pScreen, pVisual);
 			screen.registerClick(tutorialBtn, onTutorial);
 			screen.registerClick(fullscreenBtn, onFullScreen);
-			screen.registerClick(musicBtn, onMusic);
-			screen.registerClick(lachhhBtn, onLachhh);
+			//screen.registerClick(musicBtn, onMusic);
+			//screen.registerClick(lachhhBtn, onLachhh);
 		}
 
 
@@ -43,30 +43,30 @@ package com.giveawaytool.ui {
 		override public function refresh() : void {
 			super.refresh();
 			
-			screen.setNameOfDynamicBtn(tutorialBtn, "Tutorial");
-			screen.setNameOfDynamicBtn(musicBtn, "Music From\nFamilyJules7x");
-			screen.setNameOfDynamicBtn(lachhhBtn, "Lachhh's\nTwitch");
+			//screen.setNameOfDynamicBtn(tutorialBtn, "Tutorial");
+			//screen.setNameOfDynamicBtn(musicBtn, "Music From\nFamilyJules7x");
+			//screen.setNameOfDynamicBtn(lachhhBtn, "Lachhh's\nTwitch");
 			
 			if(!MetaGameProgress.instance.metaToolConfig.isFullscreen()) {
 				var scale:Number = MetaGameProgress.instance.metaToolConfig.scaleOfWindow();
 				var w:int = 1296;
 				var h:int = 758;
-				screen.setNameOfDynamicBtn(fullscreenBtn, "Window " + (scale*100) + "%");
+				//screen.setNameOfDynamicBtn(fullscreenBtn, "Window " + (scale*100) + "%");
 				visual.stage.displayState = StageDisplayState.NORMAL;
 				visual.stage.nativeWindow.width = Math.floor(w*scale);
     			visual.stage.nativeWindow.height = Math.floor(h*scale);
-				
+				iconMc.gotoAndStop(1);
 			} else {
 				visual.stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-				screen.setNameOfDynamicBtn(fullscreenBtn, "FullScreen");
+				iconMc.gotoAndStop(2);
+				//screen.setNameOfDynamicBtn(fullscreenBtn, "FullScreen");
 			}
 		}
 
-		public function get fullscreenBtn() : MovieClip {
-			return visual.getChildByName("fullscreenBtn") as MovieClip;
-		}
+		public function get fullscreenBtn() : MovieClip {return visual.getChildByName("fullscreenBtn") as MovieClip;}
+		public function get iconMc() : MovieClip { return fullscreenBtn.getChildByName("iconMc") as MovieClip;}		
 		public function get tutorialBtn() : MovieClip { return visual.getChildByName("tutorialBtn") as MovieClip;}
-		public function get musicBtn() : MovieClip { return visual.getChildByName("musicBtn") as MovieClip;}
-		public function get lachhhBtn() : MovieClip { return visual.getChildByName("lachhhBtn") as MovieClip;}
+		//public function get musicBtn() : MovieClip { return visual.getChildByName("musicBtn") as MovieClip;}
+		//public function get lachhhBtn() : MovieClip { return visual.getChildByName("lachhhBtn") as MovieClip;}
 	}
 }

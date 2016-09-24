@@ -107,6 +107,9 @@ package com.giveawaytool.ui {
 			giveawayBtn.selectIfBoolean((uiCrnt as UI_GiveawayMenu) != null);
 			donationsBtn.selectIfBoolean((uiCrnt as UI_Donation) != null);
 			followBtn.selectIfBoolean((uiCrnt as UI_FollowSubAlert) != null);
+			cheersBtn.selectIfBoolean((uiCrnt as UI_CheerAlert) != null);
+			chestBtn.selectIfBoolean((uiCrnt as UI_PatreonPromo) != null);
+			
 			playMovieBtn.selectIfBoolean((uiCrnt as UI_PlayMovies) != null);
 			playMovieBtn.visible = canPlayMovie();
 			

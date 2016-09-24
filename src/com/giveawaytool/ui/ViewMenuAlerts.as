@@ -48,12 +48,12 @@ package com.giveawaytool.ui {
 			if(UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) {
 				connectedToWidgetTxt.text = "Connected to Widget";
 				connectedToWidgetTxt.textColor = 0x00CC00;
-				infoBtn.visible = false;
+				//infoBtn.visible = false;
 				stopAllAnimBtn.deselect();
 			} else {
 				connectedToWidgetTxt.text = "Not Connected";
 				connectedToWidgetTxt.textColor = 0xCC0000;
-				infoBtn.visible = true;
+				//infoBtn.visible = true;
 				stopAllAnimBtn.select();
 			}
 			
@@ -74,7 +74,7 @@ package com.giveawaytool.ui {
 		public function get dirtyNoticeMc() : MovieClip {return visual.getChildByName("dirtyNoticeMc") as MovieClip;}
 		public function get applyAndSaveBtn() : MovieClip { return visual.getChildByName("applyAndSaveBtn") as MovieClip;}
 		public function get stopAllAnimBtn() : ButtonSelect { return visual.getChildByName("stopAllAnimBtn") as ButtonSelect;}
-		public function get infoBtn() : MovieClip { return visual.getChildByName("infoBtn") as MovieClip;}
+		//public function get infoBtn() : MovieClip { return visual.getChildByName("infoBtn") as MovieClip;}
 		public function get widgetNotConnectedMc() : MovieClip { return visual.getChildByName("widgetNotConnectedMc") as MovieClip;}
 						
 	}

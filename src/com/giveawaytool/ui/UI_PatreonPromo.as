@@ -36,7 +36,7 @@ package com.giveawaytool.ui {
 			registerClick(streamRPGPreview, onClickPatreon);
 			//registerClickWithCallback(streamRPGPreview, new Callback(onClick, this, [URL_STREAMRPG]));
 			
-			setNameOfDynamicBtn(patreonBtn, "Go to Patreon");
+			//setNameOfDynamicBtn(patreonBtn, "Go to Patreon");
 			refresh();
 		}
 		

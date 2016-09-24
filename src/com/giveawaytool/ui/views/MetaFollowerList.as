@@ -128,6 +128,7 @@ package com.giveawaytool.ui.views {
 			var result:MetaFollowerList = new MetaFollowerList();
 			var rawFollowObjects:Array = jsonData["follows"];
 			var i:int;
+			if(rawFollowObjects == null) return result;
 			for(i = 0; i < rawFollowObjects.length; i++){
 				var name:String = rawFollowObjects[i]["user"]["name"];
 				var rawDateString:String = rawFollowObjects[i]["created_at"];
