@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.io.twitch.emotes.MetaTwitchEmote;
 	import com.giveawaytool.ui.views.MetaCheerAlert;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.ui.views.MetaSubscribersList;
@@ -78,6 +79,11 @@ package com.giveawaytool.components {
 			sendData(d);
 		}
 		
+		public function sendEmoteFirework(m:MetaTwitchEmote):void{
+			var d:Dictionary = m.encode();
+			d.type = "emoteFirework";
+			sendData(d);
+		}
 		
 		public function sendPlayMovie(m:MetaPlayMovie):void {
 			var d:Dictionary = m.encode();

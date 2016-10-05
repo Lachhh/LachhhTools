@@ -1,4 +1,7 @@
 package com {
+	import com.giveawaytool.io.twitch.emotes.ModelTwitchEmoteEnum;
+	import com.giveawaytool.io.twitch.emotes.MetaTwitchEmote;
+	import com.giveawaytool.io.twitch.emotes.ModelTwitchEmote;
 	import com.giveawaytool.meta.MetaCountdownConfig;
 	import com.giveawaytool.meta.MetaGiveawayConfig;
 	import com.lachhh.utils.Utils;
@@ -12,6 +15,7 @@ package com {
 		public var text:String;
 		public var resubName:String = "";
 		public var resubMonths:int = -1;
+		public var metaEmotes:Array = new Array();
 		
 		public function MetaIRCMessage() {
 		}
@@ -121,6 +125,10 @@ package com {
 			return (name.toLowerCase() == pName.toLowerCase());
 		}
 		
+		public function hasEmotes():Boolean{
+			return metaEmotes.length > 0;
+		}
+		
 		static public function isPing(msg:String):Boolean {
 			return (msg.indexOf("PING :tmi.twitch.tv") == 0);
 		}
@@ -195,6 +203,9 @@ package com {
 					resubMonths = int(msgStr.replace("msg-param-months=", ""));
 					continue;
 				}
+				if(msgStr.indexOf("emotes=") >= 0){
+					decodeEmotes(msgStr, result);
+				}
 			}
 			
 			if(isResubAlert){
@@ -215,11 +226,11 @@ package com {
 				}
 			}
 			result.rawMsg = msg;
-			trace(result.isReSubAlert());
-			trace(result.name);
-			trace(result.text);
-			trace(result.resubMonths);
-			trace(result.resubName);
+			//trace(result.isReSubAlert());
+			//trace(result.name);
+			//trace(result.text);
+			//trace(result.resubMonths);
+			//trace(result.resubName);
 			//var nameLength:int = msg.indexOf("!");
 			//var messageStartIndex:int = msg.indexOf(":", nameLength);
 			//result.name = msg.substring(1, nameLength); // trim the initial ':'
@@ -228,7 +239,30 @@ package com {
 			return result;
 		}
 		
-		
+		private static function decodeEmotes(dataStr:String, result:MetaIRCMessage):void{
+			var tempArray:Array = dataStr.split("=");
+			if(tempArray[1] == null || tempArray[1] == "") return;
+			
+			var emotesDataStr:String = tempArray[1]; 
+			
+			var rawEmotes:Array = emotesDataStr.split("/");
+			
+			for each(var rawEmoteStr:String in rawEmotes){
+				var emoteData:Array = rawEmoteStr.split(":");
+				
+				var id:int = FlashUtils.myParseFloat(emoteData[0]);
+				var instances:Array = emoteData[1].split(",");
+				
+				var number:int = instances.length;
+				
+				var model:ModelTwitchEmote = ModelTwitchEmoteEnum.getOrCreateEmote(id);
+				
+				for(var i:int = 0; i < number; i++){
+					var emote:MetaTwitchEmote = new MetaTwitchEmote(model);
+					result.metaEmotes.push(emote);
+				}
+			}
+		}
 		
 		static public function isErrorLoggingMsg(msg:String):Boolean {
 			return (msg.indexOf(":tmi.twitch.tv NOTICE * :Error logging in") == 0);
