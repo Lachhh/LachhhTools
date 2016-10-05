@@ -53,7 +53,7 @@ package com.giveawaytool.ui {
 
 		override public function refresh() : void {
 			super.refresh();
-			
+			alertMc.visible = logicNotification.logicPatreonAccess.canUseAlerts();
 		}
 
 		private function allowAccessToDonations() : Boolean {

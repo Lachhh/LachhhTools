@@ -38,6 +38,7 @@ package com.giveawaytool.ui {
 			
 			visual.stage.focus = MainGame.instance;
 			SwfLoaderManager.loadSwf(metaSelectAnimation.pathToSwf, new Callback(onSwfLoaded, this, null), new Callback(onSwfLoadedError, this, null));
+			UI_Menu.instance.show(false);
 		}
 
 		private function onClickBack(e:Event) : void {

@@ -24,6 +24,8 @@ package com.giveawaytool.components {
 		public function canAccessCheers():Boolean {return isSilverTier();}		
 		public function canAccessDonation():Boolean {return isSilverTier();}
 		
+		public function canUseAlerts():Boolean {return isBronzeTier();}
+		
 		public function isBronzeTier():Boolean {
 			return isAdminAccess();
 		}
