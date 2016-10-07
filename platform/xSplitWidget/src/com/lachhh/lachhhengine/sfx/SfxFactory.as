@@ -1,4 +1,5 @@
 package com.lachhh.lachhhengine.sfx {
+	import com.lachhh.utils.Utils;
 	import com.starterkit.exported.sfx.*;
 
 	import flash.media.Sound;
@@ -49,6 +50,7 @@ package com.lachhh.lachhhengine.sfx {
 		static public var ID_SFX_UPGRADE_SIMPLE:int = pushClassLink(SFX_UPGRADE_SIMPLE);
 		static public var ID_SFX_NOOOOOO:int = pushClassLink(SFX_NOOOOOO);
 		
+		static public var ID_SFX_12_GAUGE:int = pushClassLink(SFX_12_GAUGE);
 
 		static public var ID_SFX_CANON:int = pushClassLink(SFX_CANON);
 		static public var ID_SFX_WEAPON_AIRSTRIKE:int = pushClassLink(SFX_WEAPON_AIRSTRIKE);
@@ -61,6 +63,20 @@ package com.lachhh.lachhhengine.sfx {
 		static public var ID_SFX_NEW_TWEET_LACHHHISTERS:int = pushClassLink(SFX_NEW_TWEET_LACHHHISTERS);
 		static public var ID_SFX_NEW_TWEET_LACHHHISTERS_2:int = pushClassLink(SFX_NEW_TWEET_LACHHHISTERS_2);
 		static public var ID_SFX_NEW_TWEET_LACHHHISTERS_3:int = pushClassLink(SFX_NEW_TWEET_LACHHHISTERS_3);
+		
+		static public var ID_SFX_EXPLOSION_1:int = pushClassLink(SFX_EXPLOSION_1);
+		static public var ID_SFX_EXPLOSION_2:int = pushClassLink(SFX_EXPLOSION_2);
+		static public var ID_SFX_EXPLOSION_3:int = pushClassLink(SFX_EXPLOSION_3);
+		static public var ID_SFX_EXPLOSION_4:int = pushClassLink(SFX_EXPLOSION_4);
+		static public var ID_SFX_EXPLOSION_5:int = pushClassLink(SFX_EXPLOSION_5);
+		static public var ID_SFX_EXPLOSION_6:int = pushClassLink(SFX_EXPLOSION_6);
+		static public var ID_SFX_EXPLOSION_7:int = pushClassLink(SFX_EXPLOSION_7);
+		static public var ID_SFX_EXPLOSION_8:int = pushClassLink(SFX_EXPLOSION_8);
+		static public var ID_SFX_EXPLOSION_9:int = pushClassLink(SFX_EXPLOSION_9);
+		
+		static public var ID_SFX_HOUSE_EXPLOSION_1:int = pushClassLink(SFX_HOUSE_EXPLOSION_1);
+		static public var ID_SFX_HOUSE_EXPLOSION_2:int = pushClassLink(SFX_HOUSE_EXPLOSION_2);
+		static public var ID_SFX_HOUSE_EXPLOSION_3:int = pushClassLink(SFX_HOUSE_EXPLOSION_3);
 
 		static public function pushClassLink(pClass:Class):int {
 			allSoundClass.push(pClass);
@@ -111,5 +127,20 @@ package com.lachhh.lachhhengine.sfx {
 			JukeBox.playSoundAtVolume(ID_SFX_UI_MEGAPUNCH_03, vol); 
 		}
 		
+		static public var randomLaunchSfx:Array = [ID_SFX_EXPLOSION_1, ID_SFX_EXPLOSION_2, ID_SFX_EXPLOSION_3,
+													ID_SFX_EXPLOSION_4,
+													ID_SFX_EXPLOSION_7, ID_SFX_EXPLOSION_8, ID_SFX_EXPLOSION_9];
+		
+		static public function playRandomLaunchSfx(vol:Number):void{
+			var result:int = Utils.pickRandomInInt(randomLaunchSfx);
+			JukeBox.playSoundAtVolume(result, vol);
+		}
+		
+		static public var randomHouseExplodeSfx:Array = [ID_SFX_HOUSE_EXPLOSION_1, ID_SFX_HOUSE_EXPLOSION_2, ID_SFX_HOUSE_EXPLOSION_3];
+		
+		static public function playRandomHouseExplodeSfx(vol:Number):void{
+			var result:int = Utils.pickRandomInInt(randomHouseExplodeSfx);
+			JukeBox.playSoundAtVolume(result, vol);
+		}
 	}
 }

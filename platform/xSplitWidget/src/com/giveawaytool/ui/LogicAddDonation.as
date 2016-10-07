@@ -1,4 +1,6 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.meta.twitch.MetaEmoteGroup;
+	import com.giveawaytool.meta.twitch.MetaTwitchEmote;
 	import com.giveawaytool.MetaCheerAlert;
 	import com.adobe.serialization.json.JSONDecoder;
 	import com.giveawaytool.meta.MetaDonationList;
@@ -50,6 +52,11 @@ package com.giveawaytool.ui {
 			switch(d.type) {
 				case "halloweenSpook" :
 					newCmd = new MetaCmdPlayHalloweenAlert();
+					cmdGroup.addCommandToQueue(newCmd);
+					break;
+				case "emoteFirework":
+					var metaEmotes:MetaEmoteGroup = MetaEmoteGroup.createFromRawData(d); 
+					newCmd = new MetaCmdEmoteFirework(metaEmotes);
 					cmdGroup.addCommandToQueue(newCmd);
 					break;
 				case "tweetAlert" :

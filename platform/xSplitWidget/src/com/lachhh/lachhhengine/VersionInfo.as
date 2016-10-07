@@ -17,7 +17,7 @@ package com.lachhh.lachhhengine {
 		static public var lachhhistersTweet:Boolean = false;
 		
 		
-		
+		static public var URL_TWITCH_EMOTE_TEMPLATE:String = "https://static-cdn.jtvnw.net/emoticons/v1/[EMOTE_ID]/3.0";
 		
 		
 		static public var DEFAULT_CHANNEL:String = "MyChannel";

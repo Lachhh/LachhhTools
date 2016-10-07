@@ -61,7 +61,7 @@ package com.giveawaytool.effect {
 			var result:EffectBlinking = new EffectBlinking();
 			result.blinkingTime = blinkingTime;
 			result.color = color;
-			result.visualToBlink = actor.renderComponent.animView.anim;
+			if(actor.renderComponent) result.visualToBlink = actor.renderComponent.animView.anim;
 			actor.addComponent(result);
 			
 			return result;

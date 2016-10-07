@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.io.twitch.emotes.LogicListenForEmotes;
 	import com.giveawaytool.io.twitch.LogicFollowAlert;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
@@ -19,6 +20,7 @@ package com.giveawaytool.components {
 		public var logicTweetAutoFetch : LogicAutoFetchTweet;
 		public var logicListenToChat: LogicTwitchChat;
 		public var logicFollowAlert : LogicFollowAlert;
+		public var logicListenForEmotes:LogicListenForEmotes;
 		
 		public var logicGiveAwayAutoChat : LogicGiveawayAutoChat;
 		public var logicPatreonAccess : LogicPatreonAccess;
@@ -46,6 +48,8 @@ package com.giveawaytool.components {
 			logicSendToWidgetPlayMovie = actor.addComponent(new LogicSendToWidget(9232)) as LogicSendToWidget;
 			logicFollowAlert = actor.addComponent(new LogicFollowAlert()) as LogicFollowAlert;
 			logicGiveAwayAutoChat = actor.addComponent(new LogicGiveawayAutoChat(logicListenToChat)) as LogicGiveawayAutoChat;
+			
+			logicListenForEmotes = LogicListenForEmotes.addToActor(actor, logicListenToChat);
 			
 			logicPatreonAccess = actor.addComponent(new LogicPatreonAccess()) as LogicPatreonAccess;
 

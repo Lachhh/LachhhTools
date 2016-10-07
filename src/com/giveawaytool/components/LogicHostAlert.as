@@ -34,7 +34,10 @@ package com.giveawaytool.components {
 			if(ircMsg.isHostAlert()) {
 				var newHost:MetaHostAlert = MetaHostAlert.createFromIRCMsg(ircMsg);
 				MetaGameProgress.instance.metaHostAlertConfig.metaHosts.add(MetaHost.create2(newHost.name, new Date(), newHost.numViewers));
-				if(canAlert()) UI_Menu.instance.logicNotification.logicSendToWidget.sendHostAlert(newHost);
+				if(canAlert()){
+					UI_Menu.instance.logicNotification.logicSendToWidget.sendHostAlert(newHost);
+					if(newHost.numViewers >= 5) MetaGameProgress.instance.metaEmoteFireworksSettings.autoTriggerFromHost();
+				}
 				MetaGameProgress.instance.saveToLocal();
 				UIBase.manager.refreshAll(UI_CheerAlert);
 			}

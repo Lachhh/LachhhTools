@@ -32,6 +32,8 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_FX_CHEER_MONSTER_IN:int = pushClassLink(FX_CHEER_MONSTER_IN);
 		static public var ID_FX_CHEER_MONSTER_OUT:int = pushClassLink(FX_CHEER_MONSTER_OUT);
 		
+		static public var ID_FX_FIREWORK_TRAIL:int = pushClassLink(FX_FIREWORK_TRAIL);
+		
 		static public var ID_UI_DONATIONINTRO:int = pushClassLink(UI_DONATIONINTRO);
 		static public var ID_UI_DONATIONRECURGOALONLY:int = pushClassLink(UI_DONATIONRECURGOALONLY);
 		static public var ID_UI_DONATIONINTROSMALL:int = pushClassLink(UI_DONATIONINTROSMALL);
