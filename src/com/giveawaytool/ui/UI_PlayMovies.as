@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.ui.views.ViewFireworksOptions;
 	import com.giveawaytool.ui.views.ViewTweetTimer;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaPlayMovie;
@@ -14,11 +15,14 @@ package com.giveawaytool.ui {
 	 */
 	public class UI_PlayMovies extends UIBase {
 		public var viewTwitter:ViewTweetTimer;
+		public var viewFireworksOptions:ViewFireworksOptions;
 		public function UI_PlayMovies() {
 			super(AnimationFactory.ID_UI_PLAYMOVIE);
 			
 			viewTwitter = new ViewTweetTimer(this, autoTwitterMc);
 			viewTwitter.metaTweetAlertConfig = MetaGameProgress.instance.metaTweetAlertConfig;
+			
+			viewFireworksOptions = new ViewFireworksOptions(this, fireworksPanel);
 			
 			createSendMovieBtn(0, "JustDoIt", "Just Do It");
 			createSendMovieBtn(1, "VanDammeHit", "VanDamme Hit");
@@ -68,5 +72,6 @@ package com.giveawaytool.ui {
 		public function get chatLogTxt() : TextField { return visual.getChildByName("chatLogTxt") as TextField;}
 		
 		public function get autoTwitterMc() : MovieClip { return visual.getChildByName("autoTwitterMc") as MovieClip;}
+		public function get fireworksPanel(): MovieClip { return visual.getChildByName("fireworksPanel") as MovieClip;}
 	}
 }

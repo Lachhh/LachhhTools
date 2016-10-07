@@ -28,6 +28,8 @@ package com.giveawaytool.meta {
 		public var metaTwitchConnection : MetaTwithConnection;
 		public var metaTwitchChat : MetaTwitchChat;
 		
+		public var metaEmoteFireworksSettings : MetaEmoteFireworksSettings;
+		
 		private var saveData : Dictionary = new Dictionary();
 		
 		public function MetaGameProgress() {			
@@ -54,6 +56,7 @@ package com.giveawaytool.meta {
 			metaTwitchChat = new MetaTwitchChat();
 			metaCheerAlertConfig = new MetaCheerConfig();
 			metaHostAlertConfig = new MetaHostConfig();
+			metaEmoteFireworksSettings = new MetaEmoteFireworksSettings(); 
 		}
 		
 		public function encode():Dictionary {
@@ -73,6 +76,7 @@ package com.giveawaytool.meta {
 			saveData["metaCheerAlertConfig"] = metaCheerAlertConfig.encode();
 			saveData["metaHostAlertConfig"] = metaHostAlertConfig.encode();
 			
+			saveData["metaEmoteFireworksSettings"] = metaEmoteFireworksSettings.encode();
 			
 			return saveData; 
 		}
@@ -94,6 +98,8 @@ package com.giveawaytool.meta {
 			
 			metaHostAlertConfig.decode(obj["metaHostAlertConfig"]) ;
 			metaCheerAlertConfig.decode(obj["metaCheerAlertConfig"]) ;
+			
+			metaEmoteFireworksSettings.decode(obj["metaEmoteFireworksSettings"]);
 			
 			if(winners == null) winners = [];
 		}

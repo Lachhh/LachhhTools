@@ -17,6 +17,8 @@ package com {
 		public var resubMonths:int = -1;
 		public var metaEmotes:Array = new Array();
 		
+		public var moderator:Boolean = false;
+		
 		public function MetaIRCMessage() {
 		}
 		
@@ -205,6 +207,12 @@ package com {
 				}
 				if(msgStr.indexOf("emotes=") >= 0){
 					decodeEmotes(msgStr, result);
+				}
+				if(msgStr.indexOf("mod=") >= 0){
+					var d:Array = msgStr.split("=");
+					if(d[1] == 1){
+						result.moderator = true;
+					}
 				}
 			}
 			

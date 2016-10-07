@@ -1,4 +1,5 @@
 package com.giveawaytool.effect {
+	import flash.display.DisplayObject;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.GameSpeed;
 	import com.lachhh.lachhhengine.actor.Actor;
@@ -12,6 +13,7 @@ package com.giveawaytool.effect {
 		public var alpha:Number = 1;
 		public var alphaFadeSpeed:Number = 0.05;
 		public var callbackOnEnd:Callback;
+		public var displayObject:DisplayObject;
 		public function EffectFadeInAlpha() {
 			super();
 		}
@@ -26,13 +28,21 @@ package com.giveawaytool.effect {
 					if(callbackOnEnd) callbackOnEnd.call();
 					destroyAndRemoveFromActor();
 				} else {
-					actor.renderComponent.animView.anim.alpha = alpha;
+					displayObject.alpha = alpha;
 				}
 			}
 		}
 		
 		static public function addToActor(actor: Actor):EffectFadeInAlpha {
 			var result:EffectFadeInAlpha = new EffectFadeInAlpha();
+			if(actor.renderComponent) result.displayObject = actor.renderComponent.animView.anim;
+			actor.addComponent(result);
+			return result;
+		}
+		
+		static public function addToActorWithDisplayObject(actor: Actor, displayObject:DisplayObject):EffectFadeInAlpha {
+			var result:EffectFadeInAlpha = new EffectFadeInAlpha();
+			result.displayObject = displayObject;
 			actor.addComponent(result);
 			return result;
 		}

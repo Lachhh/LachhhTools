@@ -79,6 +79,9 @@ package com.giveawaytool.components {
 			if(collectedAmount > 0) {
 				if(canAlert()) {
 					UI_Menu.instance.logicNotification.logicSendToWidget.sendAllNewDonation(MetaGameProgress.instance.metaDonationsConfig.allDonations);
+					if(collectedAmount >= 5){
+						MetaGameProgress.instance.metaEmoteFireworksSettings.autoTriggerFromDonation();
+					}
 				}
 				MetaGameProgress.instance.metaDonationsConfig.addAllNewToGoal();
 				MetaGameProgress.instance.saveToLocal();

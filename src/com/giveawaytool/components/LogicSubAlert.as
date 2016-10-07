@@ -34,7 +34,10 @@ package com.giveawaytool.components {
 			if(lastMsg.isNewSubAlert() || lastMsg.isReSubAlert()) {
 				var newSub:MetaSubcriberAlert = MetaSubcriberAlert.createFromIRCMsg(lastMsg);
 				
-				if(canAlert(lastMsg)) UI_Menu.instance.logicNotification.logicSendToWidget.sendSubscriberAlert(newSub);
+				if(canAlert(lastMsg)){
+					UI_Menu.instance.logicNotification.logicSendToWidget.sendSubscriberAlert(newSub);
+					MetaGameProgress.instance.metaEmoteFireworksSettings.autoTriggerFromSubscription();
+				}
 				newSub.metaSubscriber.isNew = false;
 				MetaGameProgress.instance.metaSubsConfig.listOfSubs.updateMetaSub(newSub.metaSubscriber);
 				MetaGameProgress.instance.metaSubsConfig.listOfSubs.sortByDate();

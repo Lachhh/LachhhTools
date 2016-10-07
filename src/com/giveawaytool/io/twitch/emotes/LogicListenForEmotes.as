@@ -1,4 +1,7 @@
 package com.giveawaytool.io.twitch.emotes {
+	import com.lachhh.utils.Utils;
+	import com.giveawaytool.io.twitch.TwitchConnection;
+	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.ResolutionManager;
 	import com.lachhh.lachhhengine.ui.UIEffect;
@@ -34,19 +37,34 @@ package com.giveawaytool.io.twitch.emotes {
 		public function processIRCMsg(ircMsg:MetaIRCMessage):void {
 			if(ircMsg == null) return ;
 			
+			var text:String = Utils.removeTextNewLine(ircMsg.text);
+			
+			if(text == "!fireworks"){
+				if(MetaGameProgress.instance.metaEmoteFireworksSettings.chatCommandEnabled){
+					if(shouldToggleFireworks(ircMsg)) MetaGameProgress.instance.metaEmoteFireworksSettings.tempEnableFireworks();
+				}
+			}
+			
 			if(!ircMsg.hasEmotes()) return;
 			
+			var group:MetaEmoteGroup = MetaEmoteGroup.createFromArray(ircMsg.metaEmotes);
 			
-			
-			for each(var emote:MetaTwitchEmote in ircMsg.metaEmotes){
-				if(canAlert()) UI_Menu.instance.logicNotification.logicSendToWidget.sendEmoteFirework(emote);
-			}
+			if(canAlert()) UI_Menu.instance.logicNotification.logicSendToWidget.sendEmoteFireworks(group);
 			
 			// handle emotes
 		}
 		
+		private function shouldToggleFireworks(msg:MetaIRCMessage):Boolean{
+			if(!MetaGameProgress.instance.metaEmoteFireworksSettings.chatCommandEnabled) return false;
+			
+			if(msg.name == TwitchConnection.instance.getNameOfAccount()) return true;
+			if(msg.moderator && MetaGameProgress.instance.metaEmoteFireworksSettings.modsCanUseCommand) return true;
+				
+			return false;
+		}
+		
 		public function canAlert():Boolean{
-			return true;
+			return MetaGameProgress.instance.metaEmoteFireworksSettings.canShowFireworks();
 		}
 		
 		public function spawnEmote(metaEmote:MetaTwitchEmote):void{

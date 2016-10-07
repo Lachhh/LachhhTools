@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.meta.twitch.MetaEmoteGroup;
 	import com.giveawaytool.meta.twitch.MetaTwitchEmote;
 	import com.giveawaytool.MetaCheerAlert;
 	import com.adobe.serialization.json.JSONDecoder;
@@ -54,8 +55,8 @@ package com.giveawaytool.ui {
 					cmdGroup.addCommandToQueue(newCmd);
 					break;
 				case "emoteFirework":
-					var metaEmote:MetaTwitchEmote = MetaTwitchEmote.createFromRawData(d); 
-					newCmd = new MetaCmdEmoteFirework(metaEmote);
+					var metaEmotes:MetaEmoteGroup = MetaEmoteGroup.createFromRawData(d); 
+					newCmd = new MetaCmdEmoteFirework(metaEmotes);
 					cmdGroup.addCommandToQueue(newCmd);
 					break;
 				case "tweetAlert" :

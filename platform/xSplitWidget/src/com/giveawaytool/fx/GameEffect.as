@@ -18,7 +18,7 @@ package com.giveawaytool.fx {
 		
 		public function GameEffect() {
 			super();
-			GameScene.instance.fxManager.add(this);
+			//GameScene.instance.fxManager.add(this);
 			
 		}
 		

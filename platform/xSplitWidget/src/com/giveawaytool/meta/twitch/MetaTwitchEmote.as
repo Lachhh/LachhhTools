@@ -11,8 +11,16 @@ package com.giveawaytool.meta.twitch {
 			modelEmote = pModelEmote;
 		}
 		
-		public static function createFromRawData(d:Dictionary):MetaTwitchEmote{
-			var modelEmote:ModelTwitchEmote = ModelTwitchEmoteEnum.getOrCreateEmote(d["modelEmote"]);
+		public function encode():int{
+			return modelEmote.id;
+		}
+		
+		public function decode(data:int):void{
+			modelEmote = ModelTwitchEmoteEnum.getOrCreateEmote(data);
+		}
+		
+		public static function createFromRawData(value:int):MetaTwitchEmote{
+			var modelEmote:ModelTwitchEmote = ModelTwitchEmoteEnum.getOrCreateEmote(value);
 			return new MetaTwitchEmote(modelEmote);
 		}
 		
