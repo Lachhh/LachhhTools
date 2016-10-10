@@ -1,4 +1,6 @@
 package com.giveawaytool {
+	import com.giveawaytool.meta.twitch.MetaTwitchEmote;
+	import com.giveawaytool.ui.MetaCmdEmoteFirework;
 	import com.giveawaytool.ui.UI_NewCheerAnimExplode;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.giveawaytool.ui.UI_Charity;
@@ -110,6 +112,21 @@ package com.giveawaytool {
 				var ui:UI_Charity = UIBase.manager.getFirst(UI_Charity) as UI_Charity;
 				if(ui == null) return ;
 				ui.wait = -50000;
+			}
+			
+			if(KeyManager.IsKeyPressed(Keyboard.NUMBER_9)) {
+				//var ui:UI_Charity = UIBase.manager.getFirst(UI_Charity) as UI_Charity;
+				//if(ui == null) return ;
+				//ui.wait = -50000;
+				MetaCmdEmoteFirework.loadAndSpawnEmoteWithDelay(MetaTwitchEmote.createDummy(), 1);
+				
+			}
+			
+			if(KeyManager.IsKeyPressed(Keyboard.INSERT)) {
+				//var ui:UI_Charity = UIBase.manager.getFirst(UI_Charity) as UI_Charity;
+				//if(ui == null) return ;
+				//ui.wait = -50000;
+				MetaCmdEmoteFirework.loadAndSpawnEmoteWithDelay(MetaTwitchEmote.createDummy(), 1);
 			}
 			
 			if (KeyManager.IsKeyPressed(Keyboard.NUMPAD_5)) sendCheerMsg(10000);

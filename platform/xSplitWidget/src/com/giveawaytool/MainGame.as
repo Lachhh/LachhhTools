@@ -1,4 +1,5 @@
 package com.giveawaytool {
+	import com.giveawaytool.scenes.GameScene;
 	import com.giveawaytool.ui.UI_Charity;
 	import com.giveawaytool.meta.MetaDonationsConfig;
 	import com.giveawaytool.scenes.GameSceneManager;
@@ -45,6 +46,7 @@ package com.giveawaytool {
 			UIBase.manager.add(dummyActor);
 			
 			new UIFontLoopkup();
+			gameSceneManager.loadScene(new GameScene());
 			//var _loc2_:Array = Font.enumerateFonts();
 		}
 		

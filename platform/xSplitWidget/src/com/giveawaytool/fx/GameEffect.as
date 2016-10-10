@@ -1,12 +1,6 @@
 package com.giveawaytool.fx {
-	import com.giveawaytool.effect.EffectFadeInAlpha;
-	import com.giveawaytool.effect.LogicRotate;
-	import com.giveawaytool.effect.LogicSlowDownFadeOut;
 	import com.giveawaytool.scenes.GameScene;
 	import com.lachhh.lachhhengine.actor.Actor;
-	import com.lachhh.lachhhengine.animation.AnimationFactory;
-	import com.lachhh.lachhhengine.camera.CameraFlashContainers;
-	import com.lachhh.lachhhengine.components.PhysicComponent;
 	import com.lachhh.lachhhengine.components.RenderComponent;
 
 	import flash.display.DisplayObjectContainer;
@@ -18,7 +12,7 @@ package com.giveawaytool.fx {
 		
 		public function GameEffect() {
 			super();
-			//GameScene.instance.fxManager.add(this);
+			GameScene.instance.fxManager.add(this);
 			
 		}
 		

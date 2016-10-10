@@ -1,11 +1,9 @@
 package com.giveawaytool.io.twitch.emotes {
-	import com.lachhh.lachhhengine.animation.AnimationFactory;
-	import com.lachhh.utils.Utils;
-	import com.lachhh.lachhhengine.GameSpeed;
-	import flash.display.Bitmap;
-	import com.lachhh.lachhhengine.components.RenderComponent;
-	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.actor.Actor;
+	import com.lachhh.lachhhengine.ui.UIBase;
+	import com.lachhh.utils.Utils;
+
+	import flash.display.Bitmap;
 
 	/**
 	 * @author Eel

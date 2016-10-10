@@ -1,5 +1,4 @@
 package com.giveawaytool.meta.twitch {
-	import flash.utils.Dictionary;
 	/**
 	 * @author Eel
 	 */
@@ -22,6 +21,11 @@ package com.giveawaytool.meta.twitch {
 		public static function createFromRawData(value:int):MetaTwitchEmote{
 			var modelEmote:ModelTwitchEmote = ModelTwitchEmoteEnum.getOrCreateEmote(value);
 			return new MetaTwitchEmote(modelEmote);
+		}
+		
+		static public function createDummy():MetaTwitchEmote {
+			var modelEmote:ModelTwitchEmote = ModelTwitchEmoteEnum.getOrCreateEmote(46870 + Math.random()*1000);
+			return new MetaTwitchEmote(modelEmote); 
 		}
 		
 	}

@@ -57,7 +57,7 @@ package com {
 		public function isNewSubAlert():Boolean {
 			if(!isNotificationFromTwitch()) return false;
 			if(text.indexOf("subscribed for") >= 0) return true;
-			return text.indexOf("just subscribed!") >= 0;
+			return text.indexOf("just subscribed") >= 0;
 		}
 		
 		public function isReSubAlert():Boolean {
@@ -143,9 +143,7 @@ package com {
 		}
 		
 		//:larklen!larklen@larklen.tmi.twitch.tv PRIVMSG #kojaktsl :So now you are just filtering for the appropriate tag
-		
 		//@badges=moderator/1,subscriber/1,turbo/1;color=#00997F;display-name=HiimMikeGaming;emotes=496:23-24;id=19c51976-19c1-455e-abd4-14de2f8af796;mod=1;room-id=58573465;subscriber=1;turbo=1;user-id=44573777;user-type=mod :hiimmikegaming!hiimmikegaming@hiimmikegaming.tmi.twitch.tv PRIVMSG #kojaktsl :Larklen, no they don't :D
-		
 		//@badges=staff/1,broadcaster/1,turbo/1;color=#008000;display-name=TWITCH_UserName;emotes=;mod=0;msg-id=resub;msg-param-months=6;room-id=1337;subscriber=1;system-msg=TWITCH_UserName\shas\ssubscribed\sfor\s6\smonths!;login=twitch_username;turbo=1;user-id=1337;user-type=staff :tmi.twitch.tv USERNOTICE #channel :Great stream -- keep it up!
 		
 		static public function createFromRawData(msg:String):MetaIRCMessage {

@@ -28,7 +28,7 @@ package com.giveawaytool.io.twitch.emotes {
 			var url:String = VersionInfo.URL_TWITCH_EMOTE_TEMPLATE;
 			url = url.replace("[EMOTE_ID]", id+"");
 			
-			DataManager.loadImage(url, new Callback(onBmpLoaded, this, null), new Callback(onIOError, this, null));
+			DataManager.loadImage(url, new Callback(onBmpLoaded, this, null), new Callback(onIOError, this, [null]));
 		}
 		
 		function onBmpLoaded(bmp:Bitmap):void{
