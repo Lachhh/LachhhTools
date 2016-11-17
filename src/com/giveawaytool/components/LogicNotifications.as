@@ -1,4 +1,6 @@
 package com.giveawaytool.components {
+	import com.LogicTransferFileToUserDoc;
+	import flash.system.Security;
 	import com.giveawaytool.io.twitch.emotes.LogicListenForEmotes;
 	import com.giveawaytool.io.twitch.LogicFollowAlert;
 	import com.giveawaytool.io.twitch.TwitchConnection;
@@ -32,7 +34,9 @@ package com.giveawaytool.components {
 		
 		public function LogicNotifications(m:MetaGameProgress) {
 			super();
+			LogicTransferFileToUserDoc.execute();
 			metaGameProgress = m;
+			//Security.loadPolicyFile("http://www.berzerkstudio.com/crossdomain.xml");
 		}
 
 		override public function start() : void {

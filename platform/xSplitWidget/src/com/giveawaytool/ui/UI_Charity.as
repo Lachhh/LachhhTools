@@ -15,7 +15,7 @@ package com.giveawaytool.ui {
 	public class UI_Charity extends UIBase {
 		public var wait:int = 0;
 		public function UI_Charity() {
-			super(AnimationFactory.ID_UI_MOUSTACHECHARITY);
+			super(AnimationFactory.ID_UI_HALLOWEENDEAD);
 			animMc.gotoAndStop(1);	
 			pickRandomTime();
 		}
@@ -45,11 +45,11 @@ package com.giveawaytool.ui {
 			wait -= meta.amount*3600;
 			
 			if(wait <= 0) {
-				//animMc.gotoAndPlay(1);
-				//pickRandomTime();
+				animMc.gotoAndPlay(1);
+				pickRandomTime();
 			} else {
-				//animMc.gotoAndPlay(1);
-				//CallbackWaitEffect.addWaitCallbackToActor(this, new Callback(backTo1, this, null), 70);
+				animMc.gotoAndPlay(1);
+				CallbackWaitEffect.addWaitCallbackToActor(this, new Callback(backTo1, this, null), 70);
 			}
 			
 			EffectBlinking.addToActor(this, 20, 0xFFFFFF);

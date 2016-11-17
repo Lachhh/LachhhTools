@@ -33,7 +33,7 @@ package com.giveawaytool.components {
 		}
 		
 		public function connect(oauth:String):void {
-			var nameOfAccount:String = TwitchConnection.instance.getNameOfAccount();
+			var nameOfAccount:String = TwitchConnection.getNameOfAccount();
 			var metaconnect:MetaIRCConnection = new MetaIRCConnection(nameOfAccount, oauth);
 			disconnect();
 			traceLog("Connecting to chat...");

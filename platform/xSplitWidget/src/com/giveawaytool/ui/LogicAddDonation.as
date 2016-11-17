@@ -28,7 +28,7 @@ package com.giveawaytool.ui {
 		public var isDebug:Boolean= false;
 		public function LogicAddDonation() {
 			super();
-			socket = new SimpleSocket(9231); 
+			socket = new SimpleSocket(SimpleSocket.DEFAULT_PORT); 
 			socket.connect();
 			socket.onNewData.addCallback(new Callback(onNewData, this, null));
 		}
@@ -43,7 +43,7 @@ package com.giveawaytool.ui {
 				var jsonDecoder:JSONDecoder = new JSONDecoder(msg,true);
 	         	var data:Object = jsonDecoder.getValue();
 				var d:Dictionary = DataManager.objToDictionary(data);
-				handleMsg(d);		
+				handleMsg(d);
 			}
 		}
 		

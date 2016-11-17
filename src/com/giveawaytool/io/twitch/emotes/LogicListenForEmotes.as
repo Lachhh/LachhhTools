@@ -57,13 +57,15 @@ package com.giveawaytool.io.twitch.emotes {
 		private function shouldToggleFireworks(msg:MetaIRCMessage):Boolean{
 			if(!MetaGameProgress.instance.metaEmoteFireworksSettings.chatCommandEnabled) return false;
 			
-			if(msg.name == TwitchConnection.instance.getNameOfAccount()) return true;
+			if(msg.name == TwitchConnection.getNameOfAccount()) return true;
 			if(msg.moderator && MetaGameProgress.instance.metaEmoteFireworksSettings.modsCanUseCommand) return true;
 				
 			return false;
 		}
 		
 		public function canAlert():Boolean{
+			if(!TwitchConnection.instance == null) return false;
+			if(!TwitchConnection.instance.isUserAmemberOfKOTS()) return false;
 			return MetaGameProgress.instance.metaEmoteFireworksSettings.canShowFireworks();
 		}
 		

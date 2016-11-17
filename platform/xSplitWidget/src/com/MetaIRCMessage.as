@@ -162,10 +162,7 @@ package com {
 			trace(result.text);
 			trace(result.resubMonths);
 			trace(result.resubName);
-			//var nameLength:int = msg.indexOf("!");
-			//var messageStartIndex:int = msg.indexOf(":", nameLength);
-			//result.name = msg.substring(1, nameLength); // trim the initial ':'
-			//result.text = msg.substring(messageStartIndex + 1, msg.length);
+			
 			
 			return result;
 		}

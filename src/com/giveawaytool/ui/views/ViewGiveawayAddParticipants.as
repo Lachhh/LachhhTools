@@ -138,11 +138,11 @@ package com.giveawaytool.ui.views {
 			refresh();
 			
 			if(!TwitchConnection.isLoggedIn()) return ;
-			UI_PopUp.createOkOnly("Oops, can't retreive infos from " + TwitchConnection.instance.getNameOfAccount() + "'s Twitch Channel.", null);
+			UI_PopUp.createOkOnly("Oops, can't retreive infos from " + TwitchConnection.getNameOfAccount() + "'s Twitch Channel.", null);
 		}
 		
 		public function addFromChat(name:String):void {
-			if(MetaGameProgress.instance.metaGiveawayConfig.participants.indexOf(name) != -1) return;
+			if(MetaGameProgress.instance.metaGiveawayConfig.contains(name)) return;
 			if(name == "") return; 
 			MetaGameProgress.instance.metaGiveawayConfig.participants.unshift(name);
 			uiMainMenu.viewGiveaway.viewNameList.setNames(MetaGameProgress.instance.metaGiveawayConfig.participants);
@@ -170,7 +170,7 @@ package com.giveawaytool.ui.views {
 			if(uiMainMenu.viewGiveaway.viewNameList.isLoading()) return ;
 			popupInsert = UIPopupInsert.createInsertOne("Enter Channel Name", new Callback(onIRCInput, this, null), null);
 			if(TwitchConnection.instance.isLoggedIn) {
-				popupInsert.inputTxt.text = TwitchConnection.instance.getNameOfAccount();
+				popupInsert.inputTxt.text = TwitchConnection.getNameOfAccount();
 			} else {
 				popupInsert.inputTxt.text = MetaGameProgress.instance.metaGiveawayConfig.channelToLoad;
 			}

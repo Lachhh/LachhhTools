@@ -1,4 +1,8 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.io.WidgetCustomAsset;
+	import com.giveawaytool.io.WidgetCustomAssetManager;
+	import com.lachhh.io.Callback;
+	import com.giveawaytool.io.WidgetCustomAssetLoader;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.meta.MetaDonationsConfig;
@@ -19,6 +23,9 @@ package com.giveawaytool.ui {
 			var uiWidget:UI_DonationWidget = UIBase.manager.getFirst(UI_DonationWidget) as UI_DonationWidget;
 			if(uiWidget) uiWidget.flashAllForRefresh();
 			endCmd();
+		}
+
+		private function onReloaded() : void {
 		}
 	}
 }

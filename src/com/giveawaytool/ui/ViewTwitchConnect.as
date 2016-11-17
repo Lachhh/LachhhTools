@@ -50,7 +50,7 @@ package com.giveawaytool.ui {
 
 		private function onError() : void {
 			UI_Loading.hide();
-			UI_PopUp.createOkOnly("Oops! Something went wrong...", null);
+			UI_PopUp.createOkOnly("Oops! Something went wrong... : " + TwitchConnection.instance.connectErrorMsg, null);
 			firstAutoSign = false;
 		}
 
@@ -58,14 +58,14 @@ package com.giveawaytool.ui {
 			refresh();
 			screen.doBtnPressAnim(avatarMc);
 			UI_Loading.hide();
-			MetaGameProgress.instance.metaTwitchConnection.lastNameLogin = TwitchConnection.instance.getNameOfAccount();
+			MetaGameProgress.instance.metaTwitchConnection.lastNameLogin = TwitchConnection.getNameOfAccount();
 			MetaGameProgress.instance.metaTwitchConnection.lastAccessToken = TwitchConnection.instance.accessToken;
 			
 			MetaGameProgress.instance.saveToLocal();
 			UI_Menu.instance.logicNotification.onConectedToTwitch();
 			UIBase.manager.refresh();
 			
-			if(!firstAutoSign) UI_PopUp.createOkOnly("Welcome!\n" + TwitchConnection.instance.getNameOfAccount(), null);
+			if(!firstAutoSign) UI_PopUp.createOkOnly("Welcome!\n" + TwitchConnection.getNameOfAccount(), null);
 			firstAutoSign = false;
 		}
 
@@ -90,7 +90,7 @@ package com.giveawaytool.ui {
 				nameTxt.textColor = 0xCC0000;
 				logInBtn.visible = true;
 			} else {
-				nameTxt.text = TwitchConnection.instance.getNameOfAccount();
+				nameTxt.text = TwitchConnection.getNameOfAccount();
 				logOutBtn.visible = true;
 				nameTxt.textColor = 0xBAE4DD;
 				

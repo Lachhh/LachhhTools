@@ -20,12 +20,17 @@ package com.giveawaytool.ui {
 			screen.setNameOfDynamicBtn(stopAllAnimBtn, "Stop All Anims");
 			screen.registerClick(applyAndSaveBtn, onApplySave);
 			screen.registerClick(stopAllAnimBtn, onStopAllAnims);
+			screen.registerClick(tutorialBtn, onTutorialBtn);
 
 			logicOnOffNotConnected = (screen.addComponent(new LogicOnOffNextFrame(widgetNotConnectedMc)) as LogicOnOffNextFrame);
 			logicOnOffNotConnected.isOn = false;
 			UI_Menu.instance.logicNotification.logicSendToWidget.onWidgetChanged.addCallback(new Callback(refresh, this, null));
 			UI_Menu.instance.logicNotification.logicSendToWidget.onSendFailed.addCallback(new Callback(shakeNoWidget, this, null));
 			
+		}
+
+		private function onTutorialBtn() : void {
+			new UI_TutorialWidget();
 		}
 
 		
@@ -76,6 +81,7 @@ package com.giveawaytool.ui {
 		public function get stopAllAnimBtn() : ButtonSelect { return visual.getChildByName("stopAllAnimBtn") as ButtonSelect;}
 		//public function get infoBtn() : MovieClip { return visual.getChildByName("infoBtn") as MovieClip;}
 		public function get widgetNotConnectedMc() : MovieClip { return visual.getChildByName("widgetNotConnectedMc") as MovieClip;}
+		public function get tutorialBtn() : MovieClip { return widgetNotConnectedMc.getChildByName("tutorialBtn") as MovieClip;}
 						
 	}
 }

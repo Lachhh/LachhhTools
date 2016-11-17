@@ -45,9 +45,9 @@ package com.giveawaytool {
 			
 			UIBase.manager.add(dummyActor);
 			
-			new UIFontLoopkup();
+			//new UIFontLoopkup();
 			gameSceneManager.loadScene(new GameScene());
-			//var _loc2_:Array = Font.enumerateFonts();
+			stage.color = 0x00ff00;
 		}
 		
 		public function startNormalDonation():void {

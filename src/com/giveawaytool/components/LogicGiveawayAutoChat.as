@@ -46,7 +46,8 @@ package com.giveawaytool.components {
 			if(!MetaGameProgress.instance.metaGiveawayConfig.autoChatAdd) return; 
 			var ui:UI_GiveawayMenu = UIBase.manager.getFirst(UI_GiveawayMenu) as UI_GiveawayMenu;
 			if(ui == null) return ;
-			ui.viewGiveaway.viewGiveawayAddParticipants.addFromChat(ircMsg.name); 
+			ui.viewGiveaway.viewGiveawayAddParticipants.addFromChat(ircMsg.name);
+			//PART # 
 		}
 
 		

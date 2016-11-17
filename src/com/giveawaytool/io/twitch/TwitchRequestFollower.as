@@ -40,7 +40,7 @@ package com.giveawaytool.io.twitch {
 			parameters += "&offset=" + offSetFollow; // where to start in the list
 			parameters += "&client_id=" + VersionInfoDONOTSTREAM_Twitch.TPZ_CLIENT_LNF_ID; // for good measure
 			
-			var request:URLRequest = new URLRequest(TWITCH_API_BASE + "channels/" + twitchConnection.getNameOfAccount() + "/follows" + parameters);
+			var request:URLRequest = new URLRequest(TWITCH_API_BASE + "channels/" + TwitchConnection.getNameOfAccount() + "/follows" + parameters);
 			request.contentType = TWITCH_API_VERSION;
 			
 			loader = new URLLoader() ;

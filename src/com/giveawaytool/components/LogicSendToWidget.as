@@ -1,14 +1,9 @@
 package com.giveawaytool.components {
-	import com.giveawaytool.io.twitch.emotes.MetaEmoteGroup;
-	import com.giveawaytool.io.twitch.emotes.MetaTwitchEmote;
-	import com.giveawaytool.ui.views.MetaCheerAlert;
+	import com.giveawaytool.MainGame;
+	import com.giveawaytool.effect.CallbackWaitEffect;
+	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.twitch.TwitchConnection;
-	import com.giveawaytool.ui.views.MetaSubscribersList;
-	import com.giveawaytool.ui.MetaSubscriber;
-	import com.giveawaytool.ui.views.MetaFollower;
-	import com.giveawaytool.ui.views.MetaFollowerList;
-	import com.lachhh.io.CallbackGroup;
-	import com.lachhh.io.Callback;
+	import com.giveawaytool.io.twitch.emotes.MetaEmoteGroup;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaPlayMovie;
 	import com.giveawaytool.meta.MetaTwitterAlert;
@@ -17,11 +12,20 @@ package com.giveawaytool.components {
 	import com.giveawaytool.meta.donations.MetaDonationsConfig;
 	import com.giveawaytool.ui.MetaHostAlert;
 	import com.giveawaytool.ui.MetaSubcriberAlert;
+	import com.giveawaytool.ui.MetaSubscriber;
+	import com.giveawaytool.ui.views.MetaCheerAlert;
+	import com.giveawaytool.ui.views.MetaFollower;
+	import com.giveawaytool.ui.views.MetaFollowerList;
+	import com.giveawaytool.ui.views.MetaSubscribersList;
+	import com.lachhh.io.CallbackGroup;
 	import com.lachhh.lachhhengine.DataManager;
 	import com.lachhh.lachhhengine.components.ActorComponent;
 
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.events.OutputProgressEvent;
 	import flash.events.ProgressEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.events.ServerSocketConnectEvent;
 	import flash.net.ServerSocket;
 	import flash.net.Socket;
@@ -31,47 +35,119 @@ package com.giveawaytool.components {
 	 * @author LachhhSSD
 	 */
 	public class LogicSendToWidget extends ActorComponent {
-		private var serverSocket:ServerSocket = new ServerSocket();
+		private var serverSocket:ServerSocket ;
 		private var clientSockets:Array = new Array();
-		public var onWidgetChanged:CallbackGroup = new CallbackGroup();
-		public var onSendFailed:CallbackGroup = new CallbackGroup();
-		public function LogicSendToWidget(port:int) {
+		public var onWidgetChanged : CallbackGroup = new CallbackGroup();
+		public var onSendFailed : CallbackGroup = new CallbackGroup();
+		private var port : int;
+
+		public function LogicSendToWidget(pPort : int) {
 			super();
-			
-			
-			serverSocket.bind(port, "127.0.0.1");
-			serverSocket.addEventListener( ServerSocketConnectEvent.CONNECT, onConnect );
-			serverSocket.listen();
+			port = pPort;
+			serverSocket = new ServerSocket();
+			tryToConnect();
+		}
+		
+		private function tryToConnect():void {
+			try {
+				serverSocket.bind(port, "127.0.0.1");
+				serverSocket.addEventListener( ServerSocketConnectEvent.CONNECT, onConnect );
+				serverSocket.listen();
+			} catch(e:Error) {
+				CallbackTimerEffect.addWaitCallFctToActor(MainGame.dummyActor, tryToConnect, 10000);
+			}
 		}
 		
 		private function onConnect( event:ServerSocketConnectEvent ):void {
+			trace("WidgetsConnectionManager ::: server_connectHandler");
 			var clientSocket : Socket = event.socket;
 			clientSockets.push(clientSocket);
 
-			clientSocket.addEventListener(ProgressEvent.SOCKET_DATA, onClientSocketData);
-			clientSocket.addEventListener(Event.CLOSE, onClose);
-         	trace( "Connection from " + clientSocket.remoteAddress + ":" + clientSocket.remotePort );
-			sendDonationConfig(MetaGameProgress.instance.metaDonationsConfig);
+			clientSocket.addEventListener(ProgressEvent.SOCKET_DATA, widgetSocket_dataHandler);
+			clientSocket.addEventListener(Event.CONNECT, widgetSocket_connectHandler);
+			clientSocket.addEventListener(Event.CLOSE, widgetSocket_closeHandler);
+			clientSocket.addEventListener(OutputProgressEvent.OUTPUT_PROGRESS, widgetSocket_progressHandler);
+			clientSocket.addEventListener(IOErrorEvent.IO_ERROR, widgetSocket_ioErrorHandler);
+			clientSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, widgetSocket_securityErrorHandler);
 			
 			onWidgetChanged.call();
+			
+			CallbackTimerEffect.addWaitCallFctToActor(actor, sendConfig, 1000);
 		}
 		
-		private function onClose(event : Event) : void {
-			trace("Socket CLosed " + event);
+		private function sendConfig():void {
+			sendDonationConfig(MetaGameProgress.instance.metaDonationsConfig);
+		}
+		
+		//------------------------------------
+		// getPolicy()
+		//------------------------------------
+		private function getPolicy():String {
+			trace("WidgetsConnectionManager ::: getPolicy");
+			var xml:String = '<?xml version="1.0" encoding="UTF-8"?>\n';
+			xml += '<!DOCTYPE cross-domain-policy SYSTEM "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd">\n';
+			xml += '<cross-domain-policy>\n';
+			xml += '    <allow-access-from domain="*" to-ports="*"/>\n';
+			xml += '</cross-domain-policy>\n';
+			return xml;
+			//return "<?xml version=\"1.0\"?><cross-domain-policy><allow-access-from domain=\"*\" to-ports=\"*\"/></cross-domain-policy>\0";
+		}
+		
+		private function widgetSocket_closeHandler(event : Event) : void {
+			trace("Socket CLosed " + event.type + "/" + event.target);
 			cleanDeadSocket();
 			onWidgetChanged.call();
 		}
 	  
-	 	private function onClientSocketData( event:ProgressEvent ):void {	
-	        /* var buffer:ByteArray = new ByteArray();
-			 
-	         clientSocket.readBytes( buffer, 0, clientSocket.bytesAvailable );
-	         var recString:String = buffer.toString();
-	         recString = recString.replace(/\n/g,'');
-	         recString = recString.replace(/\r/g,'');
-	         trace( "Received: " + buffer.toString() );
-	         trace( "Received: " + recString );*/
+	 	private function widgetSocket_dataHandler( event:ProgressEvent ):void {
+			trace("WidgetsConnectionManager ::: widgetSocket_dataHandler");
+			
+			var s:Socket = event.currentTarget as Socket;
+			var p:String;
+			
+			var msg:String = s.readUTFBytes(s.bytesAvailable);
+			trace("    - msg: ", msg);
+			if(msg.toString().indexOf("policy-file-request") != -1) {
+				trace("    - sending policy file");
+				p = getPolicy();
+				trace(p);
+				s.writeUTFBytes(p);
+				s.writeByte(0);
+				s.flush();
+			}
+			
+			if(msg == "Connected") {
+				sendConfig();	
+			}
+	       
 	    }
+		
+		private function widgetSocket_connectHandler(event:Event):void {
+			trace("WidgetsConnectionManager ::: widgetSocket_connectHandler");	
+		}
+		
+		//------------------------------------
+		// widgetSocket_progressHandler()
+		//------------------------------------
+		private function widgetSocket_progressHandler(event:OutputProgressEvent):void {
+			trace("WidgetsConnectionManager ::: widgetSocket_progressHandler");
+			
+		}
+		
+		//------------------------------------
+		// widgetSocket_ioErrorHandler()
+		//------------------------------------
+		private function widgetSocket_ioErrorHandler(event:IOErrorEvent):void {
+			trace("WidgetsConnectionManager ::: widgetSocket_ioErrorHandler");
+			
+		}
+		
+		//------------------------------------
+		// widgetSocket_securityErrorHandler()
+		//------------------------------------
+		private function widgetSocket_securityErrorHandler(event:SecurityErrorEvent):void {
+			trace("WidgetsConnectionManager ::: widgetSocket_securityErrorHandler");
+		}
 		
 		public function sendAddDonation(m:MetaDonation):void {
 			var d:Dictionary = m.encode();
@@ -166,8 +242,8 @@ package com.giveawaytool.components {
 				return ;
 			}
 			
-			if(!TwitchConnection.isLoggedIn()) return ;
-			if(!TwitchConnection.instance.isUserAmemberOfKOTS()) return ;
+			//if(!TwitchConnection.isLoggedIn()) return ;
+			//if(!TwitchConnection.instance.isUserAmemberOfKOTS()) return ;
 			
 			var obj:Object = DataManager.dictToObject(data);
 			var dataToSend:String = (JSON.stringify(obj)) + "\n";

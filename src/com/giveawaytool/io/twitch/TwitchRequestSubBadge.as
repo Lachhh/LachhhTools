@@ -49,7 +49,7 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		private function getUrl():String {
-			return "https://api.twitch.tv/kraken/chat/" + twitchConnection.getNameOfAccount() + "/badges";
+			return "https://api.twitch.tv/kraken/chat/" + TwitchConnection.getNameOfAccount() + "/badges";
 		}
 		
 		

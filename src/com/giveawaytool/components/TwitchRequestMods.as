@@ -26,7 +26,7 @@ package com.giveawaytool.components {
 			}
 			
 			twitchChat.callbackMsgReceived.addCallback(callbackOnMsg);
-			twitchChat.getIRCBot().SayNoDelay( "PRIVMSG #" + TwitchConnection.instance.getNameOfAccount() + " :.mods\n");
+			twitchChat.getIRCBot().SayNoDelay( "PRIVMSG #" + TwitchConnection.getNameOfAccount() + " :.mods\n");
 			trace("Something");
 		}
 		

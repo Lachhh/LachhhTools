@@ -68,7 +68,7 @@ package com.giveawaytool.ui {
 		
 		private function onFollow() : void {
 			if(uiCrnt as UI_FollowSubAlert) return ;
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) {
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow()) {
 				onChest();
 				return;
 			}

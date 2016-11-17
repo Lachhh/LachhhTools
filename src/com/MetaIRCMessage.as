@@ -38,11 +38,16 @@ package com {
 		
 		public function isGiveawayAutoAddCmd(m:MetaGiveawayConfig):Boolean {
 			if(isNotificationFromTwitch()) return false;
+			if(!isTalk()) return false;
+			if(text == "") return false;
+			if(name == "") return false;
+			if(name == null) return false;
 			return m.isEqualToCmd(text);
 		}
 		
 		public function isHostAlert():Boolean {
 			if(!isNotificationFromTwitch()) return false;
+			if (text.indexOf("is now auto hosting you") != -1) return true;
 			return text.indexOf("is now hosting you") >= 0;
 		}
 		
@@ -134,6 +139,11 @@ package com {
 		static public function isPing(msg:String):Boolean {
 			return (msg.indexOf("PING :tmi.twitch.tv") == 0);
 		}
+		
+		public function isTalk():Boolean {
+			 return (rawMsg.indexOf(" PRIVMSG #") != -1);
+		}
+		
 		
 		static public function createDummyHost():MetaIRCMessage {
 			var result:MetaIRCMessage = new MetaIRCMessage();

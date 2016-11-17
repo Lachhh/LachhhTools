@@ -1,4 +1,5 @@
 package com.giveawaytool.io.twitch {
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.giveawaytool.components.LogicTwitchChat;
 	import com.giveawaytool.components.TwitchRequestMods;
 	import com.giveawaytool.ui.MetaSubscriber;
@@ -214,8 +215,6 @@ package com.giveawaytool.io.twitch {
 			}
 		}
 		
-		
-		
 		public function isSubscriber(name:String):Boolean {
 			for (var i : int = 0; i < listOfSubs.subscribers.length; i++) {
 				var subName:MetaSubscriber = listOfSubs.subscribers[i];
@@ -321,8 +320,12 @@ package com.giveawaytool.io.twitch {
 		public function refreshSub(onSuccess : Callback, onError : Callback) : void {
 			var req:TwitchRequestSub = new TwitchRequestSub(this);
 			req.onConnectCallback = new Callback(onSubSuccess, this, [req, onSuccess]);
-			req.onErrorCallback = onError;
+			req.onErrorCallback = new Callback(onErrorFetchSub, this, [onSuccess, onError]);
 			req.fetchListOfSubsAdmin();
+		}
+		
+		private function onErrorFetchSub(cSuccess:Callback, cError:Callback):void {
+			UI_PopUp.createYesNo("We could not fetch your subs, wanna continue anyway?", cSuccess, cError);
 		}
 		
 		public function refreshMods(logicChat:LogicTwitchChat, onSuccess : Callback, onError : Callback) : void {
@@ -396,9 +399,16 @@ package com.giveawaytool.io.twitch {
 			return outputName;
 		}
 		
-		public function getNameOfAccount():String {
+		static public function getNameOfAccount():String {
+			if(instance == null) return "";
 			if(!isLoggedIn) return "";							
-			return username;
+			return instance.username;
+		}
+		
+		static public function getNameOfAccountWithTwitchPrefix():String {
+			if(instance == null) return "";
+			if(!isLoggedIn) return "";							
+			return "twitch_" + instance.username;
 		}
 
 		public function getUserId() : String {

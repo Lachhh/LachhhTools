@@ -18,6 +18,7 @@ package com.giveawaytool.meta.donations {
 		public var metaStreamTipConnection : MetaDonationSourceConnection = new MetaDonationSourceConnection();
 		public var metaAutoFetch : MetaDonationFetchTimer = new MetaDonationFetchTimer();
 		public var metaCharity : MetaCharityConfig = new MetaCharityConfig();
+		public var metaCustomAnim : MetaCustomAnimConfig = new MetaCustomAnimConfig();
 		
 		public var isDirty:Boolean = false;
 		
@@ -38,6 +39,7 @@ package com.giveawaytool.meta.donations {
 			metaBigGoal = new MetaDonationGoal();
 			metaAutoFetch = new MetaDonationFetchTimer();
 			metaCharity = new MetaCharityConfig();
+			metaCustomAnim = new MetaCustomAnimConfig();
 		}
 				
 		public function encode():Dictionary {
@@ -51,6 +53,7 @@ package com.giveawaytool.meta.donations {
 			
 			saveData["metaAutoFetch"] = metaAutoFetch.encode();
 			saveData["metaCharity"] = metaCharity.encode();
+			saveData["metaCustomAnim"] = metaCustomAnim.encode();
 			
 			
 			return saveData; 
@@ -70,6 +73,7 @@ package com.giveawaytool.meta.donations {
 			saveData["numSubs"] = MetaGameProgress.instance.metaSubsConfig.getCrntSub();
 			saveData["numSubsGoal"] = MetaGameProgress.instance.metaSubsConfig.goalSub;
 			saveData["metaCharity"] = metaCharity.settings.encode();
+			saveData["metaCustomAnim"] = metaCustomAnim.encode();
 			
 			
 			
@@ -88,6 +92,7 @@ package com.giveawaytool.meta.donations {
 			metaStreamTipConnection.decode(loadData["metaStreamTipConnection"]);
 			metaAutoFetch.decode(loadData["metaAutoFetch"]);
 			metaCharity.decode(loadData["metaCharity"]);
+			metaCustomAnim.decode(loadData["metaCustomAnim"]);
 			//numSubs = loadData["numSubs"];
 			
 		}

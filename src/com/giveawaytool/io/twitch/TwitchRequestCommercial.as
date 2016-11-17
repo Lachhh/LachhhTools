@@ -37,7 +37,7 @@ package com.giveawaytool.io.twitch {
 		
 		public function showCommercial2():void {
 			var loader:URLLoader = new URLLoader() ;
-			var url:String = "https://api.twitch.tv/kraken/channels/" + twitchConnection.getNameOfAccount() + "/commercial";
+			var url:String = "https://api.twitch.tv/kraken/channels/" + TwitchConnection.getNameOfAccount() + "/commercial";
 			var headers:Array = [
 			    new URLRequestHeader("Accept", "application/vnd.twitchtv.v3+json"),
 			    new URLRequestHeader("Authorization", "OAuth " + this.twitchConnection.accessToken.replace("oauth:",""))

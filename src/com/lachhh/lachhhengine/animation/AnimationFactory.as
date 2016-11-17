@@ -62,6 +62,8 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_POPUPEDITDONATION:int = pushClassLink(UI_POPUPEDITDONATION);
 		static public var ID_UI_FOLLOWSUBALERT:int = pushClassLink(UI_FOLLOWSUBALERT);
 		static public var ID_UI_YOUTUBEPREVIEW:int = pushClassLink(UI_YOUTUBEPREVIEW);
+		static public var ID_UI_TUTORIALWIDGET:int = pushClassLink(UI_TUTORIALWIDGET);
+		
 		
 		
 		static public var ID_FX_LOTERYNAME:int = pushClassLink(FX_LOTERYNAME);
@@ -110,6 +112,7 @@ package com.lachhh.lachhhengine.animation {
 		static public var ZZ_BTN_PREVIEWYOUTUBE:int = pushBtnLink(BTN_PREVIEWYOUTUBE);
 		static public var ZZ_BTN_STREAMRPGPROMO:int = pushBtnLink(BTN_STREAMRPGPROMO);
 		static public var ZZ_BTN_CHECKPATREON:int = pushBtnLink(BTN_CHECKPATREON);
+		static public var ZZ_BTN_GOTOADOBE:int = pushBtnLink(BTN_GOTOADOBE);
 
 
 		static public function pushClassLink(pClass:Class):int {

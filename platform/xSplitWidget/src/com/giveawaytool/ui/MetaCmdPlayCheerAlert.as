@@ -1,9 +1,11 @@
 package com.giveawaytool.ui {
 	import com.giveawaytool.MetaCheerAlert;
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.io.WidgetCustomAsset;
+	import com.giveawaytool.io.WidgetCustomAssetManager;
 	import com.giveawaytool.meta.MetaDonationsConfig;
-	import com.giveawaytool.meta.MetaHostAlert;
 	import com.lachhh.io.Callback;
+
+	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
 	 */
@@ -16,10 +18,17 @@ package com.giveawaytool.ui {
 		}
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
-			//UI_News.closeAllNews();
-			var ui : UI_NewCheerAnim = new UI_NewCheerAnim(metaCheerAlert);
-			ui.callbackOnFinish = new Callback(onAnimEnded, this, null);
-			endCmd(); 
+			if (pMetaConfig.metaCustomAnim.metaCustomAnimNewCheers.hasCustomAnim()) {
+				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget("CustomAnims/NewCheers.swf");
+				var d:Dictionary = new Dictionary();
+				d["name"] = metaCheerAlert.name;
+				d["numBits"] = metaCheerAlert.numBits;
+				ca.showAnim(d, new Callback(onAnimEnded, this, null));
+			} else {
+				var ui : UI_NewCheerAnim = new UI_NewCheerAnim(metaCheerAlert);
+				ui.callbackOnFinish = new Callback(onAnimEnded, this, null);
+				endCmd(); 
+			}  
 		}
 		
 		private function onAnimEnded():void {
