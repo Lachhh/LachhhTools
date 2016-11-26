@@ -19,7 +19,7 @@ package com.giveawaytool.ui {
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
 			if (pMetaConfig.metaCustomAnim.metaCustomAnimNewCheers.hasCustomAnim()) {
-				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget("CustomAnims/NewCheers.swf");
+				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewCheers.getPathAsWidgetLocal());
 				var d:Dictionary = new Dictionary();
 				d["name"] = metaCheerAlert.name;
 				d["numBits"] = metaCheerAlert.numBits;

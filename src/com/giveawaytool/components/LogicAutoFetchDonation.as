@@ -89,7 +89,7 @@ package com.giveawaytool.components {
 		}
 		
 		private function canAlert():Boolean {
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation()) return false;
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canSendDonationIfNotLive()) return false;
 			return true;
 		}
 

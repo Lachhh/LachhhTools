@@ -19,7 +19,7 @@ package com.giveawaytool.ui {
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
 			if (pMetaConfig.metaCustomAnim.metaCustomAnimNewSub.hasCustomAnim()) {
-				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget("CustomAnims/NewSub.swf");
+				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.getPathAsWidgetLocal());
 				var d:Dictionary = new Dictionary();
 				d["newSub"] = metaSubAlert.name;
 				d["numMonthInARow"] = metaSubAlert.numMonthInARow;

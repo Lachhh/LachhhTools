@@ -1,8 +1,8 @@
 package com.giveawaytool.ui.views {
 	import com.giveawaytool.io.DonationSourceRequest;
 	import com.giveawaytool.meta.MetaGameProgress;
-	import com.giveawaytool.ui.UI_PopUp;
 	import com.giveawaytool.ui.UI_Menu;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.VersionInfo;
@@ -29,9 +29,12 @@ package com.giveawaytool.ui.views {
 		public var viewBigGoal : ViewDonationGoal ;
 		public var viewAutoFetch : ViewDonationTimer;
 		public var viewCharity : ViewCharity;
+		public var viewCustomBtn : ViewCustomAnimBtn;
 
 		public function ViewDonationsEdit(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
+			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewDonation);
+			
 			viewCharity = new ViewCharity(pScreen, charityMc);
 			viewCharity.metaCharity = MetaGameProgress.instance.metaDonationsConfig.metaCharity;
 			
@@ -159,6 +162,8 @@ package com.giveawaytool.ui.views {
 		public function get settingsMc() : MovieClip { return visual.getChildByName("settingsMc") as MovieClip;}		
 		public function get listMc() : MovieClip { return visual.getChildByName("listMc") as MovieClip;}
 		public function get goalsMc() : MovieClip { return visual.getChildByName("goalsMc") as MovieClip;}
+		public function get customAnimBtn() : MovieClip { return goalsMc.getChildByName("customAnimBtn") as MovieClip;}
+		
 		public function get charityMc() : MovieClip { return visual.getChildByName("charityMc") as MovieClip;}
 		
 		public function get streamTipMc() : MovieClip { return settingsMc.getChildByName("streamTipMc") as MovieClip;}

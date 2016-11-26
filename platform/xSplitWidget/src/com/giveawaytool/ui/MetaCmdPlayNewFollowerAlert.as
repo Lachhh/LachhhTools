@@ -18,7 +18,7 @@ package com.giveawaytool.ui {
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
 			
 			if(hasCustomAnim()) {
-				var ca:WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget("CustomAnims/NewFollow.swf");
+				var ca:WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.getPathAsWidgetLocal());
 				var d:Dictionary = new Dictionary();
 				d["newFollower"] = metaNewFollower.name;
 				ca.showAnim(d, new Callback(endCmd, this, null));

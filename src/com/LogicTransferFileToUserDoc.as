@@ -10,23 +10,29 @@ package com {
 	public class LogicTransferFileToUserDoc {
 		private var frFile : File;
 		public var path : String;
-		private var fileName : String;
+		private var fileNameOutput : String;
+		private var fileNameSrc : String;
 
 		public static function execute() : void {
 			
-			createAndTransfer("lachhhtools_widget.html");
-			createAndTransfer("lachhhtools_widget.swf");
+			createAndTransferLocal("lachhhtools_widget.html");
+			createAndTransferLocal("lachhhtools_widget.swf");
 			
 		}
 		
-		public function transfer(pFileName:String):void {
-			fileName = pFileName;
-			path = File.applicationDirectory.resolvePath("./" + fileName).nativePath;
-			frFile = new File(path);
-			frFile.addEventListener(Event.COMPLETE, onComplete);
-			frFile.addEventListener(IOErrorEvent.IO_ERROR, onIoError);
+		public function transfer(pFileSrcPath:String, pFileNameOutput: String):void {
+			fileNameSrc = pFileSrcPath;
+			fileNameOutput = pFileNameOutput;
 			
-			frFile.load();
+			try {
+				frFile = new File(fileNameSrc);
+				frFile.addEventListener(Event.COMPLETE, onComplete);
+				frFile.addEventListener(IOErrorEvent.IO_ERROR, onIoError);
+				
+				frFile.load();
+			} catch(e:Error) {
+				
+			}
 		}
 
 		private function onIoError(event : IOErrorEvent) : void {
@@ -36,15 +42,21 @@ package com {
 		private function onComplete(event : Event) : void {
 			
 			var stream:FileStream = new FileStream();
-			var file:File = File.documentsDirectory.resolvePath("LachhhTools/" + fileName);
+			var file:File = File.documentsDirectory.resolvePath("LachhhTools/" + fileNameOutput);
 			stream.open(file, FileMode.WRITE);
 			stream.writeBytes(frFile.data);
 			stream.close();
 		}
 		
-		static private function createAndTransfer(fileName:String):LogicTransferFileToUserDoc {
+		static public function createAndTransfer(fileName:String, filenameOutput:String):LogicTransferFileToUserDoc {
 			var result:LogicTransferFileToUserDoc = new LogicTransferFileToUserDoc();
-			result.transfer(fileName);
+			result.transfer(fileName, filenameOutput);
+			return result;
+		}
+		
+		static public function createAndTransferLocal(fileName:String):LogicTransferFileToUserDoc {
+			var result:LogicTransferFileToUserDoc = new LogicTransferFileToUserDoc();
+			result.transfer(File.applicationDirectory.resolvePath("./" + fileName).nativePath, fileName);
 			return result;
 		}
 	}

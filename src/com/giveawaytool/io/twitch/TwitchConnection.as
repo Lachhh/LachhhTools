@@ -51,6 +51,8 @@ package com.giveawaytool.io.twitch {
 		public var followersData : MetaFollowerList = new MetaFollowerList();
 		public var channelData : MetaTwitchChannelData = new MetaTwitchChannelData();
 
+		public var isLive : Boolean = false;
+		
 		public function TwitchConnection(pIsAdmin:Boolean) {
 			accessToken = "";
 			isAdminConnect = pIsAdmin;
@@ -280,12 +282,36 @@ package com.giveawaytool.io.twitch {
 			
 			username = token["user_name"];
 			isLoggedIn = true;
-			 
+			
+			checkIfIsLive();
+			
 			if(isAdminConnect) {
 				checkIfPartnered();	
 			} else {
 				if(onConnect) onConnect.call();
 			}
+		}
+		
+		
+		public function checkIfIsLive():void  {
+			var url:String = "https://api.twitch.tv/kraken/streams/" + getNameOfAccount();
+			var loader:URLLoader = new URLLoader() ;
+			var request : URLRequest = new URLRequest(); 
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			request.requestHeaders = headers;
+			request.method = URLRequestMethod.GET; 
+			request.url = url;
+			loader.load(request);
+			connectErrorMsg = "Problem looking if is live";
+			loader.addEventListener(Event.COMPLETE, onCheckIfIsLive);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, onErrorConnectOnTwitch);
+		}
+
+		private function onCheckIfIsLive(event : Event) : void {
+			var rawData:String = event.target.data;
+			var d:Dictionary = DataManager.stringToDictionnary(rawData);
+			isLive = (d["stream"] != null);
+			
 		}
 		
 		private function checkIfPartnered():void  {
@@ -374,7 +400,7 @@ package com.giveawaytool.io.twitch {
 			if(!TwitchConnection.isLoggedIn()) return false;
 			var usernameLowerCase:String = username.toLocaleLowerCase();
 			//if (usernameLowerCase == "twitchplayszombidle") return true;
-            if (usernameLowerCase == "lachhhandfriends") return true;
+            //if (usernameLowerCase == "lachhhandfriends") return true;
             if (usernameLowerCase == "kojaktsl") return true;
             if (usernameLowerCase == "weallplaycast") return true;
             //if (usernameLowerCase == "slickentertainmentinc") return true;

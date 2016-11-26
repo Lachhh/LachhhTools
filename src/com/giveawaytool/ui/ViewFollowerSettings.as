@@ -1,6 +1,7 @@
 package com.giveawaytool.ui {
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
+	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
 	import com.giveawaytool.ui.views.ViewFollowerToolTip;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
@@ -17,9 +18,10 @@ package com.giveawaytool.ui {
 		//public var viewFollowGoals : ViewFollowersGoal;
 		public var viewFollowAlert : ViewFollowersAlert;
 		public var viewFollowToolTip : ViewFollowerToolTip;
+		public var viewCustomBtn:ViewCustomAnimBtn;
 		public function ViewFollowerSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
-			
+			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewFollow);
 			viewFollowList = new ViewFollowersList(screen, lastFollowersMc);
 			//viewFollowGoals = new ViewFollowersGoal(screen, followGoal);
 			viewFollowAlert = new ViewFollowersAlert(screen, alertsMc);
@@ -63,6 +65,8 @@ package com.giveawaytool.ui {
 		
 		public function get refreshBtn() : MovieClip { return visual.getChildByName("refreshBtn") as MovieClip;}
 		public function get collectBtn() : MovieClip { return visual.getChildByName("collectBtn") as MovieClip;}
+		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
+		
 		public function get followersTxt() : TextField { return visual.getChildByName("followersTxt") as TextField;}
 		
 	}

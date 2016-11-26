@@ -1,6 +1,7 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.ui.views.ViewCheerToolTip;
 	import com.giveawaytool.meta.MetaGameProgress;
+	import com.giveawaytool.ui.views.ViewCheerToolTip;
+	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
@@ -13,9 +14,13 @@ package com.giveawaytool.ui {
 	public class ViewCheerSettings extends ViewBase {
 		public var viewCheerList : ViewCheerList;
 		private var viewCheerTooltip : ViewCheerToolTip;
+		private var viewCustomBtn : ViewCustomAnimBtn;
 
 		public function ViewCheerSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
+			
+			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewCheers);
+			
 			viewCheerList = new ViewCheerList(screen, lastCheersMc);
 			viewCheerTooltip = new ViewCheerToolTip(pScreen, toolTipCheerMc);
 			viewCheerList.toolTip = viewCheerTooltip;
@@ -54,6 +59,7 @@ package com.giveawaytool.ui {
 		public function get allowBurpBtn() : MovieClip { return cheerAlertsMc.getChildByName("allowBurpBtn") as MovieClip;}
 		public function get lastCheersMc() : MovieClip { return visual.getChildByName("lastCheersMc") as MovieClip;}
 		public function get toolTipCheerMc() : MovieClip { return visual.getChildByName("toolTipCheerMc") as MovieClip;}
+		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
 		
 	}
 }

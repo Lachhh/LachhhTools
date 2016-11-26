@@ -14,6 +14,18 @@ package com.giveawaytool.meta {
 			saveData["pathToSwf"] = pathToSwf;
 			return saveData; 
 		}
+		
+		public function encodeForWidget():Dictionary {
+			saveData["useDefault"] = useDefault;
+			saveData["pathToSwf"] = getPathAsWidgetLocal();
+			return saveData;
+		}
+		
+		public function getPathAsWidgetLocal():String {
+			if(isUseDefault()) return "";
+			var fileName:String = pathToSwf.split("\\").pop();
+			return "CustomAnims\\" + fileName;
+		}
 				
 		public function decode(obj:Dictionary):void {
 			if(obj == null) return ;
@@ -33,6 +45,16 @@ package com.giveawaytool.meta {
 			if(pathToSwf == null) {
 				useDefault = true;
 			}
+		}
+		
+		public function isUseDefault():Boolean {
+			if(useDefault) return true;
+			if(pathToSwf == "") return true;
+			return false;
+		}
+		
+		public function hasCustomAnim():Boolean {
+			return !isUseDefault();
 		}
 	}
 }

@@ -1,5 +1,4 @@
 package com.giveawaytool.meta {
-	import com.giveawaytool.ui.MetaHostAlert;
 	import com.giveawaytool.io.twitch.MetaTwithConnection;
 	import com.giveawaytool.meta.donations.MetaDonationsConfig;
 	import com.lachhh.lachhhengine.DataManager;

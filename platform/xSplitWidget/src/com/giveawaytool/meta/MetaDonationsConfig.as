@@ -13,7 +13,7 @@ package com.giveawaytool.meta {
 		public var metaRecurrentGoal:MetaDonationGoal = new MetaDonationGoal();
 		public var metaBigGoal : MetaDonationGoal = new MetaDonationGoal();
 		public var metaCharity : MetaCharityPrct = new MetaCharityPrct();
-		public var metaCustomAnim : MetaCustomAnimConfig = new MetaCustomAnimConfig();
+		public var metaCustomAnim : MetaSelectAnimationConfig = new MetaSelectAnimationConfig();
 		public var numLastToShow:int = 5;
 		public var numSubs:int = 62;
 		public var numSubsGoal:int = 100;
@@ -33,7 +33,7 @@ package com.giveawaytool.meta {
 			metaRecurrentGoal = new MetaDonationGoal();
 			metaBigGoal = new MetaDonationGoal();
 			metaCharity = new MetaCharityPrct();
-			metaCustomAnim = new MetaCustomAnimConfig();
+			metaCustomAnim = new MetaSelectAnimationConfig();
 		}
 		
 		public function addDonation(m:MetaNewDonation):void {

@@ -29,7 +29,7 @@ package com.giveawaytool.ui {
 			onGiveaway();
 		}
 
-		private function onChest() : void {
+		public function onChest() : void {
 			if(uiCrnt as UI_PatreonPromo) return ;
 			closeCurrent();
 			uiCrnt = new UI_PatreonPromo();
@@ -38,10 +38,10 @@ package com.giveawaytool.ui {
 
 		private function onCheers() : void {
 			if(uiCrnt as UI_CheerAlert) return ;
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) {
+			/*if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) {
 				onChest();
 				return;
-			}
+			}*/
 			closeCurrent();
 			uiCrnt = new UI_CheerAlert();
 			animUIOpen(cheersBtn);
@@ -56,10 +56,10 @@ package com.giveawaytool.ui {
 		
 		private function onDonations() : void {
 			if(uiCrnt as UI_Donation) return ;
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation()) {
+			/*if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation()) {
 				onChest();
 				return;
-			}
+			}*/
 			closeCurrent();
 			uiCrnt = new UI_Donation();
 			animUIOpen(donationsBtn);
@@ -68,10 +68,10 @@ package com.giveawaytool.ui {
 		
 		private function onFollow() : void {
 			if(uiCrnt as UI_FollowSubAlert) return ;
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow()) {
+			/*if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow()) {
 				onChest();
 				return;
-			}
+			}*/
 			closeCurrent();
 			uiCrnt = new UI_FollowSubAlert();
 			animUIOpen(followBtn);
@@ -143,6 +143,25 @@ package com.giveawaytool.ui {
 		public function isUIneedsWidget() : Boolean {
 			if((uiCrnt as UI_Donation)) return true;
 			if((uiCrnt as UI_FollowSubAlert)) return true;
+			if((uiCrnt as UI_CheerAlert)) return true;
+			return false;
+		}
+		
+		public function isWidgetCanBeUsedInUI() : Boolean {
+			if((uiCrnt as UI_Donation)) return UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation();
+			if((uiCrnt as UI_CheerAlert)) return UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers();
+			if((uiCrnt as UI_FollowSubAlert)) return UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow();
+			return false;
+		}
+		
+		public function isNeedBronzeToBeHere():Boolean {
+			if((uiCrnt as UI_FollowSubAlert)) return true;
+			return false;
+		}
+		
+		public function isNeedSilverToBeHere():Boolean {
+			if((uiCrnt as UI_Donation)) return true;
+			if((uiCrnt as UI_CheerAlert)) return true;
 			return false;
 		}
 			

@@ -1,8 +1,8 @@
 package com.giveawaytool.ui {
-	import com.lachhh.io.Callback;
-	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
+	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
 	import com.giveawaytool.ui.views.ViewSubscriberToolTip;
+	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
@@ -17,7 +17,7 @@ package com.giveawaytool.ui {
 		public var viewSubscriberToolTip : ViewSubscriberToolTip;
 		public var viewSubscriberAlert : ViewSubscriberAlert;
 		public var viewSubscriberGoal : ViewSubscriberGoal;
-		
+		public var viewCustomBtn:ViewCustomAnimBtn;
 		
 		public function ViewSubscriberSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
@@ -26,6 +26,8 @@ package com.giveawaytool.ui {
 			viewSubscriberList = new ViewSubscribersList(screen, lastSubscriptionMc);
 			viewSubscriberToolTip = new ViewSubscriberToolTip(screen, toolTipSubscriberMc);
 			viewSubscriberList.toolTip = viewSubscriberToolTip; 
+			
+			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewSub);
 			
 			screen.setNameOfDynamicBtn(refreshBtn, "Refresh");
 			screen.setNameOfDynamicBtn(collectBtn, "Alert New");
@@ -63,5 +65,7 @@ package com.giveawaytool.ui {
 		public function get collectBtn() : MovieClip { return visual.getChildByName("collectBtn") as MovieClip;}
 		public function get subAlertsMc() : MovieClip { return visual.getChildByName("subAlertsMc") as MovieClip;}
 		public function get goalsMc() : MovieClip { return visual.getChildByName("goalsMc") as MovieClip;}
+		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
+		
 	}
 }

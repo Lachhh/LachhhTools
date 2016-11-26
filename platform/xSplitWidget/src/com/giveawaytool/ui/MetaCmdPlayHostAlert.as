@@ -21,7 +21,7 @@ package com.giveawaytool.ui {
 			UI_News.closeAllNews();
 			
 			if (pMetaConfig.metaCustomAnim.metaCustomAnimNewHost.hasCustomAnim()) {
-				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget("CustomAnims/NewHost.swf");
+				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewHost.getPathAsWidgetLocal());
 				var d:Dictionary = new Dictionary();
 				d["name"] = metaHostAlert.name;
 				d["numViewers"] = metaHostAlert.numViewers;

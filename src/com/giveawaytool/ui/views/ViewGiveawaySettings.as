@@ -18,12 +18,8 @@ package com.giveawaytool.ui.views {
 			super(pScreen, pVisual);
 			pScreen.registerEvent(text1Txt, FocusEvent.FOCUS_OUT, onEdit);
 			pScreen.registerEvent(text2Txt, FocusEvent.FOCUS_OUT, onEdit);
-			pScreen.registerClick(selectBtn, onSelect);
+			//pScreen.registerClick(selectBtn, onSelect);
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, selectBtn, MetaGameProgress.instance.metaGiveawayConfig.metaAnimation);
-		}
-
-		private function onSelect() : void {
-			new UI_SelectAnimation(MetaGameProgress.instance.metaGiveawayConfig.metaAnimation);
 		}
 		
 		private function onEdit() : void {

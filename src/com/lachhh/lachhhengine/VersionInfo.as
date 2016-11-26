@@ -18,7 +18,11 @@ package com.lachhh.lachhhengine {
 		static public var URL_YOUTUBE_FAMILYJULES_7X:String = "https://www.youtube.com/user/FamilyJules7X";
 		static public var URL_TUTORIAL:String = "https://www.youtube.com/watch?v=0wchRe2zQR8";
 		static public var URL_STREAMRPG:String = "https://www.patreon.com/StreamRPG";
+		static public var URL_JSB:String = "http://www.justshapesandbeats.com";
 		static public var URL_ADOBE_LINK:String = "https://get.adobe.com/flashplayer/otherversions/";
+		
+		static public var URL_ZOMBIDLE_IOS:String = "http://www.zombidle.com/ios";
+		static public var URL_ZOMBIDLE_ANDROID:String = "http://www.zombidle.com/android";
 		
 		static public var DEFAULT_CHANNEL:String = "MyChannel";
 		
@@ -26,6 +30,5 @@ package com.lachhh.lachhhengine {
 		
 		static public var TWITTER_CONSUMER_KEY:String = "BjXPhVuKvbGydOwhbZhfDco8l";
 		static public var TWITTER_CONSUMER_KEY_SECRET:String = "X7M7LemvEP3PSqqGuu2yoNWxdkVaPKCFKSTHNh00KV3CoSHTY5";
-			
 	}
 }

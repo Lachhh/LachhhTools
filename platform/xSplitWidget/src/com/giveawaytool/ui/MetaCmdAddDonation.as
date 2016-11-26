@@ -24,7 +24,7 @@ package com.giveawaytool.ui {
 			metaDonationConfig = pMetaConfig;
 			
 			if (pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.hasCustomAnim()) {
-				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget("CustomAnims/NewDonation.swf");
+				var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.getPathAsWidgetLocal());
 				var d:Dictionary = new Dictionary();
 				d["name"] = metaDonation.donatorName;
 				d["msg"] = metaDonation.donatorMsg;

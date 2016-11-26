@@ -23,9 +23,6 @@ package com.giveawaytool.ui {
 		public function UI_PatreonPromo() {
 			super(AnimationFactory.ID_UI_PATREONPROMO);
 			
-			//var test:Youtube_AIR_Code = new Youtube_AIR_Code();
-			// visual.addChild(test);
-			//registerClick(subPreviewBtn, onClick);
 			initBtn(subPreview, URL_SUB, "Sub alerts");
 			initBtn(followPreview, URL_FOLLOW, "Follow alerts");
 			initBtn(hostPreview, URL_HOST, "Host alerts");
@@ -33,11 +30,24 @@ package com.giveawaytool.ui {
 			initBtn(cheersPreview, URL_CHEERS, "Cheers alerts");
 			
 			registerClick(patreonBtn, onClickPatreon);
-			registerClick(streamRPGPreview, onClickPatreon);
-			//registerClickWithCallback(streamRPGPreview, new Callback(onClick, this, [URL_STREAMRPG]));
-			
-			//setNameOfDynamicBtn(patreonBtn, "Go to Patreon");
+			registerClick(jsbBtn, onClickJSB);
+			registerClick(btn_googlePlay, onGooglePlay);
+			registerClick(btn_ios, oniOs);
+
+			setNameOfDynamicBtn(jsbBtn, "Website");
 			refresh();
+		}
+
+		private function onGooglePlay() : void {
+			Utils.navigateToURLAndRecord(VersionInfo.URL_ZOMBIDLE_ANDROID);
+		}
+
+		private function oniOs() : void {
+			Utils.navigateToURLAndRecord(VersionInfo.URL_ZOMBIDLE_IOS);
+		}
+
+		private function onClickJSB() : void {
+			Utils.navigateToURLAndRecord(VersionInfo.URL_JSB);
 		}
 		
 		private function initBtn(btn:MovieClip, idVideo:String, label:String):void {
@@ -64,10 +74,17 @@ package com.giveawaytool.ui {
 		public function get hostPreview() : MovieClip { return visual.getChildByName("hostPreview") as MovieClip;}
 		public function get donationPreview() : MovieClip { return visual.getChildByName("donationPreview") as MovieClip;}
 		public function get cheersPreview() : MovieClip { return visual.getChildByName("cheersPreview") as MovieClip;}
-		public function get streamRPGPreview() : MovieClip { return visual.getChildByName("streamRPGPreview") as MovieClip;}
+		//public function get streamRPGPreview() : MovieClip { return visual.getChildByName("streamRPGPreview") as MovieClip;}
 		
 		
 		public function get patreonBtn() : MovieClip { return visual.getChildByName("patreonBtn") as MovieClip;}
+		public function get jsbBtn() : MovieClip { return visual.getChildByName("jsbBtn") as MovieClip;}
+		
+		public function get btn_googlePlay() : MovieClip { return visual.getChildByName("btn_googlePlay") as MovieClip;}
+		public function get btn_ios() : MovieClip { return visual.getChildByName("btn_ios") as MovieClip;}
+		
+		
+		
 		
 	}
 }

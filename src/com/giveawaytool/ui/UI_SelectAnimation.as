@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.animation.exported.UI_MENU;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaSelectAnimation;
 	import com.lachhh.ResolutionManager;
@@ -51,6 +52,8 @@ package com.giveawaytool.ui {
 			useCustomBtn.deselect();
 			useDefaultBtn.deselect();
 			UIBase.manager.refresh();
+			
+			UI_Menu.instance.logicNotification.logicSendToWidget.sendDonationConfig(MetaGameProgress.instance.metaDonationsConfig);
 		}
  	
 		private function onBrowse() : void {

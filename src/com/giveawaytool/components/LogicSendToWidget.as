@@ -225,6 +225,8 @@ package com.giveawaytool.components {
 			var d:Dictionary = m.encodeForWidget();
 			d.type = "refreshConfig";
 			sendData(d);
+			
+			MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.transfertCustomAnimToFolder();
 		}
 		
 		

@@ -39,9 +39,14 @@ package com.giveawaytool.components {
 		public function canAccessFollow():Boolean {return isBronzeTier();}		
 		public function canAccessHost():Boolean {return isBronzeTier();}		
 		public function canAccessSub():Boolean {return isBronzeTier();}
-		
 		public function canAccessCheers():Boolean {return isSilverTier();}		
 		public function canAccessDonation():Boolean {return isSilverTier();}
+		
+		public function canSendFollowIfNotLive():Boolean {return isBronzeTier() || !TwitchConnection.instance.isLive;}		
+		public function canSendHostIfNotLive():Boolean {return isBronzeTier() || !TwitchConnection.instance.isLive;}		
+		public function canSendSubIfNotLive():Boolean {return isBronzeTier() || !TwitchConnection.instance.isLive;}
+		public function canSendCheersIfNotLive():Boolean {return isSilverTier() || !TwitchConnection.instance.isLive;}		
+		public function canSendDonationIfNotLive():Boolean {return isSilverTier() || !TwitchConnection.instance.isLive;}
 		
 		public function canUseAlerts():Boolean {return isBronzeTier();}
 		

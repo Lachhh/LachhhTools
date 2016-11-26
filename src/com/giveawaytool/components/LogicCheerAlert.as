@@ -40,7 +40,7 @@ package com.giveawaytool.components {
 		}
 
 		private function canAlert() : Boolean {
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) return false;
+			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canSendCheersIfNotLive()) return false;
 			return MetaGameProgress.instance.metaCheerAlertConfig.alertOnNewCheer;
 		}
 		

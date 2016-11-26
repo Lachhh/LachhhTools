@@ -26,11 +26,17 @@ package com.giveawaytool.ui {
 			logicOnOffNotConnected.isOn = false;
 			UI_Menu.instance.logicNotification.logicSendToWidget.onWidgetChanged.addCallback(new Callback(refresh, this, null));
 			UI_Menu.instance.logicNotification.logicSendToWidget.onSendFailed.addCallback(new Callback(shakeNoWidget, this, null));
-			
+			iconOnlyMc.gotoAndStop(1);
 		}
 
+		
+		
 		private function onTutorialBtn() : void {
-			new UI_TutorialWidget();
+			if(!UI_Menu.instance.viewMenuUISelect.isWidgetCanBeUsedInUI()) {
+				UI_Menu.instance.viewMenuUISelect.onChest();
+			} else {
+				new UI_TutorialWidget();
+			}
 		}
 
 		
@@ -62,12 +68,30 @@ package com.giveawaytool.ui {
 				stopAllAnimBtn.select();
 			}
 			
+			if(!UI_Menu.instance.viewMenuUISelect.isWidgetCanBeUsedInUI()) {
+				backMc.gotoAndStop(2);
+				iconOnlyMc.visible = true;
+			} else {
+				backMc.gotoAndStop(1);
+				iconOnlyMc.visible = false;
+			}
+			refreshIcon();
 			logicOnOffNotConnected.isOn = shouldShowNotConnectInfo();
+		}
+		
+		private function refreshIcon():void {
+			if(UI_Menu.instance.viewMenuUISelect.isNeedBronzeToBeHere()) {
+				iconOnlyMc.gotoAndStop(1);
+			} else {
+				iconOnlyMc.gotoAndStop(2);
+			}
 		}
 
 		private function shouldShowNotConnectInfo() : Boolean {
-			if(UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) return false;
 			if(!UI_Menu.instance.viewMenuUISelect.isUIneedsWidget()) return false;
+			if(!UI_Menu.instance.viewMenuUISelect.isWidgetCanBeUsedInUI()) return true;
+			if(UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) return false;
+			
 			return true;
 		}
 		
@@ -82,6 +106,8 @@ package com.giveawaytool.ui {
 		//public function get infoBtn() : MovieClip { return visual.getChildByName("infoBtn") as MovieClip;}
 		public function get widgetNotConnectedMc() : MovieClip { return visual.getChildByName("widgetNotConnectedMc") as MovieClip;}
 		public function get tutorialBtn() : MovieClip { return widgetNotConnectedMc.getChildByName("tutorialBtn") as MovieClip;}
+		public function get backMc() : MovieClip { return widgetNotConnectedMc.getChildByName("backMc") as MovieClip;}
+		public function get iconOnlyMc() : MovieClip { return backMc.getChildByName("iconOnlyMc") as MovieClip;}
 						
 	}
 }

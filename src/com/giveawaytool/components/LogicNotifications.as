@@ -1,9 +1,9 @@
 package com.giveawaytool.components {
 	import com.LogicTransferFileToUserDoc;
-	import flash.system.Security;
-	import com.giveawaytool.io.twitch.emotes.LogicListenForEmotes;
+	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.twitch.LogicFollowAlert;
 	import com.giveawaytool.io.twitch.TwitchConnection;
+	import com.giveawaytool.io.twitch.emotes.LogicListenForEmotes;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.components.ActorComponent;
@@ -57,7 +57,14 @@ package com.giveawaytool.components {
 			
 			logicPatreonAccess = actor.addComponent(new LogicPatreonAccess()) as LogicPatreonAccess;
 
+			refreshIfIsLive();
 		}
+		
+		private function refreshIfIsLive():void {
+			if(TwitchConnection.instance != null) TwitchConnection.instance.checkIfIsLive();
+			CallbackTimerEffect.addWaitCallFctToActor(actor, refreshIfIsLive, 1000*60*3);
+		}
+		
 		
 		public function onConectedToTwitch():void {
 			logicListenToChat.callbackOnConnectGroup.addCallback(new Callback(onConnectToChat, this, null));

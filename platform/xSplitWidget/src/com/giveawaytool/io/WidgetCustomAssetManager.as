@@ -20,6 +20,10 @@ package com.giveawaytool.io {
 			}
 			return null;
 		}
+
+		public static function clearCache() : void {
+			cache = new Vector.<WidgetCustomAsset>();
+		}
 		
 	}
 }

@@ -1,8 +1,8 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.ui.views.ViewHostToolTip;
-	import com.giveawaytool.meta.MetaHostConfig;
 	import com.giveawaytool.meta.MetaGameProgress;
-	import com.giveawaytool.meta.MetaSubsConfig;
+	import com.giveawaytool.meta.MetaHostConfig;
+	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
+	import com.giveawaytool.ui.views.ViewHostToolTip;
 	import com.lachhh.flash.FlashUtils;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
@@ -18,12 +18,16 @@ package com.giveawaytool.ui {
 	public class ViewHostSettings extends ViewBase {
 		public var viewHostList:ViewHostList;
 		public var viewHostTooltip:ViewHostToolTip;
+		public var viewCustomBtn:ViewCustomAnimBtn;
 		
 		public function ViewHostSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
+						
 			viewHostList = new ViewHostList(pScreen, lastHostMc);
 			viewHostTooltip = new ViewHostToolTip(pScreen, toolTipHostMc);
 			viewHostList.toolTip = viewHostTooltip;
+			
+			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewHost);
 			
 			screen.registerClick(newHostBtn, onNewHost);
 			pScreen.registerEvent(bigHostNumTxt, FocusEvent.FOCUS_OUT, onEdit);
@@ -63,5 +67,6 @@ package com.giveawaytool.ui {
 		public function get bigHostNumTxt() : TextField { return hostAlertsMc.getChildByName("bigHostNumTxt") as TextField;}
 		public function get lastHostMc() : MovieClip { return visual.getChildByName("lastHostMc") as MovieClip;}
 		public function get toolTipHostMc() : MovieClip { return visual.getChildByName("toolTipHostMc") as MovieClip;}
+		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
 	}
 }

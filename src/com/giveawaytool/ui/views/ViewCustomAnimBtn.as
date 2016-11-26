@@ -1,5 +1,6 @@
 package com.giveawaytool.ui.views {
 	import com.giveawaytool.meta.MetaSelectAnimation;
+	import com.giveawaytool.ui.UI_SelectAnimation;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
@@ -14,7 +15,12 @@ package com.giveawaytool.ui.views {
 		public function ViewCustomAnimBtn(pScreen : UIBase, pVisual : DisplayObject, pMetaAnim:MetaSelectAnimation) {
 			super(pScreen, pVisual);
 			metaSelectAnimation = pMetaAnim;
+			screen.registerClick(visual, onSelect);
 			refresh();
+		}
+		
+		private function onSelect() : void {
+			new UI_SelectAnimation(metaSelectAnimation);
 		}
 		
 		

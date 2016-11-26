@@ -113,6 +113,10 @@ package com.lachhh.lachhhengine.animation {
 		static public var ZZ_BTN_STREAMRPGPROMO:int = pushBtnLink(BTN_STREAMRPGPROMO);
 		static public var ZZ_BTN_CHECKPATREON:int = pushBtnLink(BTN_CHECKPATREON);
 		static public var ZZ_BTN_GOTOADOBE:int = pushBtnLink(BTN_GOTOADOBE);
+		
+		static public var ZZ_BTN_APPSTORE:int = pushBtnLink(BTN_APPSTORE);
+		static public var ZZ_BTN_GOOGLEPLAY:int = pushBtnLink(BTN_GOOGLEPLAY);
+		
 
 
 		static public function pushClassLink(pClass:Class):int {
