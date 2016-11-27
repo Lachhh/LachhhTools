@@ -59,21 +59,19 @@ package com.giveawaytool.ui {
 			if(UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) {
 				connectedToWidgetTxt.text = "Connected to Widget";
 				connectedToWidgetTxt.textColor = 0x00CC00;
-				//infoBtn.visible = false;
 				stopAllAnimBtn.deselect();
 			} else {
 				connectedToWidgetTxt.text = "Not Connected";
 				connectedToWidgetTxt.textColor = 0xCC0000;
-				//infoBtn.visible = true;
 				stopAllAnimBtn.select();
 			}
 			
-			if(!UI_Menu.instance.viewMenuUISelect.isWidgetCanBeUsedInUI()) {
-				backMc.gotoAndStop(2);
-				iconOnlyMc.visible = true;
-			} else {
+			if(!UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) {
 				backMc.gotoAndStop(1);
 				iconOnlyMc.visible = false;
+			} else {
+				backMc.gotoAndStop(2);
+				iconOnlyMc.visible = true;
 			}
 			refreshIcon();
 			logicOnOffNotConnected.isOn = shouldShowNotConnectInfo();
@@ -89,10 +87,10 @@ package com.giveawaytool.ui {
 
 		private function shouldShowNotConnectInfo() : Boolean {
 			if(!UI_Menu.instance.viewMenuUISelect.isUIneedsWidget()) return false;
+			if(!UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) return true;
 			if(!UI_Menu.instance.viewMenuUISelect.isWidgetCanBeUsedInUI()) return true;
-			if(UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) return false;
 			
-			return true;
+			return false;
 		}
 		
 		public function shakeNoWidget():void {

@@ -37,5 +37,9 @@ package com.giveawaytool.ui {
 			result.numViewers = metaHost.numViewers;
 			return result;
 		}
+
+		public static function createDummy() : MetaHostAlert {
+			return createFromMetaHost(MetaHost.createDUMMY());
+		}
 	}
 }

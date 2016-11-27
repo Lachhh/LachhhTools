@@ -4,6 +4,7 @@ package com.giveawaytool.meta {
 	 * @author LachhhSSD
 	 */
 	public class MetaSelectAnimation {
+		
 		public var useDefault:Boolean = true;
 		public var pathToSwf:String = "";
 		

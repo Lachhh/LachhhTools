@@ -4,6 +4,7 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
 	import com.giveawaytool.ui.views.ViewHostToolTip;
 	import com.lachhh.flash.FlashUtils;
+	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
@@ -28,7 +29,7 @@ package com.giveawaytool.ui {
 			viewHostList.toolTip = viewHostTooltip;
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewHost);
-			
+			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestHost, this, null);
 			screen.registerClick(newHostBtn, onNewHost);
 			pScreen.registerEvent(bigHostNumTxt, FocusEvent.FOCUS_OUT, onEdit);
 		}

@@ -19,16 +19,16 @@ package com.giveawaytool.meta {
 		public function encode():Dictionary {
 			saveData["alertOnNewHost"] = alertOnNewHost;
 			saveData["bigHostNum"] = bigHostNum;
-			
+			saveData["metaHosts"] = metaHosts.encode();
 			
 			return saveData; 
 		}
 		
 		public function decode(loadData:Dictionary):void {
 			if(loadData == null) return ;
-			metaHosts.decode(loadData["metaFollowers"]);
 			alertOnNewHost = (loadData["alertOnNewHost"]);
 			bigHostNum = (loadData["bigHostNum"]);
+			metaHosts.decode(loadData["metaHosts"]);
 		}
 	}
 }

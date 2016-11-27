@@ -24,11 +24,9 @@ package com.giveawaytool.ui.views {
 			super(pScreen, pVisual);
 			pScreen.registerClick(exportPNGBtn, onExport);
 			pScreen.registerClick(previewBtn, onPreview);
-			pScreen.registerClick(selectBtn, onSelect);
-		
+			
 			pScreen.setNameOfDynamicBtn(exportPNGBtn, "Export PNG");
 			pScreen.setNameOfDynamicBtn(previewBtn, "Preview");
-			
 			
 			pScreen.registerEvent(winnersTxt, FocusEvent.FOCUS_OUT, onEdit);
 			pScreen.registerEvent(text1Txt, FocusEvent.FOCUS_OUT, onEdit);
@@ -36,11 +34,6 @@ package com.giveawaytool.ui.views {
 			pScreen.registerEvent(text3Txt, FocusEvent.FOCUS_OUT, onEdit);
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, selectBtn, MetaGameProgress.instance.metaExportPNGConfig.metaAnimation);
-			
-		}
-
-		private function onSelect() : void {
-			new UI_SelectAnimation(MetaGameProgress.instance.metaExportPNGConfig.metaAnimation);
 			
 		}
 

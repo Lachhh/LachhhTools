@@ -41,5 +41,9 @@ package com.giveawaytool.ui {
 			result.metaSubscriber = m;
 			return result;
 		}
+
+		public static function createDummy() : MetaSubcriberAlert {
+			return createFromSub(MetaSubscriber.createDummy());
+		}
 	}
 }

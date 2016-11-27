@@ -41,7 +41,7 @@ package com.giveawaytool.ui {
 		}
 
 		public function clone() : MetaSubscriber {
-			var result:MetaSubscriber = new MetaSubscriber();
+			var result : MetaSubscriber = new MetaSubscriber();
 			result.decode(encode());
 			return result;
 		}
@@ -78,6 +78,10 @@ package com.giveawaytool.ui {
 
 		public function getDescForToolTip() : String {
 			return name + "\n" + "Subcribed " + numMonthInARow + " month(s) in a row.";
+		}
+
+		public static function createDummy() : MetaSubscriber {
+			return create2("An Awesome Dude", (Math.random() < 0.5 ? 1 : 2));
 		}
 	}
 }

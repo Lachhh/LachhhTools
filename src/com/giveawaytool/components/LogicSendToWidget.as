@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.views.MetaCheer;
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.CallbackWaitEffect;
 	import com.giveawaytool.effect.CallbackTimerEffect;
@@ -149,6 +150,12 @@ package com.giveawaytool.components {
 			trace("WidgetsConnectionManager ::: widgetSocket_securityErrorHandler");
 		}
 		
+		public function sendTestDonation():void { sendAddDonation(MetaDonation.createDummy());}
+		public function sendTestCheer():void { sendCheerAlert(MetaCheerAlert.createDummy());}
+		public function sendTestFollow():void { sendFollowAlert(MetaFollowAlert.createDummy());}
+		public function sendTestSub():void { sendSubscriberAlert(MetaSubcriberAlert.createDummy());}
+		public function sendTestHost():void { sendHostAlert(MetaHostAlert.createDummy());}
+		
 		public function sendAddDonation(m:MetaDonation):void {
 			var d:Dictionary = m.encode();
 			MetaGameProgress.instance.metaDonationsConfig.allDonations.encodeNewDonation(d, m);
@@ -213,6 +220,8 @@ package com.giveawaytool.components {
 			d.type = "tweetAlert";
 			sendData(d);
 		}
+		
+		
 		
 		public function sendAllNewDonation(allDonation:MetaDonationList):void {
 			var newDonationsList:MetaDonationList = allDonation.copyKeepingOnlyNew();

@@ -50,7 +50,6 @@ package com.giveawaytool.ui {
 			UI_Overlay.show();
 			AnimationManager.factoryCache.ClearCache();
 			renderComponent.animView.gotoAndStop(1);
-			//flashNewWinner();
 		}
 
 		private function onShare() : void {

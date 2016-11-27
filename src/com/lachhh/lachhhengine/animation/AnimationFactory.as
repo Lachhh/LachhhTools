@@ -116,6 +116,7 @@ package com.lachhh.lachhhengine.animation {
 		
 		static public var ZZ_BTN_APPSTORE:int = pushBtnLink(BTN_APPSTORE);
 		static public var ZZ_BTN_GOOGLEPLAY:int = pushBtnLink(BTN_GOOGLEPLAY);
+		static public var ZZ_BTN_DYNAMICNAMESMALL3:int = pushBtnLink(BTN_DYNAMICNAMESMALL3);
 		
 
 

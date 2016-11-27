@@ -33,5 +33,11 @@ package com.giveawaytool.components {
 			result.metaFollower = metaFollower;
 			return result;
 		}
+
+		public static function createDummy() : MetaFollowAlert {
+			var result:MetaFollowAlert = new MetaFollowAlert();
+			result.metaFollower = MetaFollower.createDUMMY();
+			return result;
+		}
 	}
 }

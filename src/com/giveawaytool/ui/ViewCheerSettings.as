@@ -2,6 +2,7 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewCheerToolTip;
 	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
+	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
@@ -20,6 +21,7 @@ package com.giveawaytool.ui {
 			super(pScreen, pVisual);
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewCheers);
+			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestCheer, this, null);
 			
 			viewCheerList = new ViewCheerList(screen, lastCheersMc);
 			viewCheerTooltip = new ViewCheerToolTip(pScreen, toolTipCheerMc);

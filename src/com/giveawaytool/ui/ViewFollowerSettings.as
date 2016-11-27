@@ -3,6 +3,7 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
 	import com.giveawaytool.ui.views.ViewFollowerToolTip;
+	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
@@ -22,8 +23,9 @@ package com.giveawaytool.ui {
 		public function ViewFollowerSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewFollow);
+			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestFollow, this, null);
+			
 			viewFollowList = new ViewFollowersList(screen, lastFollowersMc);
-			//viewFollowGoals = new ViewFollowersGoal(screen, followGoal);
 			viewFollowAlert = new ViewFollowersAlert(screen, alertsMc);
 			viewFollowToolTip = new ViewFollowerToolTip(screen, toolTipFollowerMc);
 			viewFollowList.toolTip = viewFollowToolTip; 

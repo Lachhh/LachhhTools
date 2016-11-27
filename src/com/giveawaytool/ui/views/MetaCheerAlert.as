@@ -37,5 +37,12 @@ package com.giveawaytool.ui.views {
 			result.numBits = metaCheer.numBits;
 			return result;
 		}
+
+		public static function createDummy() : MetaCheerAlert {
+			var result:MetaCheerAlert = new MetaCheerAlert();
+			result.name = "An Awesome dude";
+			result.numBits = Math.random()*127+24;
+			return result;
+		}
 	}
 }

@@ -1,4 +1,5 @@
 package com.giveawaytool.ui.views {
+	import com.giveawaytool.ui.UI_Menu;
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.UI_CountDown;
@@ -29,12 +30,12 @@ package com.giveawaytool.ui.views {
 			targetTxt.addEventListener(FocusEvent.FOCUS_OUT, onEdit);
 			text1Txt.addEventListener(FocusEvent.FOCUS_OUT, onEdit);
 			countdownTxt.addEventListener(FocusEvent.FOCUS_OUT, onEdit);
-			pScreen.registerClick(selectBtn, onSelect);
 			pScreen.registerClick(autoClaimBtn, onAutoClaim);
 
 			pScreen.setNameOfDynamicBtn(playBtn, "Start");		
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, selectBtn, MetaGameProgress.instance.metaCountdownConfig.metaAnimation);
+			
 			
 			refresh();  
 		}
@@ -43,10 +44,6 @@ package com.giveawaytool.ui.views {
 			MetaGameProgress.instance.metaCountdownConfig.autoChatClaim = !MetaGameProgress.instance.metaCountdownConfig.autoChatClaim;
 			refresh();
 			
-		}
-		
-		private function onSelect() : void {
-			new UI_SelectAnimation(MetaGameProgress.instance.metaCountdownConfig.metaAnimation);
 		}
 
 		private function onEdit(event : FocusEvent) : void {

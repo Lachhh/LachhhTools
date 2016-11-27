@@ -17,8 +17,8 @@ package com.giveawaytool.ui {
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
 			
-			if(hasCustomAnim()) {
-				var ca:WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.getPathAsWidgetLocal());
+			if(pMetaConfig.metaCustomAnim.metaCustomAnimNewFollow.hasCustomAnim()) {
+				var ca:WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewFollow.getPathAsWidgetLocal());
 				var d:Dictionary = new Dictionary();
 				d["newFollower"] = metaNewFollower.name;
 				ca.showAnim(d, new Callback(endCmd, this, null));
@@ -26,11 +26,6 @@ package com.giveawaytool.ui {
 				var ui:UI_NewFollowerAnim = new UI_NewFollowerAnim(metaNewFollower);
 				ui.callbackOnDestroy = new Callback(endCmd, this, null);
 			} 
-		}
-		
-		private function hasCustomAnim(): Boolean {
-			return true;
-		}
-		
+		}		
 	}
 }

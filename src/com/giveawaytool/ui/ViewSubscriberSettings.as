@@ -28,7 +28,7 @@ package com.giveawaytool.ui {
 			viewSubscriberList.toolTip = viewSubscriberToolTip; 
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewSub);
-			
+			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestSub, this, null);
 			screen.setNameOfDynamicBtn(refreshBtn, "Refresh");
 			screen.setNameOfDynamicBtn(collectBtn, "Alert New");
 
