@@ -1,4 +1,5 @@
 package com.giveawaytool.ui.views {
+	import mx.utils.StringUtil;
 	import com.lachhh.lachhhengine.VersionInfo;
 	import com.giveawaytool.io.DonationSourceConnection;
 	import com.giveawaytool.meta.donations.MetaDonationSourceConnection;
@@ -41,8 +42,9 @@ package com.giveawaytool.ui.views {
 		}
 
 		private function onApply() : void {
-			metaConnection.clientId = uiSettings.clientIdTxt.text;
-			metaConnection.accessToken = uiSettings.accessTokenTxt.text;
+			metaConnection.clientId = StringUtil.trim(uiSettings.clientIdTxt.text);
+			metaConnection.accessToken = StringUtil.trim(uiSettings.accessTokenTxt.text);
+			
 			if(onNewSettings) onNewSettings.call();
 		}
 		

@@ -13,8 +13,8 @@ package com.giveawaytool.ui.views {
 		
 		
 		public function sortDate(m1:MetaFollower, m2:MetaFollower):int {
-			if(m1.date.time > m2.date.time) return -1;
 			if(m1.date.time < m2.date.time) return 1;
+			if(m1.date.time > m2.date.time) return -1;
 			return 0;
 		}
 		

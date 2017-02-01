@@ -43,7 +43,7 @@ package com.giveawaytool.ui {
 			
 		}
 
-		private function onLogin() : void {
+		public function onLogin() : void {
 			TwitchConnection.instance.connect();
 			UI_Loading.show("Connecting to Twitch");
 		}

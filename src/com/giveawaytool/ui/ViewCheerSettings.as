@@ -16,12 +16,14 @@ package com.giveawaytool.ui {
 		public var viewCheerList : ViewCheerList;
 		private var viewCheerTooltip : ViewCheerToolTip;
 		private var viewCustomBtn : ViewCustomAnimBtn;
+		private var viewTestFirst : ViewTestFirst;
 
 		public function ViewCheerSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewCheers);
-			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestCheer, this, null);
+			viewTestFirst = new ViewTestFirst(pScreen, testFirstMc);
+			viewTestFirst.metaHasBeenTested = MetaGameProgress.instance.metaCheerAlertConfig.metaHasBeenTested;
 			
 			viewCheerList = new ViewCheerList(screen, lastCheersMc);
 			viewCheerTooltip = new ViewCheerToolTip(pScreen, toolTipCheerMc);
@@ -62,6 +64,7 @@ package com.giveawaytool.ui {
 		public function get lastCheersMc() : MovieClip { return visual.getChildByName("lastCheersMc") as MovieClip;}
 		public function get toolTipCheerMc() : MovieClip { return visual.getChildByName("toolTipCheerMc") as MovieClip;}
 		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
+		public function get testFirstMc() : MovieClip { return visual.getChildByName("testFirstMc") as MovieClip;}
 		
 	}
 }

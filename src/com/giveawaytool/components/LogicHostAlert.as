@@ -44,7 +44,7 @@ package com.giveawaytool.components {
 		}
 
 		private function canAlert() : Boolean {
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canSendHostIfNotLive()) return false;
+			if(!UI_Menu.instance.logicNotification.logicVIPAccess.canSendHostIfNotLive()) return false;
 			return MetaGameProgress.instance.metaHostAlertConfig.alertOnNewHost;
 		}
 		

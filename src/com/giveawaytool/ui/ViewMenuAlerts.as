@@ -24,7 +24,7 @@ package com.giveawaytool.ui {
 
 			logicOnOffNotConnected = (screen.addComponent(new LogicOnOffNextFrame(widgetNotConnectedMc)) as LogicOnOffNextFrame);
 			logicOnOffNotConnected.isOn = false;
-			UI_Menu.instance.logicNotification.logicSendToWidget.onWidgetChanged.addCallback(new Callback(refresh, this, null));
+			UI_Menu.instance.logicNotification.logicSendToWidget.onWidgetChanged.addCallback(new Callback(UIBase.manager.refresh, UIBase, null));
 			UI_Menu.instance.logicNotification.logicSendToWidget.onSendFailed.addCallback(new Callback(shakeNoWidget, this, null));
 			iconOnlyMc.gotoAndStop(1);
 		}
@@ -32,10 +32,10 @@ package com.giveawaytool.ui {
 		
 		
 		private function onTutorialBtn() : void {
-			if(!UI_Menu.instance.viewMenuUISelect.isWidgetCanBeUsedInUI()) {
-				UI_Menu.instance.viewMenuUISelect.onChest();
-			} else {
+			if(!UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) {
 				new UI_TutorialWidget();
+			} else if(!UI_Menu.instance.viewMenuUISelect.hasVIPAccessToBeInUI()){
+				UI_Menu.instance.viewMenuUISelect.onChest();
 			}
 		}
 
@@ -88,7 +88,7 @@ package com.giveawaytool.ui {
 		private function shouldShowNotConnectInfo() : Boolean {
 			if(!UI_Menu.instance.viewMenuUISelect.isUIneedsWidget()) return false;
 			if(!UI_Menu.instance.logicNotification.logicSendToWidget.hasAWidgetConnected()) return true;
-			if(!UI_Menu.instance.viewMenuUISelect.isWidgetCanBeUsedInUI()) return true;
+			if(!UI_Menu.instance.viewMenuUISelect.hasVIPAccessToBeInUI()) return true;
 			
 			return false;
 		}

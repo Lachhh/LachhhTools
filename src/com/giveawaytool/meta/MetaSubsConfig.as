@@ -1,4 +1,6 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.ui.ModelAlertTypeEnum;
+	import com.giveawaytool.ui.MetaHasBeenTested;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.ui.MetaSubscriber;
 	import com.giveawaytool.ui.views.MetaSubscribersList;
@@ -15,9 +17,14 @@ package com.giveawaytool.meta {
 		public var alertOnReSub:Boolean = true;
 		public var subTrainNum:int = 3;
 		public var goalSub:int = 0;
-		public var listOfSubs:MetaSubscribersList = new MetaSubscribersList();
+		public var listOfSubs : MetaSubscribersList = new MetaSubscribersList();
 		private var saveData : Dictionary = new Dictionary();
-				
+		public var metaHasBeenTested : MetaHasBeenTested = new MetaHasBeenTested(ModelAlertTypeEnum.SUB);
+
+		public function clear() : void {
+			listOfSubs.clear();
+		}
+		
 		public function encode() : Dictionary {
 			// saveData["crntSub"] = crntSub.value;
 			saveData["alertOnNewSub"] = alertOnNewSub;
@@ -25,6 +32,8 @@ package com.giveawaytool.meta {
 			saveData["subTrainNum"] = subTrainNum;
 			saveData["goalSub"] = goalSub;
 			saveData["listOfSubs"] = listOfSubs.encode();
+			saveData["metaHasBeenTested"] = metaHasBeenTested.encode();
+			
 			
 			
 			return saveData; 
@@ -38,6 +47,8 @@ package com.giveawaytool.meta {
 			subTrainNum = loadData["subTrainNum"];
 			goalSub = loadData["goalSub"];
 			listOfSubs.decode(loadData["listOfSubs"]);
+			metaHasBeenTested.decode(loadData["metaHasBeenTested"]);
+			
 		}
 
 		public function setAutoNext(crnt:int) : void {
@@ -48,6 +59,6 @@ package com.giveawaytool.meta {
 		public function getCrntSub() : int {
 			if(TwitchConnection.instance == null) return 1;
 			return TwitchConnection.instance.listOfSubs.subscribers.length;
-		}		
+		}
 	}
 }

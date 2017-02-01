@@ -1,4 +1,5 @@
 package com.giveawaytool {
+	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.MetaIRCMessage;
 	import com.giveawaytool.ui.UI_Donation;
@@ -30,6 +31,16 @@ package com.giveawaytool {
 				ircMsg.text = "GrosPenis is now hosting you for 55 viewers.";
 				ui.logicNotification.logicHostAlert.processIRCMsg(ircMsg);
 			}*/
+			
+			if(KeyManager.IsKeyPressed(Keyboard.DELETE)) {
+				MetaGameProgress.instance.metaFollowConfig.metaHasBeenTested.clear();
+				MetaGameProgress.instance.metaSubsConfig.metaHasBeenTested.clear();
+				MetaGameProgress.instance.metaHostAlertConfig.metaHasBeenTested.clear();
+				MetaGameProgress.instance.metaDonationsConfig.metaHasBeenTested.clear();
+				MetaGameProgress.instance.metaCheerAlertConfig.metaHasBeenTested.clear();
+				//MetaGameProgress.instance.saveToLocal();
+				UIBase.manager.refresh();
+			}
 		}
 	}
 }

@@ -34,7 +34,7 @@ package com.giveawaytool.ui {
 		}
 		
 		private function sortOnDate(a:MetaSubscriber, b:MetaSubscriber):int {
-			if(a.date.time < b.date.time) return -1;
+			if(a.date.time < b.date.time) return 1;
 			if(a.date.time > b.date.time) return -1;
 			return 0;
 		}

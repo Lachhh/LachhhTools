@@ -10,7 +10,7 @@ package com.flashinit {
 	public class DebugLachhhToolsInit extends Sprite {
 		public function DebugLachhhToolsInit() {
 			super();
-			
+			//VersionInfo.pioDebug = true;
 			VersionInfo.isDebug = true;
 			var m:MainGame = new MainGame();
 			stage.addChild(m);

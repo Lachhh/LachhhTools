@@ -62,8 +62,10 @@ package com.giveawaytool.io.twitch {
 				created_at = created_at.substr(0, 10);
 				var a:Array = created_at.split("-");
 				var dateOfSubStart:Date = new Date(a[0], a[1], a[2]);
-				var numMonthInaRow:int = getNumMonth(dateOfSubStart, thisDate);  
-				listOfSubs.add(MetaSubscriber.create2(userName, numMonthInaRow+1));
+				var numMonthInaRow:int = getNumMonth(dateOfSubStart, thisDate);
+				var metaSub:MetaSubscriber = MetaSubscriber.create2(userName, numMonthInaRow+1);
+				metaSub.date = dateOfSubStart;
+				listOfSubs.add(metaSub);
 				i++;
 			}
 			

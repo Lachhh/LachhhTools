@@ -46,7 +46,7 @@ package com.giveawaytool.components {
 		}
 		
 		public function canAlert(mMsg:MetaIRCMessage):Boolean {
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canSendSubIfNotLive()) return false;
+			if(!UI_Menu.instance.logicNotification.logicVIPAccess.canSendSubIfNotLive()) return false;
 			if(mMsg.isReSubAlert() && MetaGameProgress.instance.metaSubsConfig.alertOnReSub) return true;
 			if(mMsg.isNewSubAlert() && MetaGameProgress.instance.metaSubsConfig.alertOnNewSub) return true;
 			return false;
@@ -70,6 +70,7 @@ package com.giveawaytool.components {
 		
 		public function mergeTwitchSubsInSavedList():void {
 			var listOfTwitchSub:MetaSubscribersList = TwitchConnection.instance.listOfSubs;
+			//MetaGameProgress.instance.metaSubsConfig.clear();
 			for (var i : int = 0; i < listOfTwitchSub.subscribers.length; i++) {
 				var m:MetaSubscriber = listOfTwitchSub.getMetaSubscriber(i);
 				if(!MetaGameProgress.instance.metaSubsConfig.listOfSubs.containsName(m.name)) {

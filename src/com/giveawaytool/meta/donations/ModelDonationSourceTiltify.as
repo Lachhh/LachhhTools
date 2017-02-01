@@ -1,5 +1,4 @@
 package com.giveawaytool.meta.donations {
-	import com.giveawaytool.io.DonationSourceRequest;
 	import com.lachhh.lachhhengine.DataManager;
 	import com.lachhh.utils.Utils;
 

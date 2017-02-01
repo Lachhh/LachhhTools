@@ -1,5 +1,6 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.components.LogicNotifications;
+	import com.animation.exported.UI_GIVEAWAY;
+	import com.giveawaytool.io.playerio.LogicServerGameWispCheck;
 	import com.giveawaytool.effect.EffectKickBackUI;
 	import com.giveawaytool.effect.LogicAlphaOnOff;
 	import com.giveawaytool.io.twitch.TwitchConnection;
@@ -10,6 +11,7 @@ package com.giveawaytool.ui {
 
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.text.TextField;
 
 	/**
 	 * @author LachhhSSD
@@ -25,14 +27,16 @@ package com.giveawaytool.ui {
 			screen.registerClick(playMovieBtn, onPlayMovie);
 			screen.registerClick(cheersBtn, onCheers);
 			screen.registerClick(chestBtn, onChest);
+			screen.registerClick(tutorialBtn, onTutorial);
+			
 
 			onGiveaway();
 		}
 
 		public function onChest() : void {
-			if(uiCrnt as UI_PatreonPromo) return ;
+			if(uiCrnt as UI_VIPPromo) return ;
 			closeCurrent();
-			uiCrnt = new UI_PatreonPromo();
+			uiCrnt = new UI_VIPPromo();
 			animUIOpen(chestBtn);
 		}
 
@@ -84,6 +88,13 @@ package com.giveawaytool.ui {
 			animUIOpen(playMovieBtn);
 		}
 		
+		public function onTutorial() : void {
+			if(uiCrnt as UI_Help) return ;
+			closeCurrent();
+			uiCrnt = new UI_Help();
+			animUIOpen(tutorialBtn);
+		}
+		
 		private function animUIOpen(fromBtn:ButtonSelect):void {
 			UI_Overlay.show();
 			screen.doBtnPressAnim(fromBtn);
@@ -108,17 +119,33 @@ package com.giveawaytool.ui {
 			donationsBtn.selectIfBoolean((uiCrnt as UI_Donation) != null);
 			followBtn.selectIfBoolean((uiCrnt as UI_FollowSubAlert) != null);
 			cheersBtn.selectIfBoolean((uiCrnt as UI_CheerAlert) != null);
-			chestBtn.selectIfBoolean((uiCrnt as UI_PatreonPromo) != null);
+			chestBtn.selectIfBoolean((uiCrnt as UI_VIPPromo) != null);
+			tutorialBtn.selectIfBoolean((uiCrnt as UI_Help) != null);
 			
 			playMovieBtn.selectIfBoolean((uiCrnt as UI_PlayMovies) != null);
 			playMovieBtn.visible = canPlayMovie();
 			
-			lockedMcCheers.visible = !UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers();
-			lockedMcDonation.visible = !UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation();
-			lockedMcFollow.visible = !UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow();
-			
+			//lockedMcCheers.visible = !UI_Menu.instance.logicNotification.logicVIPAccess.canAccessCheers();
+			//lockedMcDonation.visible = !UI_Menu.instance.logicNotification.logicVIPAccess.canAccessDonation();
+			//lockedMcFollow.visible = !UI_Menu.instance.logicNotification.logicVIPAccess.canAccessFollow();
+			refreshConnectedServerTxt();
 		}
 		
+		private function refreshConnectedServerTxt() : void {
+			var serverCheck : LogicServerGameWispCheck = UI_Menu.instance.logicNotification.logicGameWisp.logicServerGameWisp;
+			connectedTxt.text = getTextOfConnected();
+			
+			if(serverCheck.isConnected()) {
+				connectedTxt.textColor = 0x3C8641; 
+			} else {
+				connectedTxt.textColor = 0x664646;
+			}
+		}
+		
+		public function getTextOfConnected():String {
+			if(!UI_Menu.instance.logicNotification.logicGameWisp.logicServerGameWisp.isConnected()) return "GameWisp failed";
+			return "Connected";
+		}
 		
 		
 		private function canPlayMovie():Boolean {
@@ -134,6 +161,9 @@ package com.giveawaytool.ui {
 		public function get playMovieBtn() : ButtonSelect { return visual.getChildByName("playMovieBtn") as ButtonSelect;}
 		public function get cheersBtn() : ButtonSelect { return visual.getChildByName("cheersBtn") as ButtonSelect;}
 		public function get chestBtn() : ButtonSelect { return visual.getChildByName("chestBtn") as ButtonSelect;}
+		public function get tutorialBtn() : ButtonSelect { return visual.getChildByName("tutorialBtn") as ButtonSelect;}
+		
+		public function get connectedTxt() : TextField { return playMovieBtn.getChildByName("connectedTxt") as TextField;}
 		
 		public function get lockedMcDonation() : MovieClip { return donationsBtn.getChildByName("lockedMc") as MovieClip;}
 		public function get lockedMcFollow() : MovieClip { return followBtn.getChildByName("lockedMc") as MovieClip;}
@@ -147,10 +177,10 @@ package com.giveawaytool.ui {
 			return false;
 		}
 		
-		public function isWidgetCanBeUsedInUI() : Boolean {
-			if((uiCrnt as UI_Donation)) return UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessDonation();
-			if((uiCrnt as UI_CheerAlert)) return UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers();
-			if((uiCrnt as UI_FollowSubAlert)) return UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessFollow();
+		public function hasVIPAccessToBeInUI() : Boolean {
+			if((uiCrnt as UI_Donation)) return UI_Menu.instance.logicNotification.logicVIPAccess.canAccessDonation();
+			if((uiCrnt as UI_CheerAlert)) return UI_Menu.instance.logicNotification.logicVIPAccess.canAccessCheers();
+			if((uiCrnt as UI_FollowSubAlert)) return UI_Menu.instance.logicNotification.logicVIPAccess.canAccessFollow();
 			return false;
 		}
 		
@@ -162,6 +192,11 @@ package com.giveawaytool.ui {
 		public function isNeedSilverToBeHere():Boolean {
 			if((uiCrnt as UI_Donation)) return true;
 			if((uiCrnt as UI_CheerAlert)) return true;
+			return false;
+		}
+
+		public function isGiveaway() : Boolean {
+			if((uiCrnt as UI_GiveawayMenu)) return true;
 			return false;
 		}
 			

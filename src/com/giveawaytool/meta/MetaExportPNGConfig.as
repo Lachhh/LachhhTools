@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.ui.ModelAlertTypeEnum;
 	import com.lachhh.lachhhengine.VersionInfo;
 
 	import flash.utils.Dictionary;
@@ -10,7 +11,7 @@ package com.giveawaytool.meta {
 		public var text1:String = "has won the giveaway!";
 		public var text2:String = "Come over for a chance to win!";
 		public var text3:String = "twitch.tv/" + VersionInfo.DEFAULT_CHANNEL;
-		public var metaAnimation:MetaSelectAnimation = new MetaSelectAnimation();
+		public var metaAnimation:MetaSelectAnimation = new MetaSelectAnimation(ModelAlertTypeEnum.EXPORTPNG);
 		
 		private var saveData : Dictionary = new Dictionary();
 			

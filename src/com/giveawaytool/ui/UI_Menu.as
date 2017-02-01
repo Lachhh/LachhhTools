@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.effect.ui.EffectShakeUI;
 	import com.giveawaytool.DefaultMainGame;
 	import com.giveawaytool.components.LogicNotifications;
 	import com.giveawaytool.io.twitch.TwitchConnection;
@@ -29,7 +30,7 @@ package com.giveawaytool.ui {
 			
 			renderComponent.animView.stop();
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_ABOVE);
-						
+
 			logicNotification = addComponent(new LogicNotifications(MetaGameProgress.instance)) as LogicNotifications;
 			visual.gotoAndStop(1);
 		}
@@ -53,7 +54,8 @@ package com.giveawaytool.ui {
 
 		override public function refresh() : void {
 			super.refresh();
-			alertMc.visible = logicNotification.logicPatreonAccess.canUseAlerts();
+			alertMc.visible = TwitchConnection.isLoggedIn();
+			//alertMc.visible = logicNotification.logicVIPAccess.canUseAlerts();
 		}
 
 		private function allowAccessToDonations() : Boolean {
@@ -70,9 +72,20 @@ package com.giveawaytool.ui {
 
 		public function get oldMenuMc() : MovieClip {return visual.getChildByName("oldMenuMc") as MovieClip;}
 		
+		
+		
 
 		public function show(b: Boolean) : void {
 			visual.visible = b;
+			if(!b) {
+				UI_LachhhToolsAds.hide();
+				UI_AnnoyingPopup.hide();
+			}
+		}
+
+		public function shakeAll() : void {
+			EffectShakeUI.addToActor(this, visual, 50, 50);
+			EffectShakeUI.addToActor(this, viewMenuUISelect.uiCrnt.visual, 50, 50);
 		}
 		
 	}

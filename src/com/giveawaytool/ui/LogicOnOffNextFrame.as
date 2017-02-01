@@ -37,6 +37,14 @@ package com.giveawaytool.ui {
 		public function isOnLastFrame():Boolean {
 			return (visualToToggle.currentFrame >= visualToToggle.totalFrames);
 		}
+		
+		public function quickGoto():void {
+			if(isOn) {
+				gotoLastframe();
+			} else {
+				gotoFirstFrame();
+			}
+		}
 
 		static public function addToActor(actor: Actor, theVisual:MovieClip): LogicOnOffNextFrame {
 			var result: LogicOnOffNextFrame = new LogicOnOffNextFrame (theVisual);

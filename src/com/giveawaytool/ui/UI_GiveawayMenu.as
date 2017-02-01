@@ -1,7 +1,4 @@
 package com.giveawaytool.ui {
-	import com.animation.exported.UI_MENU;
-	import air.update.utils.VersionUtils;
-
 	import com.giveawaytool.effect.EffectBlinking;
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.giveawaytool.meta.MetaGameProgress;
@@ -16,7 +13,6 @@ package com.giveawaytool.ui {
 
 	import flash.display.MovieClip;
 	import flash.display.StageDisplayState;
-	import flash.text.TextField;
 	import flash.utils.Dictionary;
 
 	/**
@@ -73,7 +69,10 @@ package com.giveawaytool.ui {
 
 			enableAllClicks(false);
 			UI_Overlay.hide();
-			EffectFlashColorFadeIn.create(0x000000, 15, new Callback(onClose, this, null));
+			//EffectFlashColorFadeIn.create(0x000000, 15, new Callback(onClose, this, null));
+			onClose();
+			
+			
 		}
 		
 		private function onClose():void {
@@ -117,7 +116,6 @@ package com.giveawaytool.ui {
 		public function get shareMc() : MovieClip { return visual.getChildByName("shareMc") as MovieClip;}
 		public function get giveawayPanel() : MovieClip { return visual.getChildByName("giveawayPanel") as MovieClip;}
 		public function get settingMc() : MovieClip { return giveawayPanel.getChildByName("settingMc") as MovieClip;}
-		
 		
 		
 		public function get backBtn() : MovieClip { return visual.getChildByName("backBtn") as MovieClip;}

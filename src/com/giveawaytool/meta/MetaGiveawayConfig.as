@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.ui.ModelAlertTypeEnum;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.lachhh.utils.Utils;
 	import com.lachhh.lachhhengine.VersionInfo;
@@ -10,7 +11,7 @@ package com.giveawaytool.meta {
 		public var text1:String = "It's Super Awesome";
 		public var text2:String = "Giveaway time!";
 		public var channelToLoad:String = VersionInfo.DEFAULT_CHANNEL;
-		public var metaAnimation:MetaSelectAnimation = new MetaSelectAnimation();
+		public var metaAnimation:MetaSelectAnimation = new MetaSelectAnimation( ModelAlertTypeEnum.GIVEAWAY);
 		public var autoChatAdd:Boolean = true;
 		public var autoChatAddCmd:String = "!here";
 		

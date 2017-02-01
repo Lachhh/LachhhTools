@@ -47,7 +47,7 @@ package com.giveawaytool.ui {
 			if(total == 0) {
 				MetaGameProgress.instance.metaSubsConfig.setAutoNext(crnt);
 			}
-			crntTxt.text = crnt +" / ";
+			crntTxt.text = crnt +"";
 			totalTxt.text = MetaGameProgress.instance.metaSubsConfig.goalSub+"";
 			
 			

@@ -15,7 +15,7 @@ package com.giveawaytool.ui.views {
 	 */
 	public class ViewCustomAnimBtn extends ViewBase {
 		public var metaSelectAnimation:MetaSelectAnimation;
-		public var callbackOnTest:Callback;
+		//public var callbackOnTest:Callback;
 		public function ViewCustomAnimBtn(pScreen : UIBase, pVisual : DisplayObject, pMetaAnim:MetaSelectAnimation) {
 			super(pScreen, pVisual);
 			metaSelectAnimation = pMetaAnim;
@@ -30,7 +30,7 @@ package com.giveawaytool.ui.views {
 		}
 
 		private function onTest() : void {
-			if(callbackOnTest) callbackOnTest.call();
+			metaSelectAnimation.modelAlertType.testWidget();
 		}
 		
 		private function onSelect() : void {

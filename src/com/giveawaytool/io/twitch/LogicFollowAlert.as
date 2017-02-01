@@ -68,7 +68,7 @@
 		}
 
 		private function canAlert() : Boolean {
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canSendFollowIfNotLive()) return false;
+			if(!UI_Menu.instance.logicNotification.logicVIPAccess.canSendFollowIfNotLive()) return false;
 			return MetaGameProgress.instance.metaFollowConfig.alertOnNewFollow;
 		}
 		

@@ -10,10 +10,14 @@ package com.giveawaytool.ui {
 		public var isNew : Boolean = false ;
 		public var numMonthInARow : int = 0 ;
 		public var name:String = "Dummy" ;
-		public var date:Date = new Date() ;
+		public var date : Date = new Date() ;
 		private var saveData : Dictionary = new Dictionary();
-				
-		public function encode():Dictionary {
+
+		public function MetaSubscriber() {
+			
+		}
+
+		public function encode() : Dictionary {
 			saveData["numMonthInARow"] = numMonthInARow;
 			saveData["name"] = name;
 			saveData["date"] = date.time;
@@ -77,7 +81,7 @@ package com.giveawaytool.ui {
 		}
 
 		public function getDescForToolTip() : String {
-			return name + "\n" + "Subcribed " + numMonthInARow + " month(s) in a row.";
+			return name + "\n" + "Subcribed " + numMonthInARow + " month(s) in a row." /*+ "\n" + date.toString()*/;
 		}
 
 		public static function createDummy() : MetaSubscriber {

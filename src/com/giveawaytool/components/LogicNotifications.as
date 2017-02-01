@@ -25,7 +25,9 @@ package com.giveawaytool.components {
 		public var logicListenForEmotes:LogicListenForEmotes;
 		
 		public var logicGiveAwayAutoChat : LogicGiveawayAutoChat;
-		public var logicPatreonAccess : LogicPatreonAccess;
+		public var logicVIPAccess : LogicVIPAccess;
+		public var logicGameWisp : LogicGameWisp;
+		
 		
 		
 		public var metaGameProgress:MetaGameProgress;
@@ -52,10 +54,10 @@ package com.giveawaytool.components {
 			logicSendToWidgetPlayMovie = actor.addComponent(new LogicSendToWidget(9232)) as LogicSendToWidget;
 			logicFollowAlert = actor.addComponent(new LogicFollowAlert()) as LogicFollowAlert;
 			logicGiveAwayAutoChat = actor.addComponent(new LogicGiveawayAutoChat(logicListenToChat)) as LogicGiveawayAutoChat;
-			
+			logicGameWisp = actor.addComponent(new LogicGameWisp()) as LogicGameWisp;
 			logicListenForEmotes = LogicListenForEmotes.addToActor(actor, logicListenToChat);
 			
-			logicPatreonAccess = actor.addComponent(new LogicPatreonAccess()) as LogicPatreonAccess;
+			logicVIPAccess = actor.addComponent(new LogicVIPAccess()) as LogicVIPAccess;
 
 			refreshIfIsLive();
 		}
@@ -72,7 +74,7 @@ package com.giveawaytool.components {
 			
 			logicFollowAlert.refreshFollowers();
 			logicSubAlert.mergeTwitchSubsInSavedList();
-			
+			logicGameWisp.connect();
 		}
 		
 		private function onConnectToChat():void {

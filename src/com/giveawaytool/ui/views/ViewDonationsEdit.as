@@ -34,7 +34,6 @@ package com.giveawaytool.ui.views {
 		public function ViewDonationsEdit(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewDonation);
-			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestDonation, this, null);
 			
 			viewCharity = new ViewCharity(pScreen, charityMc);
 			viewCharity.metaCharity = MetaGameProgress.instance.metaDonationsConfig.metaCharity;

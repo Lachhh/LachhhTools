@@ -81,6 +81,7 @@ package com.giveawaytool.ui.views {
 
 		private function onClickCollect() : void {
 			if(metaDonation.modelSource.isCalculated()) return ;
+			if(!UI_Menu.instance.logicNotification.logicVIPAccess.canSendDonationIfNotLive()) return ;
 
 			UI_Menu.instance.logicNotification.logicSendToWidget.sendAddDonation(metaDonation);
 			if(metaDonation.isNew) MetaGameProgress.instance.metaDonationsConfig.addDonationToGoalsAndCharity(metaDonation);

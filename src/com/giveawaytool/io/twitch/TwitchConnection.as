@@ -400,7 +400,7 @@ package com.giveawaytool.io.twitch {
 			if(!TwitchConnection.isLoggedIn()) return false;
 			var usernameLowerCase:String = username.toLocaleLowerCase();
 			//if (usernameLowerCase == "twitchplayszombidle") return true;
-            //if (usernameLowerCase == "lachhhandfriends") return true;
+            if (usernameLowerCase == "lachhhandfriends") return true;
             if (usernameLowerCase == "kojaktsl") return true;
             if (usernameLowerCase == "weallplaycast") return true;
             //if (usernameLowerCase == "slickentertainmentinc") return true;
@@ -427,13 +427,13 @@ package com.giveawaytool.io.twitch {
 		
 		static public function getNameOfAccount():String {
 			if(instance == null) return "";
-			if(!isLoggedIn) return "";							
+			if(!isLoggedIn()) return "";							
 			return instance.username;
 		}
 		
 		static public function getNameOfAccountWithTwitchPrefix():String {
 			if(instance == null) return "";
-			if(!isLoggedIn) return "";							
+			if(!isLoggedIn()) return "";							
 			return "twitch_" + instance.username;
 		}
 

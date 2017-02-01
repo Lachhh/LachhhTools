@@ -1,8 +1,9 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.ui.views.ViewFireworksOptions;
-	import com.giveawaytool.ui.views.ViewTweetTimer;
+	import com.giveawaytool.io.playerio.ViewGameWispServer;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaPlayMovie;
+	import com.giveawaytool.ui.views.ViewFireworksOptions;
+	import com.giveawaytool.ui.views.ViewTweetTimer;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.ui.UIBase;
@@ -14,8 +15,10 @@ package com.giveawaytool.ui {
 	 * @author LachhhSSD
 	 */
 	public class UI_PlayMovies extends UIBase {
-		public var viewTwitter:ViewTweetTimer;
-		public var viewFireworksOptions:ViewFireworksOptions;
+		public var viewTwitter : ViewTweetTimer;
+		public var viewFireworksOptions : ViewFireworksOptions;
+		private var viewGameWispServer : ViewGameWispServer;
+
 		public function UI_PlayMovies() {
 			super(AnimationFactory.ID_UI_PLAYMOVIE);
 			
@@ -23,6 +26,7 @@ package com.giveawaytool.ui {
 			viewTwitter.metaTweetAlertConfig = MetaGameProgress.instance.metaTweetAlertConfig;
 			
 			viewFireworksOptions = new ViewFireworksOptions(this, fireworksPanel);
+			viewGameWispServer = new ViewGameWispServer(this, gameWispMc);
 			
 			createSendMovieBtn(0, "JustDoIt", "Just Do It");
 			createSendMovieBtn(1, "VanDammeHit", "VanDamme Hit");
@@ -73,5 +77,6 @@ package com.giveawaytool.ui {
 		
 		public function get autoTwitterMc() : MovieClip { return visual.getChildByName("autoTwitterMc") as MovieClip;}
 		public function get fireworksPanel(): MovieClip { return visual.getChildByName("fireworksPanel") as MovieClip;}
+		public function get gameWispMc() : MovieClip { return visual.getChildByName("gameWispMc") as MovieClip;}
 	}
 }

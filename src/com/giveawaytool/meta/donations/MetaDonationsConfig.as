@@ -1,4 +1,6 @@
 package com.giveawaytool.meta.donations {
+	import com.giveawaytool.ui.ModelAlertTypeEnum;
+	import com.giveawaytool.ui.MetaHasBeenTested;
 	import com.giveawaytool.meta.MetaGameProgress;
 
 	import flash.utils.Dictionary;
@@ -21,8 +23,8 @@ package com.giveawaytool.meta.donations {
 		public var metaCustomAnim : MetaSelectAnimationConfig = new MetaSelectAnimationConfig();
 		
 		public var isDirty:Boolean = false;
-		
 		private var saveData : Dictionary = new Dictionary();
+		public var metaHasBeenTested : MetaHasBeenTested = new MetaHasBeenTested(ModelAlertTypeEnum.DONATION);
 
 		public function MetaDonationsConfig() {
 			
@@ -54,6 +56,7 @@ package com.giveawaytool.meta.donations {
 			saveData["metaAutoFetch"] = metaAutoFetch.encode();
 			saveData["metaCharity"] = metaCharity.encode();
 			saveData["metaCustomAnim"] = metaCustomAnim.encode();
+			saveData["metaHasBeenTested"] = metaHasBeenTested.encode();
 			
 			
 			return saveData; 
@@ -73,6 +76,7 @@ package com.giveawaytool.meta.donations {
 			saveData["numSubs"] = MetaGameProgress.instance.metaSubsConfig.getCrntSub();
 			saveData["numSubsGoal"] = MetaGameProgress.instance.metaSubsConfig.goalSub;
 			saveData["metaCharity"] = metaCharity.settings.encode();
+			
 			saveData["metaCustomAnim"] = metaCustomAnim.encodeWidget();
 			
 			return saveData; 
@@ -91,6 +95,7 @@ package com.giveawaytool.meta.donations {
 			metaAutoFetch.decode(loadData["metaAutoFetch"]);
 			metaCharity.decode(loadData["metaCharity"]);
 			metaCustomAnim.decode(loadData["metaCustomAnim"]);
+			metaHasBeenTested.decode(loadData["metaHasBeenTested"]);
 			//numSubs = loadData["numSubs"];
 			
 		}

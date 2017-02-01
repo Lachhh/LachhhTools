@@ -1,16 +1,13 @@
 package com.giveawaytool.ui {
-	import com.lachhh.utils.Utils;
 	import com.giveawaytool.DefaultMainGame;
-	import com.giveawaytool.effect.EffectFadeOut;
-	import com.giveawaytool.effect.ui.EffectShakeRotateUI;
-	import com.giveawaytool.effect.ui.EffectSquashUI;
 	import com.lachhh.ResolutionManager;
-	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
 	import com.lachhh.io.KeyManager;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.sfx.SfxFactory;
+	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.UIOpenClose;
+	import com.lachhh.utils.Utils;
 
 	import flash.display.MovieClip;
 	import flash.text.TextField;
@@ -41,8 +38,8 @@ package com.giveawaytool.ui {
 			btnOnEnter = null;
 			refresh();
 		}
-		
-		protected function registerClicks():void  {
+
+		protected function registerClicks() : void {
 			registerClick(btn1, onBtn1);
 			registerClick(btn2, onBtn2);
 			registerClick(btn3, onBtn3);
@@ -138,6 +135,16 @@ package com.giveawaytool.ui {
 		static public function createTwitchLoginRequired():UI_PopUp {
 			
 			return UI_PopUp.createOkOnly("You need to be logged in to Twitch for that!", null);; 
+		}
+
+		static public function closeAllPopups():void {
+			var allPopup:Array = new Array();
+			UIBase.manager.appendAllInstanceOf(UI_PopUp, allPopup);
+			
+			for (var i : int = 0; i < allPopup.length; i++) {
+				var ui:UI_PopUp = allPopup[i] as UI_PopUp;
+				ui.close();
+			}
 		}
 		
 		

@@ -18,7 +18,6 @@ package com.flashinit {
 			VersionInfo.showSub = false;
 			VersionInfo.showGaz = false;
 			
-			
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		

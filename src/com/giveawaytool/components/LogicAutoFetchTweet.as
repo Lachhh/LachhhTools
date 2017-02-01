@@ -58,7 +58,7 @@ package com.giveawaytool.components {
 		
 		private function onEndTimer():void {
 
-			if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessTweets()) return ;
+			if(!UI_Menu.instance.logicNotification.logicVIPAccess.canAccessTweets()) return ;
 			
 			tweetSearch.twitter = metaTweetAlertConfig.getTwitter();
 			tweetSearch2.twitter = metaTweetAlertConfig.getTwitter();

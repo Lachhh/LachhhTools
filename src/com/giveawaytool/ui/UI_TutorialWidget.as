@@ -23,11 +23,20 @@ package com.giveawaytool.ui {
 			registerClick(xBtn, onClickX);
 			registerClick(backMc, onClickX);
 			registerClick(adobeLinkMc, onClickAdobeLink);
+			registerClick(watchOnYoutubeBtn, onClickYoutube);
+			setNameOfDynamicBtn(watchOnYoutubeBtn, "Watch\ntutorial");
 
 			px = ResolutionManager.getGameWidth() * 0.5;
 			py = ResolutionManager.getGameHeight()*0.5;
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_ABOVE);
+			
 			refresh();
+		}
+
+		private function onClickYoutube() : void {
+			//Utils.navigateToURLAndRecord(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS);
+			new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS);
+			close();
 		}
 
 		private function onClickAdobeLink() : void {
@@ -44,6 +53,7 @@ package com.giveawaytool.ui {
 		public function get xBtn() : MovieClip { return panel.getChildByName("xBtn") as MovieClip;}
 		public function get backMc() : MovieClip { return visual.getChildByName("backMc") as MovieClip;}
 		public function get adobeLinkMc() : MovieClip { return panel.getChildByName("adobeLinkMc") as MovieClip;}
+		public function get watchOnYoutubeBtn() : MovieClip { return panel.getChildByName("watchOnYoutubeBtn") as MovieClip;}
 		
 		
 	}

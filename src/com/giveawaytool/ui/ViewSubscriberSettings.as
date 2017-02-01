@@ -17,10 +17,14 @@ package com.giveawaytool.ui {
 		public var viewSubscriberToolTip : ViewSubscriberToolTip;
 		public var viewSubscriberAlert : ViewSubscriberAlert;
 		public var viewSubscriberGoal : ViewSubscriberGoal;
-		public var viewCustomBtn:ViewCustomAnimBtn;
-		
+		public var viewCustomBtn : ViewCustomAnimBtn;
+		private var viewTestFirst : ViewTestFirst;
+
 		public function ViewSubscriberSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
+			viewTestFirst = new ViewTestFirst(pScreen, testFirstMc);
+			viewTestFirst.metaHasBeenTested = MetaGameProgress.instance.metaSubsConfig.metaHasBeenTested;
+			
 			viewSubscriberAlert = new ViewSubscriberAlert(screen, subAlertsMc);
 			viewSubscriberGoal = new ViewSubscriberGoal(screen, goalsMc);
 			viewSubscriberList = new ViewSubscribersList(screen, lastSubscriptionMc);
@@ -28,7 +32,7 @@ package com.giveawaytool.ui {
 			viewSubscriberList.toolTip = viewSubscriberToolTip; 
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewSub);
-			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestSub, this, null);
+		
 			screen.setNameOfDynamicBtn(refreshBtn, "Refresh");
 			screen.setNameOfDynamicBtn(collectBtn, "Alert New");
 
@@ -66,6 +70,7 @@ package com.giveawaytool.ui {
 		public function get subAlertsMc() : MovieClip { return visual.getChildByName("subAlertsMc") as MovieClip;}
 		public function get goalsMc() : MovieClip { return visual.getChildByName("goalsMc") as MovieClip;}
 		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
+		public function get testFirstMc() : MovieClip { return visual.getChildByName("testFirstMc") as MovieClip;}
 		
 	}
 }

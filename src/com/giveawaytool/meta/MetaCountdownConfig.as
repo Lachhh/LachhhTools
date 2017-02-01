@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.ui.ModelAlertTypeEnum;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -8,7 +9,7 @@ package com.giveawaytool.meta {
 		public var text1:String = "QUICK!  Show yourself!  Talk in the chat!";
 		public var countdown:int = 30;
 		public var autoChatClaim:Boolean = true;
-		public var metaAnimation:MetaSelectAnimation = new MetaSelectAnimation();
+		public var metaAnimation:MetaSelectAnimation = new MetaSelectAnimation(ModelAlertTypeEnum.COUNTDOWN);
 		
 		private var saveData : Dictionary = new Dictionary();
 			

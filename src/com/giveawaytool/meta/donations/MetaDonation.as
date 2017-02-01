@@ -59,7 +59,7 @@ package com.giveawaytool.meta.donations {
 		static public function createDummy():MetaDonation {
 			var result:MetaDonation = new MetaDonation(ModelDonationSourceEnum.STREAM_TIP);
 			result.donatorName = "An Awesome Dude";
-			result.donatorMsg = "OMG You're so cool I love you with all my mouth. ";
+			result.donatorMsg = "OMG This is a test donation!";
 			result.amount = Math.random()*35+5;
 			result.date = new Date();
 			return result;

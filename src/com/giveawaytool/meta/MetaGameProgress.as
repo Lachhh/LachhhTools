@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.io.playerio.MetaGameWispGroup;
 	import com.giveawaytool.io.twitch.MetaTwithConnection;
 	import com.giveawaytool.meta.donations.MetaDonationsConfig;
 	import com.lachhh.lachhhengine.DataManager;
@@ -26,6 +27,7 @@ package com.giveawaytool.meta {
 		public var metaFollowConfig : MetaFollowConfig;
 		public var metaTwitchConnection : MetaTwithConnection;
 		public var metaTwitchChat : MetaTwitchChat;
+		public var metaGameWisp:MetaGameWispGroup;
 		
 		public var metaEmoteFireworksSettings : MetaEmoteFireworksSettings;
 		
@@ -56,6 +58,7 @@ package com.giveawaytool.meta {
 			metaCheerAlertConfig = new MetaCheerConfig();
 			metaHostAlertConfig = new MetaHostConfig();
 			metaEmoteFireworksSettings = new MetaEmoteFireworksSettings(); 
+			metaGameWisp = new MetaGameWispGroup();
 		}
 		
 		public function encode():Dictionary {
@@ -111,6 +114,15 @@ package com.giveawaytool.meta {
 		
 		public function saveToLocal():void {
 			 DataManager.saveLocally(encode());
+		}
+		
+		public function atLeastOneHasBeenTested():Boolean {
+			 if(metaFollowConfig.metaHasBeenTested.hasBeenTested) return true;
+			 if(metaSubsConfig.metaHasBeenTested.hasBeenTested) return true;
+			 if(metaHostAlertConfig.metaHasBeenTested.hasBeenTested) return true;
+			 if(metaDonationsConfig.metaHasBeenTested.hasBeenTested) return true;
+			 if(metaCheerAlertConfig.metaHasBeenTested.hasBeenTested) return true;
+			 return false;
 		}
 		
 		public function loadFromLocal():void {

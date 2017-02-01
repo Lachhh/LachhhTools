@@ -41,6 +41,7 @@ package com.giveawaytool.ui.views {
 		}
 
 		private function onClickAlert() : void {
+			if(!UI_Menu.instance.logicNotification.logicVIPAccess.canSendFollowIfNotLive()) return ;
 			UI_Menu.instance.logicNotification.logicSendToWidget.sendFollowAlert(MetaFollowAlert.create(metaFollower));
 		}
 

@@ -19,11 +19,15 @@ package com.giveawaytool.ui {
 		//public var viewFollowGoals : ViewFollowersGoal;
 		public var viewFollowAlert : ViewFollowersAlert;
 		public var viewFollowToolTip : ViewFollowerToolTip;
-		public var viewCustomBtn:ViewCustomAnimBtn;
+		public var viewCustomBtn : ViewCustomAnimBtn;
+		private var viewTestFirst : ViewTestFirst;
+
 		public function ViewFollowerSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewFollow);
-			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestFollow, this, null);
+			
+			viewTestFirst = new ViewTestFirst(pScreen, testFirstMc);
+			viewTestFirst.metaHasBeenTested = MetaGameProgress.instance.metaFollowConfig.metaHasBeenTested;
 			
 			viewFollowList = new ViewFollowersList(screen, lastFollowersMc);
 			viewFollowAlert = new ViewFollowersAlert(screen, alertsMc);
@@ -70,6 +74,7 @@ package com.giveawaytool.ui {
 		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
 		
 		public function get followersTxt() : TextField { return visual.getChildByName("followersTxt") as TextField;}
+		public function get testFirstMc() : MovieClip { return visual.getChildByName("testFirstMc") as MovieClip;}
 		
 	}
 }

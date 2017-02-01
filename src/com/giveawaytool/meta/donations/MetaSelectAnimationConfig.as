@@ -1,4 +1,5 @@
 package com.giveawaytool.meta.donations {
+	import com.giveawaytool.ui.ModelAlertTypeEnum;
 	import com.LogicTransferFileToUserDoc;
 	import com.giveawaytool.meta.MetaSelectAnimation;
 
@@ -7,11 +8,11 @@ package com.giveawaytool.meta.donations {
 	 * @author LachhhSSD
 	 */
 	public class MetaSelectAnimationConfig {
-		public var metaCustomAnimNewFollow : MetaSelectAnimation = new MetaSelectAnimation();
-		public var metaCustomAnimNewSub : MetaSelectAnimation = new MetaSelectAnimation();
-		public var metaCustomAnimNewHost : MetaSelectAnimation = new MetaSelectAnimation();
-		public var metaCustomAnimNewCheers : MetaSelectAnimation = new MetaSelectAnimation();
-		public var metaCustomAnimNewDonation : MetaSelectAnimation = new MetaSelectAnimation();
+		public var metaCustomAnimNewFollow : MetaSelectAnimation = new MetaSelectAnimation(ModelAlertTypeEnum.FOLLOW);
+		public var metaCustomAnimNewSub : MetaSelectAnimation = new MetaSelectAnimation(ModelAlertTypeEnum.SUB);
+		public var metaCustomAnimNewHost : MetaSelectAnimation = new MetaSelectAnimation(ModelAlertTypeEnum.HOST);
+		public var metaCustomAnimNewCheers : MetaSelectAnimation = new MetaSelectAnimation(ModelAlertTypeEnum.CHEERS);
+		public var metaCustomAnimNewDonation : MetaSelectAnimation = new MetaSelectAnimation(ModelAlertTypeEnum.DONATION);
 		private var saveData : Dictionary = new Dictionary();
 				
 		public function encode():Dictionary {

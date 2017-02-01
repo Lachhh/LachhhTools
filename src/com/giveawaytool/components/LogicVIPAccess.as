@@ -1,4 +1,6 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.UI_Menu;
+	import com.animation.exported.UI_MENU;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.GoogleSheetData;
 	import com.GoogleSheetsAPI;
@@ -10,9 +12,9 @@ package com.giveawaytool.components {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class LogicPatreonAccess extends ActorComponent {
+	public class LogicVIPAccess extends ActorComponent {
 		public var googleSheetData : GoogleSheetData_Patreon = new GoogleSheetData_Patreon(null);
-		public function LogicPatreonAccess() {
+		public function LogicVIPAccess() {
 			super();
 			var sheet:GoogleSheetsAPI = new GoogleSheetsAPI(); 
 			
@@ -42,16 +44,16 @@ package com.giveawaytool.components {
 		public function canAccessCheers():Boolean {return isSilverTier();}		
 		public function canAccessDonation():Boolean {return isSilverTier();}
 		
-		public function canSendFollowIfNotLive():Boolean {return isBronzeTier() || !TwitchConnection.instance.isLive;}		
-		public function canSendHostIfNotLive():Boolean {return isBronzeTier() || !TwitchConnection.instance.isLive;}		
-		public function canSendSubIfNotLive():Boolean {return isBronzeTier() || !TwitchConnection.instance.isLive;}
-		public function canSendCheersIfNotLive():Boolean {return isSilverTier() || !TwitchConnection.instance.isLive;}		
-		public function canSendDonationIfNotLive():Boolean {return isSilverTier() || !TwitchConnection.instance.isLive;}
+		public function canSendFollowIfNotLive():Boolean {return /*isBronzeTier() || !TwitchConnection.instance.isLive || */ true;}		
+		public function canSendHostIfNotLive():Boolean {return /*isBronzeTier() || !TwitchConnection.instance.isLive || */ true;}		
+		public function canSendSubIfNotLive():Boolean {return /*isBronzeTier() || !TwitchConnection.instance.isLive || */ true;}
+		public function canSendCheersIfNotLive():Boolean {return /*isSilverTier() || !TwitchConnection.instance.isLive || */ true;}		
+		public function canSendDonationIfNotLive():Boolean {return /*isSilverTier() || !TwitchConnection.instance.isLive || */ true;}
 		
 		public function canUseAlerts():Boolean {return isBronzeTier();}
 		
 		public function isBronzeTier():Boolean {
-			
+			if(UI_Menu.instance.logicNotification.logicGameWisp.isBronzeTier()) return true;
 			if(googleSheetData.isInBronze(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			if(googleSheetData.isInSilver(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			if(googleSheetData.isInGold(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
@@ -61,14 +63,15 @@ package com.giveawaytool.components {
 		
 		public function isSilverTier():Boolean {
 			if(isAdminAccess()) return true;
-			
+			if(UI_Menu.instance.logicNotification.logicGameWisp.isBronzeTier()) return true;
+			if(UI_Menu.instance.logicNotification.logicGameWisp.isSilverTier()) return true;
 			if(googleSheetData.isInSilver(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			if(googleSheetData.isInGold(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			return false;
 		}
 		
 		
-		public function isAdminAccess():Boolean {
+		static public function isAdminAccess():Boolean {
 			if(TwitchConnection.instance == null) return false;
 			if(TwitchConnection.instance.isUserAmemberOfKOTS()) return true;
 			return false;

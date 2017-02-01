@@ -1,16 +1,22 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.ui.ModelAlertType;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
 	 */
 	public class MetaSelectAnimation {
-		
+		public var modelAlertType:ModelAlertType;
 		public var useDefault:Boolean = true;
 		public var pathToSwf:String = "";
 		
-		public var saveData:Dictionary = new Dictionary();
 		
-		public function encode():Dictionary {
+		public var saveData : Dictionary = new Dictionary();
+
+		public function MetaSelectAnimation(pModelAlertType : ModelAlertType) {
+			modelAlertType = pModelAlertType;
+		}
+
+		public function encode() : Dictionary {
 			saveData["useDefault"] = useDefault;
 			saveData["pathToSwf"] = pathToSwf;
 			return saveData; 

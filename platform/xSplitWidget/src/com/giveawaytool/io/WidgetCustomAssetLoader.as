@@ -1,4 +1,5 @@
 package com.giveawaytool.io {
+	import com.lachhh.io.SimpleSocket;
 	import flash.utils.Dictionary;
 	import flash.display.LoaderInfo;
 	import com.giveawaytool.MainGame;
@@ -34,7 +35,9 @@ package com.giveawaytool.io {
 		}
 
 		public function loadAssets(callback : Callback, callbackError : Callback = null) : void {
-			Security.allowDomain("*"); 
+			
+			Security.allowDomain("*");
+			SimpleSocket.DEBUGTRACE("DataPath : " + dataPath); 
 			callbackLoadingSuccess = callback;
 			callbackLoadingSuccess = callback;
 			callbackLoadingError = callbackError;

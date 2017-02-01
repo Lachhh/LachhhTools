@@ -19,17 +19,22 @@ package com.giveawaytool.ui {
 	public class ViewHostSettings extends ViewBase {
 		public var viewHostList:ViewHostList;
 		public var viewHostTooltip:ViewHostToolTip;
-		public var viewCustomBtn:ViewCustomAnimBtn;
+		public var viewCustomBtn : ViewCustomAnimBtn;
+		public var viewTestFirst : ViewTestFirst;
+		
 		
 		public function ViewHostSettings(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 						
 			viewHostList = new ViewHostList(pScreen, lastHostMc);
+			viewTestFirst = new ViewTestFirst(pScreen, testFirstMc);
+			viewTestFirst.metaHasBeenTested = MetaGameProgress.instance.metaHostAlertConfig.metaHasBeenTested;
+			
 			viewHostTooltip = new ViewHostToolTip(pScreen, toolTipHostMc);
 			viewHostList.toolTip = viewHostTooltip;
 			
+			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, customAnimBtn, MetaGameProgress.instance.metaDonationsConfig.metaCustomAnim.metaCustomAnimNewHost);
-			viewCustomBtn.callbackOnTest = new Callback(UI_Menu.instance.logicNotification.logicSendToWidget.sendTestHost, this, null);
 			screen.registerClick(newHostBtn, onNewHost);
 			pScreen.registerEvent(bigHostNumTxt, FocusEvent.FOCUS_OUT, onEdit);
 		}
@@ -55,7 +60,6 @@ package com.giveawaytool.ui {
 			
 			setCheckBox(MetaGameProgress.instance.metaHostAlertConfig.alertOnNewHost, newHostBtn);
 			bigHostNumTxt.text = MetaGameProgress.instance.metaHostAlertConfig.bigHostNum + "";
-			 
 		}
 		
 		public function setCheckBox(value : Boolean, btn : MovieClip) : void {
@@ -69,5 +73,6 @@ package com.giveawaytool.ui {
 		public function get lastHostMc() : MovieClip { return visual.getChildByName("lastHostMc") as MovieClip;}
 		public function get toolTipHostMc() : MovieClip { return visual.getChildByName("toolTipHostMc") as MovieClip;}
 		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
+		public function get testFirstMc() : MovieClip { return visual.getChildByName("testFirstMc") as MovieClip;}
 	}
 }

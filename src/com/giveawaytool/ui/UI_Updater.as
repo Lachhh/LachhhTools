@@ -25,11 +25,11 @@ package com.giveawaytool.ui {
 		
 		private var appUpdater:ApplicationUpdater = new ApplicationUpdater();
 		
-		public function UI_Updater() {
+		public function UI_Updater(updateUrl:String) {
 			super(AnimationFactory.ID_UI_UPDATE);
 			registerClick(skipBtn, onSkip);
 			
-			appUpdater.updateURL = "http://lachhhAndFriends.com/twitchTool/update_flash.xml";
+			appUpdater.updateURL = updateUrl;
 			//we set the event handlers for INITIALIZED nad ERROR
 			appUpdater.addEventListener(UpdateEvent.INITIALIZED, onUpdate);
 			appUpdater.addEventListener(ErrorEvent.ERROR, onError);

@@ -1,6 +1,6 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewDonationsEdit;
-	import com.giveawaytool.ui.views.ViewSubTemp_DEPRECATED;
 	import com.lachhh.lachhhengine.VersionInfo;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.ui.UIBase;
@@ -15,10 +15,13 @@ package com.giveawaytool.ui {
 	public class UI_Donation extends UIBase {
 		 //Stending : Lachhh, will we be able to buy other stuff than character customisation with XP? I mean, I really want to buy some things directly from YOU. Like a Kazoo song, or something else!
 		public var viewDonationsEdit : ViewDonationsEdit;
-		public var logicNavigation:LogicOnOffNextFrame;
-		
+		public var logicNavigation : LogicOnOffNextFrame;
+		private var viewTestFirst : ViewTestFirst;
+
 		public function UI_Donation() {
 			super(AnimationFactory.ID_UI_DONATION);
+			viewTestFirst = new ViewTestFirst(this, testFirstMc);
+			viewTestFirst.metaHasBeenTested = MetaGameProgress.instance.metaDonationsConfig.metaHasBeenTested;
 			
 			logicNavigation = LogicOnOffNextFrame.addToActor(this, donationsMc);
 			logicNavigation.invisibleOnFirstFrame = false;
@@ -60,6 +63,8 @@ package com.giveawaytool.ui {
 		public function get charityBtn() : MovieClip { return donationsMc.getChildByName("charityBtn") as MovieClip;}
 		public function get backBtn() : MovieClip { return donationsMc.getChildByName("backBtn") as MovieClip;}
 		public function get txt() : TextField { return charityBtn.getChildByName("txt") as TextField;}
+		
+		public function get testFirstMc() : MovieClip { return visual.getChildByName("testFirstMc") as MovieClip;}
 		//public function get lblTxt() : TextField { return charityBtn.getChildByName("lblTxt") as TextField;}
 		
 			

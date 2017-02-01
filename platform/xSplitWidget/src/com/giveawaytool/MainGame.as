@@ -1,4 +1,5 @@
 package com.giveawaytool {
+	import com.giveawaytool.ui.UI_NoConnection;
 	import com.giveawaytool.scenes.GameScene;
 	import com.giveawaytool.ui.UI_Charity;
 	import com.giveawaytool.meta.MetaDonationsConfig;
@@ -48,6 +49,7 @@ package com.giveawaytool {
 			//new UIFontLoopkup();
 			gameSceneManager.loadScene(new GameScene());
 			stage.color = 0x00ff00;
+			new UI_NoConnection();
 		}
 		
 		public function startNormalDonation():void {

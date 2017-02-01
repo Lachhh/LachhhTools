@@ -46,6 +46,9 @@ package com.giveawaytool.ui {
 			setTextOnVisual(textShakeTextMc);
 			newWinner = false;
 			UI_Menu.instance.show(false);
+			visual.graphics.beginFill(0x000000);
+			visual.graphics.drawRect(0, 0, 1280, 720);
+			visual.graphics.endFill();
 		}
 
 		

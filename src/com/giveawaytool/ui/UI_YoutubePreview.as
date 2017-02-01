@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.lachhh.utils.Utils;
 	import com.giveawaytool.DefaultMainGame;
 	import flash.geom.Point;
 	import com.giveawaytool.MainGame;
@@ -22,11 +23,19 @@ package com.giveawaytool.ui {
 			idUrl = pIdUrl;
 			registerClick(xBtn, onClickX);
 			registerClick(backMc, onClickX);
+			registerClick(onYoutubeBtn, onClickYoutube);
+
+			setNameOfDynamicBtn(onYoutubeBtn, "Watch on Youtube");
 			
-			px = ResolutionManager.getGameWidth()*0.5;
-			py = ResolutionManager.getGameHeight()*0.5;
+			px = ResolutionManager.getGameWidth() * 0.5;
+			py = ResolutionManager.getGameHeight() * 0.5;
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_ABOVE);
 			refresh();
+		}
+
+		private function onClickYoutube() : void {
+			var newUrl:String = idUrl.split("embed/").join("watch?v=");
+			Utils.navigateToURLAndRecord(newUrl);
 		}
 		
 		private function createPreview(id:String):void {
@@ -82,6 +91,7 @@ package com.giveawaytool.ui {
 		public function get youtubeContainerMc() : MovieClip {return panel.getChildByName("youtubeContainerMc") as MovieClip;}
 		public function get xBtn() : MovieClip { return panel.getChildByName("xBtn") as MovieClip;}
 		public function get backMc() : MovieClip { return visual.getChildByName("backMc") as MovieClip;}
+		public function get onYoutubeBtn() : MovieClip { return panel.getChildByName("onYoutubeBtn") as MovieClip;}
 		
 	}
 }

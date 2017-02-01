@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.lachhh.flash.ui.ButtonSelect;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.lachhhengine.VersionInfo;
 	import com.lachhh.lachhhengine.ui.UIBase;
@@ -15,7 +16,7 @@ package com.giveawaytool.ui {
 	public class ViewOldMenu extends ViewBase {
 		public function ViewOldMenu(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
-			screen.registerClick(tutorialBtn, onTutorial);
+			//screen.registerClick(tutorialBtn, onTutorial);
 			screen.registerClick(fullscreenBtn, onFullScreen);
 			//screen.registerClick(musicBtn, onMusic);
 			//screen.registerClick(lachhhBtn, onLachhh);
@@ -37,7 +38,12 @@ package com.giveawaytool.ui {
 		}
 
 		private function onTutorial() : void {
-			Utils.navigateToURLAndRecord(VersionInfo.URL_TUTORIAL);
+			//UI_Menu.instance.viewMenuUISelect.onTutorial(tutorialBtn);
+			/*if(UI_Menu.instance.viewMenuUISelect.isGiveaway()) {
+				new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_GIVEAWAY);
+			} else {
+				new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS);
+			}*/
 		}
 
 		override public function refresh() : void {
@@ -65,7 +71,7 @@ package com.giveawaytool.ui {
 
 		public function get fullscreenBtn() : MovieClip {return visual.getChildByName("fullscreenBtn") as MovieClip;}
 		public function get iconMc() : MovieClip { return fullscreenBtn.getChildByName("iconMc") as MovieClip;}		
-		public function get tutorialBtn() : MovieClip { return visual.getChildByName("tutorialBtn") as MovieClip;}
+		//public function get tutorialBtn() : ButtonSelect { return visual.getChildByName("tutorialBtn") as ButtonSelect;}
 		//public function get musicBtn() : MovieClip { return visual.getChildByName("musicBtn") as MovieClip;}
 		//public function get lachhhBtn() : MovieClip { return visual.getChildByName("lachhhBtn") as MovieClip;}
 	}

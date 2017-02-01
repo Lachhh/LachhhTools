@@ -1,13 +1,9 @@
 package com.lachhh.io {
 
 	import com.flashinit.ReleaseDonationInit;
-	import com.flashinit.ReleaseDonationInitWithoutNews;
-	import flash.system.SecurityDomain;
-	import flash.system.Security;
-	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.giveawaytool.ui.UI_DebugText;
-	import com.adobe.serialization.json.JSONDecoder;
-
+	import com.giveawaytool.ui.UI_NoConnection;
+	import com.lachhh.lachhhengine.ui.UIBase;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
@@ -89,7 +85,7 @@ package com.lachhh.io {
          connectTimer.reset();
          socket.writeUTF("Connected");
          socket.flush();
-         
+		 UI_NoConnection.closeAllNoConnection();
       }
       
       private function socket_datahandler(param1:ProgressEvent) : void {
@@ -108,6 +104,7 @@ package com.lachhh.io {
 		DEBUGTRACE("socket_closeHandler");
          connectTimer.start();
         // dispatchEvent(param1);
+        UI_NoConnection.show();
       }
       
       private function socket_ioErrorHandler(param1:IOErrorEvent) : void {
@@ -151,7 +148,7 @@ package com.lachhh.io {
          return socket.connected;
       }
 	  
-	  public function DEBUGTRACE(msg:String):void {
+	  static public function DEBUGTRACE(msg:String):void {
 		  var ui:UI_DebugText = UIBase.manager.getFirst(UI_DebugText) as UI_DebugText;
 		  if(ui) {
 			 ui.msg += msg + "\n";

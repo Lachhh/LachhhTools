@@ -17,6 +17,8 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_FX_GORE_2:int = pushClassLink(FX_GORE_2);
 		static public var ID_FX_GORE_3:int = pushClassLink(FX_GORE_3);		
 		static public var ID_FX_COUNTDOWN_SIMPLE:int = pushClassLink(FX_COUNTDOWN_SIMPLE);
+		static public var ID_FX_COUNTDOWNFEEDBACK:int = pushClassLink(FX_COUNTDOWNFEEDBACK);
+		
 		
 		static public var ID_FX_CHEER_BAG:int = pushClassLink(FX_CHEER_BAG);
 		static public var ID_FX_CHEER_BIT1:int = pushClassLink(FX_CHEER_BIT1);
@@ -41,7 +43,7 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_NEWHOSTSMALL:int = pushClassLink(UI_NEWHOSTSMALL);
 		static public var ID_UI_NEWCHEER:int = pushClassLink(UI_NEWCHEER);
 		static public var ID_UI_NEWCHEEREXPLODE:int = pushClassLink(UI_NEWCHEEREXPLODE);
-		
+		static public var ID_UI_NOCONNECTION:int = pushClassLink(UI_NOCONNECTION);
 		
 		static public var ID_UI_HALLOWEENDEAD:int = pushClassLink(UI_HALLOWEENDEAD);
 		

@@ -1,20 +1,12 @@
 package com.giveawaytool.ui.views {
-	import com.giveawaytool.ui.MetaSubcriberAlert;
-	import com.giveawaytool.ui.MetaSubscriber;
-	import com.giveawaytool.components.MetaFollowAlert;
-	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.LogicOnOffNextFrame;
-	import com.giveawaytool.ui.UI_PopUp;
-	import com.giveawaytool.ui.UIPopupEditDonations;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.flash.ui.ButtonSelect;
-	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
 
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.text.TextField;
 
@@ -44,6 +36,7 @@ package com.giveawaytool.ui.views {
 		}
 
 		private function onClickAlert() : void {
+			if(!UI_Menu.instance.logicNotification.logicVIPAccess.canSendCheersIfNotLive()) return ;
 			UI_Menu.instance.logicNotification.logicSendToWidget.sendCheerAlert(MetaCheerAlert.createFromCheer(metaCheer));
 		}
 
