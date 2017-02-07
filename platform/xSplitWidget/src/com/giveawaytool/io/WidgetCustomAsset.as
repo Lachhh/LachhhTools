@@ -1,12 +1,14 @@
 package com.giveawaytool.io {
-	import com.giveawaytool.effect.CallbackWaitEffect;
-	import com.giveawaytool.effect.CallbackTimerEffect;
-	import flash.display.MovieClip;
-	import com.lachhh.utils.Utils;
-	import flash.display.DisplayObject;
 	import com.giveawaytool.MainGame;
+	import com.giveawaytool.effect.CallbackTimerEffect;
+	import com.giveawaytool.effect.CallbackWaitEffect;
 	import com.lachhh.io.Callback;
+	import com.lachhh.lachhhengine.sfx.JukeBox;
+	import com.lachhh.utils.Utils;
 
+	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
+	import flash.media.SoundTransform;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -43,7 +45,12 @@ package com.giveawaytool.io {
 		private function play() : void {
 			var d:DisplayObject = getMyAnim();
 			var m:MovieClip = d as MovieClip;
-			if(m) m.gotoAndPlay(1);
+			if(m) {
+				m.gotoAndPlay(1);
+				var st:SoundTransform = m.soundTransform;
+				st.volume = JukeBox.SFX_VOLUME;
+				m.soundTransform = st; 
+			}
 			assetLoader.content["values"] = values;
 			MainGame.instance.addChild(assetLoader.content);
 			addTimerBasedOnContent();

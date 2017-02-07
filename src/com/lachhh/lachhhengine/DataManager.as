@@ -13,8 +13,8 @@ package com.lachhh.lachhhengine {
 	 * @author LachhhSSD
 	 */
 	public class DataManager {
-		static private var GAME_NAME:String = "GAME";
-		static private var DATANAME:String = "GAMEDATA_FGL";
+		static private var GAME_NAME:String = "GAME" ;
+		static private var DATANAME:String = "GAMEDATA_FGL" ;
 		static private var _sharedObject:SharedObject = SharedObject.getLocal(GAME_NAME);
 		static public var isEmpty:Boolean = (_sharedObject.data[DATANAME] == "" || _sharedObject.data[DATANAME] == null);
 		

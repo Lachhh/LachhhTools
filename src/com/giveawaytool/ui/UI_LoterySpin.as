@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import flash.media.SoundTransform;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.effect.EffectShake;
@@ -49,6 +50,12 @@ package com.giveawaytool.ui {
 			visual.graphics.beginFill(0x000000);
 			visual.graphics.drawRect(0, 0, 1280, 720);
 			visual.graphics.endFill();
+			
+			var st:SoundTransform = visual.soundTransform;
+			st.volume = MetaGameProgress.instance.metaGiveawayConfig.metaAnimation.volume;
+			visual.soundTransform = st; 
+			JukeBox.SFX_VOLUME = MetaGameProgress.instance.metaGiveawayConfig.metaAnimation.volume;
+			JukeBox.MUSIC_VOLUME = MetaGameProgress.instance.metaGiveawayConfig.metaAnimation.volume;
 		}
 
 		

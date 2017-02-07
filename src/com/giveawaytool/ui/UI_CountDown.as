@@ -1,9 +1,5 @@
 package com.giveawaytool.ui {
-	import flash.display.Stage;
-	import flash.events.MouseEvent;
 	import com.giveawaytool.DefaultMainGame;
-	import flash.events.KeyboardEvent;
-	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.effect.EffectFadeOut;
 	import com.giveawaytool.effect.EffectFlashColor;
@@ -19,6 +15,8 @@ package com.giveawaytool.ui {
 	import com.lachhh.lachhhengine.ui.UIBase;
 
 	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
+	import flash.media.SoundTransform;
 	import flash.text.TextField;
 	import flash.ui.Keyboard;
 
@@ -62,6 +60,12 @@ package com.giveawaytool.ui {
 			visual.stage.focus = visual.stage;
 			
 			UI_Menu.instance.show(false);
+			
+			var st:SoundTransform = visual.soundTransform;
+			st.volume = MetaGameProgress.instance.metaCountdownConfig.metaAnimation.volume;
+			visual.soundTransform = st; 
+			JukeBox.SFX_VOLUME = MetaGameProgress.instance.metaCountdownConfig.metaAnimation.volume;
+			JukeBox.MUSIC_VOLUME = MetaGameProgress.instance.metaCountdownConfig.metaAnimation.volume;
 			
 		}
 

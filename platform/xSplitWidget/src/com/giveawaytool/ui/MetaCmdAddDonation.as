@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.lachhh.lachhhengine.sfx.JukeBox;
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.WidgetCustomAsset;
@@ -24,6 +25,8 @@ package com.giveawaytool.ui {
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
 			metaDonationConfig = pMetaConfig;
+			JukeBox.MUSIC_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.volume;
+			JukeBox.SFX_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.volume;
 			
 			if (pMetaConfig.metaCustomAnim.metaCustomAnimNewDonation.hasCustomAnim()) {
 				try {

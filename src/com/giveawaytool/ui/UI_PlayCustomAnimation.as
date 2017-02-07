@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
@@ -34,8 +35,6 @@ package com.giveawaytool.ui {
 			metaSelectAnimation = pAnimation;
 			values = pValues;
 			
-		
-			
 			visual.stage.focus = MainGame.instance;
 			SwfLoaderManager.loadSwf(metaSelectAnimation.pathToSwf, new Callback(onSwfLoaded, this, null), new Callback(onSwfLoadedError, this, null));
 			UI_Menu.instance.show(false);
@@ -63,7 +62,7 @@ package com.giveawaytool.ui {
 
 
 		override public function destroy() : void {
-			super.destroy();
+			
 			if(back) {
 				Utils.LazyRemoveFromParent(back);
 				back = null;	
@@ -82,6 +81,7 @@ package com.giveawaytool.ui {
 				Utils.LazyRemoveFromParent(loadedSwf);
 				loadedSwf = null;
 			}
+			super.destroy();
 		}
 		
 		private function onSwfLoaded(o:Object):void {
@@ -90,6 +90,12 @@ package com.giveawaytool.ui {
 				loadedSwf["values"] = values;
 				visual.addChild(loadedSwf);
 				loadedSwf.addEventListener(KeyboardEvent.KEY_DOWN, KeyManager.keyDownHandler);
+				var loadedMc:MovieClip = loadedSwf as MovieClip;
+				if(loadedMc) { 
+					var st:SoundTransform = loadedMc.soundTransform;
+					st.volume = metaSelectAnimation.volume;
+					loadedMc.soundTransform = st;
+				} 
 			}
 		}
 		

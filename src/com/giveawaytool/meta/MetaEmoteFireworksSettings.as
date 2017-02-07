@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.SimpleIRCBot;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.flash.FlashUtils;
 	import flash.utils.Dictionary;
@@ -53,7 +54,8 @@ package com.giveawaytool.meta {
 		
 		public function tempEnableFireworks():void{
 			lastTimeFireworksEnabled = FlashUtils.myGetTime();
-			UI_Menu.instance.logicNotification.logicListenToChat.getIRCBot().SayToChannel("/me --- emote fireworks enabled for 30 seconds!")
+			var simpleIRCBot : SimpleIRCBot = UI_Menu.instance.logicNotification.logicListenToChat.getIRCBot(); 
+			if(simpleIRCBot) simpleIRCBot.SayToChannel("/me --- emote fireworks enabled for 30 seconds!");
 		}
 		
 		public function canShowFireworks():Boolean{

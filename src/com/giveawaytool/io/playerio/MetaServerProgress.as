@@ -13,7 +13,9 @@ package com.giveawaytool.io.playerio {
 			
 		}
 		
-		
+		public function getStreamLabsAccessToken(authCode:String, success : Callback, failure : Callback) : void {
+			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getStreamLabsAccesssToken(authCode, success, failure);
+		}
 		
 		public function sendNewGamewispToken(accessToken:String, success : Callback, failure : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.SendNewGameWispToken(accessToken, success, failure);

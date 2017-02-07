@@ -84,17 +84,19 @@ package com.giveawaytool.meta.donations {
 			return result;
 		}
 		
-		static public function createFromStreamTipData(d:Dictionary):MetaDonation {
+		static public function createFromStreamLabs(d:Dictionary):MetaDonation {
 			var result:MetaDonation = new MetaDonation(ModelDonationSourceEnum.STREAM_TIP);
-			result.donatorName = d.username;
-			result.donatorMsg = d.note;
+			result.donatorName = d.name;
+			result.donatorMsg = d.message;
 			result.amount = FlashUtils.myParseFloat(d.amount);
-			result.id = d.id;
+			result.id = d.donation_id;
 			if(result.id == null) {
 				result.id = d._id;	
 			}
-			
-			var date:Date = Utils.parseDateYYYYMMDDHHMMSS(d.date);
+			var timeInStr:String = d.created_at +"000";
+			var timeInMs:Number = FlashUtils.myParseFloat(timeInStr);
+			var date:Date = new Date();
+			date.time = timeInMs;
 			
 			result.date = date; 
 			return result;
@@ -111,6 +113,22 @@ package com.giveawaytool.meta.donations {
 			}
 			
 			var date:Date = Utils.parseDateYYYYMMDDHHMMSS(d.created);
+			
+			result.date = date; 
+			return result;
+		}
+		
+		static public function createFromStreamTipData(d:Dictionary):MetaDonation {
+			var result:MetaDonation = new MetaDonation(ModelDonationSourceEnum.STREAM_TIP);
+			result.donatorName = d.username;
+			result.donatorMsg = d.note;
+			result.amount = FlashUtils.myParseFloat(d.amount);
+			result.id = d.id;
+			if(result.id == null) {
+				result.id = d._id;	
+			}
+			
+			var date:Date = Utils.parseDateYYYYMMDDHHMMSS(d.date);
 			
 			result.date = date; 
 			return result;
@@ -140,7 +158,7 @@ package com.giveawaytool.meta.donations {
 		public function getMsg():String {
 			if(donatorMsg == null) return MSG_NULL;
 			if(donatorMsg == "") return MSG_NULL;
-			return donatorMsg;
+			return donatorMsg +"\nCreated at " + date.toDateString();
 		}
 		
 		public function isThisMonth():Boolean {

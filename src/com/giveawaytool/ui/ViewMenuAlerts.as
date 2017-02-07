@@ -1,4 +1,6 @@
 package com.giveawaytool.ui {
+	import com.lachhh.lachhhengine.sfx.JukeBox;
+	import com.giveawaytool.ui.views.ViewOptionSlider;
 	import com.lachhh.flash.ui.ButtonSelect;
 	import com.lachhh.io.Callback;
 	import com.giveawaytool.meta.MetaGameProgress;
@@ -14,8 +16,13 @@ package com.giveawaytool.ui {
 	 */
 	public class ViewMenuAlerts extends ViewBase {
 		public var logicOnOffNotConnected:LogicOnOffNextFrame;
+		public var viewOptionSlider:ViewOptionSlider;
 		public function ViewMenuAlerts(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
+			viewOptionSlider = new ViewOptionSlider(pScreen, soundSliderMc);
+			viewOptionSlider.prct = JukeBox.MUSIC_VOLUME;
+			viewOptionSlider.callbackOnUpdate = new Callback(onUpdateVolume, this, null);
+			viewOptionSlider.callbackOnUpdateFinished = new Callback(onUpdateWidgetSound, this, null);
 			screen.setNameOfDynamicBtn(applyAndSaveBtn, "Apply & Save");
 			screen.setNameOfDynamicBtn(stopAllAnimBtn, "Stop All Anims");
 			screen.registerClick(applyAndSaveBtn, onApplySave);
@@ -27,6 +34,17 @@ package com.giveawaytool.ui {
 			UI_Menu.instance.logicNotification.logicSendToWidget.onWidgetChanged.addCallback(new Callback(UIBase.manager.refresh, UIBase, null));
 			UI_Menu.instance.logicNotification.logicSendToWidget.onSendFailed.addCallback(new Callback(shakeNoWidget, this, null));
 			iconOnlyMc.gotoAndStop(1);
+		}
+
+		private function onUpdateWidgetSound() : void {
+			UI_Menu.instance.logicNotification.logicSendToWidget.sendVolumeMaster();
+		}
+
+		private function onUpdateVolume() : void {
+			JukeBox.MUSIC_VOLUME = viewOptionSlider.prct;
+			JukeBox.SFX_VOLUME = viewOptionSlider.prct;
+			refresh();
+			//MetaGameProgress.instance.saveToLocal();
 		}
 
 		
@@ -73,6 +91,9 @@ package com.giveawaytool.ui {
 				backMc.gotoAndStop(2);
 				iconOnlyMc.visible = true;
 			}
+			
+			viewOptionSlider.prct = JukeBox.MUSIC_VOLUME;
+			viewOptionSlider.refresh();
 			refreshIcon();
 			logicOnOffNotConnected.isOn = shouldShowNotConnectInfo();
 		}
@@ -106,6 +127,7 @@ package com.giveawaytool.ui {
 		public function get tutorialBtn() : MovieClip { return widgetNotConnectedMc.getChildByName("tutorialBtn") as MovieClip;}
 		public function get backMc() : MovieClip { return widgetNotConnectedMc.getChildByName("backMc") as MovieClip;}
 		public function get iconOnlyMc() : MovieClip { return backMc.getChildByName("iconOnlyMc") as MovieClip;}
-						
+		
+		public function get soundSliderMc() : MovieClip { return visual.getChildByName("soundSliderMc") as MovieClip;}						
 	}
 }

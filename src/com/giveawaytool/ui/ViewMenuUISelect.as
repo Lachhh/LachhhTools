@@ -178,10 +178,11 @@ package com.giveawaytool.ui {
 		}
 		
 		public function hasVIPAccessToBeInUI() : Boolean {
-			if((uiCrnt as UI_Donation)) return UI_Menu.instance.logicNotification.logicVIPAccess.canAccessDonation();
+			return true;
+			/*if((uiCrnt as UI_Donation)) return UI_Menu.instance.logicNotification.logicVIPAccess.canAccessDonation();
 			if((uiCrnt as UI_CheerAlert)) return UI_Menu.instance.logicNotification.logicVIPAccess.canAccessCheers();
 			if((uiCrnt as UI_FollowSubAlert)) return UI_Menu.instance.logicNotification.logicVIPAccess.canAccessFollow();
-			return false;
+			return false;*/
 		}
 		
 		public function isNeedBronzeToBeHere():Boolean {

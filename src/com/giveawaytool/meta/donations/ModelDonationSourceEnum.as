@@ -10,6 +10,7 @@ package com.giveawaytool.meta.donations {
 		
 		static public var STREAM_TIP:ModelDonationSourceStreamTip = create(_id++, "StreamTip", ModelDonationSourceStreamTip) as ModelDonationSourceStreamTip;//192A2C
 		static public var TILTIFY:ModelDonationSourceTiltify = create(_id++, "Tiltify", ModelDonationSourceTiltify) as ModelDonationSourceTiltify;//192A2C
+		static public var STREAM_LABS:ModelDonationSourceStreamLabs = create(_id++, "StreamLabs", ModelDonationSourceStreamLabs) as ModelDonationSourceStreamLabs;//192A2C
 		static public var CALCULATED:ModelDonationSource = create(_id++, "Calculated", ModelDonationSource) as ModelDonationSource;//192A2C
 		
 		static public function create(id:int, name:String, className:Class):ModelDonationSource {

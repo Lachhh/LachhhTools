@@ -11,6 +11,7 @@ package com.giveawaytool.meta {
 		
 		
 		public var saveData : Dictionary = new Dictionary();
+		public var volume : Number = 1;
 
 		public function MetaSelectAnimation(pModelAlertType : ModelAlertType) {
 			modelAlertType = pModelAlertType;
@@ -19,12 +20,16 @@ package com.giveawaytool.meta {
 		public function encode() : Dictionary {
 			saveData["useDefault"] = useDefault;
 			saveData["pathToSwf"] = pathToSwf;
+			saveData["volume"] = volume;
+			
 			return saveData; 
 		}
 		
 		public function encodeForWidget():Dictionary {
 			saveData["useDefault"] = useDefault;
 			saveData["pathToSwf"] = getPathAsWidgetLocal();
+			saveData["volume"] = volume;
+			
 			return saveData;
 		}
 		
@@ -38,6 +43,8 @@ package com.giveawaytool.meta {
 			if(obj == null) return ;
 			useDefault = obj["useDefault"] ;
 			pathToSwf = obj["pathToSwf"] ;
+			volume = obj["volume"] ;
+			if(isNaN(volume)) volume = 1;
 			clean();
 		}
 		

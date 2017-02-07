@@ -33,6 +33,12 @@ package com.giveawaytool.meta.donations {
 		public function getUrlForLast(limit:int):String {
 			return modelSource.getUrlForLast(clientId, accessToken, limit);
 		}
+		
+		static public function createStreamLabsConnection():MetaDonationSourceConnection {
+			var result: MetaDonationSourceConnection = new MetaDonationSourceConnection();
+			result.modelSource = ModelDonationSourceEnum.STREAM_LABS;
+			return result; 
+		}
 	
 	}
 }

@@ -1,4 +1,5 @@
 package com.giveawaytool.meta.donations {
+	import com.lachhh.lachhhengine.sfx.JukeBox;
 	import com.giveawaytool.ui.ModelAlertTypeEnum;
 	import com.giveawaytool.ui.MetaHasBeenTested;
 	import com.giveawaytool.meta.MetaGameProgress;
@@ -18,6 +19,7 @@ package com.giveawaytool.meta.donations {
 		public var metaRecurrentGoal:MetaDonationGoal = new MetaDonationGoal();
 		public var metaBigGoal:MetaDonationGoal = new MetaDonationGoal();
 		public var metaStreamTipConnection : MetaDonationSourceConnection = new MetaDonationSourceConnection();
+		public var metaStreamLabsConnection : MetaDonationSourceConnection = MetaDonationSourceConnection.createStreamLabsConnection();
 		public var metaAutoFetch : MetaDonationFetchTimer = new MetaDonationFetchTimer();
 		public var metaCharity : MetaCharityConfig = new MetaCharityConfig();
 		public var metaCustomAnim : MetaSelectAnimationConfig = new MetaSelectAnimationConfig();
@@ -52,6 +54,8 @@ package com.giveawaytool.meta.donations {
 			saveData["metaRecurrentGoal"] = metaRecurrentGoal.encode();
 			saveData["metaBigGoal"] = metaBigGoal.encode();
 			saveData["metaStreamTipConnection"] = metaStreamTipConnection.encode();
+			saveData["metaStreamLabsConnection"] = metaStreamLabsConnection.encode();
+			
 			
 			saveData["metaAutoFetch"] = metaAutoFetch.encode();
 			saveData["metaCharity"] = metaCharity.encode();
@@ -76,9 +80,11 @@ package com.giveawaytool.meta.donations {
 			saveData["numSubs"] = MetaGameProgress.instance.metaSubsConfig.getCrntSub();
 			saveData["numSubsGoal"] = MetaGameProgress.instance.metaSubsConfig.goalSub;
 			saveData["metaCharity"] = metaCharity.settings.encode();
-			
+
 			saveData["metaCustomAnim"] = metaCustomAnim.encodeWidget();
+			saveData["jukebox"] = JukeBox.getInstance().encode();
 			
+
 			return saveData; 
 		}
 		
@@ -92,6 +98,7 @@ package com.giveawaytool.meta.donations {
 			metaRecurrentGoal.decode(loadData["metaRecurrentGoal"]);
 			metaBigGoal.decode(loadData["metaBigGoal"]);
 			metaStreamTipConnection.decode(loadData["metaStreamTipConnection"]);
+			metaStreamLabsConnection.decode(loadData["metaStreamLabsConnection"]);
 			metaAutoFetch.decode(loadData["metaAutoFetch"]);
 			metaCharity.decode(loadData["metaCharity"]);
 			metaCustomAnim.decode(loadData["metaCustomAnim"]);
@@ -161,6 +168,7 @@ package com.giveawaytool.meta.donations {
 			}
 		}
 		
+				
 		
 	}
 }

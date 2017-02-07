@@ -153,6 +153,8 @@ package com.lachhh.lachhhengine.animation {
 		
 		static public var ZZ_BTN_BERZERKCIRCLE:int = pushBtnLink(BTN_BERZERKCIRCLE);
 		static public var ZZ_BTN_GAEMWISPSTARCIRCLE:int = pushBtnLink(BTN_GAEMWISPSTARCIRCLE);
+		static public var ZZ_BTN_CURSORSLIDER:int = pushBtnLink(BTN_CURSORSLIDER);
+		static public var ZZ_BTN_GOTOOBS:int = pushBtnLink(BTN_GOTOOBS);
 		
 
 		static public function pushClassLink(pClass:Class):int {

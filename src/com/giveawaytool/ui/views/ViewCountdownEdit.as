@@ -36,7 +36,6 @@ package com.giveawaytool.ui.views {
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, selectBtn, MetaGameProgress.instance.metaCountdownConfig.metaAnimation);
 			
-			
 			refresh();  
 		}
 

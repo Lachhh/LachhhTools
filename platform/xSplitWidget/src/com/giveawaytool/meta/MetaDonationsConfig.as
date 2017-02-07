@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.lachhh.lachhhengine.sfx.JukeBox;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -102,6 +103,7 @@ package com.giveawaytool.meta {
 			
 			numSubs = loadData["numSubs"];
 			numSubsGoal = loadData["numSubsGoal"];
+			JukeBox.getInstance().decode(loadData["jukebox"]);
 			
 		}
 		

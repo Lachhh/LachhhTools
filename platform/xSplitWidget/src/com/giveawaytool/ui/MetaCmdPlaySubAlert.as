@@ -7,6 +7,7 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.meta.MetaSubcriberAlert;
 	import com.lachhh.io.Callback;
 	import com.lachhh.io.SimpleSocket;
+	import com.lachhh.lachhhengine.sfx.JukeBox;
 
 	import flash.utils.Dictionary;
 	/**
@@ -21,6 +22,9 @@ package com.giveawaytool.ui {
 		}
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
+			JukeBox.MUSIC_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewSub.volume;
+			JukeBox.SFX_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewSub.volume;
+			
 			if (pMetaConfig.metaCustomAnim.metaCustomAnimNewSub.hasCustomAnim()) {
 				try {
 					var ca : WidgetCustomAsset = WidgetCustomAssetManager.getOrCreateCustomWidget(pMetaConfig.metaCustomAnim.metaCustomAnimNewSub.getPathAsWidgetLocal());

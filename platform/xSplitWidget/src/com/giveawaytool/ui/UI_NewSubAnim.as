@@ -3,9 +3,11 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.meta.MetaSubcriberAlert;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
+	import com.lachhh.lachhhengine.sfx.JukeBox;
 	import com.lachhh.lachhhengine.ui.UIBase;
 
 	import flash.display.MovieClip;
+	import flash.media.SoundTransform;
 	import flash.text.TextField;
 
 	/**
@@ -24,6 +26,9 @@ package com.giveawaytool.ui {
 			px = 640;
 			py = 360;
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_ABOVE_NO_CLICK);
+			var st:SoundTransform = visual.soundTransform;
+			st.volume = JukeBox.SFX_VOLUME;
+			visual.soundTransform = st; 
 			refresh();
 		}
 		

@@ -26,6 +26,7 @@ package com.giveawaytool.meta {
 		public var metaSubsConfig : MetaSubsConfig;
 		public var metaFollowConfig : MetaFollowConfig;
 		public var metaTwitchConnection : MetaTwithConnection;
+		
 		public var metaTwitchChat : MetaTwitchChat;
 		public var metaGameWisp:MetaGameWispGroup;
 		

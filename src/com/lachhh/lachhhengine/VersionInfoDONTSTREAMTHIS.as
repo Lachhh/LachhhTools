@@ -12,5 +12,8 @@ package com.lachhh.lachhhengine {
 		
 		static public var GAMEWISP_ID:String = "7bc2264fd7d9fa005081395533681909a115177";
 		static public var GAMEWISP_CLIENT_REDIRECT:String = "http://www.lachhhAndFriends.com/twitch/oauth.html";
+		
+		static public var STREAMLABS_CLIENT_ID:String = "k6cA6wmzuYkBPgXivso7gWJAVLySla1oroCEDONR";
+		static public var STREAMLABS_CLIENT_REDIRECT:String = "http://www.lachhhAndFriends.com/twitch/oauth.html";
 	}
 }

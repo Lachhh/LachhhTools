@@ -1,4 +1,5 @@
 package com.lachhh.lachhhengine {
+	import com.giveawaytool.io.GoogleAnalyticController;
 	import com.giveawaytool.meta.donations.ModelDonationSourceEnum;
 	import com.giveawaytool.meta.donations.ModelDonationSource;
 	/**
@@ -23,6 +24,8 @@ package com.lachhh.lachhhengine {
 		static public var URL_GAMEWISP_LACHHHTOOLS:String = "https://www.gamewisp.com/LachhhTools";
 		static public var URL_JSB:String = "http://www.justshapesandbeats.com";
 		static public var URL_ADOBE_LINK:String = "https://get.adobe.com/flashplayer/otherversions/";
+		static public var URL_OBS_BROWSER_LINK:String = "https://obsproject.com/forum/resources/browser-plugin.115/";
+		
 		static public var URL_DISCORD:String = "http://www.lachhhtools.com/discord";
 		
 		static public var URL_SUB_ALERT:String = "https://www.youtube.com/embed/4WArVMN5Q2s";
@@ -48,6 +51,6 @@ package com.lachhh.lachhhengine {
 		static public var TWITTER_CONSUMER_KEY : String = "BjXPhVuKvbGydOwhbZhfDco8l";
 		static public var TWITTER_CONSUMER_KEY_SECRET : String = "X7M7LemvEP3PSqqGuu2yoNWxdkVaPKCFKSTHNh00KV3CoSHTY5";
 		public static var pioDebug : Boolean = false;
-		
+		public static var trackerAPI  : GoogleAnalyticController ;
 	}
 }

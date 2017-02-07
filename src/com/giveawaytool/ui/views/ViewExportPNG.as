@@ -34,6 +34,9 @@ package com.giveawaytool.ui.views {
 			pScreen.registerEvent(text3Txt, FocusEvent.FOCUS_OUT, onEdit);
 			
 			viewCustomBtn = new ViewCustomAnimBtn(pScreen, selectBtn, MetaGameProgress.instance.metaExportPNGConfig.metaAnimation);
+			viewCustomBtn.viewOptionSlider.visual.visible = false;
+			
+			viewCustomBtn.visualMc.gotoAndStop(2);
 			
 		}
 

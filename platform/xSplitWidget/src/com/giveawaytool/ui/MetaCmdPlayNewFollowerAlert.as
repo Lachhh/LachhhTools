@@ -1,13 +1,14 @@
 package com.giveawaytool.ui {
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.CallbackTimerEffect;
-	import com.lachhh.io.SimpleSocket;
-	import com.flashinit.ReleaseDonationInitWithoutNewsWithTExtDebug;
-	import flash.utils.Dictionary;
 	import com.giveawaytool.io.WidgetCustomAsset;
 	import com.giveawaytool.io.WidgetCustomAssetManager;
 	import com.giveawaytool.meta.MetaDonationsConfig;
 	import com.lachhh.io.Callback;
+	import com.lachhh.io.SimpleSocket;
+	import com.lachhh.lachhhengine.sfx.JukeBox;
+
+	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
 	 */
@@ -20,6 +21,8 @@ package com.giveawaytool.ui {
 		}
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
+			JukeBox.MUSIC_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewFollow.volume;
+			JukeBox.SFX_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewFollow.volume;
 			
 			if(pMetaConfig.metaCustomAnim.metaCustomAnimNewFollow.hasCustomAnim()) {
 				try {

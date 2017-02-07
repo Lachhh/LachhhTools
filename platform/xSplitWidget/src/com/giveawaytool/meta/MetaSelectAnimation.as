@@ -6,6 +6,7 @@ package com.giveawaytool.meta {
 	public class MetaSelectAnimation {
 		public var pathToSwf : String = "";
 		public var useDefault : Boolean = true;
+		public var volume : Number = 1;
 		private var saveData : Dictionary = new Dictionary();
 
 		public function MetaSelectAnimation() {
@@ -15,6 +16,8 @@ package com.giveawaytool.meta {
 		public function encode():Dictionary {
 			saveData["pathToSwf"] = pathToSwf;
 			saveData["useDefault"] = useDefault;
+			saveData["volume"] = volume;
+			
 			return saveData; 
 		}
 		
@@ -22,6 +25,8 @@ package com.giveawaytool.meta {
 			if(loadData == null) return ;
 			pathToSwf = loadData["pathToSwf"];
 			useDefault = loadData["useDefault"];
+			volume = loadData["volume"];
+			if(isNaN(volume)) volume = 1;
 		}
 		
 		public function isUseDefault():Boolean {

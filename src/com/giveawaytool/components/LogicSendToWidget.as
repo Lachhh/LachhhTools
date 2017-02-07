@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.lachhh.lachhhengine.sfx.JukeBox;
 	import com.giveawaytool.ui.views.MetaCheer;
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.CallbackWaitEffect;
@@ -190,6 +191,12 @@ package com.giveawaytool.components {
 		public function sendCheerAlert(m : MetaCheerAlert) : void {
 			var d:Dictionary = m.encode();
 			d.type = "cheerAlert";
+			sendData(d);
+		}
+		
+		public function sendVolumeMaster() : void {
+			var d:Dictionary = JukeBox.getInstance().encode();
+			d.type = "volumeMaster";
 			sendData(d);
 		}
 		

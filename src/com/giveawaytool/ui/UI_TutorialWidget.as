@@ -23,8 +23,15 @@ package com.giveawaytool.ui {
 			registerClick(xBtn, onClickX);
 			registerClick(backMc, onClickX);
 			registerClick(adobeLinkMc, onClickAdobeLink);
-			registerClick(watchOnYoutubeBtn, onClickYoutube);
-			setNameOfDynamicBtn(watchOnYoutubeBtn, "Watch\ntutorial");
+			registerClick(obsLinkMc, onClickOBS);
+			
+			registerClick(discordBtn, onDiscord);
+			registerClick(discordMc, onDiscord);
+			registerClick(howToAlertsMc, onTutoAlerts);
+			registerClick(tutoBtn, onTutoAlerts);
+			
+			
+			setNameOfDynamicBtn(howToAlertsMc, "Alerts tutorial");
 
 			px = ResolutionManager.getGameWidth() * 0.5;
 			py = ResolutionManager.getGameHeight()*0.5;
@@ -33,14 +40,15 @@ package com.giveawaytool.ui {
 			refresh();
 		}
 
-		private function onClickYoutube() : void {
-			//Utils.navigateToURLAndRecord(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS);
-			new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS);
-			close();
-		}
-
+		private function onDiscord() : void {Utils.navigateToURLAndRecord(VersionInfo.URL_DISCORD);}
+		private function onTutoAlerts() : void {new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS); close();}	
+		
 		private function onClickAdobeLink() : void {
 			Utils.navigateToURLAndRecord(VersionInfo.URL_ADOBE_LINK);
+		}
+		
+		private function onClickOBS() : void {
+			Utils.navigateToURLAndRecord(VersionInfo.URL_OBS_BROWSER_LINK);
 		}
 		
 		
@@ -53,7 +61,15 @@ package com.giveawaytool.ui {
 		public function get xBtn() : MovieClip { return panel.getChildByName("xBtn") as MovieClip;}
 		public function get backMc() : MovieClip { return visual.getChildByName("backMc") as MovieClip;}
 		public function get adobeLinkMc() : MovieClip { return panel.getChildByName("adobeLinkMc") as MovieClip;}
-		public function get watchOnYoutubeBtn() : MovieClip { return panel.getChildByName("watchOnYoutubeBtn") as MovieClip;}
+		public function get obsLinkMc() : MovieClip { return panel.getChildByName("obsLinkMc") as MovieClip;}
+		
+		
+		
+		public function get howToAlertsMc() : MovieClip { return panel.getChildByName("howToAlertsMc") as MovieClip;}
+		public function get tutoBtn() : MovieClip { return panel.getChildByName("tutoBtn") as MovieClip;}
+		public function get discordMc() : MovieClip { return panel.getChildByName("discordMc") as MovieClip;}
+		public function get discordBtn() : MovieClip { return panel.getChildByName("discordBtn") as MovieClip;}
+		
 		
 		
 	}

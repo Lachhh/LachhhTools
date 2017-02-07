@@ -16,7 +16,7 @@ package com.flashinit {
 			var m:MainGame = new MainGame();
 			stage.addChild(m);
 			m.init();
-			new UI_Updater("http://lachhhAndFriends.com/twitchTool/update_flash.xml");
+			new UI_Updater("http://lachhhtools.com/dl/update_flash.xml");
 		}
 
 

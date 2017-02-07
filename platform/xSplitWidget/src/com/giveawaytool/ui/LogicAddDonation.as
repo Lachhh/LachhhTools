@@ -50,6 +50,11 @@ package com.giveawaytool.ui {
 		public function handleMsg(d:Dictionary):void {
 			var newCmd:MetaCmd;
 			switch(d.type) {
+				case "volumeMaster" :
+					//JukeBox.getInstance().decode(d);
+					/*newCmd = new MetaCmdPlayHalloweenAlert();
+					cmdGroup.addCommandToQueue(newCmd);*/
+					break;
 				case "halloweenSpook" :
 					newCmd = new MetaCmdPlayHalloweenAlert();
 					cmdGroup.addCommandToQueue(newCmd);

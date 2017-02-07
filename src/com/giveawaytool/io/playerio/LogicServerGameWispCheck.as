@@ -1,4 +1,5 @@
 package com.giveawaytool.io.playerio {
+	import com.giveawaytool.io.twitch.streamlabs.StreamLabsConnection;
 	import playerio.Message;
 
 	import com.giveawaytool.io.PlayerIOLachhhRPGController;
@@ -16,8 +17,6 @@ package com.giveawaytool.io.playerio {
 		public function LogicServerGameWispCheck() {
 			super();
 			//
-			
-			
 		}
 		
 		public function fetchServerData():void {
@@ -30,6 +29,7 @@ package com.giveawaytool.io.playerio {
 			var gamewispSecret:String = msg.getString(1);
 			GameWispConnection.getInstance().accessToken = newAccessToken;
 			GameWispConnection.getInstance().gameWispSecret = gamewispSecret;
+			
 			validateToken(new Callback(UIBase.manager.refresh, UIBase.manager, null));
 		}	
 		

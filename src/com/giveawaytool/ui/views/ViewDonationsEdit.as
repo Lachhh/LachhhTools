@@ -17,6 +17,7 @@ package com.giveawaytool.ui.views {
 	 */
 	public class ViewDonationsEdit extends ViewBase {
 		public var viewStreamTip : ViewStreamTipConnection ;
+		public var viewStreamLabs : ViewStreamLabsConnection;
 		public var viewDonationsList : ViewDonationList;
 		
 		public var viewTopDonator : ViewFollowerBtn;
@@ -42,6 +43,9 @@ package com.giveawaytool.ui.views {
 			viewStreamTip.onNewSettings = new Callback(loadNewData, this, [false]);
 			viewStreamTip.metaConnection = MetaGameProgress.instance.metaDonationsConfig.metaStreamTipConnection;
 			viewStreamTip.donationSourceConnection.metaStreamTipConnection = viewStreamTip.metaConnection;
+			
+			viewStreamLabs = new ViewStreamLabsConnection(pScreen, streamLabsMc);
+			viewStreamLabs.onNewSettings = new Callback(loadNewData, this, [false]);
 			
 			viewAutoFetch = new ViewDonationTimer(pScreen, autoFetchMc);
 			viewAutoFetch.metaTimer = MetaGameProgress.instance.metaDonationsConfig.metaAutoFetch;
@@ -74,8 +78,8 @@ package com.giveawaytool.ui.views {
 		}
 
 		private function onRefreshList() : void {
-			loadNewData(false);
-			viewAutoFetch.metaTimer.resetTimer();
+			viewDonationsList.showLoading(true);
+			viewAutoFetch.metaTimer.secondsLeft = 0;
 		}
 
 		private function onCollect() : void {
@@ -156,6 +160,7 @@ package com.giveawaytool.ui.views {
 			viewDonationsList.refresh();
 			
 			viewStreamTip.refresh();
+			viewStreamLabs.refresh();
 			//dirtyNoticeMc.visible = MetaGameProgress.instance.metaDonationsConfig.isDirty;
 		}
 		
@@ -167,6 +172,8 @@ package com.giveawaytool.ui.views {
 		public function get charityMc() : MovieClip { return visual.getChildByName("charityMc") as MovieClip;}
 		
 		public function get streamTipMc() : MovieClip { return settingsMc.getChildByName("streamTipMc") as MovieClip;}
+		public function get streamLabsMc() : MovieClip { return settingsMc.getChildByName("streamLabsMc") as MovieClip;}
+		
 		public function get autoFetchMc() : MovieClip { return settingsMc.getChildByName("autoFetchMc") as MovieClip;}
 		//public function get autoTwitterMc() : MovieClip { return settingsMc.getChildByName("autoTwitterMc") as MovieClip;}
 		

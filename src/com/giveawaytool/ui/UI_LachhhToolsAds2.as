@@ -15,7 +15,7 @@ package com.giveawaytool.ui {
 	 */
 	public class UI_LachhhToolsAds2 extends UIOpenClose {
 		public function UI_LachhhToolsAds2() {
-			super(AnimationFactory.ID_UI_JSB_ADS, 430, 435);
+			super(AnimationFactory.ID_UI_JSB_ADS, 420, 425);
 			registerClick(xBtn, close);
 			registerClick(jsbBtn, onJSB);
 			setNameOfDynamicBtn(jsbBtn, "Website");

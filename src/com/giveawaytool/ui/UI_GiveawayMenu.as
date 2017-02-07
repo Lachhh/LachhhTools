@@ -1,12 +1,12 @@
 package com.giveawaytool.ui {
 	import com.giveawaytool.effect.EffectBlinking;
-	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewCountdownEdit;
 	import com.giveawaytool.ui.views.ViewExportPNG;
 	import com.giveawaytool.ui.views.ViewShareOnTwitter;
 	import com.lachhh.draw.SwfExporterToFileOnDisk;
 	import com.lachhh.io.Callback;
+	import com.lachhh.lachhhengine.VersionInfo;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.animation.AnimationManager;
 	import com.lachhh.lachhhengine.ui.UIBase;
@@ -46,6 +46,8 @@ package com.giveawaytool.ui {
 			UI_Overlay.show();
 			AnimationManager.factoryCache.ClearCache();
 			renderComponent.animView.gotoAndStop(1);
+			
+			
 		}
 
 		private function onShare() : void {
@@ -72,7 +74,7 @@ package com.giveawaytool.ui {
 			//EffectFlashColorFadeIn.create(0x000000, 15, new Callback(onClose, this, null));
 			onClose();
 			
-			
+			VersionInfo.trackerAPI.trackEvent("Anims", "Giveaway");
 		}
 		
 		private function onClose():void {
