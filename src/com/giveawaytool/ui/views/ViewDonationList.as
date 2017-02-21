@@ -27,7 +27,7 @@ package com.giveawaytool.ui.views {
 
 		override public function refresh() : void {
 			super.refresh();
-			titleTxt.text = "Last donations";
+			titleTxt.text = "Last donations (USD)";
 		}
 	}
 }

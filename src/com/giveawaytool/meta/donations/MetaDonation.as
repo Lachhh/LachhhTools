@@ -155,6 +155,11 @@ package com.giveawaytool.meta.donations {
 			return "$" + amount; 
 		}
 		
+		public function getAmountTxt2Digit():String {
+			var amountInCent:int = amount*100;
+			return "" + (amountInCent/100); 
+		}
+		
 		public function getMsg():String {
 			if(donatorMsg == null) return MSG_NULL;
 			if(donatorMsg == "") return MSG_NULL;

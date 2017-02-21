@@ -1,8 +1,8 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
+	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaSelectAnimation;
 	import com.lachhh.io.Callback;
 	import com.lachhh.io.KeyManager;
@@ -15,9 +15,9 @@ package com.giveawaytool.ui {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
 	import flash.media.SoundTransform;
 	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
@@ -38,13 +38,6 @@ package com.giveawaytool.ui {
 			visual.stage.focus = MainGame.instance;
 			SwfLoaderManager.loadSwf(metaSelectAnimation.pathToSwf, new Callback(onSwfLoaded, this, null), new Callback(onSwfLoadedError, this, null));
 			UI_Menu.instance.show(false);
-		}
-
-		private function onClickBack(e:Event) : void {
-			if(e.target == back) {
-				visual.stage.focus = null;
-				EffectFlashColor.create(0xFFFFFF, 5);
-			}
 		}
 
 		override public function update() : void {
@@ -77,8 +70,14 @@ package com.giveawaytool.ui {
 					mc.soundTransform = s;	
 				}
 				
+				
+				
 				loadedSwf.removeEventListener(KeyboardEvent.KEY_DOWN, KeyManager.keyDownHandler);
-				Utils.LazyRemoveFromParent(loadedSwf);
+				try {
+					Utils.LazyRemoveFromParent(loadedSwf);
+				} catch(e:Error) {
+					trace(e);
+				}
 				loadedSwf = null;
 			}
 			super.destroy();
@@ -90,6 +89,9 @@ package com.giveawaytool.ui {
 				loadedSwf["values"] = values;
 				visual.addChild(loadedSwf);
 				loadedSwf.addEventListener(KeyboardEvent.KEY_DOWN, KeyManager.keyDownHandler);
+				loadedSwf.addEventListener("countdownFail", onCountdownFail);
+				loadedSwf.addEventListener("countdownWin", onCountdownWin);
+				loadedSwf.addEventListener("giveawayComplete", giveawayComplete);
 				var loadedMc:MovieClip = loadedSwf as MovieClip;
 				if(loadedMc) { 
 					var st:SoundTransform = loadedMc.soundTransform;
@@ -97,6 +99,26 @@ package com.giveawaytool.ui {
 					loadedMc.soundTransform = st;
 				} 
 			}
+			
+			MainGame.instance.stage.focus = null;
+		}
+
+		private function onCountdownFail(event : Event) : void {
+			backToMenu();
+		}
+
+		private function onCountdownWin(event : Event) : void {
+			backToMenu();
+		}
+		
+		private function giveawayComplete(e:DataEvent):void {
+			//var winner:String = e.currentTarget.spinnerScene.theTV.currentWinner.nMC.nameTxt.text;
+			var winner:String = e.data;
+			trace(winner);
+			MetaGameProgress.instance.winners.push(winner);
+			MetaGameProgress.instance.metaExportPNGConfig.winner = winner;
+			MetaGameProgress.instance.metaCountdownConfig.target = winner;
+			backToMenu();
 		}
 		
 		private function onSwfLoadedError():void {

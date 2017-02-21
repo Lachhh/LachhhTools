@@ -26,7 +26,7 @@ package com.giveawaytool.ui.views {
 			}
 			visualMc.gotoAndStop((metaDonation.isNew ? 2 : 1));
 			nameTxt.text = metaDonation.donatorName+"";
-			amountTxt.text = metaDonation.amount+"";
+			amountTxt.text = metaDonation.getAmountTxt2Digit()+"";
 		}
 		
 		public function get nameTxt() : TextField { return visual.getChildByName("nameTxt") as TextField;}
