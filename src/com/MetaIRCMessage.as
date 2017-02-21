@@ -62,6 +62,7 @@ package com {
 		public function isNewSubAlert():Boolean {
 			if(!isNotificationFromTwitch()) return false;
 			if(text.indexOf("subscribed for") >= 0) return true;
+			if(text.indexOf("just subscribed to") >= 0) return false;
 			return text.indexOf("just subscribed") >= 0;
 		}
 		
