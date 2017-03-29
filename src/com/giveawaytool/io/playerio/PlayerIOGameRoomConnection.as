@@ -17,6 +17,12 @@ package com.giveawaytool.io.playerio {
 		
 		public var getGamewispDataSuccess : PlayerIORoomCommand;
 		public var getGamewispDataFailure : PlayerIORoomCommand;
+		
+		public var getGamewispTokenSuccess : PlayerIORoomCommand;
+		public var getGamewispTokenFailure : PlayerIORoomCommand;
+		
+		public var getTwitchTokenSuccess : PlayerIORoomCommand;
+		public var getTwitchTokenFailure : PlayerIORoomCommand;
 
 		public function PlayerIOGameRoomConnection(pClient : Client, pDebug : Boolean) {
 			super(pClient, pDebug);
@@ -35,6 +41,18 @@ package com.giveawaytool.io.playerio {
 			getStreamLabsAccessTokenSuccess = new PlayerIORoomCommand(this, "getStreamLabsAccessTokenSuccess");
 			getStreamLabsAccessTokenFailure = new PlayerIORoomCommand(this, "getStreamLabsAccessTokenFailure");
 			
+			getTwitchTokenSuccess = new PlayerIORoomCommand(this, "getTwitchTokenSuccess");
+			getTwitchTokenFailure = new PlayerIORoomCommand(this, "getTwitchTokenFailure");
+			
+			getGamewispTokenSuccess = new PlayerIORoomCommand(this, "getGamewispTokenSuccess");
+			getGamewispTokenFailure = new PlayerIORoomCommand(this, "getGamewispTokenFailure");
+			
+		}
+		
+		public function getTwitchAccesssToken(authCode: String, success : Callback, failure : Callback) : void {
+			getTwitchTokenSuccess.onMsg = success;
+			getTwitchTokenFailure.onMsg = failure;
+			connection.send("getTwitchAccessToken", authCode);
 		}
 		
 		public function getStreamLabsAccesssToken(authCode: String, success : Callback, failure : Callback) : void {
@@ -54,6 +72,12 @@ package com.giveawaytool.io.playerio {
 			getGamewispDataSuccess.onMsg = success;
 			getGamewispDataFailure.onMsg = failure;
 			connection.send("getGamewispData");
+		}
+
+		public function getGamewispAccessToken(authCode : String, success : Callback, failure : Callback) : void {
+			getGamewispTokenSuccess.onMsg = success;
+			getGamewispTokenFailure.onMsg = failure;
+			connection.send("getGamewispAccessToken", authCode);
 		}
 	}
 }

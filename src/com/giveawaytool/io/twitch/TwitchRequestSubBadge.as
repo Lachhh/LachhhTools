@@ -31,7 +31,7 @@ package com.giveawaytool.io.twitch {
 			
 			var url:String = getUrl();
 			var loader:URLLoader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
 			var request:URLRequest = new URLRequest(url);
 			request.requestHeaders = headers;
 			loader.load(request);

@@ -1,21 +1,30 @@
 package com.giveawaytool.io.twitch {
-	import com.giveawaytool.ui.UI_PopUp;
+	import playerio.Message;
+
+	import com.giveawaytool.components.LogicSendToWidget;
 	import com.giveawaytool.components.LogicTwitchChat;
 	import com.giveawaytool.components.TwitchRequestMods;
+	import com.giveawaytool.io.PlayerIOLachhhRPGController;
+	import com.giveawaytool.io.playerio.MetaServerProgress;
 	import com.giveawaytool.ui.MetaSubscriber;
+	import com.giveawaytool.ui.UI_Menu;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.giveawaytool.ui.views.MetaFollowerList;
 	import com.giveawaytool.ui.views.MetaSubscribersList;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.DataManager;
 	import com.lachhh.lachhhengine.VersionInfoDONTSTREAMTHIS;
+	import com.lachhh.utils.Utils;
 
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.NativeWindowRenderMode;
 	import flash.display.NativeWindowSystemChrome;
 	import flash.display.NativeWindowType;
 	import flash.events.Event;
+	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
 	import flash.events.LocationChangeEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.geom.Rectangle;
 	import flash.html.HTMLLoader;
 	import flash.net.URLLoader;
@@ -50,10 +59,10 @@ package com.giveawaytool.io.twitch {
 		public var listOfSubs : MetaSubscribersList = new MetaSubscribersList();
 		public var followersData : MetaFollowerList = new MetaFollowerList();
 		public var channelData : MetaTwitchChannelData = new MetaTwitchChannelData();
-
 		public var isLive : Boolean = false;
 		
-		public function TwitchConnection(pIsAdmin:Boolean) {
+
+		public function TwitchConnection(pIsAdmin : Boolean) {
 			accessToken = "";
 			isAdminConnect = pIsAdmin;
 		}
@@ -78,34 +87,15 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		public function connectStep1FetchAccessToken():void {
-			windowOptions = new NativeWindowInitOptions();
-			windowOptions.type = NativeWindowType.UTILITY;
-			windowOptions.systemChrome = NativeWindowSystemChrome.STANDARD;
-			windowOptions.transparent = false;
-			windowOptions.resizable = true;
-			windowOptions.minimizable = false;
-			windowOptions.renderMode = NativeWindowRenderMode.DIRECT;	
-			
-			htmlLoader = HTMLLoader.createRootWindow(  true, windowOptions, false, new Rectangle( 610, 78, 780, 580) );
-			//htmlLoader.paintsDefaultBackground = false;
-			htmlLoader.stage.nativeWindow.alwaysInFront = true;
-			htmlLoader.addEventListener(Event.LOCATION_CHANGE, onLocationChange);
-			htmlLoader.addEventListener(Event.COMPLETE, onComplete_htmlLoader);
-			
-			var request : URLRequest = new URLRequest(); 
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
-			
-			request.requestHeaders = headers;
-			request.method = URLRequestMethod.GET; 
-			request.url = getConnectURL();
-			
-			htmlLoader.load(request);
+			UI_PopUp.createOkOnly("A webpage will open, please authorize LachhhTools and come back here!", null);
+			UI_Menu.instance.logicNotification.logicSendToWidgetAuth.setModelForTwitch();
+			Utils.navigateToURLAndRecord(getConnectURL());
 		}
 		
 		public function logout(c:Callback):void {
 			windowOptions = new NativeWindowInitOptions();
 			windowOptions.type = NativeWindowType.UTILITY;
-			windowOptions.systemChrome = NativeWindowSystemChrome.STANDARD;
+			windowOptions.systemChrome = NativeWindowSystemChrome.ALTERNATE;
 			windowOptions.transparent = false;
 			windowOptions.resizable = true;
 			windowOptions.minimizable = false;
@@ -123,23 +113,18 @@ package com.giveawaytool.io.twitch {
 			onLogout = c;
 		}
 				
-		private function onComplete_htmlLoader(event : Event) : void {
-			trace("onComplete_htmlLoader :  " + htmlLoader.stage.nativeWindow.closed);
-			
-			if(htmlLoader.stage.nativeWindow.closed) {
-				if(isConnected()) return ;	
-				if(onConnectError) onConnectError.call();	
-			}
-		}
-		
+
 	
 		
 		private function onLocationChange(event : LocationChangeEvent) : void {
 			trace("onLocationChange : " + event.location);
 			
 			var newUrl:String = event.location;
-			var str:String = "http://www.lachhhAndFriends.com/twitch/oauth.html";
-			if(newUrl.indexOf(str) == 0) {
+			var str:String = "www.lachhhAndFriends.com";
+			var str2:String = "https://passport.twitch.tv/authentications/new";
+			var result:String = event.toString();
+			
+			if((newUrl.indexOf(str) == 0)) {
 				if(newUrl.indexOf("#access_token=") != -1) {
 					var a:Array = newUrl.split("#access_token=");
 					var str1:String = a[1];
@@ -176,7 +161,7 @@ package com.giveawaytool.io.twitch {
 		
 		public function fetchViewers(channelName:String, onFetch:Callback):void {
 			listOfViewers = new Array();
-			//listOfMods = new Array();
+			
 			
 		   var url:String = "https://tmi.twitch.tv/group/user/" + channelName.toLocaleLowerCase() + "/chatters";
 		   var request:URLRequest = new URLRequest(url);
@@ -191,6 +176,7 @@ package com.giveawaytool.io.twitch {
 
 		private function onErrorConnectOnTwitch(event : Event) : void {
 			trace(event);
+			UI_PopUp.closeAllPopups();
 			if(onConnectError) {
 				onConnectError.call();
 			}
@@ -201,7 +187,6 @@ package com.giveawaytool.io.twitch {
 		    var obj:Object = JSON.parse(loader.data);
 		    var arrayOfNames:Array = obj.chatters.viewers as Array;
 			
-		    //listOfMods = obj.chatters.moderators;
 			listOfViewers = arrayOfNames.concat(listOfMods);
 			removeNameFromList(listOfViewers, getNameOfAccount());
 			if(onFetchViewers) onFetchViewers.call();
@@ -242,15 +227,47 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		public function getConnectURL():String {
-			var url:String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=" + VersionInfoDONOTSTREAM_Twitch.TPZ_CLIENT_LNF_ID + "&redirect_uri=http://www.lachhhAndFriends.com/twitch/oauth.html&scope=user_read";
+			var redirect:String = VersionInfoDONTSTREAMTHIS.TWITCH_REDIRECT_URI;
+			var url:String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID + "&redirect_uri=" + redirect + "&force_verify=true&scope=user_read";
 			url = url + "+channel_commercial";
 			url = url + "+chat_login";
 			if(isAdminConnect) url = url + "+channel_subscriptions";			 
 			return url;
 		}
 		
+
+		
 		protected function onStep1Done():void {
 			connectStep2FetchUsername();
+		}
+
+		public function setCodeFromWebSocket(authCode : String) : void {
+			if(isLoggedIn) return;
+			MetaServerProgress.instance.getTwitchAccessToken(authCode, new Callback(onAuthCodeSendSuccess, this, null), new Callback(onAuthCodeSendError, this, null));
+		}
+		
+		private function onAuthCodeSendSuccess() : void {
+			UI_Menu.instance.logicNotification.logicSendToWidgetAuth.sendSuccessMsg();
+			var msg : Message = PlayerIOLachhhRPGController.getInstance().myPublicConnection.connectionGameRoom.getTwitchTokenSuccess.msg;
+			accessToken = msg.getString(0);
+			if(accessToken != null) {
+				onStep1Done();
+			} else {
+				onAuthCodeSendError();
+			}
+		}
+		
+		private function onAuthCodeSendError() : void {
+			UI_PopUp.closeAllPopups();
+			if(onConnectError) onConnectError.call();
+		}
+		
+		
+		function httpStatusHandler( e:HTTPStatusEvent ):void {
+			trace("httpStatusHandler:" + e.status + "/"+  e.responseURL + "/" + e.type);
+		}
+		function securityErrorHandler( e:SecurityErrorEvent ):void {
+			trace("securityErrorHandler:" + e);
 		}
 		
 		public function isConnected():Boolean {
@@ -260,7 +277,7 @@ package com.giveawaytool.io.twitch {
 		public function connectStep2FetchUsername():void {
 			var url:String = "https://api.twitch.tv/kraken?oauth_token=" + accessToken + "&scope=user_read";
 			var loader:URLLoader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
 			var request:URLRequest = new URLRequest(url);
 			request.requestHeaders = headers;
 			loader.load(request);
@@ -297,7 +314,7 @@ package com.giveawaytool.io.twitch {
 			var url:String = "https://api.twitch.tv/kraken/streams/" + getNameOfAccount();
 			var loader:URLLoader = new URLLoader() ;
 			var request : URLRequest = new URLRequest(); 
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
 			request.requestHeaders = headers;
 			request.method = URLRequestMethod.GET; 
 			request.url = url;
@@ -318,7 +335,7 @@ package com.giveawaytool.io.twitch {
 			var url:String = "https://api.twitch.tv/kraken/channels/" + getNameOfAccount();
 			var loader:URLLoader = new URLLoader() ;
 			var request : URLRequest = new URLRequest(); 
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
 			request.requestHeaders = headers;
 			request.method = URLRequestMethod.GET; 
 			request.url = url;
@@ -326,7 +343,6 @@ package com.giveawaytool.io.twitch {
 			connectErrorMsg = "Problem looking if you're partnered";
 			loader.addEventListener(Event.COMPLETE, onCheckIfPartner);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onErrorConnectOnTwitch);
-			
 		}
 
 		private function onCheckIfPartner(event : Event) : void {

@@ -133,8 +133,7 @@ package com.giveawaytool.ui {
 		}
 		
 		static public function createTwitchLoginRequired():UI_PopUp {
-			
-			return UI_PopUp.createOkOnly("You need to be logged in to Twitch for that!", null);; 
+			return UI_PopUp.createOkOnly("You need to be logged in to Twitch for that!", null); 
 		}
 
 		static public function closeAllPopups():void {

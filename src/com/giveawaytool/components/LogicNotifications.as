@@ -12,6 +12,7 @@ package com.giveawaytool.components {
 	 * @author LachhhSSD
 	 */
 	public class LogicNotifications extends ActorComponent {
+		public var logicSendToWidgetAuth: LogicSendToWidget;
 		public var logicSendToWidget: LogicSendToWidget;
 		public var logicSendToWidgetPlayMovie: LogicSendToWidget;
 		
@@ -50,8 +51,9 @@ package com.giveawaytool.components {
 			logicSubAlert = actor.addComponent(new LogicSubAlert(logicListenToChat)) as LogicSubAlert;	
 			logicHostAlert = actor.addComponent(new LogicHostAlert(logicListenToChat)) as LogicHostAlert;
 			logicCheerAlert = actor.addComponent(new LogicCheerAlert(logicListenToChat)) as LogicCheerAlert;
-			logicSendToWidget = actor.addComponent(new LogicSendToWidget(9231)) as LogicSendToWidget;
-			logicSendToWidgetPlayMovie = actor.addComponent(new LogicSendToWidget(9232)) as LogicSendToWidget;
+			logicSendToWidget = actor.addComponent(new LogicSendToWidget(9231, true)) as LogicSendToWidget;
+			logicSendToWidgetAuth = actor.addComponent(new LogicSendToWidget(9233, false)) as LogicSendToWidget;
+			logicSendToWidgetPlayMovie = actor.addComponent(new LogicSendToWidget(9232, true)) as LogicSendToWidget;
 			logicFollowAlert = actor.addComponent(new LogicFollowAlert()) as LogicFollowAlert;
 			logicGiveAwayAutoChat = actor.addComponent(new LogicGiveawayAutoChat(logicListenToChat)) as LogicGiveawayAutoChat;
 			logicGameWisp = actor.addComponent(new LogicGameWisp()) as LogicGameWisp;

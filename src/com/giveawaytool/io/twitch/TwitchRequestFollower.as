@@ -38,13 +38,13 @@ package com.giveawaytool.io.twitch {
 			var parameters:String = "?direction=DESC"; // newest to oldest
 			parameters += "&limit=" + 100; // how many objects returned. 25 = default, 100 = max
 			parameters += "&offset=" + offSetFollow; // where to start in the list
-			parameters += "&client_id=" + VersionInfoDONOTSTREAM_Twitch.TPZ_CLIENT_LNF_ID; // for good measure
+			parameters += "&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID; // for good measure
 			
 			var request:URLRequest = new URLRequest(TWITCH_API_BASE + "channels/" + TwitchConnection.getNameOfAccount() + "/follows" + parameters);
 			request.contentType = TWITCH_API_VERSION;
 			
 			loader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
 			
 			request.requestHeaders = headers;
 			

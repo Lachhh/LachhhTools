@@ -58,6 +58,7 @@ package com.giveawaytool.ui {
 			refresh();
 			screen.doBtnPressAnim(avatarMc);
 			UI_Loading.hide();
+			UI_PopUp.closeAllPopups();
 			MetaGameProgress.instance.metaTwitchConnection.lastNameLogin = TwitchConnection.getNameOfAccount();
 			MetaGameProgress.instance.metaTwitchConnection.lastAccessToken = TwitchConnection.instance.accessToken;
 			

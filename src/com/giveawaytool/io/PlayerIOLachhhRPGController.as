@@ -55,7 +55,7 @@ package com.giveawaytool.io {
 		}
 		
 		public function get mySecuredConnection() : PlayerIOConnectionSecure {return _mySecuredConnection;}		
-		public function get myPublicConnection() : PlayerIOConnection {
+		public function get myPublicConnection() : PlayerIOConnectionPublic {
 			return _myPublicConnection;
 		}
 

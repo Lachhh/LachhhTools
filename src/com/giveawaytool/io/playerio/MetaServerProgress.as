@@ -13,11 +13,20 @@ package com.giveawaytool.io.playerio {
 			
 		}
 		
+		public function getTwitchAccessToken(authCode:String, success : Callback, failure : Callback) : void {
+			PlayerIOLachhhRPGController.getInstance().myPublicConnection.getTwitchAccesssToken(authCode, success, failure);
+			
+		}
+		
 		public function getStreamLabsAccessToken(authCode:String, success : Callback, failure : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getStreamLabsAccesssToken(authCode, success, failure);
 		}
 		
-		public function sendNewGamewispToken(accessToken:String, success : Callback, failure : Callback) : void {
+		public function getGameWispAccessToken(authCode:String, success : Callback, failure : Callback) : void {
+			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getGamewispAccessToken(authCode, success, failure);
+		}
+		
+		public function sendNewGamewispToken_DEPRECATED(accessToken:String, success : Callback, failure : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.SendNewGameWispToken(accessToken, success, failure);
 		}
 		

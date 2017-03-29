@@ -36,7 +36,7 @@ package com.giveawaytool.io.twitch {
 		private function fecthByBatchOf100():void {
 			var url:String = "https://api.twitch.tv/kraken/users/" + TwitchConnection.getNameOfAccount() + "/subscriptions?oauth_token=" + twitchConnection.accessToken + "&scope=user_subscriptions&limit=100&offset="+offSetSub;
 			var loader:URLLoader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];
+			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
 			var request:URLRequest = new URLRequest(url);
 			request.requestHeaders = headers;
 			request.method = URLRequestMethod.GET;

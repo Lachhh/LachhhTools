@@ -26,9 +26,8 @@ package com.giveawaytool.io.playerio {
 		private function onGameWispTokenReceived() : void {
 			var msg : Message = PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getGamewispDataSuccess.msg;
 			var newAccessToken:String = msg.getString(0); 
-			var gamewispSecret:String = msg.getString(1);
+			
 			GameWispConnection.getInstance().accessToken = newAccessToken;
-			GameWispConnection.getInstance().gameWispSecret = gamewispSecret;
 			
 			validateToken(new Callback(UIBase.manager.refresh, UIBase.manager, null));
 		}	
@@ -41,17 +40,9 @@ package com.giveawaytool.io.playerio {
 		public function tryToSendNewAccessTokenToDB(success : Callback, callbackOnError : Callback) : void {
 			callbackSendNewTokenToServerSuccess = success;
 			callbackSendNewTokenToServerError = callbackOnError;
-			GameWispConnection.getInstance().fecthNewAccessToken(new Callback(sendTokenToServer, this, null), callbackSendNewTokenToServerError);			
+			GameWispConnection.getInstance().fecthNewAccessToken(new Callback(validateToken, this, [callbackSendNewTokenToServerSuccess]), callbackSendNewTokenToServerError);			
 		}
-		
-		private function sendTokenToServer():void {
-			if(!GameWispConnection.instance.isTokenValid) {
-				if(callbackSendNewTokenToServerError) callbackSendNewTokenToServerError.call();
-				return ;
-			}
-			MetaServerProgress.instance.sendNewGamewispToken(GameWispConnection.instance.accessToken, new Callback(validateToken, this, [callbackSendNewTokenToServerSuccess]), callbackSendNewTokenToServerError);
-		}
-		
+				
 		private function validateToken(c:Callback) : void {
 			GameWispConnection.getInstance().validateToken(c);
 		}

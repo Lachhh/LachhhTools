@@ -43,6 +43,11 @@ package com.giveawaytool.io.playerio {
 			return connection.connected;
 		}
 		
+		public function disconnect():void {
+			if(!isConnected()) return ;
+			connection.disconnect();
+		}
+		
 		
 	}
 }

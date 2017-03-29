@@ -1,24 +1,22 @@
 package com.giveawaytool.io.twitch.streamlabs {
 	import playerio.Message;
 
+	import com.giveawaytool.components.LogicSendToWidget;
 	import com.giveawaytool.io.PlayerIOLachhhRPGController;
 	import com.giveawaytool.io.playerio.MetaServerProgress;
+	import com.giveawaytool.ui.UI_Menu;
+	import com.giveawaytool.ui.UI_PopUp;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.DataManager;
 	import com.lachhh.lachhhengine.VersionInfoDONTSTREAMTHIS;
+	import com.lachhh.utils.Utils;
 
 	import flash.display.NativeWindowInitOptions;
-	import flash.display.NativeWindowRenderMode;
-	import flash.display.NativeWindowSystemChrome;
-	import flash.display.NativeWindowType;
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
-	import flash.events.LocationChangeEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.geom.Rectangle;
 	import flash.html.HTMLLoader;
-	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
 	import flash.utils.Dictionary;
 	/**
@@ -39,6 +37,7 @@ package com.giveawaytool.io.twitch.streamlabs {
 		public var isLoggedIn : Boolean = false;
 		private var closeOnNext : Boolean;
 		private var isTokenValid : Boolean;
+		private var mySocket : LogicSendToWidget;
 
 		public function StreamLabsConnection() {
 			accessToken = "";
@@ -56,7 +55,7 @@ package com.giveawaytool.io.twitch.streamlabs {
 		}
 		
 		public function connectStep1FetchAuthCode():void {
-			windowOptions = new NativeWindowInitOptions();
+			/*windowOptions = new NativeWindowInitOptions();
 			windowOptions.type = NativeWindowType.UTILITY;
 			windowOptions.systemChrome = NativeWindowSystemChrome.STANDARD;
 			windowOptions.transparent = false;
@@ -71,84 +70,54 @@ package com.giveawaytool.io.twitch.streamlabs {
 			htmlLoader.addEventListener(Event.COMPLETE, onComplete_htmlLoader);
 			
 			var request : URLRequest = new URLRequest(); 
-			/*var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.LANF_ID)];*/
 			
-			/*request.requestHeaders = headers;
-			request.method = URLRequestMethod.GET; */
 			request.url = getConnectURL();
 			
-			htmlLoader.load(request);
+			htmlLoader.load(request);*/
+			UI_Menu.instance.logicNotification.logicSendToWidgetAuth.setModelForStreamlabs();
+			UI_PopUp.createOkOnly("A webpage will open, please authorize LachhhTools and come back here!", null);
+			Utils.navigateToURLAndRecord(getConnectURL());
 		}
 		
-		/*public function logout(c:Callback):void {
-			windowOptions = new NativeWindowInitOptions();
-			windowOptions.type = NativeWindowType.UTILITY;
-			windowOptions.systemChrome = NativeWindowSystemChrome.STANDARD;
-			windowOptions.transparent = false;
-			windowOptions.resizable = true;
-			windowOptions.minimizable = false;
-			
-			windowOptions.renderMode = NativeWindowRenderMode.DIRECT;	
-			
-			
-			htmlLoader = HTMLLoader.createRootWindow(  true, windowOptions, false, new Rectangle( 610, 78, 780, 680) );
-			//htmlLoader.paintsDefaultBackground = false;
-			
-			htmlLoader.addEventListener(Event.LOCATION_CHANGE, onLocationChange);
-			//htmlLoader.addEventListener(Event.COMPLETE, onComplete_htmlLoader);
-			
-			htmlLoader.load(new URLRequest("http://twitch.tv/logout"));
-			onLogout = c;
-		}*/
-				
-		private function onComplete_htmlLoader(event : Event) : void {
-			trace("onComplete_htmlLoader :  " + htmlLoader.stage.nativeWindow.closed);
-			
-			if(htmlLoader.stage.nativeWindow.closed) {
-				if(isConnected()) return ;	
-				if(onConnectError) onConnectError.call();	
-			}
-		}
-		
-	
-		
-		private function onLocationChange(event : LocationChangeEvent) : void {
-			trace("onLocationChange : " + event.location);
-			
-			var newUrl:String = event.location;
-			var str:String = "http://www.lachhhAndFriends.com/twitch/oauth.html";
-			if(newUrl.indexOf(str) == 0) {
-				if(newUrl.indexOf("?code=") != -1) {
-					var a:Array = newUrl.split("?code=");
-					var str1:String = a[1];
-					var a2:Array = str1.split("&");
-					authCode = a2[0];
-					//trace(accessToken) ;
-					onStep1Done();
-				} else {
-					//if(onConnectError) onConnectError.call();
-				}
-				
-				htmlLoader.stage.nativeWindow.close();
-					 
-			} else if(newUrl == "http://twitch.tv/logout") {
-				closeOnNext = true;
-			} else if(closeOnNext) {
-				htmlLoader.stage.nativeWindow.close();
-				closeOnNext = false;
-				
-				clear();
-				
-				if(onLogout) onLogout.call();
-				
-			}	
-		}
-		
-
 		private function onErrorConnectOnStreamLabs(event : Event) : void {
 			trace(event);
 			if(onConnectError) {
 				onConnectError.call();
+			}
+		}
+		
+		public function setCodeFromWebSocket(code : String) : void {
+			authCode = code;
+			onStep1Done();
+		}
+		
+		function httpStatusHandler( e:HTTPStatusEvent ):void {
+			trace("httpStatusHandler:" + e.status + "/"+  e.responseURL + "/" + e.type);
+		}
+		function securityErrorHandler( e:SecurityErrorEvent ):void {
+			trace("securityErrorHandler:" + e);
+		}
+		
+		private function onHttpResponseStatus(event : HTTPStatusEvent) : void {
+			trace("onHttpResponseStatus:" + event.responseURL + "/" + event.responseHeaders + "/" + event.type);
+			for (var i : int = 0; i < event.responseHeaders.length; i++) {
+				var rh:URLRequestHeader = event.responseHeaders[i] as URLRequestHeader; 
+				trace(rh.name + "/" + rh.value);
+			}
+			
+		}
+
+		private function onFetchAccessToken(event : Event) : void {
+			var rawData:String = event.target.data;
+			var d:Dictionary = DataManager.stringToDictionnary(rawData);
+			trace(d);
+			mySocket.clearShitOnURL();
+			if(d["access_token"] != null) {
+				accessToken = d["access_token"];
+				onStep1Done();
+				mySocket.sendRaw("Success! You can now close this page.");
+			} else {
+				mySocket.sendRaw("Oops! Something went wrong...");
 			}
 		}
 	 		 
@@ -163,16 +132,17 @@ package com.giveawaytool.io.twitch.streamlabs {
 		}
 				
 		public function getConnectURL():String {
-			var url:String = "https://www.twitchalerts.com/api/v1.0/authorize?response_type=code"; 
+			var url:String = "https://streamlabs.com/api/v1.0/authorize?response_type=code"; 
 			url = url + "&client_id=" + VersionInfoDONTSTREAMTHIS.STREAMLABS_CLIENT_ID ;
 			url = url + "&redirect_uri=" + VersionInfoDONTSTREAMTHIS.STREAMLABS_CLIENT_REDIRECT ;
+			url = url + "&state=" + getStateRandom();
 			url = url + "&scope=donations.read";
 
 			return url;
 		}
 		
 		protected function onStep1Done():void {
-			MetaServerProgress.instance.getStreamLabsAccessToken(authCode, new Callback(onAuthCodeSendSuccess, this, null), onConnectError);
+			MetaServerProgress.instance.getStreamLabsAccessToken(authCode, new Callback(onAuthCodeSendSuccess, this, null), new Callback(onAuthCodeSendError, this, null));
 
 			/*var requestVars : URLVariables = new URLVariables();
 			requestVars.grant_type = "authorization_code";
@@ -203,11 +173,18 @@ package com.giveawaytool.io.twitch.streamlabs {
 			accessToken = msg.getString(0);
 			if(accessToken != null) {
 				isTokenValid = true;
+				UI_PopUp.closeAllPopups();
+				UI_PopUp.createOkOnly("Connected to StreamLabs successfully!", null)
 				if(onConnect) onConnect.call();
 			} else {
 				isTokenValid = false;
-				if(onConnectError) onConnectError.call();
+				onAuthCodeSendError();
 			}
+		}
+		
+		private function onAuthCodeSendError() : void {
+			UI_PopUp.closeAllPopups();
+			if(onConnectError) onConnectError.call();
 		}
 		
 		public function isConnected():Boolean {
@@ -233,22 +210,7 @@ package com.giveawaytool.io.twitch.streamlabs {
 			if(onConnectError) onConnectError.call();
 		}
 		
-		private function onHttpResponseStatus(event : HTTPStatusEvent) : void {
-			trace("onHttpResponseStatus:" + event.responseURL + "/" + event.responseHeaders + "/" + event.type);
-			for (var i : int = 0; i < event.responseHeaders.length; i++) {
-				var rh:URLRequestHeader = event.responseHeaders[i] as URLRequestHeader; 
-				trace(rh.name + "/" + rh.value);
-			}
-			
-		}
-		
-		function httpStatusHandler( e:HTTPStatusEvent ):void {
-			trace("httpStatusHandler:" + e.status + "/"+  e.responseURL + "/" + e.type);
-		}
-		function securityErrorHandler( e:SecurityErrorEvent ):void {
-			trace("securityErrorHandler:" + e);
-		}
-		
+	
 		public function connectStep2FetchDonations():void {
 			
 		}
@@ -268,6 +230,24 @@ package com.giveawaytool.io.twitch.streamlabs {
 
 		public function get nameOfSystem() : String {
 			return "Twitch";
+		}
+		
+		
+		private function getStateRandom():String { 
+			return getDigits(5) + "-" + getDigits(5) + "-" + getDigits(5) + "-" + getDigits(5) ;
+		}
+		
+		private function getDigits(n:int):String {
+			var result:String = "";
+			for (var i : int = 0; i < n; i++) {
+				result += getDigit();
+			}
+			return result;
+		}
+		
+		private function getDigit():String {
+			var i:int = Math.random()*10;
+			return i.toString();
 		}
 		
 		static public function getInstance():StreamLabsConnection {

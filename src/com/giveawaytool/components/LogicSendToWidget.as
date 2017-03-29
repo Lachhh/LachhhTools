@@ -1,4 +1,6 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.io.playerio.GameWispConnection;
+	import com.giveawaytool.io.twitch.streamlabs.StreamLabsConnection;
 	import com.lachhh.lachhhengine.sfx.JukeBox;
 	import com.giveawaytool.ui.views.MetaCheer;
 	import com.giveawaytool.MainGame;
@@ -42,18 +44,38 @@ package com.giveawaytool.components {
 		public var onWidgetChanged : CallbackGroup = new CallbackGroup();
 		public var onSendFailed : CallbackGroup = new CallbackGroup();
 		private var port : int;
+		public var autoSendConfig : Boolean = false;
+		public var modelAPIToGetCodeFrom : String = "twitch";
+		public var MODEL_TWITCH : String = "twitch";
+		public var MODEL_STREAMLABS : String = "streamlabs";
+		public var MODEL_GAMEWISP : String = "gamewisp";
+		
 
-		public function LogicSendToWidget(pPort : int) {
+		public function LogicSendToWidget(pPort : int, pAutoSendConfig:Boolean) {
 			super();
 			port = pPort;
 			serverSocket = new ServerSocket();
+			autoSendConfig = pAutoSendConfig;
 			tryToConnect();
+			
 		}
+		
+		public function setModelForTwitch():void {
+			modelAPIToGetCodeFrom = MODEL_TWITCH;
+		}
+		
+		public function setModelForStreamlabs():void {
+			modelAPIToGetCodeFrom = MODEL_STREAMLABS;
+		}
+		public function setModelForGameWisp() : void {
+			modelAPIToGetCodeFrom = MODEL_GAMEWISP;
+		}
+		
 		
 		private function tryToConnect():void {
 			try {
 				serverSocket.bind(port, "127.0.0.1");
-				serverSocket.addEventListener( ServerSocketConnectEvent.CONNECT, onConnect );
+				serverSocket.addEventListener(ServerSocketConnectEvent.CONNECT, onConnect);
 				serverSocket.listen();
 			} catch(e:Error) {
 				CallbackTimerEffect.addWaitCallFctToActor(MainGame.dummyActor, tryToConnect, 10000);
@@ -74,7 +96,7 @@ package com.giveawaytool.components {
 			
 			onWidgetChanged.call();
 			
-			CallbackTimerEffect.addWaitCallFctToActor(actor, sendConfig, 1000);
+			if(autoSendConfig) CallbackTimerEffect.addWaitCallFctToActor(actor, sendConfig, 1000);
 		}
 		
 		private function sendConfig():void {
@@ -109,6 +131,24 @@ package com.giveawaytool.components {
 			
 			var msg:String = s.readUTFBytes(s.bytesAvailable);
 			trace("    - msg: ", msg);
+			 
+			if(msg.toString().indexOf("GET /?code=") == 0) {
+				var a:Array = msg.toString().split("?code=");
+				var str1:String = a[1];
+				var a2:Array = str1.split("&");
+				var code:String = a2[0];
+				//s.flush();
+				if(modelAPIToGetCodeFrom == MODEL_TWITCH) {
+					TwitchConnection.instance.setCodeFromWebSocket(code);
+				} else if(modelAPIToGetCodeFrom == MODEL_STREAMLABS) {
+					StreamLabsConnection.instance.setCodeFromWebSocket(code);
+				} else if(modelAPIToGetCodeFrom == MODEL_GAMEWISP) {
+					GameWispConnection.instance.setCodeFromWebSocket(code);
+				}
+				s.writeUTFBytes(getSuccessMsg());
+				s.flush();
+			}
+			
 			if(msg.toString().indexOf("policy-file-request") != -1) {
 				trace("    - sending policy file");
 				p = getPolicy();
@@ -122,7 +162,11 @@ package com.giveawaytool.components {
 				sendConfig();	
 			}
 	       
-	    }
+		}
+
+		public function sendSuccessMsg() : void {
+			//sendRaw("Success! You can close this page and return to LachhhTools.");
+		}
 		
 		private function widgetSocket_connectHandler(event:Event):void {
 			trace("WidgetsConnectionManager ::: widgetSocket_connectHandler");	
@@ -177,7 +221,7 @@ package com.giveawaytool.components {
 		}
 
 		public function sendHostAlert(m : MetaHostAlert) : void {
-			var d:Dictionary = m.encode();
+			var d : Dictionary = m.encode();
 			d.type = "hostAlert";
 			sendData(d);
 		}
@@ -253,6 +297,7 @@ package com.giveawaytool.components {
 		}
 		
 		public function sendData(data:Dictionary):void {
+			if(!autoSendConfig) return ;
 			cleanDeadSocket();
 			
 			if(!hasAWidgetConnected()) {
@@ -260,21 +305,33 @@ package com.giveawaytool.components {
 				return ;
 			}
 			
-			//if(!TwitchConnection.isLoggedIn()) return ;
-			//if(!TwitchConnection.instance.isUserAmemberOfKOTS()) return ;
-			
 			var obj:Object = DataManager.dictToObject(data);
 			var dataToSend:String = (JSON.stringify(obj)) + "\n";
+			sendRaw(dataToSend);
+			
+		}
+		
+		public function sendRaw(dataToSend:String):void {
+			cleanDeadSocket();
+			
+			if(!hasAWidgetConnected()) {
+				onSendFailed.call();
+				return ;
+			}
+			
 			for (var i : int = 0; i < clientSockets.length; i++) {
 				var clientSocket:Socket =  clientSockets[i];
 				if(!clientSocket.connected) continue;
 				
+				if(port == 9233) {
+					trace(dataToSend);
+				}
 				clientSocket.writeUTFBytes(dataToSend);
-           		clientSocket.flush();
+           		//clientSocket.flush();
 			}
 		}
-		
-		public function cleanDeadSocket():void {
+
+		public function cleanDeadSocket() : void {
 			for (var i : int = 0; i < clientSockets.length; i++) {
 				var clientSocket:Socket =  clientSockets[i];
 				if(clientSocket.connected == false) {
@@ -289,6 +346,44 @@ package com.giveawaytool.components {
 			return clientSockets.length >= 1;
 		}
 
-		
+		public function clearShitOnURL() : void {
+			cleanDeadSocket();
+			
+			if(!hasAWidgetConnected()) {
+				onSendFailed.call();
+				return ;
+			}
+			
+			
+			for (var i : int = 0; i < clientSockets.length; i++) {
+				var clientSocket:Socket =  clientSockets[i];
+				if(!clientSocket.connected) continue;
+				
+           		clientSocket.flush();
+			}
+		}
+
+		public function getSuccessMsg():String {
+			var redirect:String = "http://www.lachhhTools.com";
+			var result:String = "";
+			result = '<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">'+"\n";
+			result += '<head>' +"\n";
+			result += '</head>'+"\n";
+			result += '<body>'+"\n";
+			result += '<?php '+"\n";
+			result += 'echo "'+"\n";
+			result += '<center>Success! You can now close this page'+"\n";
+			/*result += '<script language=\'javascript\'>'+"\n";
+			result += '<!--' +"\n";
+			result += 'window.location = \'' + redirect + '\';'+"\n";
+			result += "//-->"+"\n";
+			result += '</script>";'+"\n";
+			result += '?>'+"\n";*/
+			result += '</body>'+"\n";
+			result += '</html>';
+			trace(result);
+			return result;
+	
+		}
 	}
 }
