@@ -11,7 +11,7 @@ package com.giveawaytool {
 	import com.giveawaytool.ui.UIDonationAdd;
 	import com.giveawaytool.meta.ModelDonationAwardEnum;
 	import com.giveawaytool.meta.MetaNewDonation;
-	import com.giveawaytool.meta.MetaSubcriberAlert;
+	import com.giveawaytool.meta.MetaSubcriberAlert_widget;
 	import com.giveawaytool.meta.MetaTwitterAlert;
 	import com.giveawaytool.ui.MetaNewFollowerAlert;
 	import com.lachhh.io.KeyManager;
@@ -31,7 +31,7 @@ package com.giveawaytool {
 		override public function update() : void {
 			super.update();
 			if(KeyManager.IsKeyPressed(Keyboard.NUMBER_0)) {
-				var metaSubAlert:MetaSubcriberAlert = new MetaSubcriberAlert();
+				var metaSubAlert:MetaSubcriberAlert_widget = new MetaSubcriberAlert_widget();
 				metaSubAlert.name = "hiimmikegaming";
 				metaSubAlert.numMonthInARow = 6;
 				var d:Dictionary = metaSubAlert.encode();

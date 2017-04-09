@@ -1,5 +1,5 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.io.playerio.MetaGameWispGroup;
+	import com.giveawaytool.io.playerio.MetaGameWispSubGroup;
 	import com.giveawaytool.io.playerio.MetaGameWispSub;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewScrollBar;
@@ -66,11 +66,11 @@ package com.giveawaytool.ui {
 			
 			metaManual = new Vector.<MetaGameWispSub>();
 			//metaManual = MetaGameProgress.instance.metaManualRewardList.addManualPatrons(metaManual);
-			metaManual = MetaGameProgress.instance.metaGameWisp.listOfSub;
-			metaTotal = MetaGameProgress.instance.metaGameWisp.listOfSub;
+			metaManual = MetaGameProgress.instance.metaLachhhToolGameWispSub.listOfSub;
+			metaTotal = MetaGameProgress.instance.metaLachhhToolGameWispSub.listOfSub;
 			addIfNotInList(metaTotal, metaManual);
 			//metaTotal = metaTotal.concat(metaManual);
-			MetaGameWispGroup.sortNext(metaTotal);
+			MetaGameWispSubGroup.sortNext(metaTotal);
 			
 			crntPageTxt.text = crntPage + "";
 			totalPagesTxt.text = "/ " + totalPages;

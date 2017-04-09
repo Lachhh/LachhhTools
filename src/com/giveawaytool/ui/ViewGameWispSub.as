@@ -56,8 +56,17 @@ package com.giveawaytool.ui {
 			
 			visual.visible = true;
 			
-			nameTxt.text = metaGamewispSub.name ;
+			
 			iconMc.gotoAndStop(getIconFrame());
+			if(metaGamewispSub.isActive()) {
+				visual.alpha = 1;
+				nameTxt.text = metaGamewispSub.name ;
+			} else {
+				visual.alpha = 0.5;	
+				nameTxt.text = metaGamewispSub.name ;
+				iconMc.gotoAndStop(4);
+			}
+			Utils.SetMaxSizeOfTxtField(nameTxt, 16);
 		}
 		
 		private function getIconFrame():int {

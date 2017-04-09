@@ -1,7 +1,9 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.effect.ui.EffectShakeUI;
+	import com.lachhh.io.Callback;
+	import com.TwitchLachhhIsLiveSimpleCheckUp;
 	import com.giveawaytool.DefaultMainGame;
 	import com.giveawaytool.components.LogicNotifications;
+	import com.giveawaytool.effect.ui.EffectShakeUI;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
@@ -15,7 +17,6 @@ package com.giveawaytool.ui {
 	public class UI_Menu extends UIBase {
 		private var viewCredits : ViewCredits;
 		
-		private var wait:int = 0;
 		public var logicNotification : LogicNotifications;
 		public var viewMenuUISelect : ViewMenuUISelect;
 		public var viewMenuAlerts : ViewMenuAlerts;
@@ -33,6 +34,8 @@ package com.giveawaytool.ui {
 
 			logicNotification = addComponent(new LogicNotifications(MetaGameProgress.instance)) as LogicNotifications;
 			visual.gotoAndStop(1);
+			
+			
 		}
 
 		override public function start() : void {
@@ -43,6 +46,8 @@ package com.giveawaytool.ui {
 			viewTwitchConnect = new ViewTwitchConnect(this, yourChannelMc);
 			viewChatConnect = new ViewChatConnect(this, chatConnectMc);
 			viewOldMenu = new ViewOldMenu(this, oldMenuMc);
+			TwitchLachhhIsLiveSimpleCheckUp.checkIfDevsAreLive();
+			TwitchLachhhIsLiveSimpleCheckUp.onRefreshed = new Callback(viewCredits.refresh, this, null);
 			refresh();
 		}
 

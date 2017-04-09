@@ -1,13 +1,10 @@
 package com.giveawaytool.components {
-	import com.giveawaytool.io.playerio.GameWispConnection;
-	import com.giveawaytool.io.twitch.streamlabs.StreamLabsConnection;
-	import com.lachhh.lachhhengine.sfx.JukeBox;
-	import com.giveawaytool.ui.views.MetaCheer;
 	import com.giveawaytool.MainGame;
-	import com.giveawaytool.effect.CallbackWaitEffect;
 	import com.giveawaytool.effect.CallbackTimerEffect;
+	import com.giveawaytool.io.playerio.GameWispConnection;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.io.twitch.emotes.MetaEmoteGroup;
+	import com.giveawaytool.io.twitch.streamlabs.StreamLabsConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaPlayMovie;
 	import com.giveawaytool.meta.MetaTwitterAlert;
@@ -24,6 +21,7 @@ package com.giveawaytool.components {
 	import com.lachhh.io.CallbackGroup;
 	import com.lachhh.lachhhengine.DataManager;
 	import com.lachhh.lachhhengine.components.ActorComponent;
+	import com.lachhh.lachhhengine.sfx.JukeBox;
 
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -31,8 +29,11 @@ package com.giveawaytool.components {
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.events.ServerSocketConnectEvent;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
 	import flash.net.ServerSocket;
 	import flash.net.Socket;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
 	/**
@@ -145,8 +146,11 @@ package com.giveawaytool.components {
 				} else if(modelAPIToGetCodeFrom == MODEL_GAMEWISP) {
 					GameWispConnection.instance.setCodeFromWebSocket(code);
 				}
-				s.writeUTFBytes(getSuccessMsg());
-				s.flush();
+				///clearShitOnURL();
+				
+				/*s.writeUTFBytes(getSuccessMsg());
+				s.flush();*/
+				sendSuccessMsg(s);
 			}
 			
 			if(msg.toString().indexOf("policy-file-request") != -1) {
@@ -164,9 +168,6 @@ package com.giveawaytool.components {
 	       
 		}
 
-		public function sendSuccessMsg() : void {
-			//sendRaw("Success! You can close this page and return to LachhhTools.");
-		}
 		
 		private function widgetSocket_connectHandler(event:Event):void {
 			trace("WidgetsConnectionManager ::: widgetSocket_connectHandler");	
@@ -327,7 +328,7 @@ package com.giveawaytool.components {
 					trace(dataToSend);
 				}
 				clientSocket.writeUTFBytes(dataToSend);
-           		//clientSocket.flush();
+           		clientSocket.flush();
 			}
 		}
 
@@ -363,24 +364,35 @@ package com.giveawaytool.components {
 			}
 		}
 
+		public function sendSuccessMsg(s:Socket):void {
+			var returnData : ByteArray =new ByteArray();
+			var str:String = "Success! You can now close this page";
+			returnData.writeUTFBytes(str);
+				
+			var returnHeader:String = "";
+			returnHeader="HTTP/1.1 200 OK\r\n";
+		    returnHeader+="Accept-Ranges: bytes\r\n";
+		    returnHeader+="Connection: keep-alive\r\n";
+		    returnHeader+="Content-Length: "+returnData.length+"\r\n";
+		    returnHeader+="Content-Type: "+"html"+"\r\n\r\n";
+			s.writeUTFBytes(returnHeader);
+			s.writeBytes(returnData);
+			s.flush();
+		}
+	
 		public function getSuccessMsg():String {
 			var redirect:String = "http://www.lachhhTools.com";
+			var returnData : ByteArray =new ByteArray();
+			var str:String = "Success! You can now close this page";
+			returnData.writeUTFBytes(str);
+				
 			var result:String = "";
-			result = '<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">'+"\n";
-			result += '<head>' +"\n";
-			result += '</head>'+"\n";
-			result += '<body>'+"\n";
-			result += '<?php '+"\n";
-			result += 'echo "'+"\n";
-			result += '<center>Success! You can now close this page'+"\n";
-			/*result += '<script language=\'javascript\'>'+"\n";
-			result += '<!--' +"\n";
-			result += 'window.location = \'' + redirect + '\';'+"\n";
-			result += "//-->"+"\n";
-			result += '</script>";'+"\n";
-			result += '?>'+"\n";*/
-			result += '</body>'+"\n";
-			result += '</html>';
+			result="HTTP/1.1 200 OK\r\n";
+		    result+="Accept-Ranges: bytes\r\n";
+		    result+="Connection: keep-alive\r\n";
+		    result+="Content-Length: "+returnData.length+"\r\n";
+		    result+="Content-Type: "+"html"+"\r\n\r\n";
+			result = "<html lang=\"en\" xml:lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"><head></head><body><?php echo \"<center>Success! You can now close this page\" <script language=\'javascript\'>?></body></html>";
 			trace(result);
 			return result;
 	

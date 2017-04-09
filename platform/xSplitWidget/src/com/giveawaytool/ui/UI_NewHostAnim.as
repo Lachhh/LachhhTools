@@ -4,7 +4,7 @@ package com.giveawaytool.ui {
 	import com.lachhh.lachhhengine.sfx.SfxFactory;
 	import com.giveawaytool.meta.MetaHostAlert;
 	import com.giveawaytool.DefaultMainGame;
-	import com.giveawaytool.meta.MetaSubcriberAlert;
+	import com.giveawaytool.meta.MetaSubcriberAlert_widget;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.animation.AnimationManager;

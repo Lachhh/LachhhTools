@@ -69,7 +69,7 @@ package com.giveawaytool.ui {
 		override public function refresh() : void {
 			super.refresh();
 			if(metaHasBeenTested == null) return ;
-			logicOnOff.isOn = metaHasBeenTested.hasBeenTested && canTest();
+			logicOnOff.isOn = metaHasBeenTested.hasBeenTested || canTest();
 			previewYoutubeTxt.text = metaHasBeenTested.modelAlertType.getPlayOnTxt();
 			
 			refreshQuickFix();

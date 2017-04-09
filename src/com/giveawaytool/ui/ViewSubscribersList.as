@@ -1,5 +1,4 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.ui.views.MetaCheer;
 	import com.giveawaytool.ui.views.ViewGenericListWithPages;
 	import com.giveawaytool.ui.views.ViewSubscriberBtn;
 	import com.giveawaytool.ui.views.ViewSubscriberDynamic;
@@ -26,7 +25,7 @@ package com.giveawaytool.ui {
 		override public function refresh() : void {
 			super.refresh();
 			titleTxt.text = "Subscribers";
-			
+			totalTxt.visible = false;
 		}
 		
 		override protected function sortData(d : Array) : void {

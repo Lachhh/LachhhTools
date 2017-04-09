@@ -3,7 +3,7 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.meta.MetaDonationList;
 	import com.giveawaytool.meta.MetaDonationsConfig;
 	import com.giveawaytool.meta.MetaNewDonation;
-	import com.giveawaytool.meta.MetaSubcriberAlert;
+	import com.giveawaytool.meta.MetaSubcriberAlert_widget;
 	import com.giveawaytool.meta.MetaTwitterAlert;
 	import com.lachhh.io.Callback;
 	import com.lachhh.io.SimpleSocket;

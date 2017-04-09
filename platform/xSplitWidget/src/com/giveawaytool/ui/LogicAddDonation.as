@@ -7,7 +7,7 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.meta.MetaDonationsConfig;
 	import com.giveawaytool.meta.MetaHostAlert;
 	import com.giveawaytool.meta.MetaNewDonation;
-	import com.giveawaytool.meta.MetaSubcriberAlert;
+	import com.giveawaytool.meta.MetaSubcriberAlert_widget;
 	import com.giveawaytool.meta.MetaTwitterAlert;
 	import com.lachhh.io.Callback;
 	import com.lachhh.io.SimpleSocket;
@@ -90,7 +90,7 @@ package com.giveawaytool.ui {
 					cmdGroup.addCommandToQueue(newCmd);
 					break; 
 				case "subAlert" :
-					var metaSubAlert:MetaSubcriberAlert = MetaSubcriberAlert.createFromRawData(d);
+					var metaSubAlert:MetaSubcriberAlert_widget = MetaSubcriberAlert_widget.createFromRawData(d);
 					newCmd = new MetaCmdPlaySubAlert(metaSubAlert);
 					cmdGroup.addCommandToQueue(newCmd);
 					break; 

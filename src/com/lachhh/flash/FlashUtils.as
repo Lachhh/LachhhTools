@@ -32,5 +32,9 @@ package com.lachhh.flash {
 		static public function myJSONStringify(obj:Object):String {
 			return (com.adobe.serialization.json.JSON.encode(obj)); 
 		}
+		
+		static public function myJSONParse(str:String):Object{
+			return (com.adobe.serialization.json.JSON.decode(str)); 
+		}
 	}
 }

@@ -12,8 +12,7 @@
 	
 	public class LogicFollowAlert extends ActorComponent {
 		
-		private var followerCheckDelay:int = 1 * 1000;
-		
+		private var followerCheckDelay:int = 60 * 1000;
 		private var timer:CallbackTimerEffect ;
 		
 		public function LogicFollowAlert() {
@@ -26,7 +25,7 @@
 		
 		public function tick():void{
 			refreshFollowers();
-			timer = CallbackTimerEffect.addWaitCallFctToActor(actor, tick, 1000*60);
+			timer = CallbackTimerEffect.addWaitCallFctToActor(actor, tick, followerCheckDelay);
 			trace("LogicFollowAlert : tick");
 		}
 

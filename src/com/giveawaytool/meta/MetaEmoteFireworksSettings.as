@@ -1,4 +1,5 @@
 package com.giveawaytool.meta {
+	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.SimpleIRCBot;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.flash.FlashUtils;
@@ -53,9 +54,17 @@ package com.giveawaytool.meta {
 		}
 		
 		public function tempEnableFireworks():void{
+			if(!canUseFirework()) return ;
+			
 			lastTimeFireworksEnabled = FlashUtils.myGetTime();
 			var simpleIRCBot : SimpleIRCBot = UI_Menu.instance.logicNotification.logicListenToChat.getIRCBot(); 
 			if(simpleIRCBot) simpleIRCBot.SayToChannel("/me --- emote fireworks enabled for 30 seconds!");
+		}
+		
+		private function canUseFirework():Boolean {
+			if(!TwitchConnection.isLoggedIn()) return false;
+			if(!TwitchConnection.instance.isUserAmemberOfKOTS()) return false;
+			return true;
 		}
 		
 		public function canShowFireworks():Boolean{

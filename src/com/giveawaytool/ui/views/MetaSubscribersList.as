@@ -1,4 +1,7 @@
 package com.giveawaytool.ui.views {
+	import com.giveawaytool.ui.ModelSubcriberSourceEnum;
+	import com.giveawaytool.ui.ModelSubcriberSource;
+	import com.giveawaytool.io.playerio.MetaGameWispSub;
 	import com.giveawaytool.ui.MetaSubscriber;
 
 	import flash.utils.Dictionary;
@@ -90,9 +93,9 @@ package com.giveawaytool.ui.views {
 		
 		
 		public function getAmountTotalOfNew():Number {
-			var result:Number = 0;
+			var result : Number = 0;
 			for (var i : int = 0; i < subscribers.length; i++) {
-				var metaSubscriber:MetaSubscriber = subscribers[i];
+				var metaSubscriber : MetaSubscriber = subscribers[i];
 				if(metaSubscriber.isNew) {
 					result++;
 				}
@@ -115,18 +118,26 @@ package com.giveawaytool.ui.views {
 			return false;
 		}
 		
+		public function hasOfSameNameAndSource(metaSub:MetaSubscriber):Boolean {
+			for (var i : int = 0; i < subscribers.length; i++) {
+				var metaSubscriber:MetaSubscriber = subscribers[i];
+				if(metaSubscriber.isSameNameAndSource(metaSub)) return true;
+			}
+			return false;
+		}
+		
 		public function addIfNameNotInList(metaSubscriber : MetaSubscriber) : Boolean {
 			if(containsName(metaSubscriber.name)) return false;
 			add(metaSubscriber);
 			return true;
 		}
 		
-		public function isEmpty():Boolean {
+		public function isEmpty() : Boolean {
 			return subscribers.length <= 0;
 		}
 
 		public function updateMetaSub(metaSubscriber : MetaSubscriber) : void {
-			var alreadySub:MetaSubscriber = getMetaSubByName(metaSubscriber.name);
+			var alreadySub:MetaSubscriber = getMetaSubByNameAndSource(metaSubscriber.name, metaSubscriber.modelSubSource);
 			if(alreadySub.isNull()) {
 				add(alreadySub);
 			} else {
@@ -135,10 +146,18 @@ package com.giveawaytool.ui.views {
 			}
 		}
 		
-		public function getMetaSubByName(name:String):MetaSubscriber {
+		public function getMetaSubByName_DEPRECATED(name:String):MetaSubscriber {
 			for (var i : int = 0; i < subscribers.length; i++) {
 				var metaSubscriber:MetaSubscriber = subscribers[i];
 				if(metaSubscriber.name.toLowerCase() == name.toLowerCase()) return metaSubscriber;
+			}
+			return MetaSubscriber.NULL;
+		}
+		
+		public function getMetaSubByNameAndSource(name:String, modelSource:ModelSubcriberSource):MetaSubscriber {
+			for (var i : int = 0; i < subscribers.length; i++) {
+				var metaSubscriber:MetaSubscriber = subscribers[i];
+				if(metaSubscriber.isSameNameAndSource2(name, modelSource)) return metaSubscriber;
 			}
 			return MetaSubscriber.NULL;
 		}
@@ -154,6 +173,32 @@ package com.giveawaytool.ui.views {
 
 		public function clear() : void {
 			subscribers = new Array();
+		}
+
+		public function appendIfNotSameNameAndSource(listOfSub : MetaSubscribersList) : void {
+			for (var i : int = 0; i < listOfSub.subscribers.length; i++) {
+				var m:MetaSubscriber = listOfSub.getMetaSubscriber(i);
+				if(!hasOfSameNameAndSource(m)) {
+					add(m);
+				}
+			}
+		}
+
+		public function addGameWispSubIfNewOrNowActive(mGameWispSub : MetaSubscriber) : Boolean {
+			if(!mGameWispSub.modelSubSource.isGameWisp()) return false;
+			var m:MetaSubscriber = getMetaSubByNameAndSource(mGameWispSub.name, ModelSubcriberSourceEnum.GAMEWISP);
+			if(m == MetaSubscriber.NULL) {
+				add(mGameWispSub);
+				mGameWispSub.isNew = true;
+				return true;
+			} else {
+				if(m.metaGameWispSubInfo.hasBeenReactivatedOrPledgedHigher(mGameWispSub.metaGameWispSubInfo)) {
+					m.decode(mGameWispSub.encode());
+					m.isNew = true;
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

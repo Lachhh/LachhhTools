@@ -201,7 +201,14 @@ package com {
 			
 			for(var i:int = 0; i < msgData.length; i++){
 				var msgStr:String = msgData[i];
+				if(msgStr.indexOf("user-type=") >= 0){
+					if(username != "") continue;
+					username = fromUserType(msgStr);
+					continue;
+				}
+				
 				if(msgStr.indexOf("display-name=") >= 0){
+					if(username != "") continue; 
 					username = msgStr.replace("display-name=", "");
 					continue;
 				}
@@ -252,6 +259,17 @@ package com {
 			//result.name = msg.substring(1, nameLength); // trim the initial ':'
 			//result.text = msg.substring(messageStartIndex + 1, msg.length);
 			
+			return result;
+		}
+		
+		static private function fromUserType(msgStr:String):String {
+			//var test:String = "user-type= :lachhhandfriends!lachhhandfriends@lachhhandfriends.tmi.twitch.tv PRIVMSG #lachhhandfriends :!shout test"
+			var a:Array = msgStr.split("!");
+			if(a.length <= 1) return "";
+			var a1:String = a[1]; 
+			var b:Array = a1.split("@");
+			var result:String = b[0];  
+			//username = msgStr.replace("display-name=", "");
 			return result;
 		}
 		

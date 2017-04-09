@@ -38,7 +38,7 @@ package com.giveawaytool.io.playerio {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.LoadMySub(str, success, errorCall);
 		}
 		
-		public function loadAllGameWishSub(m:MetaGameWispGroup, success : Callback, errorCall : Callback) : void {
+		public function loadAllGameWishSub(m:MetaGameWispSubGroup, success : Callback, errorCall : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.LoadAllGameWispDub(m, success, errorCall);
 		}
 		

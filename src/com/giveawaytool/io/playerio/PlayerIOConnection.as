@@ -129,7 +129,7 @@ package com.giveawaytool.io.playerio {
 			TraceMsg("Loading Data...");
 		}
 		
-		public function LoadAllGameWispDub(m:MetaGameWispGroup, success:Callback, errorCall:Callback):void {
+		public function LoadAllGameWispDub(m:MetaGameWispSubGroup, success:Callback, errorCall:Callback):void {
 			if(!connected) return; 
 			_client.bigDB.loadRange("GamewispData","ByName", null, null, null, 100,   
 				function(ob:Array):void {

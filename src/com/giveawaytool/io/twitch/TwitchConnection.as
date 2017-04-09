@@ -247,7 +247,7 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		private function onAuthCodeSendSuccess() : void {
-			UI_Menu.instance.logicNotification.logicSendToWidgetAuth.sendSuccessMsg();
+			//UI_Menu.instance.logicNotification.logicSendToWidgetAuth.sendSuccessMsg();
 			var msg : Message = PlayerIOLachhhRPGController.getInstance().myPublicConnection.connectionGameRoom.getTwitchTokenSuccess.msg;
 			accessToken = msg.getString(0);
 			if(accessToken != null) {

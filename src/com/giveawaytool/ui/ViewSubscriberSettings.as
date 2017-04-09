@@ -1,4 +1,7 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.io.playerio.GameWispRequestFetchMySubs;
+	import com.giveawaytool.io.playerio.GameWispConnection;
+	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
 	import com.giveawaytool.ui.views.ViewSubscriberToolTip;
@@ -8,6 +11,7 @@ package com.giveawaytool.ui {
 
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.text.TextField;
 
 	/**
 	 * @author LachhhSSD
@@ -16,7 +20,7 @@ package com.giveawaytool.ui {
 		public var viewSubscriberList : ViewSubscribersList;
 		public var viewSubscriberToolTip : ViewSubscriberToolTip;
 		public var viewSubscriberAlert : ViewSubscriberAlert;
-		public var viewSubscriberGoal : ViewSubscriberGoal;
+		//public var viewSubscriberGoal : ViewSubscriberGoal;
 		public var viewCustomBtn : ViewCustomAnimBtn;
 		private var viewTestFirst : ViewTestFirst;
 
@@ -26,7 +30,8 @@ package com.giveawaytool.ui {
 			viewTestFirst.metaHasBeenTested = MetaGameProgress.instance.metaSubsConfig.metaHasBeenTested;
 			
 			viewSubscriberAlert = new ViewSubscriberAlert(screen, subAlertsMc);
-			viewSubscriberGoal = new ViewSubscriberGoal(screen, goalsMc);
+			viewSubscriberAlert.viewGameWispSubAlert.callbackOnConnectionChanged = new Callback(onRefresh, this, null);
+			//viewSubscriberGoal = new ViewSubscriberGoal(screen, goalsMc);
 			viewSubscriberList = new ViewSubscribersList(screen, lastSubscriptionMc);
 			viewSubscriberToolTip = new ViewSubscriberToolTip(screen, toolTipSubscriberMc);
 			viewSubscriberList.toolTip = viewSubscriberToolTip; 
@@ -59,6 +64,15 @@ package com.giveawaytool.ui {
 			viewSubscriberList.setData(MetaGameProgress.instance.metaSubsConfig.listOfSubs.subscribers);
 			viewSubscriberList.refresh();
 			viewSubscriberList.showLoading(false);
+			
+			var crntTwitch:int = TwitchConnection.instance.listOfSubs.subscribers.length;
+			var crntGameWisp:int = GameWispConnection.getInstance().metaChannelSubsGroup.listOfSub.length;
+			
+			if(GameWispConnection.getInstance().isConnected()) {
+				crntTxt.text = "Twitch : " + crntTwitch + " - GameWisp : " + crntGameWisp;
+			} else {
+				crntTxt.text = "Total Subs : " + crntTwitch;
+			}
 		}
 		
 
@@ -71,6 +85,8 @@ package com.giveawaytool.ui {
 		public function get goalsMc() : MovieClip { return visual.getChildByName("goalsMc") as MovieClip;}
 		public function get customAnimBtn() : MovieClip { return visual.getChildByName("customAnimBtn") as MovieClip;}
 		public function get testFirstMc() : MovieClip { return visual.getChildByName("testFirstMc") as MovieClip;}
+		public function get crntTxt() : TextField { return visual.getChildByName("crntTxt") as TextField;};
+		
 		
 	}
 }

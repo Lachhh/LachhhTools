@@ -14,7 +14,6 @@ package com.giveawaytool.components {
 	import com.giveawaytool.ui.UI_LachhhToolsAds;
 	import com.giveawaytool.ui.UI_LachhhToolsAds2;
 	import com.giveawaytool.ui.UI_Loading;
-	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.VersionInfo;
 	import com.lachhh.lachhhengine.components.ActorComponent;
@@ -24,7 +23,7 @@ package com.giveawaytool.components {
 	 * @author LachhhSSD
 	 */
 	public class LogicGameWisp extends ActorComponent {
-		private var metaGameSub : MetaGameWispSub;
+		
 		private var isLoaded:Boolean = false;
 		public var logicServerGameWisp : LogicServerGameWispCheck;
 
@@ -46,20 +45,27 @@ package com.giveawaytool.components {
 
 		private function onConnectedToGame() : void {
 			MetaServerProgress.instance.loadGameWishSub(TwitchConnection.getNameOfAccount(), new Callback(onLoadMySub, this, null), new Callback(onLoginError, this, null));
-			MetaGameProgress.instance.metaGameWisp.loadIfEmpty();
+			MetaGameProgress.instance.metaLachhhToolGameWispSub.loadIfEmpty();
 		}
 
 		private function onLoadMySub(db:DatabaseObject) : void {
-			metaGameSub = MetaGameWispSub.createFromDb(db);
+			
+			MetaGameProgress.instance.metaGameWispClientSubToLachhhTools = MetaGameWispSub.createFromDb(db); 
 			UI_Loading.hide();
 			isLoaded = true;
 			if(LogicVIPAccess.isAdminAccess()) {
 				logicServerGameWisp.fetchServerData();
+			} else {
+				logicServerGameWisp.validateToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, new Callback(onValidate, this, null));
 			}
 			
 			checkToShowAds();
 			
 			UIBase.manager.refresh();
+		}
+
+		private function onValidate() : void {
+			MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = "";
 		}
 		
 		public function checkToShowAds():void {
@@ -86,14 +92,14 @@ package com.giveawaytool.components {
 		}
 		
 		public function isBronzeTier():Boolean {
-			if(metaGameSub == null) return false;
-			if(ModelPatreonRewardEnum.STREAMER_BRONZE.gameWispUserMeetsReward(metaGameSub)) return true;
+			if(MetaGameProgress.instance.metaGameWispClientSubToLachhhTools == null) return false;
+			if(ModelPatreonRewardEnum.STREAMER_BRONZE.gameWispUserMeetsReward(MetaGameProgress.instance.metaGameWispClientSubToLachhhTools)) return true;
 			return false;
 		}
 		
 		public function isSilverTier():Boolean {
-			if(metaGameSub == null) return false;
-			if(ModelPatreonRewardEnum.STREAMER_SILVER.gameWispUserMeetsReward(metaGameSub)) return true;
+			if(MetaGameProgress.instance.metaGameWispClientSubToLachhhTools == null) return false;
+			if(ModelPatreonRewardEnum.STREAMER_SILVER.gameWispUserMeetsReward(MetaGameProgress.instance.metaGameWispClientSubToLachhhTools)) return true;
 			return false;
 		}
 

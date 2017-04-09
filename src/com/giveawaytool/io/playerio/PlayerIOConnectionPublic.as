@@ -35,10 +35,13 @@ package com.giveawaytool.io.playerio {
 
 		public function getTwitchAccesssToken(authCode : String, success : Callback, failure : Callback) : void {
 			if(connectionGameRoom == null) {
+				
 				connectToGameRoom(new Callback(getTwitchAccesssToken, this, [authCode, success, failure]));
 				return;
 			}
-			connectionGameRoom.getTwitchAccesssToken(authCode, new Callback(onAuthTokenSuccess, this, [success]), new Callback(onAuthTokenError, this, [failure]));
+			if(connectionGameRoom.isConnected()) {
+				connectionGameRoom.getTwitchAccesssToken(authCode, new Callback(onAuthTokenSuccess, this, [success]), new Callback(onAuthTokenError, this, [failure]));
+			}
 		}
 		
 		private function onAuthTokenSuccess(s:Callback):void {

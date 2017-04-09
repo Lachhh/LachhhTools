@@ -15,6 +15,7 @@ package com.giveawaytool.meta {
 		public var crntSub:MetaUpgrade = new MetaUpgrade(GameConstants.SUB_NEEDED);
 		public var alertOnNewSub:Boolean = true;
 		public var alertOnReSub:Boolean = true;
+		public var alertOnGameWispSub:Boolean = true;
 		public var subTrainNum:int = 3;
 		public var goalSub:int = 0;
 		public var listOfSubs : MetaSubscribersList = new MetaSubscribersList();
@@ -29,6 +30,8 @@ package com.giveawaytool.meta {
 			// saveData["crntSub"] = crntSub.value;
 			saveData["alertOnNewSub"] = alertOnNewSub;
 			saveData["alertOnReSub"] = alertOnReSub;
+			saveData["alertOnGameWispSub"] = alertOnGameWispSub;
+			
 			saveData["subTrainNum"] = subTrainNum;
 			saveData["goalSub"] = goalSub;
 			saveData["listOfSubs"] = listOfSubs.encode();
@@ -44,6 +47,8 @@ package com.giveawaytool.meta {
 			//crntSub.value = loadData["crntSub"];
 			alertOnNewSub = loadData["alertOnNewSub"];
 			alertOnReSub = loadData["alertOnReSub"];
+			alertOnGameWispSub = loadData["alertOnGameWispSub"];
+			
 			subTrainNum = loadData["subTrainNum"];
 			goalSub = loadData["goalSub"];
 			listOfSubs.decode(loadData["listOfSubs"]);

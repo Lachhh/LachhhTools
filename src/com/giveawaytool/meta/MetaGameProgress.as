@@ -1,5 +1,7 @@
 package com.giveawaytool.meta {
-	import com.giveawaytool.io.playerio.MetaGameWispGroup;
+	import com.giveawaytool.io.playerio.MetaGameWispSub;
+	import com.giveawaytool.io.twitch.MetaGameWispConnection;
+	import com.giveawaytool.io.playerio.MetaGameWispSubGroup;
 	import com.giveawaytool.io.twitch.MetaTwithConnection;
 	import com.giveawaytool.meta.donations.MetaDonationsConfig;
 	import com.lachhh.lachhhengine.DataManager;
@@ -28,12 +30,14 @@ package com.giveawaytool.meta {
 		public var metaTwitchConnection : MetaTwithConnection;
 		
 		public var metaTwitchChat : MetaTwitchChat;
-		public var metaGameWisp:MetaGameWispGroup;
+		public var metaLachhhToolGameWispSub:MetaGameWispSubGroup;
+		public var metaMyGameWispSub:MetaGameWispSubGroup;
+		public var metaGameWispConnection : MetaGameWispConnection;
 		
 		public var metaEmoteFireworksSettings : MetaEmoteFireworksSettings;
-		
 		private var saveData : Dictionary = new Dictionary();
-		
+		public var metaGameWispClientSubToLachhhTools : MetaGameWispSub;
+
 		public function MetaGameProgress() {			
 			clear();
 		}
@@ -59,7 +63,9 @@ package com.giveawaytool.meta {
 			metaCheerAlertConfig = new MetaCheerConfig();
 			metaHostAlertConfig = new MetaHostConfig();
 			metaEmoteFireworksSettings = new MetaEmoteFireworksSettings(); 
-			metaGameWisp = new MetaGameWispGroup();
+			metaLachhhToolGameWispSub = new MetaGameWispSubGroup();
+			metaMyGameWispSub = new MetaGameWispSubGroup();
+			metaGameWispConnection = new MetaGameWispConnection();
 		}
 		
 		public function encode():Dictionary {
@@ -74,6 +80,8 @@ package com.giveawaytool.meta {
 			saveData["metaSubsConfig"] = metaSubsConfig.encode();
 			saveData["metaTweetAlertConfig"] = metaTweetAlertConfig.encode();
 			saveData["metaTwitchConnection"] = metaTwitchConnection.encode();
+			saveData["metaGameWispConnection"] = metaGameWispConnection.encode();
+			
 			saveData["metaFollowConfig"] = metaFollowConfig.encode();
 			
 			saveData["metaCheerAlertConfig"] = metaCheerAlertConfig.encode();
@@ -97,6 +105,8 @@ package com.giveawaytool.meta {
 			metaSubsConfig.decode(obj["metaSubsConfig"]) ;
 			metaTweetAlertConfig.decode(obj["metaTweetAlertConfig"]) ;
 			metaTwitchConnection.decode(obj["metaTwitchConnection"]) ;
+			metaGameWispConnection.decode(obj["metaGameWispConnection"]) ;
+			
 			metaFollowConfig.decode(obj["metaFollowConfig"]) ;
 			
 			metaHostAlertConfig.decode(obj["metaHostAlertConfig"]) ;

@@ -55,6 +55,8 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_FX_GORE_RANDOM01:int = pushClassLink(FX_GORE_RANDOM01);
 		static public var ID_FX_GORE_SHOULDER01:int = pushClassLink(FX_GORE_SHOULDER01);
 		static public var ID_FX_DONATION:int = pushClassLink(FX_DONATION);
+		static public var ID_FX_SUBSCRIBER:int = pushClassLink(FX_SUBSCRIBER);
+		
 		
 
 		static public var ID_UI_PNGTHUMBNAIL:int = pushClassLink(UI_PNGTHUMBNAIL);
@@ -156,6 +158,9 @@ package com.lachhh.lachhhengine.animation {
 		static public var ZZ_BTN_CURSORSLIDER:int = pushBtnLink(BTN_CURSORSLIDER);
 		static public var ZZ_BTN_GOTOOBS:int = pushBtnLink(BTN_GOTOOBS);
 		
+		static public var ZZ_BTN_CONNECTGAMEWISP:int = pushBtnLink(BTN_CONNECTGAMEWISP);
+		static public var ZZ_BTN_SUBSCRIBER:int = pushBtnLink(BTN_SUBSCRIBER);
+		static public var ZZ_BTN_GAMEWISPBADGE:int = pushBtnLink(BTN_GAMEWISPBADGE);
 
 		static public function pushClassLink(pClass:Class):int {
 			allAnimationClass.push(pClass);

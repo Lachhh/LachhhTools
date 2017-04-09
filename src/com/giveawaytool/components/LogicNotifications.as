@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.TwitchLachhhIsLiveSimpleCheckUp;
 	import com.LogicTransferFileToUserDoc;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.twitch.LogicFollowAlert;
@@ -67,6 +68,7 @@ package com.giveawaytool.components {
 		private function refreshIfIsLive():void {
 			if(TwitchConnection.instance != null) TwitchConnection.instance.checkIfIsLive();
 			CallbackTimerEffect.addWaitCallFctToActor(actor, refreshIfIsLive, 1000*60*3);
+			
 		}
 		
 		

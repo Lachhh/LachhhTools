@@ -1,6 +1,6 @@
 package com.giveawaytool.ui {
 	import com.giveawaytool.DefaultMainGame;
-	import com.giveawaytool.meta.MetaSubcriberAlert;
+	import com.giveawaytool.meta.MetaSubcriberAlert_widget;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.sfx.JukeBox;
@@ -14,10 +14,10 @@ package com.giveawaytool.ui {
 	 * @author LachhhSSD
 	 */
 	public class UI_NewSubAnim extends UIBase {
-		private var metaSubAlert : MetaSubcriberAlert;
+		private var metaSubAlert : MetaSubcriberAlert_widget;
 		public var callbackOnDestroy:Callback;
 		
-		public function UI_NewSubAnim(m:MetaSubcriberAlert) {
+		public function UI_NewSubAnim(m:MetaSubcriberAlert_widget) {
 			super(AnimationFactory.ID_UI_NEWSUBSCRIBERS);
 			renderComponent.animView.stop();
 			renderComponent.animView.anim.play();
@@ -41,10 +41,13 @@ package com.giveawaytool.ui {
 			super.refresh();
 			nameTxt.text = metaSubAlert.name;
 			numMonthTxt.text = metaSubAlert.numMonthInARow + " MONTHS";
-			newSubMc.visible = metaSubAlert.isNewSubscriber();
-			punchNewSubMc.visible = metaSubAlert.isNewSubscriber();
-			reSubMc.visible = !newSubMc.visible;
+			titleTxt.text = metaSubAlert.metaGameWispSubInfo.tierTitle ;
+			punchNewSubMc.visible = metaSubAlert.isNewSubscriberOnTwitch() || metaSubAlert.isGameWispSub();;
 			punchReSubMc.visible = !punchNewSubMc.visible;
+			
+			newSubMc.visible = metaSubAlert.isNewSubscriberOnTwitch(); 
+			reSubMc.visible = metaSubAlert.isReSubOnTwitch();
+			gameWispSubMc.visible = metaSubAlert.isGameWispSub();
 		}
 		
 		
@@ -62,6 +65,9 @@ package com.giveawaytool.ui {
 		public function get msgMc() : MovieClip { return doorsMc.getChildByName("msgMc") as MovieClip;}
 		public function get reSubMc() : MovieClip { return msgMc.getChildByName("reSubMc") as MovieClip;}
 		public function get numMonthTxt() : TextField { return reSubMc.getChildByName("numMonthTxt") as TextField;}
+		
+		public function get gameWispSubMc() : MovieClip { return msgMc.getChildByName("gameWispSubMc") as MovieClip;}
+		public function get titleTxt() : TextField { return gameWispSubMc.getChildByName("titleTxt") as TextField;}
 		
 		public function get newSubMc() : MovieClip { return msgMc.getChildByName("newSubMc") as MovieClip;}
 		

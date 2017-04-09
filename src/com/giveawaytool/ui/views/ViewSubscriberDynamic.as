@@ -14,7 +14,7 @@ package com.giveawaytool.ui.views {
 
 		public function ViewSubscriberDynamic(pScreen : UIBase, pVisual : DisplayObjectContainer) {
 			flashAnim = new FlashAnimationView(pVisual);
-			flashAnim.setAnim(AnimationFactory.ID_FX_DONATION);
+			flashAnim.setAnim(AnimationFactory.ID_FX_SUBSCRIBER);
 			super(pScreen, btn);
 		}
 

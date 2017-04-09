@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.TwitchLachhhIsLiveSimpleCheckUp;
 	import air.update.utils.VersionUtils;
 
 	import com.lachhh.lachhhengine.VersionInfo;
@@ -7,6 +8,7 @@ package com.giveawaytool.ui {
 	import com.lachhh.utils.Utils;
 
 	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
@@ -41,10 +43,10 @@ package com.giveawaytool.ui {
 		override public function refresh() : void {
 			super.refresh();
 			versionTxt.text = "v" + VersionUtils.getApplicationVersion();
+			liveMc.visible = TwitchLachhhIsLiveSimpleCheckUp.isLachhLive;
 		}
 
-		public function get versionTxt() : TextField {
-			return visual.getChildByName("versionTxt") as TextField;
-		}
+		public function get versionTxt() : TextField {return visual.getChildByName("versionTxt") as TextField;}
+		public function get liveMc() : MovieClip { return visual.getChildByName("liveMc") as MovieClip;}
 	}
 }

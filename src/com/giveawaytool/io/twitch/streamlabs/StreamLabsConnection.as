@@ -107,19 +107,6 @@ package com.giveawaytool.io.twitch.streamlabs {
 			
 		}
 
-		private function onFetchAccessToken(event : Event) : void {
-			var rawData:String = event.target.data;
-			var d:Dictionary = DataManager.stringToDictionnary(rawData);
-			trace(d);
-			mySocket.clearShitOnURL();
-			if(d["access_token"] != null) {
-				accessToken = d["access_token"];
-				onStep1Done();
-				mySocket.sendRaw("Success! You can now close this page.");
-			} else {
-				mySocket.sendRaw("Oops! Something went wrong...");
-			}
-		}
 	 		 
 		static public function removeNameFromList(list:Array, name:String):void {
 			for (var i : int = 0; i < list.length; i++) {

@@ -1,5 +1,4 @@
 package com.giveawaytool.io.playerio {
-	import com.giveawaytool.io.twitch.streamlabs.StreamLabsConnection;
 	import playerio.Message;
 
 	import com.giveawaytool.io.PlayerIOLachhhRPGController;
@@ -27,14 +26,12 @@ package com.giveawaytool.io.playerio {
 			var msg : Message = PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getGamewispDataSuccess.msg;
 			var newAccessToken:String = msg.getString(0); 
 			
-			GameWispConnection.getInstance().accessToken = newAccessToken;
-			
-			validateToken(new Callback(UIBase.manager.refresh, UIBase.manager, null));
+			validateToken(newAccessToken, new Callback(UIBase.manager.refresh, UIBase.manager, null));
 		}	
 		
 
 		public function isConnected() : Boolean {
-			return GameWispConnection.getInstance().isTokenValid;
+			return GameWispConnection.getInstance().isServerTokenValid;
 		}
 		
 		public function tryToSendNewAccessTokenToDB(success : Callback, callbackOnError : Callback) : void {
@@ -43,8 +40,8 @@ package com.giveawaytool.io.playerio {
 			GameWispConnection.getInstance().fecthNewAccessToken(new Callback(validateToken, this, [callbackSendNewTokenToServerSuccess]), callbackSendNewTokenToServerError);			
 		}
 				
-		private function validateToken(c:Callback) : void {
-			GameWispConnection.getInstance().validateToken(c);
+		public function validateToken(token:String, c:Callback) : void {
+			GameWispConnection.getInstance().validateServerToken(token, c);
 		}
 		
 	}

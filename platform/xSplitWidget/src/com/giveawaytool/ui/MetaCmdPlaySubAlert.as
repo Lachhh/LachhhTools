@@ -4,7 +4,7 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.io.WidgetCustomAsset;
 	import com.giveawaytool.io.WidgetCustomAssetManager;
 	import com.giveawaytool.meta.MetaDonationsConfig;
-	import com.giveawaytool.meta.MetaSubcriberAlert;
+	import com.giveawaytool.meta.MetaSubcriberAlert_widget;
 	import com.lachhh.io.Callback;
 	import com.lachhh.io.SimpleSocket;
 	import com.lachhh.lachhhengine.sfx.JukeBox;
@@ -14,10 +14,10 @@ package com.giveawaytool.ui {
 	 * @author LachhhSSD
 	 */
 	public class MetaCmdPlaySubAlert extends MetaCmd {
-		public var metaSubAlert:MetaSubcriberAlert;
+		public var metaSubAlert:MetaSubcriberAlert_widget;
 		
 
-		public function MetaCmdPlaySubAlert(m : MetaSubcriberAlert) {
+		public function MetaCmdPlaySubAlert(m : MetaSubcriberAlert_widget) {
 			metaSubAlert = m;
 		}
 
@@ -31,6 +31,11 @@ package com.giveawaytool.ui {
 					var d:Dictionary = new Dictionary();
 					d["newSub"] = metaSubAlert.name;
 					d["numMonthInARow"] = metaSubAlert.numMonthInARow;
+					d["subSource"] = metaSubAlert.modelSubSource;
+					d["gameWispTierStatus"] = metaSubAlert.metaGameWispSubInfo.status;
+					d["gameWispTierCost"] = metaSubAlert.metaGameWispSubInfo.tierCostStr;
+					d["gameWispTierTitle"] = metaSubAlert.metaGameWispSubInfo.tierTitle;
+					d["gameWispTierDesc"] = metaSubAlert.metaGameWispSubInfo.tierDesc;
 					ca.showAnim(d, new Callback(endCmd, this, null));
 				} catch(e:Error) {
 					SimpleSocket.DEBUGTRACE("Error New Sub" + e.toString());

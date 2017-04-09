@@ -1,4 +1,6 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.io.playerio.MetaGameWispSub;
+	import com.giveawaytool.io.playerio.GameWispConnection;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.io.Callback;
@@ -15,10 +17,11 @@ package com.giveawaytool.ui {
 	public class ViewTwitchConnect extends ViewBase {
 		public var firstAutoSign : Boolean = true;
 		public var viewTwitchLogo : ViewTwitchLogo;
+		public var viewGameWispBadge : ViewGameWispBadge;
 		public function ViewTwitchConnect(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			viewTwitchLogo = new ViewTwitchLogo(screen, avatarMc);
-			
+			viewGameWispBadge = new ViewGameWispBadge(screen, myGameWispSubMc);
 			screen.setNameOfDynamicBtn(logOutBtn, "Log Out");
 			screen.setNameOfDynamicBtn(logInBtn, "LogIn");
 
@@ -30,6 +33,7 @@ package com.giveawaytool.ui {
 			TwitchConnection.instance.onConnectError = new Callback(onError, this, null);
 			TwitchConnection.instance.accessToken = MetaGameProgress.instance.metaTwitchConnection.lastAccessToken;
 			
+			GameWispConnection.getInstance().validateClientToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, null);
 			refresh();
 		}
 
@@ -86,6 +90,8 @@ package com.giveawaytool.ui {
 			super.refresh();
 			logInBtn.visible = false;
 			logOutBtn.visible = false;
+			viewGameWispBadge.metaGameSub = MetaGameProgress.instance.metaGameWispClientSubToLachhhTools;
+			viewGameWispBadge.refresh();
 			if(!TwitchConnection.instance.isConnected()) {
 				nameTxt.text = "OFFLINE";
 				nameTxt.textColor = 0xCC0000;
@@ -94,7 +100,6 @@ package com.giveawaytool.ui {
 				nameTxt.text = TwitchConnection.getNameOfAccount();
 				logOutBtn.visible = true;
 				nameTxt.textColor = 0xBAE4DD;
-				
 			}
 		}
 
@@ -102,6 +107,7 @@ package com.giveawaytool.ui {
 		public function get logOutBtn() : MovieClip { return visual.getChildByName("logOutBtn") as MovieClip;}
 		public function get logInBtn() : MovieClip { return visual.getChildByName("logInBtn") as MovieClip;}
 		public function get avatarMc() : MovieClip { return visual.getChildByName("avatarMc") as MovieClip;}
+		public function get myGameWispSubMc() : MovieClip { return visual.getChildByName("myGameWispSubMc") as MovieClip;}
 		
 	}
 }
