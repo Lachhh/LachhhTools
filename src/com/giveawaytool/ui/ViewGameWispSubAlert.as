@@ -14,7 +14,8 @@ package com.giveawaytool.ui {
 	 * @author LachhhSSD
 	 */
 	public class ViewGameWispSubAlert extends ViewBase {
-		public var callbackOnConnectionChanged:Callback;
+		public var callbackOnConnectionChanged : Callback;
+
 		public function ViewGameWispSubAlert(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			visualMc.gotoAndStop(1);
@@ -32,7 +33,7 @@ package com.giveawaytool.ui {
 		private function logOut() : void {
 			GameWispConnection.getInstance().logout();
 			MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = "";
-			if(callbackOnConnectionChanged) callbackOnConnectionChanged.call();
+			if (callbackOnConnectionChanged) callbackOnConnectionChanged.call();
 			refresh();
 		}
 
@@ -40,15 +41,15 @@ package com.giveawaytool.ui {
 			UI_PopUp.createOkOnly("A webpage should be opened.  Authorize the LachhhTools there and come back!", null);
 			GameWispConnection.getInstance().fecthNewAccessToken(new Callback(onSuccess, this, null), new Callback(onError, this, null));
 		}
-		
+
 		private function onSuccess() : void {
 			MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = GameWispConnection.instance.accessTokenClient;
 			MetaGameProgress.instance.metaGameWispConnection.channelInfo.decode(GameWispConnection.instance.metaChannelInfo.encode());
 			MetaGameProgress.instance.saveToLocal();
-			
+
 			UI_PopUp.closeAllPopups();
 			UI_PopUp.createOkOnly("All good!", null);
-			if(callbackOnConnectionChanged) callbackOnConnectionChanged.call();
+			if (callbackOnConnectionChanged) callbackOnConnectionChanged.call();
 			refresh();
 		}
 
@@ -60,9 +61,9 @@ package com.giveawaytool.ui {
 
 		override public function refresh() : void {
 			super.refresh();
-			if(isConnected()) {
+			if (isConnected()) {
 				visualMc.gotoAndStop(2);
-				
+
 				connectedText.text = getTextConnected();
 				connectedText.textColor = 0x006600;
 				screen.setNameOfDynamicBtn(logoutBtn, "Log Out");
@@ -74,23 +75,31 @@ package com.giveawaytool.ui {
 			}
 			Utils.SetMaxSizeOfTxtField(connectedText, 12);
 		}
-		
-		private function getTextConnected():String {
-			var name:String = MetaGameProgress.instance.metaGameWispConnection.channelInfo.displayName;
-			
-			if(name.length < 12) {
+
+		private function getTextConnected() : String {
+			var name : String = MetaGameProgress.instance.metaGameWispConnection.channelInfo.displayName;
+
+			if (name.length < 12) {
 				return "Welcome\n" + name;
 			} else {
 				return "Connected Successfully";
 			}
 		}
-		
-		private function isConnected():Boolean {
+
+		private function isConnected() : Boolean {
 			return GameWispConnection.getInstance().isConnected();
 		}
-		
-		public function get logoutBtn() : MovieClip { return visual.getChildByName("logoutBtn") as MovieClip;}
-		public function get newSubGamewispBtn() : MovieClip { return visual.getChildByName("newSubGamewispBtn") as MovieClip;}
-		public function get connectedText() : TextField { return visual.getChildByName("connectedText") as TextField;}
+
+		public function get logoutBtn() : MovieClip {
+			return visual.getChildByName("logoutBtn") as MovieClip;
+		}
+
+		public function get newSubGamewispBtn() : MovieClip {
+			return visual.getChildByName("newSubGamewispBtn") as MovieClip;
+		}
+
+		public function get connectedText() : TextField {
+			return visual.getChildByName("connectedText") as TextField;
+		}
 	}
 }

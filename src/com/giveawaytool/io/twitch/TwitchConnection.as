@@ -351,7 +351,7 @@ package com.giveawaytool.io.twitch {
 			channelData.decode(rawData);
 			
 			if(channelData.isPartner) {
-				refreshSub(onConnect, onConnectError);
+				refreshSub(onConnect, onConnect);
 			} else {
 				if(onConnect) onConnect.call();
 			}
@@ -367,7 +367,8 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		private function onErrorFetchSub(cSuccess:Callback, cError:Callback):void {
-			UI_PopUp.createYesNo("We could not fetch your subs, wanna continue anyway?", cSuccess, cError);
+			//UI_PopUp.createYesNo("We could not fetch your subs, wanna continue anyway?", cSuccess, cError);
+			if(cError) cError.call();
 		}
 		
 		public function refreshMods(logicChat:LogicTwitchChat, onSuccess : Callback, onError : Callback) : void {

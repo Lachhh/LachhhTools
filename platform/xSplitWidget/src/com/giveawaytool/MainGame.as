@@ -58,6 +58,12 @@ package com.giveawaytool {
 			createNews();
 		}
 		
+		public function startNewsForAdobe():void {
+			createNews();
+			UI_NoConnection.closeAllNoConnection();
+		}
+		
+		
 		public function startNormalDonationWithoutNewsAndWidget():void {
 			logicListenToMain = dummyActor.addComponent(new LogicAddDonation()) as LogicAddDonation;
 			//uiWidget = new UI_DonationWidget();

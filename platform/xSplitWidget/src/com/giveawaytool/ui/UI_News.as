@@ -12,7 +12,9 @@ package com.giveawaytool.ui {
 	 */
 	public class UI_News extends UIBase {
 		public var logicInfernaxBossExplode : LogicInfernaxBossExplode;
-		private var allNews:Array = [AnimationFactory.ID_FX_NEWS_7_ZOMBIDLE, AnimationFactory.ID_FX_NEWS_3_WHOISLACHHH, AnimationFactory.ID_FX_NEWS_4_JSB, AnimationFactory.ID_FX_NEWS_1_FOLLOWMSG];
+		private var allNewsNonPG:Array = [AnimationFactory.ID_FX_NEWS_7_ZOMBIDLE, AnimationFactory.ID_FX_NEWS_3_WHOISLACHHH, AnimationFactory.ID_FX_NEWS_4_JSB, AnimationFactory.ID_FX_NEWS_1_FOLLOWMSG];
+		private var allNewsPG:Array = [AnimationFactory.ID_FX_NEWS_7_ZOMBIDLEPG13, AnimationFactory.ID_FX_NEWS_3_WHOISLACHHH, AnimationFactory.ID_FX_NEWS_4_JSB, AnimationFactory.ID_FX_NEWS_1_FOLLOWMSGADOBE];
+		private var allNews:Array = allNewsNonPG;
 		private var WAIT_BETWEEN_NEWS:Number = 60000*5;
 		static private var index:int = -1;
 
@@ -20,14 +22,13 @@ package com.giveawaytool.ui {
 			super(0);
 			
 			renderComponent.animView.isLooping = false;
-			
+			if(VersionInfo.isPG13) allNews = allNewsPG;
 			if(VersionInfo.charityOnly) {
 				allNews = [AnimationFactory.ID_FX_NEWS_6_CHARITYMOUSTACHE];
 				nextRoll();
 			} else {
 				CallbackTimerEffect.addWaitCallFctToActor(this, nextRoll, 2000);
 			}
-			
 			
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_BELOW);
 		}

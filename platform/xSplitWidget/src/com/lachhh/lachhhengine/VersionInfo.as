@@ -6,6 +6,7 @@ package com.lachhh.lachhhengine {
 		static public var charityOnly:Boolean = false;
 		static public var showNewsWhenNothing:Boolean = true;
 		static public var isDebug:Boolean = false;
+		static public var isPG13:Boolean = false;
 		static public var hasMTX:Boolean = false;
 		
 		static public var showGaz:Boolean = true;

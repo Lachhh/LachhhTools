@@ -138,7 +138,7 @@ package com.giveawaytool.ui.views {
 			refresh();
 			
 			if(!TwitchConnection.isLoggedIn()) return ;
-			UI_PopUp.createOkOnly("Oops, can't retreive infos from " + TwitchConnection.getNameOfAccount() + "'s Twitch Channel.", null);
+			UI_PopUp.createOkOnly("Oops, I can't fetch your subs. Are you a partner on Twitch?", null);
 		}
 		
 		public function addFromChat(name:String):void {

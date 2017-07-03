@@ -62,11 +62,14 @@ package com.lachhh.lachhhengine.animation {
 		static public var ID_UI_DEBUGTEXT:int = pushClassLink(UI_DEBUGTEXT);
 		
 		static public var ID_FX_NEWS_1_FOLLOWMSG:int = pushClassLink(FX_NEWS_1_FOLLOWMSG);
+		static public var ID_FX_NEWS_1_FOLLOWMSGADOBE:int = pushClassLink(FX_NEWS_1_FOLLOWMSGADOBE);
+		
 		static public var ID_FX_NEWS_2_INFERNAX:int = pushClassLink(FX_NEWS_2_INFERNAX);
 		static public var ID_FX_NEWS_3_WHOISLACHHH:int = pushClassLink(FX_NEWS_3_WHOISLACHHH);
 		static public var ID_FX_NEWS_4_JSB:int = pushClassLink(FX_NEWS_4_JSB);
 		static public var ID_FX_NEWS_5_CHARITY:int = pushClassLink(FX_NEWS_5_CHARITY);
 		static public var ID_FX_NEWS_7_ZOMBIDLE:int = pushClassLink(FX_NEWS_7_ZOMBIDLE);
+		static public var ID_FX_NEWS_7_ZOMBIDLEPG13:int = pushClassLink(FX_NEWS_7_ZOMBIDLEPG13);
 		
 		
 		static public var ID_FX_TWEET:int = pushClassLink(FX_TWEET);

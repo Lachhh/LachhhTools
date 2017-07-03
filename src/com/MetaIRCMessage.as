@@ -216,6 +216,13 @@ package com {
 					isResubAlert = true;
 					continue;
 				}
+				
+				if(msgStr.indexOf("msg-id=sub") >= 0){
+					isResubAlert = true;
+					resubMonths = 1;
+					continue;
+				}
+				
 				if(msgStr.indexOf("msg-param-months=") >= 0){
 					resubMonths = int(msgStr.replace("msg-param-months=", ""));
 					continue;
