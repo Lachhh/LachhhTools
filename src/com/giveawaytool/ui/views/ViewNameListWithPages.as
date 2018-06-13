@@ -15,12 +15,10 @@ package com.giveawaytool.ui.views {
 		public var numPerPage:int = 250;
 		private var totalPages:int = 1;
 		private var crntPage:int = 1;
-		private var namesTotal : Array = EMPTY_ARRAY;
-		
+		private var namesTotal : Vector.<MetaParticipant> = EMPTY_ARRAY;
 		
 		public function ViewNameListWithPages(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
-			
 			
 			crntPageTxt.addEventListener(FocusEvent.FOCUS_OUT, onEditPage);
 			pScreen.registerClick(prevBtn, onPrev);
@@ -41,15 +39,15 @@ package com.giveawaytool.ui.views {
 			refresh();
 		}
 
-		override public function setNames(newNames : Array) : void {
+		override public function setNames(newNames : Vector.<MetaParticipant>) : void {
 			namesTotal = newNames;
 			cleanNames();
 		}
 		
 		private function cleanNames():void {
 			for (var i : int = 0; i < namesTotal.length; i++) {
-				var name:String = namesTotal[i];
-				if(name == "" || name == null) {
+				var name:MetaParticipant = namesTotal[i];
+				if(name.isNull()) {
 					namesTotal.splice(i, 1);
 					 i--;
 				}
@@ -70,7 +68,7 @@ package com.giveawaytool.ui.views {
 		
 		override public function refresh() : void {
 			
-			namesTotal.sort();
+			namesTotal.sort(MetaParticipant.sortByNameLowerCase);
 			refreshPagesIndexes();
 			crntPageTxt.text = crntPage + "";
 			totalPagesTxt.text = "/ " + totalPages;
@@ -79,16 +77,33 @@ package com.giveawaytool.ui.views {
 			
 			var startSlice:int = (crntPage-1)*numPerPage;
 			var endSlice:int = (crntPage)*numPerPage;
-			var copy:Array = namesTotal.slice(startSlice, endSlice);
+			var copy:Vector.<MetaParticipant> = namesTotal.slice(startSlice, endSlice);
 			super.setNames(copy);
 			viewScrollBar.setPrct(0);
 			pageMc.visible = (totalPages > 1);
 			super.refresh();
 		}
+		
+		public function refreshQuick() : void {
+			namesTotal.sort(MetaParticipant.sortByNameLowerCase);
+			refreshPagesIndexes();
+			crntPageTxt.text = crntPage + "";
+			totalPagesTxt.text = "/ " + totalPages;
+			prevBtn.selectIfBoolean(isOnFirstPage());
+			nextBtn.selectIfBoolean(isOnLastPage());
+			
+			var startSlice:int = (crntPage-1)*numPerPage;
+			var endSlice:int = (crntPage)*numPerPage;
+			var copy:Vector.<MetaParticipant> = namesTotal.slice(startSlice, endSlice);
+			super.setNames(copy);
+			viewScrollBar.setPrct(0);
+			pageMc.visible = (totalPages > 1);
+			quickRefresh();
+		}
 
 		override protected function removeView(v : ViewName) : void {
 			super.removeView(v);
-			var i:int = namesTotal.indexOf(v.name);
+			var i:int = namesTotal.indexOf(v.metaParticipant);
 			if(i != -1) namesTotal.splice(i, 1);
 			refreshTotal();
 		}
@@ -115,13 +130,11 @@ package com.giveawaytool.ui.views {
 		override public function clear() : void {
 			namesTotal = EMPTY_ARRAY;
 			super.clear();
-			
 		}
 		
-		override public function getNames() : Array {
+		override public function getNames() : Vector.<MetaParticipant> {
 			return namesTotal;
 		}
-		
 		
 		public function get pageMc() : MovieClip { return visual.getChildByName("pageMc") as MovieClip;}
 		public function get crntPageTxt() : TextField { return pageMc.getChildByName("crntTxt") as TextField;}
@@ -130,6 +143,9 @@ package com.giveawaytool.ui.views {
 		public function get nextBtn() : ButtonSelect { return pageMc.getChildByName("nextBtn") as ButtonSelect;}
 		
 		public function get text1Txt() : TextField { return visual.getChildByName("text1Txt") as TextField;}
-		public function get text2Txt() : TextField { return visual.getChildByName("text2Txt") as TextField;}
+
+		public function get text2Txt() : TextField {
+			return visual.getChildByName("text2Txt") as TextField;
+		}
 	}
 }

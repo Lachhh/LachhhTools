@@ -60,8 +60,8 @@ package com.giveawaytool.ui.views {
 		}
 
 		private function onClear() : void {
-			uiMainMenu.viewGiveaway.viewNameList.removeViewFromNames(MetaGameProgress.instance.metaGiveawayConfig.participants);
-			MetaGameProgress.instance.metaGiveawayConfig.participants = [];
+			uiMainMenu.viewGiveaway.viewNameList.removeViewFromParticipants(MetaGameProgress.instance.metaGiveawayConfig.participants);
+			MetaGameProgress.instance.metaGiveawayConfig.participants = new Vector.<MetaParticipant>();
 			uiMainMenu.viewGiveaway.viewNameList.setNames(MetaGameProgress.instance.metaGiveawayConfig.participants);
 			uiMainMenu.viewGiveaway.viewNameList.refresh();
 		}
@@ -144,9 +144,10 @@ package com.giveawaytool.ui.views {
 		public function addFromChat(name:String):void {
 			if(MetaGameProgress.instance.metaGiveawayConfig.contains(name)) return;
 			if(name == "") return; 
-			MetaGameProgress.instance.metaGiveawayConfig.participants.unshift(name);
+			MetaGameProgress.instance.metaGiveawayConfig.addSingleParticipant(name);
 			uiMainMenu.viewGiveaway.viewNameList.setNames(MetaGameProgress.instance.metaGiveawayConfig.participants);
-			uiMainMenu.viewGiveaway.viewNameList.refresh();
+			uiMainMenu.viewGiveaway.viewNameList.refreshQuick();
+			uiMainMenu.viewGiveaway.viewNameList.flash();
 		}
 
 		private function onEdit() : void {
@@ -240,20 +241,20 @@ package com.giveawaytool.ui.views {
 		
 		private function onAppendFromListInput() : void {
 			var listNames:String = popupInsert.inputTxt.text;
-			var a:Array = uiMainMenu.viewGiveaway.viewNameList.getNames();
-			var b:Array = nameToArray(listNames);
+			var a:Vector.<MetaParticipant> = uiMainMenu.viewGiveaway.viewNameList.getNames();
+			var b:Vector.<MetaParticipant> = nameToArray(listNames);
 			a = a.concat(b);
 			uiMainMenu.viewGiveaway.viewNameList.setNames(a);
 			MetaGameProgress.instance.metaGiveawayConfig.participants = a;
 			uiMainMenu.viewGiveaway.viewNameList.refresh();
 		}
 		
-		static public function nameToArray(names:String):Array {
+		static public function nameToArray(names:String):Vector.<MetaParticipant> {
 			var splitter:String = "" ;
 			var arrayTest:Array ;
 			var justNamesSeparatedWithSpace:String ; 
-			var result:Array ;
-			
+			var resultString:Array ;
+			var result:Vector.<MetaParticipant> = new Vector.<MetaParticipant>();
 			if(hasInstanceOf(names, "VIEWERS")) splitter = "VIEWERS";
 			if(hasInstanceOf(names, "\nVIEWERS")) splitter = "\nVIEWERS";
 			if(hasInstanceOf(names, "\\nVIEWERS")) splitter = "\\nVIEWERS";
@@ -266,7 +267,11 @@ package com.giveawaytool.ui.views {
 				justNamesSeparatedWithSpace = arrayTest[1];
 			}
 			
-			result = justNamesSeparatedWithSpace.split(" ");
+			resultString = justNamesSeparatedWithSpace.split(" ");
+			
+			for (var i : int = 0; i < resultString.length; i++) {
+				result.push(new MetaParticipant(resultString[i]));
+			}
 			
 			return result;
 		}

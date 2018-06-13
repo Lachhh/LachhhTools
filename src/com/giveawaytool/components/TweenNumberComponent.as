@@ -8,7 +8,7 @@ package com.giveawaytool.components {
 	 */
 	public class TweenNumberComponent extends ActorComponent {
 		public var value:Number;
-		public var goto:Number;
+		public var gotoValue:Number;
 		public var ease:Number = 2;
 		public var callbackOnReach:Callback;
 		public function TweenNumberComponent() {
@@ -18,13 +18,13 @@ package com.giveawaytool.components {
 
 		override public function update() : void {
 			super.update();
-			if(value > (goto-ease)) {
+			if(value > (gotoValue-ease)) {
 				value-=ease;
-			} else if(value < (goto+ease)) {
+			} else if(value < (gotoValue+ease)) {
 				value+=ease;
 			}
 			if(hasReachedGoto()) {
-				value = goto;
+				value = gotoValue;
 				ease = 0;
 				if(callbackOnReach) {
 					callbackOnReach.call();
@@ -34,11 +34,11 @@ package com.giveawaytool.components {
 		}
 		
 		public function hasReachedGoto():Boolean {
-			return Math.abs(goto - value) <= ease;
+			return Math.abs(gotoValue - value) <= ease;
 		}
 		
 		public function prctProgress():Number {
-			return (value/goto) ;
+			return (value/gotoValue) ;
 		}
 		
 		static public function addToActor(actor: Actor):TweenNumberComponent {

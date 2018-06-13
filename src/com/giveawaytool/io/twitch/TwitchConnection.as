@@ -50,6 +50,7 @@ package com.giveawaytool.io.twitch {
 		
 		
 		public var listOfMods:Array = new Array();
+		public var listOfModsLowerCase:Array = new Array();
 		public var listOfViewers:Array = new Array();
 		public var onFetchViewers : Callback;
 		
@@ -203,17 +204,19 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		public function isSubscriber(name:String):Boolean {
+			var lowerCaseName:String = name.toLowerCase();
 			for (var i : int = 0; i < listOfSubs.subscribers.length; i++) {
 				var subName:MetaSubscriber = listOfSubs.subscribers[i];
-				if(subName.name.toLowerCase() == name.toLowerCase()) return true;
+				if(subName.nameInLowerCase == lowerCaseName) return true;
 			}
 			return false;
 		}
 		
 		public function isModerator(name:String):Boolean {
-			for (var i : int = 0; i < listOfMods.length; i++) {
-				var modName:String = listOfMods[i];
-				if(modName.toLowerCase() == name.toLowerCase()) return true;
+			var nameInLowerCase:String = name.toLowerCase();
+			for (var i : int = 0; i < listOfModsLowerCase.length; i++) {
+				var modName:String = listOfModsLowerCase[i];
+				if(modName == nameInLowerCase) return true;
 			}
 			return (listOfMods.indexOf(name) != -1);
 		}
@@ -392,6 +395,7 @@ package com.giveawaytool.io.twitch {
 		
 		private function onModSuccess(req:TwitchRequestMods, callback:Callback) : void {
 			listOfMods = req.listOfMods;
+			listOfModsLowerCase = Utils.copyStringArrayInLowerCase(listOfMods);
 			if(callback) callback.call();
 		}
 		

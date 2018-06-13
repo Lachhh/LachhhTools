@@ -181,7 +181,6 @@
 			
 			lastMsgReceived = MetaIRCMessage.createFromRawData(msg);
 			if (callbackMsgReceived) callbackMsgReceived.call();
-			
 		}
 		
 		public function disconnect():void {

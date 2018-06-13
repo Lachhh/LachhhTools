@@ -371,6 +371,15 @@ package com.lachhh.utils {
 			pCmd = pCmd.split("\n").join("");
 			return pCmd;
 		}
+
+		public static function copyStringArrayInLowerCase(source : Array) : Array {
+			var result:Array = new Array();
+			for (var i : int = 0; i < source.length; i++) {
+				var name:String = source[i];
+				result.push(name.toLowerCase());
+			}
+			return result;
+		}
 		
 		
 	}

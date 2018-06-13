@@ -10,6 +10,7 @@ package com.giveawaytool.ui.views {
 	 */
 	public class MetaSubscribersList {
 		public var subscribers : Array = new Array();
+		public var subscribersInLowerCase : Array = new Array();
 		private var saveData : Dictionary;
 
 		public function sortByDate() : void {
@@ -31,6 +32,7 @@ package com.giveawaytool.ui.views {
 
 		public function add(metaSubscriber : MetaSubscriber) : void {
 			subscribers.push(metaSubscriber);
+			
 		}
 		
 		public function clone(otherList : MetaSubscribersList) : void {

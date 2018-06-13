@@ -1,4 +1,5 @@
 package com.giveawaytool.ui.views {
+	import com.giveawaytool.effect.CallbackWaitEffect;
 	import flash.display.DisplayObjectContainer;
 	import com.lachhh.lachhhengine.animation.FlashAnimationView;
 	import flash.display.BitmapData;
@@ -23,10 +24,11 @@ package com.giveawaytool.ui.views {
 	 * @author LachhhSSD
 	 */
 	public class ViewName extends ViewBase {
-		public var name : String ;
+		public var metaParticipant : MetaParticipant ;
 		private var viewSubBadge : ViewAvatarLogo;
 		private var flashAnim : FlashAnimationView;
 		private var rotateEffect : EffectShakeRotateUI;
+		private var canFlash:Boolean = true;
 
 		public function ViewName(pScreen : UIBase, pVisual : DisplayObjectContainer) {
 			flashAnim = new FlashAnimationView(pVisual);
@@ -64,14 +66,14 @@ package com.giveawaytool.ui.views {
 			avatarMc.visible = false;
 			
 			if(TwitchConnection.isLoggedIn()){
-				if(TwitchConnection.instance.isSubscriber(name)) {
+				if(TwitchConnection.instance.isSubscriber(metaParticipant.name)) {
 					frame += 2;
 					avatarMc.visible = true;
 				}
 			}
 			
 			nameMc.gotoAndStop(frame);
-			nameTxt.text = name;
+			nameTxt.text = metaParticipant.name;
 		}
 		
 		public function getSubBadgeBmpData():BitmapData {
@@ -82,12 +84,21 @@ package com.giveawaytool.ui.views {
 		public function flash():void {
 			if(destroyed) return ;
 			//EffectFadeOut.addToActorWithSpecificMc(screen, visual, 5, 0x000000);
-			rotateEffect = EffectShakeRotateUI.addToActor(actor, visual, 30);
-			//EffectSquashUI.addToActorWithSpecificDisplayObjAndRevolution(actor, visual, 1);
+			
+			if(canFlash) {
+				rotateEffect = EffectShakeRotateUI.addToActor(actor, visual, 30);
+				canFlash = false;
+				CallbackWaitEffect.addWaitCallFctToActor(actor, enableCanFlash, 35);
+			}
+		
+		}
+
+		private function enableCanFlash() : void {
+			canFlash = true;
 		}
 		
 		public function get isModerator():Boolean {
-			return (MetaGameProgress.instance.metaGiveawayConfig.isModerator(name));
+			return (MetaGameProgress.instance.metaGiveawayConfig.isModerator(metaParticipant.name));
 		}
 		
 		public function get nameBtn() : MovieClip { return visual.getChildByName("nameBtn") as MovieClip;}

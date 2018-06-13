@@ -186,9 +186,9 @@ package com.giveawaytool.ui.views {
 			
 			if(monsterIdleMc) {
 				var diff:int = END_X - START_X;
-				var goto:int = prct*diff+START_X; 
+				var gotoX:int = prct*diff+START_X; 
 				
-				monsterIdleMc.x += (goto-monsterIdleMc.x)*0.1;
+				monsterIdleMc.x += (gotoX-monsterIdleMc.x)*0.1;
 			}
 		}
 		
@@ -198,7 +198,6 @@ package com.giveawaytool.ui.views {
 				spewBunchOfGore(1);
 			}
 		}
-		
 		
 		
 		override public function refresh() : void {

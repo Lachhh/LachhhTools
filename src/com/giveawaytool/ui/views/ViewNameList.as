@@ -24,8 +24,8 @@ package com.giveawaytool.ui.views {
 	 * @author LachhhSSD
 	 */
 	public class ViewNameList extends ViewBase {
-		static public var EMPTY_ARRAY:Array = [];
-		private var names:Array = EMPTY_ARRAY;
+		static public var EMPTY_ARRAY:Vector.<MetaParticipant> = new Vector.<MetaParticipant>();
+		private var names:Vector.<MetaParticipant> = EMPTY_ARRAY;
 		public var views:Vector.<ViewName> = new Vector.<ViewName>();
 		public var viewScrollBar:ViewScrollBar;
 		
@@ -45,11 +45,9 @@ package com.giveawaytool.ui.views {
 			names = EMPTY_ARRAY;
 			refresh();
 		}
-        
-        public function setNames(newNames:Array):void {
-			
+
+		public function setNames(newNames : Vector.<MetaParticipant>) : void {
             names = newNames;
-			
         }
 		
 		private function destroyAllChildren():void {
@@ -63,15 +61,15 @@ package com.giveawaytool.ui.views {
 		public function getViewFromName(pName:String):ViewName {
 			for (var i : int = 0; i < views.length; i++) {
 				var v:ViewName = views[i];
-				if(v.name == pName) return v;
+				if(v.metaParticipant.name == pName) return v;
 			}
 			return null;
 		}
 		
 		private function cleanNames():void {
 			for (var i : int = 0; i < names.length; i++) {
-				var name:String = names[i];
-				if(name == "" || name == null) {
+				var name:MetaParticipant = names[i];
+				if(name.isNull()) {
 					names.splice(i, 1);
 					 i--;
 				}
@@ -87,19 +85,27 @@ package com.giveawaytool.ui.views {
 		public function createViews():void {
 			destroyAllChildren();
 			cleanNames();
-			names.sort();
+			names.sort(MetaParticipant.sortByNameLowerCase);
 			for (var i : int = 0; i < names.length; i++) {
-				var name:String = names[i];
-				var newView:ViewName = new ViewName(screen, contentMc);
-				newView.name = name;
+				var name:MetaParticipant = names[i];
+				var newView:ViewName = creatViewWithName();
+				newView.metaParticipant = name;
 				newView.refresh();
 				newView.visual.x = 0;
 				newView.visual.y = i*17;
-				screen.registerClickWithCallback(newView.visual, new Callback(removeViewWithFx, this, [newView]));
+				
 
 				views.push(newView);
 			}	
 		}
+		
+		private function creatViewWithName():ViewName {
+			var result:ViewName = new ViewName(screen, contentMc);
+			screen.registerClickWithCallback(result.visual, new Callback(removeViewWithFx, this, [result]));
+			return result;
+			
+		}
+			
 		
 		public function flash():void {
 			for (var i : int = 0; i < views.length; i++) {
@@ -107,6 +113,11 @@ package com.giveawaytool.ui.views {
 				CallbackWaitEffect.addWaitCallFctToActor(actor, newView.flash, i);
 				if(i > 20) return;
 			}
+		}
+		
+		public function removeViewFromParticipants(lstToREmove:Vector.<MetaParticipant>):void {
+			var a:Array = MetaParticipant.toArray(lstToREmove);
+			removeViewFromNames(a);
 		}
 		
 		public function removeViewFromNames(lstToREmove:Array):void {
@@ -117,7 +128,7 @@ package com.giveawaytool.ui.views {
 				if(v == null) continue;
 				
 				if(numFx < 20) {
-					var fx:UIEffect = createNameTossed(v.name);
+					var fx:UIEffect = createNameTossed(v.metaParticipant.name);
 					var p:Point = new Point();
 					p = v.visual.localToGlobal(p);
 					fx.px = p.x+100;
@@ -133,7 +144,7 @@ package com.giveawaytool.ui.views {
 		
 		private function removeViewWithFx(v:ViewName):void {
 			removeView(v);
-			createNameTossed(v.name);
+			createNameTossed(v.metaParticipant.name);
 		}
         
         
@@ -175,15 +186,24 @@ package com.giveawaytool.ui.views {
 		
 		public function quickRefresh():void {
 			for (var i : int = 0; i < names.length; i++) {
-				var name:String = names[i];
-				var newView:ViewName = views[i];
-				newView.name = name;
+				var name:MetaParticipant = names[i];
+				var newView:ViewName;
+				if(i >= views.length) {
+					newView = creatViewWithName();
+					views.push(newView);
+				} else {
+					newView = views[i];
+				}
+				
+				newView.metaParticipant = name;
 				newView.refresh();
 				newView.visual.x = 0;
 				newView.visual.y = i*17;
 			}
+			
 			refreshScollBar();
 			refreshTotal();
+			emptyMc.visible = (names.length <= 0) && !isLoading();
 		}
 		
 		public function refreshTotal():void {
@@ -198,6 +218,8 @@ package com.giveawaytool.ui.views {
 			emptyMc.visible = (names.length <= 0) && !isLoading();
 			flash();
 		}
+
+		
 		
 		public function showLoading(b:Boolean):void {
 			loadingMc.visible = b;
@@ -209,7 +231,7 @@ package com.giveawaytool.ui.views {
 			return (loadingMc.visible);
 		}
         
-        public function getNames():Array {
+        public function getNames():Vector.<MetaParticipant> {
             return names;
         }
 		

@@ -42,7 +42,7 @@ package com.giveawaytool.ui.views {
 			
 			tweenNumber = TweenNumberComponent.addToActor(screen);
 			tweenNumber.value = 0;
-			tweenNumber.goto = 0;
+			tweenNumber.gotoValue = 0;
 			tweenNumber.ease = 1;
 		}
 
@@ -90,8 +90,8 @@ package com.giveawaytool.ui.views {
 			checkedMc.visible = metaGoal.showWidget;
 			//enableCheckedMc.visible = metaGoal.enabled;
 			logicOnOff.isOn = metaGoal.enabled;
-			tweenNumber.goto = metaGoal.crntAmount;
-			tweenNumber.ease = Math.abs((tweenNumber.goto-tweenNumber.value)/40);
+			tweenNumber.gotoValue = metaGoal.crntAmount;
+			tweenNumber.ease = Math.abs((tweenNumber.gotoValue-tweenNumber.value)/40);
 			desactivateBtn.visible = metaGoal.enabled;
 		}
 		

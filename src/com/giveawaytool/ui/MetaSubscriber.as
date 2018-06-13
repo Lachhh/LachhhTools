@@ -11,6 +11,7 @@ package com.giveawaytool.ui {
 		public var isNew : Boolean = false ;
 		public var numMonthInARow : int = 0 ;
 		public var name:String = "Dummy" ;
+		public var nameInLowerCase:String = "dummy" ;
 		public var metaGameWispSubInfo:MetaGameWispSub = new MetaGameWispSub() ;
 		public var date : Date = new Date() ;
 		public var modelSubSource : ModelSubcriberSource = ModelSubcriberSourceEnum.TWITCH;
@@ -37,6 +38,7 @@ package com.giveawaytool.ui {
 			metaGameWispSubInfo.decode(loadData["metaGameWispSubInfo"]);
 			modelSubSource = ModelSubcriberSourceEnum.getFromId(loadData["modelSubSource"]);
 			date = new Date(loadData["date"]);
+			nameInLowerCase = name.toLowerCase();
 			
 			if(modelSubSource.isNull) modelSubSource = ModelSubcriberSourceEnum.TWITCH;
 		}
@@ -48,6 +50,7 @@ package com.giveawaytool.ui {
 		static public function createFromIRCMsg(m:MetaIRCMessage):MetaSubscriber {
 			var result:MetaSubscriber = new MetaSubscriber();
 			result.name = m.getSubName();
+			result.nameInLowerCase = result.name.toLowerCase();
 			result.numMonthInARow = m.getResubMonth();
 			result.date = new Date();
 			return result;
@@ -75,19 +78,20 @@ package com.giveawaytool.ui {
 		public static function create2(name : String, num:int) : MetaSubscriber {
 			var result:MetaSubscriber = new MetaSubscriber();
 			result.name = name;
+			result.nameInLowerCase = result.name.toLowerCase();
 			result.numMonthInARow = num;
 			
 			return result;
 		}
 		
 		public function isSameNameAndSource(metaSub : MetaSubscriber) : Boolean {
-			if(name.toLowerCase() != metaSub.name.toLowerCase()) return false;
+			if(nameInLowerCase != metaSub.nameInLowerCase) return false;
 			if(modelSubSource.id != metaSub.modelSubSource.id) return false;
 			return true;
 		}
 		
 		public function isSameNameAndSource2(pName :String, pModelSource:ModelSubcriberSource ) : Boolean {
-			if(name.toLowerCase() != pName .toLowerCase()) return false;
+			if(nameInLowerCase != pName .toLowerCase()) return false;
 			if(modelSubSource.id != pModelSource.id) return false;
 			return true;
 		}

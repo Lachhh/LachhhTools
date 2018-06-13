@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import com.giveawaytool.ui.views.MetaParticipant;
 	import com.giveawaytool.effect.EffectBlinking;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewCountdownEdit;
@@ -81,7 +82,7 @@ package com.giveawaytool.ui {
 			destroy();
 			
 			if(MetaGameProgress.instance.metaGiveawayConfig.metaAnimation.useDefault) {
-				new UI_LoterySpin(viewGiveaway.viewNameList.getNames());
+				new UI_LoterySpin(MetaParticipant.toArray(viewGiveaway.viewNameList.getNames()));
 			} else {
 				var d:Dictionary = MetaGameProgress.instance.metaGiveawayConfig.encode();
 				d["participants"] = MetaGameProgress.instance.metaGiveawayConfig.participants;

@@ -15,8 +15,8 @@ package com {
 		public var text:String;
 		public var resubName:String = "";
 		public var resubMonths:int = -1;
+		public var bits:int = 0;
 		public var metaEmotes:Array = new Array();
-		
 		public var moderator:Boolean = false;
 		
 		public function MetaIRCMessage() {
@@ -52,6 +52,7 @@ package com {
 		}
 		
 		public function isCheerAlert():Boolean {
+			if(bits >= 1) return true;
 			if(isNotificationFromTwitch()) return false;
 			var numBits:int = getCheerBitCount();
 			 
@@ -61,13 +62,12 @@ package com {
 		
 		public function isNewSubAlert():Boolean {
 			if(!isNotificationFromTwitch()) return false;
-			if(text.indexOf("subscribed for") >= 0) return true;
-			return text.indexOf("just subscribed") >= 0;
+			return resubMonths == 1;
 		}
 		
 		public function isReSubAlert():Boolean {
 			if(!isNotificationFromTwitch()) return false;
-			return resubMonths > 0;
+			return resubMonths > 1;
 		}
 		
 		public function getCheerName():String {
@@ -76,6 +76,7 @@ package com {
 		}
 		
 		public function getCheerBitCount():int {
+			if(bits >= 1) return bits;
 			var data:Array = text.split(" ");
 			var result:int = 0;
 			for (var i : int = 0; i < data.length; i++) {
@@ -223,8 +224,15 @@ package com {
 					continue;
 				}
 				
+				if(msgStr.indexOf("bits=") >= 0){
+					var bitStr:String = msgStr.replace("bits=", ""); 
+					result.bits = FlashUtils.myParseFloat(bitStr);
+					continue;
+				}
+				
 				if(msgStr.indexOf("msg-param-months=") >= 0){
 					resubMonths = int(msgStr.replace("msg-param-months=", ""));
+					if(resubMonths <= 0) resubMonths = 1;
 					continue;
 				}
 				if(msgStr.indexOf("emotes=") >= 0){
@@ -237,6 +245,11 @@ package com {
 					}
 				}
 			}
+			
+		/*	if(msg.indexOf(" USERNOTICE ") == -1) {
+				isResubAlert = false;
+				resubMonths = 0;
+			}*/
 			
 			if(isResubAlert){
 				result.name = "twitchnotify";
@@ -321,7 +334,7 @@ package com {
 		}
 
 		public function toString() : String {
-			return name + ": " + text;
+			return rawMsg;
 		}
 	}
 }

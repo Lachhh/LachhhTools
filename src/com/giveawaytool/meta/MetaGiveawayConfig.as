@@ -1,8 +1,10 @@
 package com.giveawaytool.meta {
-	import com.giveawaytool.ui.ModelAlertTypeEnum;
 	import com.giveawaytool.io.twitch.TwitchConnection;
-	import com.lachhh.utils.Utils;
+	import com.giveawaytool.ui.ModelAlertTypeEnum;
+	import com.giveawaytool.ui.views.MetaParticipant;
 	import com.lachhh.lachhhengine.VersionInfo;
+	import com.lachhh.utils.Utils;
+
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -15,12 +17,12 @@ package com.giveawaytool.meta {
 		public var autoChatAdd:Boolean = true;
 		public var autoChatAddCmd:String = "!here";
 		
-		public var participants:Array;
+		public var participants:Vector.<MetaParticipant>;
 		public var moderators:Array;
 		private var saveData : Dictionary = new Dictionary();
 
 		public function MetaGiveawayConfig() {
-			participants = [];
+			participants = new Vector.<MetaParticipant>();
 			moderators = [];
 		}
 
@@ -59,26 +61,31 @@ package com.giveawaytool.meta {
 			for (var i : int = 0; i < list.length; i++) {
 				var name:String = list[i];
 				if(bAllowDuplicate) {
-					participants.push(name);
+					addSingleParticipant(name);
 					continue;
 				}
 				if(!contains(name)) {
-					participants.push(name); 
+					addSingleParticipant(name);
 				}
 			}
+		}
+		
+		public function addSingleParticipant(pNane:String):void {
+			participants.push(new MetaParticipant(pNane));
 		}
 		
 		public function removeNonSub():Array {
 			var result:Array = new Array();
 			if(!TwitchConnection.isLoggedIn()) return result;
 			for (var i : int = 0; i < participants.length; i++) {
-				var name:String = participants[i];
-				if(!TwitchConnection.instance.listOfSubs.containsName(name)) {
-					result.push(name);
+				var metaParticipant:MetaParticipant = participants[i];
+				if(!TwitchConnection.instance.listOfSubs.containsName(metaParticipant.name)) {
+					result.push(metaParticipant);
 					participants.splice(i, 1);
 					i--;
 				}
 			}
+			
 			return result;
 		}
 		
@@ -86,24 +93,26 @@ package com.giveawaytool.meta {
 			var result:Array = new Array();
 			if(!TwitchConnection.isLoggedIn()) return result;
 			for (var i : int = 0; i < participants.length; i++) {
-				var name:String = participants[i];
-				if(!TwitchConnection.instance.isModerator(name)) {
-					result.push(name);
+				var metaParticipant:MetaParticipant = participants[i];
+				if(!TwitchConnection.instance.isModerator(metaParticipant.name)) {
+					result.push(metaParticipant);
 					participants.splice(i, 1);
 					i--;
 				}
 			}
+			
 			return result;
 		}
 		
 		public function contains(pName:String):Boolean {
+			var lwName:String = pName.toLowerCase(); 
 			for (var i : int = 0; i < participants.length; i++) {
-				var name:String = participants[i];
-				if(pName.toLowerCase() == name.toLowerCase()) return true;
+				var name:MetaParticipant = participants[i];
+				if(lwName == name.nameToLowerCase) return true;
 			}
 			return false;
 		}
-		
+				
 		public function isModerator(str:String):Boolean {
 			if(!TwitchConnection.isLoggedIn()) return (moderators.indexOf(str) != -1);
 			 

@@ -28,8 +28,7 @@ package com.giveawaytool.ui {
 			screen.registerClick(cheersBtn, onCheers);
 			screen.registerClick(chestBtn, onChest);
 			screen.registerClick(tutorialBtn, onTutorial);
-			
-
+		
 			onGiveaway();
 		}
 
@@ -42,10 +41,7 @@ package com.giveawaytool.ui {
 
 		private function onCheers() : void {
 			if(uiCrnt as UI_CheerAlert) return ;
-			/*if(!UI_Menu.instance.logicNotification.logicPatreonAccess.canAccessCheers()) {
-				onChest();
-				return;
-			}*/
+			
 			closeCurrent();
 			uiCrnt = new UI_CheerAlert();
 			animUIOpen(cheersBtn);

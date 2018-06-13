@@ -48,6 +48,10 @@ package com.giveawaytool {
 			
 			VersionInfo.trackerAPI = new GoogleAnalyticController(this, 'UA-50260892-4');
 			VersionInfo.trackerAPI.trackView("Tools Opened");
+			
+			var b:FX_FONT_FUCK = new FX_FONT_FUCK();
+			var a:FX_FONT_FUCK_2 = new FX_FONT_FUCK_2();
+			
 		}				
 		
 		override public function update():void {
