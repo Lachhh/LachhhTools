@@ -18,9 +18,6 @@ package com.flashinit {
 			m.init();
 			new UI_Updater("http://lachhhtools.com/dl/update_flash.xml");
 		}
-
-
-				
 	}
 }
 

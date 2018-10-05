@@ -17,4 +17,6 @@
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/as3crypto.swc</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/Flash-Socket.IO.swc</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/Firc.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/PlayerIOClient.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/analytics_flash.swc</AS3Classpath>
 </AS3Classpath>

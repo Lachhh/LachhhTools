@@ -14,7 +14,7 @@ package com.lachhh.lachhhengine {
 		static public var hasHostAlert:Boolean = true;
 		
 		static public var donationSource:ModelDonationSource = ModelDonationSourceEnum.STREAM_TIP;
-		static public var URL_TWITCH_LF:String = "http://www.twitch.tv/LachhhAndFriends";
+		static public var URL_TWITCH_LF:String = "http://www.twitch.tv/Lachhh";
 		static public var URL_TWITCH_FAMILYJULES_7X:String = "http://www.twitch.tv/FamilyJules7x";
 		static public var URL_YOUTUBE_FAMILYJULES_7X:String = "https://www.youtube.com/user/FamilyJules7X";
 		static public var URL_TUTORIAL_GIVEAWAY:String = "https://www.youtube.com/embed/0wchRe2zQR8";

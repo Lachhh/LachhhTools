@@ -1,8 +1,4 @@
 package com.giveawaytool.meta.donations {
-	import com.lachhh.lachhhengine.DataManager;
-	import com.lachhh.utils.Utils;
-
-	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
 	 */
@@ -19,7 +15,7 @@ package com.giveawaytool.meta.donations {
 		}
 
 		override public function convertRawDataToArray(output : Array, rawData : Object) : Array {
-			Utils.ClearArray(output);
+			/*Utils.ClearArray(output);
 			var d:Dictionary = DataManager.stringToDictionnary(rawData + "");
 			
 			var tips:Dictionary = d.tips;
@@ -31,8 +27,9 @@ package com.giveawaytool.meta.donations {
 				output.push(newDonation);
 				i++;
 				crntTip = tips[i+""];
-			}
-			return output;
+			}*/
+			// Streamtip is dead :(
+			return new Array();
 		}
 	}
 }

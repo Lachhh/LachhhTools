@@ -426,7 +426,7 @@ package com.giveawaytool.io.twitch {
             if (usernameLowerCase == "weallplaycast") return true;
             //if (usernameLowerCase == "slickentertainmentinc") return true;
             //if (usernameLowerCase == "brawlhalla") return true;
-			if (usernameLowerCase == "lachhhh") return true;
+			if (usernameLowerCase == "lachhh") return true;
 			if (usernameLowerCase == "80pgaming") return true;
 			if (usernameLowerCase == "hiimmikegaming") return true;
 			if (usernameLowerCase == "jacklifear") return true;

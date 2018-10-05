@@ -1,4 +1,5 @@
 package com.giveawaytool.io.playerio {
+	import com.giveawaytool.ui.UI_PopUp;
 	import playerio.Message;
 
 	import com.giveawaytool.io.PlayerIOLachhhRPGController;
@@ -19,7 +20,7 @@ package com.giveawaytool.io.playerio {
 		}
 		
 		public function fetchServerData():void {
-			MetaServerProgress.instance.getGamewispData(new Callback(onGameWispTokenReceived, this, null), null); 
+			MetaServerProgress.instance.getGamewispData(new Callback(onGameWispTokenReceived, this, null), new Callback(onGameWispServerTokenError, this, null)); 
 		}
 		
 		private function onGameWispTokenReceived() : void {
@@ -27,6 +28,14 @@ package com.giveawaytool.io.playerio {
 			var newAccessToken:String = msg.getString(0); 
 			
 			validateToken(newAccessToken, new Callback(UIBase.manager.refresh, UIBase.manager, null));
+		}	
+		
+			private function onGameWispServerTokenError() : void {
+			var msg : Message = PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getGamewispDataSuccess.msg;
+			var errorMsg:String = msg.getString(0); 
+			UI_PopUp.createOkOnly(errorMsg, null);
+			
+			//validateToken(newAccessToken, new Callback(UIBase.manager.refresh, UIBase.manager, null));
 		}	
 		
 
@@ -37,7 +46,11 @@ package com.giveawaytool.io.playerio {
 		public function tryToSendNewAccessTokenToDB(success : Callback, callbackOnError : Callback) : void {
 			callbackSendNewTokenToServerSuccess = success;
 			callbackSendNewTokenToServerError = callbackOnError;
-			GameWispConnection.getInstance().fecthNewAccessToken(new Callback(validateToken, this, [callbackSendNewTokenToServerSuccess]), callbackSendNewTokenToServerError);			
+			GameWispConnection.getInstance().fecthNewAccessToken(new Callback(validateToken2, this, [callbackSendNewTokenToServerSuccess]), callbackSendNewTokenToServerError);			
+		}
+		
+		public function validateToken2(c:Callback) : void {
+			//GameWispConnection.getInstance().validateServerToken(GameWispConnection.getInstance().isServerTokenValid, c);
 		}
 				
 		public function validateToken(token:String, c:Callback) : void {
