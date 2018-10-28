@@ -10,11 +10,14 @@ package com.giveawaytool.io.playerio {
 	public class MetaGameWispSub {
 		public var name:String = "";
 		public var status:String = "";
+		public var source:String = "";
 		public var tierCostStr:String = "";
 		public var tierCostInCents : Number = 0;
 		public var tierLevel : int = 0;
 		public var tierTitle : String = "";
 		public var tierDesc: String = "";
+		public var date:Date = new Date();
+		static public var dateOnMonthEarlier:Date ;
 		private var saveData : Dictionary = new Dictionary();
 
 		public function MetaGameWispSub() {
@@ -23,14 +26,20 @@ package com.giveawaytool.io.playerio {
 
 		static public function createFromDb(obj : Object) : MetaGameWispSub {
 			if(obj == null) return null;
+			
 			var result : MetaGameWispSub = new MetaGameWispSub();
 			result.name = obj.name;
 			result.status = obj.status;
+			result.source = obj.source;
 			result.tierCostStr = obj.tierCost;
 			result.tierLevel = obj.tierLevel;
 			result.tierTitle = obj.tierTitle;
 			result.tierDesc = obj.tierDesc;
-			
+			if(obj.date) {
+				result.date = new Date(obj.date);
+			} else {
+				result.date = new Date();
+			}
 			result.tierCostInCents = FlashUtils.myParseFloat(result.tierCostStr.substring(1)) * 100;
 
 			return result;
@@ -138,18 +147,41 @@ package com.giveawaytool.io.playerio {
 		}
 
 		public function isActive() : Boolean {
+			if(isOutofDate()) {
+				return false;
+			}
 			return status == "active";
+		}
+		
+		public function isOutofDate() : Boolean {
+			initEarlyDate();
+			return date < dateOnMonthEarlier;
+		}
+
+		private function initEarlyDate() : void {
+			if(dateOnMonthEarlier) return;
+			dateOnMonthEarlier = new Date();
+			dateOnMonthEarlier.time -= 1000*60*60*24*30;
 		}
 		
 		public function isExpiring() : Boolean {
 			return status == "grace_period";
 		}
 		
+		public function getTierCents() :int {
+			if(!isActive()) return 0;
+			return tierCostInCents;
+		}
+		
 		public function isInactive() : Boolean {
 			if(status == "inactive") return true;
+			if(isOutofDate()) return true;
 			return false;
 		}
 				
-		
+		public function isLachhh() : Boolean {
+			if(name == "lachhh") return true;
+			return false;
+		}
 	}
 }

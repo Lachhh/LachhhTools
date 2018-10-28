@@ -23,7 +23,7 @@ package com.giveawaytool.ui {
 		}
 
 		private function onClick() : void {
-			Utils.navigateToURLAndRecord(VersionInfo.URL_GAMEWISP_LACHHHTOOLS);
+			Utils.navigateToURLAndRecord(VersionInfo.URL_TWITCH_LF);
 		}
 
 		override public function refresh() : void {

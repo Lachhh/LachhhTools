@@ -11,8 +11,8 @@ package com.giveawaytool.io.playerio {
 		public static var NULL:ModelPatreonReward = new ModelPatreonReward(-1, "", -1, false, 0);
 		
 		public static var STREAMER_BRONZE:ModelPatreonReward = 		create(0, "pledge5_broadcaster", 	5*DOLLAR, false, 0);
-		public static var STREAMER_SILVER:ModelPatreonReward = 		create(1, "pledge10_broadcaster", 	10*DOLLAR, false, 0);
-		public static var STREAMER_GOLD:ModelPatreonReward = 		create(2, "pledge25_broadcaster",   25*DOLLAR, true,  0);
+		public static var STREAMER_SILVER:ModelPatreonReward = 		create(1, "pledge10_broadcaster", 	10*DOLLAR-1, false, 0);
+		public static var STREAMER_GOLD:ModelPatreonReward = 		create(2, "pledge25_broadcaster",   25*DOLLAR-1, true,  0);
 		
 		public static function create(id:int, idStr:String, thresholdCents:int, isManuallyControlled:Boolean, goldenXPChance:Number):ModelPatreonReward{
 			if (!getFromId(id).isNull) throw new Error("Duplicate ID!");

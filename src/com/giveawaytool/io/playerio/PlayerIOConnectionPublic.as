@@ -44,6 +44,8 @@ package com.giveawaytool.io.playerio {
 			}
 		}
 		
+		
+		
 		private function onAuthTokenSuccess(s:Callback):void {
 			if(s) s.call();
 			disconnectFromRoom();

@@ -13,9 +13,16 @@ package com.giveawaytool.io.playerio {
 			
 		}
 		
+		public function refreshTwitchSub(authCode:String,success : Callback, failure : Callback) : void {
+			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.refreshTwitchSub(authCode, success, failure);
+		}
+		
+		public function refreshTwitchSubLachhh(authCode:String,userId:String, success : Callback, failure : Callback) : void {
+			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.refreshTwitchSubLachhh(authCode, userId, success, failure);
+		}
+		
 		public function getTwitchAccessToken(authCode:String, success : Callback, failure : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().myPublicConnection.getTwitchAccesssToken(authCode, success, failure);
-			
 		}
 		
 		public function getStreamLabsAccessToken(authCode:String, success : Callback, failure : Callback) : void {

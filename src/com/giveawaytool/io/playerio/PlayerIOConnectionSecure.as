@@ -16,9 +16,9 @@ package com.giveawaytool.io.playerio {
 	public class PlayerIOConnectionSecure extends PlayerIOConnection  {
 		public var myAccountName:String = "";
 		public var myAccountNameWithoutPrefix:String = "";
-		public var userId:String;
-		public var authToken:String;
-		public var msgAuthType:String;
+		public var userId : String;
+		public var authToken : String;
+		public var msgAuthType : String;
 		public var myDate:Date;
 		
 		private var _connection:Connection;
@@ -202,5 +202,7 @@ package com.giveawaytool.io.playerio {
 			connectionGameRoom.connectToRoom("GameRoom");
 
 		}
+
+		
 	}
 }

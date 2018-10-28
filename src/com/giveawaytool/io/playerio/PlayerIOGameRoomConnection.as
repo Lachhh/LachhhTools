@@ -23,6 +23,10 @@ package com.giveawaytool.io.playerio {
 		
 		public var getTwitchTokenSuccess : PlayerIORoomCommand;
 		public var getTwitchTokenFailure : PlayerIORoomCommand;
+		private var refreshTwitchSubSuccess : PlayerIORoomCommand;
+		private var refreshTwitchSubFailure : PlayerIORoomCommand;
+		private var refreshTwitchSubToLachhhSuccess : PlayerIORoomCommand;
+		private var refreshTwitchSubToLachhhFailure : PlayerIORoomCommand;
 
 		public function PlayerIOGameRoomConnection(pClient : Client, pDebug : Boolean) {
 			super(pClient, pDebug);
@@ -47,12 +51,29 @@ package com.giveawaytool.io.playerio {
 			getGamewispTokenSuccess = new PlayerIORoomCommand(this, "getGamewispTokenSuccess");
 			getGamewispTokenFailure = new PlayerIORoomCommand(this, "getGamewispTokenFailure");
 			
+			refreshTwitchSubSuccess = new PlayerIORoomCommand(this, "refreshTwitchSubSuccess");
+			refreshTwitchSubFailure = new PlayerIORoomCommand(this, "refreshTwitchSubFailure");
+			
+			refreshTwitchSubToLachhhSuccess = new PlayerIORoomCommand(this, "refreshTwitchSubToLachhhSuccess");
+			refreshTwitchSubToLachhhFailure = new PlayerIORoomCommand(this, "refreshTwitchSubToLachhhFailure");
 		}
 		
 		public function getTwitchAccesssToken(authCode: String, success : Callback, failure : Callback) : void {
 			getTwitchTokenSuccess.onMsg = success;
 			getTwitchTokenFailure.onMsg = failure;
 			connection.send("getTwitchAccessToken", authCode);
+		}
+		
+		public function refreshTwitchSub(authCode: String, success : Callback, failure : Callback) : void {
+			refreshTwitchSubSuccess.onMsg = success;
+			refreshTwitchSubFailure.onMsg = failure;
+			connection.send("refreshTwitchSub", authCode);
+		}
+		
+		public function refreshTwitchSubLachhh(authCode: String, userId: String, success : Callback, failure : Callback) : void {
+			refreshTwitchSubToLachhhSuccess.onMsg = success;
+			refreshTwitchSubToLachhhFailure.onMsg = failure;
+			connection.send("refreshTwitchSubToLachhh", authCode, userId);
 		}
 		
 		public function getStreamLabsAccesssToken(authCode: String, success : Callback, failure : Callback) : void {

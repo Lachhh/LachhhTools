@@ -56,12 +56,13 @@ package com.giveawaytool.io.twitch {
 		
 		public var isLoggedIn:Boolean = false;
 		private var username:String = "";
+		private var userId:String = "";
 		
 		public var listOfSubs : MetaSubscribersList = new MetaSubscribersList();
 		public var followersData : MetaFollowerList = new MetaFollowerList();
 		public var channelData : MetaTwitchChannelData = new MetaTwitchChannelData();
 		public var isLive : Boolean = false;
-		
+		private var authCode : String;
 
 		public function TwitchConnection(pIsAdmin : Boolean) {
 			accessToken = "";
@@ -76,6 +77,7 @@ package com.giveawaytool.io.twitch {
 			listOfMods = new Array();
 			listOfViewers = new Array();
 			username = "";
+			userId = "";
 			isLoggedIn = false;
 		}
 		
@@ -231,9 +233,10 @@ package com.giveawaytool.io.twitch {
 		
 		public function getConnectURL():String {
 			var redirect:String = VersionInfoDONTSTREAMTHIS.TWITCH_REDIRECT_URI;
-			var url:String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID + "&redirect_uri=" + redirect + "&force_verify=true&scope=user_read";
+			var url:String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&api_version=5&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID + "&redirect_uri=" + redirect + "&force_verify=true&scope=user_read";
 			url = url + "+channel_commercial";
 			url = url + "+chat_login";
+			url = url + "+user_subscriptions";
 			if(isAdminConnect) url = url + "+channel_subscriptions";			 
 			return url;
 		}
@@ -246,6 +249,7 @@ package com.giveawaytool.io.twitch {
 
 		public function setCodeFromWebSocket(authCode : String) : void {
 			if(isLoggedIn) return;
+			this.authCode = authCode;
 			MetaServerProgress.instance.getTwitchAccessToken(authCode, new Callback(onAuthCodeSendSuccess, this, null), new Callback(onAuthCodeSendError, this, null));
 		}
 		
@@ -278,7 +282,7 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		public function connectStep2FetchUsername():void {
-			var url:String = "https://api.twitch.tv/kraken?oauth_token=" + accessToken + "&scope=user_read";
+			var url:String = "https://api.twitch.tv/kraken?oauth_token=" + accessToken + "&scope=user_read&api_version=5";
 			var loader:URLLoader = new URLLoader() ;
 			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
 			var request:URLRequest = new URLRequest(url);
@@ -301,6 +305,7 @@ package com.giveawaytool.io.twitch {
 			}
 			
 			username = token["user_name"];
+			userId = token["user_id"];
 			isLoggedIn = true;
 			
 			checkIfIsLive();
@@ -314,7 +319,7 @@ package com.giveawaytool.io.twitch {
 		
 		
 		public function checkIfIsLive():void  {
-			var url:String = "https://api.twitch.tv/kraken/streams/" + getNameOfAccount();
+			var url:String = "https://api.twitch.tv/kraken/streams/" + getAccountId() + "?api_version=5";
 			var loader:URLLoader = new URLLoader() ;
 			var request : URLRequest = new URLRequest(); 
 			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
@@ -335,7 +340,7 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		private function checkIfPartnered():void  {
-			var url:String = "https://api.twitch.tv/kraken/channels/" + getNameOfAccount();
+			var url:String = "https://api.twitch.tv/kraken/channels/" + getAccountId()  + "?api_version=5";
 			var loader:URLLoader = new URLLoader() ;
 			var request : URLRequest = new URLRequest(); 
 			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
@@ -413,7 +418,7 @@ package com.giveawaytool.io.twitch {
 			if(!TwitchConnection.isLoggedIn()) return false;
 			var usernameLowerCase:String = username.toLocaleLowerCase();
             if (usernameLowerCase == "lachhhandfriends") return true;
-			
+			if (usernameLowerCase == "lachhh") return true;
             return false;
 		}
 		
@@ -450,6 +455,12 @@ package com.giveawaytool.io.twitch {
 			if(instance == null) return "";
 			if(!isLoggedIn()) return "";							
 			return instance.username;
+		}
+		
+		static public function getAccountId():String {
+			if(instance == null) return "";
+			if(!isLoggedIn()) return "";							
+			return instance.userId;
 		}
 		
 		static public function getNameOfAccountWithTwitchPrefix():String {

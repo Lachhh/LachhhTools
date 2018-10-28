@@ -131,9 +131,11 @@ package com.giveawaytool.io.playerio {
 		
 		public function LoadAllGameWispDub(m:MetaGameWispSubGroup, success:Callback, errorCall:Callback):void {
 			if(!connected) return; 
-			_client.bigDB.loadRange("GamewispData","ByName", null, null, null, 100,   
+			var offset:int = 0;
+			_client.bigDB.loadRange("GamewispData","ByName", null, null, null, 1000,   
 				function(ob:Array):void {
 					m.setSubs(ob);
+					
 					if(success) success.call();	
 				}, 
 				function(error:Object):void {

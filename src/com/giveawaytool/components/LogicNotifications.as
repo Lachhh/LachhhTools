@@ -1,13 +1,16 @@
 package com.giveawaytool.components {
-	import com.TwitchLachhhIsLiveSimpleCheckUp;
+	import com.animation.exported.UI_LOADING;
 	import com.LogicTransferFileToUserDoc;
 	import com.giveawaytool.effect.CallbackTimerEffect;
+	import com.giveawaytool.io.playerio.MetaServerProgress;
 	import com.giveawaytool.io.twitch.LogicFollowAlert;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.io.twitch.emotes.LogicListenForEmotes;
 	import com.giveawaytool.meta.MetaGameProgress;
+	import com.giveawaytool.ui.UI_Loading;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.components.ActorComponent;
+	import com.lachhh.lachhhengine.ui.UIBase;
 
 	/**
 	 * @author LachhhSSD
@@ -78,7 +81,30 @@ package com.giveawaytool.components {
 			
 			logicFollowAlert.refreshFollowers();
 			logicSubAlert.mergeTwitchSubsInSavedList();
-			logicGameWisp.connect();
+			
+			
+			logicGameWisp.connect(new Callback(onGameWispDone, this, null));
+		}
+		
+		public function onGameWispDone():void {
+			
+			//if(TwitchConnection.instance.isLachhhAndFriends()) {
+				//UI_Loading.show("Refreshing DB because you're Lachhh");
+				//MetaServerProgress.instance.refreshTwitchSub(TwitchConnection.instance.accessToken, new Callback(onAllDone, this, null), new Callback(onAllDone, this, null));
+			//} else {
+				UI_Loading.show("Checking if you're sub to Lachhh");
+				MetaServerProgress.instance.refreshTwitchSubLachhh(TwitchConnection.instance.accessToken, TwitchConnection.getAccountId(),  new Callback(onAllDone, this, null), new Callback(onAllDone, this, null));
+			//}
+			
+			
+		}
+		
+		private function onAllDone():void {
+			UI_Loading.hide();
+			
+			logicGameWisp.checkToShowAds();
+			
+			UIBase.manager.refresh();
 		}
 		
 		private function onConnectToChat():void {

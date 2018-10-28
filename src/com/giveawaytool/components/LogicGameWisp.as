@@ -24,8 +24,9 @@ package com.giveawaytool.components {
 	 */
 	public class LogicGameWisp extends ActorComponent {
 		
-		private var isLoaded:Boolean = false;
+		private var isLoaded : Boolean = false;
 		public var logicServerGameWisp : LogicServerGameWispCheck;
+		private var success : Callback;
 
 		public function LogicGameWisp() {
 			super();
@@ -34,7 +35,8 @@ package com.giveawaytool.components {
 		}
 				
 
-		public function connect() : void {
+		public function connect(success:Callback) : void {
+			this.success = success;
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.SecureConnectTwitch(TwitchConnection.instance.accessToken, new Callback(onLoginSuccess, this, null), new Callback(onLoginError, this, null));
 			UI_Loading.show("Connecting to GameWisp");
 		}
@@ -51,7 +53,7 @@ package com.giveawaytool.components {
 		private function onLoadMySub(db:DatabaseObject) : void {
 			
 			MetaGameProgress.instance.metaGameWispClientSubToLachhhTools = MetaGameWispSub.createFromDb(db); 
-			UI_Loading.hide();
+		
 			isLoaded = true;
 			if(LogicVIPAccess.isAdminAccess()) {
 				logicServerGameWisp.fetchServerData();
@@ -59,9 +61,7 @@ package com.giveawaytool.components {
 				logicServerGameWisp.validateToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, new Callback(onValidate, this, null));
 			}
 			
-			checkToShowAds();
-			
-			UIBase.manager.refresh();
+			if(success) success.call();
 		}
 
 		private function onValidate() : void {

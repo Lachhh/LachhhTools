@@ -31,7 +31,7 @@ package com.giveawaytool.ui {
 			TwitchConnection.instance = new TwitchConnection(true);
 			TwitchConnection.instance.onConnect = new Callback(onConnected, this, null);
 			TwitchConnection.instance.onConnectError = new Callback(onError, this, null);
-			TwitchConnection.instance.accessToken = MetaGameProgress.instance.metaTwitchConnection.lastAccessToken;
+			TwitchConnection.instance.accessToken = MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5;
 			
 			GameWispConnection.getInstance().validateClientToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, null);
 			refresh();
@@ -64,7 +64,7 @@ package com.giveawaytool.ui {
 			UI_Loading.hide();
 			UI_PopUp.closeAllPopups();
 			MetaGameProgress.instance.metaTwitchConnection.lastNameLogin = TwitchConnection.getNameOfAccount();
-			MetaGameProgress.instance.metaTwitchConnection.lastAccessToken = TwitchConnection.instance.accessToken;
+			MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5 = TwitchConnection.instance.accessToken;
 			
 			MetaGameProgress.instance.saveToLocal();
 			UI_Menu.instance.logicNotification.onConectedToTwitch();

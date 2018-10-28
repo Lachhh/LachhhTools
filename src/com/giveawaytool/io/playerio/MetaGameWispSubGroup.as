@@ -56,6 +56,14 @@ package com.giveawaytool.io.playerio {
 			}
 		}
 		
+		public function addSubs(ob : Array) : void {
+			for (var i : int = 0; i < ob.length; i++) {
+				var subRaw:DatabaseObject = ob[i];
+				var newSub:MetaGameWispSub = MetaGameWispSub.createFromDb(subRaw);
+				listOfSub.push(newSub); 
+			}
+		}
+		
 		public function add(m:MetaGameWispSub):void {
 			listOfSub.push(m);
 		}
@@ -71,8 +79,11 @@ package com.giveawaytool.io.playerio {
 		}
 
 		private static function sortOnPledge(a:MetaGameWispSub, b:MetaGameWispSub) : int {
-			if(a.tierCostInCents > b.tierCostInCents) return -1;
-			if(a.tierCostInCents < b.tierCostInCents) return 1;
+			if(a.getTierCents() > b.getTierCents()) return -1;
+			if(a.getTierCents() < b.getTierCents()) return 1;
+			
+			if(a.date < b.date) return 1;
+			if(a.date > b.date) return -1;
 			return 0;
 		}
 		

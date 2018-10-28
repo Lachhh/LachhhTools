@@ -4,7 +4,7 @@ package com.giveawaytool.io.twitch {
 	 * @author LachhhSSD
 	 */
 	public class MetaTwithConnection {
-		public var lastAccessToken:String = "";
+		public var lastAccessTokenV5:String = "";
 		public var lastNameLogin:String = "";
 		public var chatIRCoauth : String = "";
 		
@@ -26,13 +26,13 @@ package com.giveawaytool.io.twitch {
 		public function clear():void {
 			lastNameLogin = "";
 			chatIRCoauth = "";
-			lastAccessToken = "";
+			lastAccessTokenV5 = "";
 		}
 		
 		public function encode():Dictionary {
 			saveData["lastNameLogin"] = lastNameLogin;
 			saveData["chatIRCoauth"] = chatIRCoauth;
-			saveData["lastAccessToken"] = lastAccessToken;
+			saveData["lastAccessTokenV5"] = lastAccessTokenV5;
 			
 			return saveData; 
 		}
@@ -41,11 +41,11 @@ package com.giveawaytool.io.twitch {
 			if(loadData == null) return ;
 			chatIRCoauth = loadData["chatIRCoauth"];
 			lastNameLogin = loadData["lastNameLogin"];
-			lastAccessToken = loadData["lastAccessToken"];
+			lastAccessTokenV5 = loadData["lastAccessTokenV5"];
 			
 			if(chatIRCoauth == null) chatIRCoauth = "";
 			if(lastNameLogin == null) lastNameLogin = "";
-			if(lastAccessToken == null) lastAccessToken = "";
+			if(lastAccessTokenV5 == null) lastAccessTokenV5 = "";
 		}
 	}
 }

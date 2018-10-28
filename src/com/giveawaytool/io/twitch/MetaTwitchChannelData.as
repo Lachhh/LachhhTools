@@ -15,6 +15,7 @@ package com.giveawaytool.io.twitch {
 		public var logoBmpData : BitmapData;
 		public var logoSubBadge : BitmapData;
 		public var numFollowers:int = 0;
+		public var channedId:String = "";
 
 		public function decode(data : String) : void {
 			rawData = data;
@@ -23,6 +24,7 @@ package com.giveawaytool.io.twitch {
 			isPartner = d["partner"];
 			name = d["name"];
 			numFollowers = d["followers"];
+			channedId = d["_id"];
 			/*_id		
 			_links		
 			broadcaster_language		
