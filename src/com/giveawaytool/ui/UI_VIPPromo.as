@@ -19,6 +19,8 @@ package com.giveawaytool.ui {
 			viewHallOfFame = new ViewHallOfFame(this, hallOfFameMc);
 			
 			registerClick(patreonBtn, onClickPatreon);
+			registerClick(lachhhBtn, onClickPatreon);
+			
 			registerClick(jsbBtn, onClickJSB);
 			registerClick(btn_googlePlay, onGooglePlay);
 			registerClick(btn_ios, oniOs);
@@ -46,7 +48,7 @@ package com.giveawaytool.ui {
 		}
 		
 		private function onClickPatreon() : void {
-			Utils.navigateToURLAndRecord(VersionInfo.URL_GAMEWISP_LACHHHTOOLS);
+			Utils.navigateToURLAndRecord(VersionInfo.URL_TWITCH_LF);
 			CallbackTimerEffect.addWaitCallFctToActor(this, showSubMsg, 3000);
 		}
 		
@@ -57,6 +59,7 @@ package com.giveawaytool.ui {
 		public function get creditsMc() : MovieClip { return visual.getChildByName("creditsMc") as MovieClip;}
 		
 		public function get patreonBtn() : MovieClip { return visual.getChildByName("patreonBtn") as MovieClip;}
+		public function get lachhhBtn() : MovieClip { return visual.getChildByName("lachhhBtn") as MovieClip;}
 		public function get jsbBtn() : MovieClip { return visual.getChildByName("jsbBtn") as MovieClip;}
 		
 		public function get btn_googlePlay() : MovieClip { return visual.getChildByName("btn_googlePlay") as MovieClip;}

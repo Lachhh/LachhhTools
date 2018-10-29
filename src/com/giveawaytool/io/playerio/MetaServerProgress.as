@@ -41,7 +41,7 @@ package com.giveawaytool.io.playerio {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.GetGameWispData(success, failure);
 		}
 		
-		public function loadGameWishSub(str:String, success : Callback, errorCall : Callback) : void {
+		public function loadTwitchSub(str:String, success : Callback, errorCall : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.LoadMySub(str, success, errorCall);
 		}
 		

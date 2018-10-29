@@ -22,13 +22,13 @@ package com.giveawaytool.components {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class LogicGameWisp extends ActorComponent {
+	public class LogicIsSubToLachhh extends ActorComponent {
 		
 		private var isLoaded : Boolean = false;
 		public var logicServerGameWisp : LogicServerGameWispCheck;
 		private var success : Callback;
 
-		public function LogicGameWisp() {
+		public function LogicIsSubToLachhh() {
 			super();
 			PlayerIOLachhhRPGController.InitInstance(MainGame.instance, ModelExternalPremiumAPIEnum.TWITCH, VersionInfo.pioDebug);
 			logicServerGameWisp = new LogicServerGameWispCheck();
@@ -38,7 +38,7 @@ package com.giveawaytool.components {
 		public function connect(success:Callback) : void {
 			this.success = success;
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.SecureConnectTwitch(TwitchConnection.instance.accessToken, new Callback(onLoginSuccess, this, null), new Callback(onLoginError, this, null));
-			UI_Loading.show("Connecting to GameWisp");
+			UI_Loading.show("Connecting to Server");
 		}
 
 		private function onLoginSuccess() : void {
@@ -46,7 +46,7 @@ package com.giveawaytool.components {
 		}
 
 		private function onConnectedToGame() : void {
-			MetaServerProgress.instance.loadGameWishSub(TwitchConnection.getNameOfAccount(), new Callback(onLoadMySub, this, null), new Callback(onLoginError, this, null));
+			MetaServerProgress.instance.loadTwitchSub(TwitchConnection.getNameOfAccount(), new Callback(onLoadMySub, this, null), new Callback(onLoginError, this, null));
 			MetaGameProgress.instance.metaLachhhToolGameWispSub.loadIfEmpty();
 		}
 
