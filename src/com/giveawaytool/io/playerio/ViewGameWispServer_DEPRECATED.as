@@ -12,8 +12,8 @@ package com.giveawaytool.io.playerio {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ViewGameWispServer extends ViewBase {
-		public function ViewGameWispServer(pScreen : UIBase, pVisual : DisplayObject) {
+	public class ViewGameWispServer_DEPRECATED extends ViewBase {
+		public function ViewGameWispServer_DEPRECATED(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			statusMsgMc.gotoAndStop(1);
 			screen.setNameOfDynamicBtn(connectBtn, "Reactivate");
@@ -29,7 +29,8 @@ package com.giveawaytool.io.playerio {
 
 		private function onConnect() : void {
 			UI_PopUp.createLoading("Loading...");
-			UI_Menu.instance.logicNotification.logicGameWisp.logicServerGameWisp.tryToSendNewAccessTokenToDB(new Callback(onSuccess, this, null), new Callback(onError, this, null));
+			//UI_Menu.instance.logicNotification.logicGameWisp.logicServerGameWisp.tryToSendNewAccessTokenToDB(new Callback(onSuccess, this, null), new Callback(onError, this, null));
+			onSuccess();
 		}
 
 		private function onSuccess() : void {
@@ -47,7 +48,7 @@ package com.giveawaytool.io.playerio {
 		override public function refresh() : void {
 			super.refresh();
 			
-			var isConnected:Boolean = UI_Menu.instance.logicNotification.logicGameWisp.logicServerGameWisp.isConnected();
+			var isConnected:Boolean = UI_Menu.instance.logicNotification.logicIsSubToLachhh.logicServerGameWisp.isConnected();
 			if(isConnected) {
 				statusMsgMc.gotoAndStop(3);
 			} else {

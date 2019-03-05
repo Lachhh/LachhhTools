@@ -1,5 +1,4 @@
 package com.giveawaytool.components {
-	import com.animation.exported.UI_LOADING;
 	import com.LogicTransferFileToUserDoc;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.playerio.MetaServerProgress;
@@ -31,7 +30,7 @@ package com.giveawaytool.components {
 		
 		public var logicGiveAwayAutoChat : LogicGiveawayAutoChat;
 		public var logicVIPAccess : LogicVIPAccess;
-		public var logicGameWisp : LogicIsSubToLachhh;
+		public var logicIsSubToLachhh : LogicIsSubToLachhh;
 		
 		
 		
@@ -60,7 +59,7 @@ package com.giveawaytool.components {
 			logicSendToWidgetPlayMovie = actor.addComponent(new LogicSendToWidget(9232, true)) as LogicSendToWidget;
 			logicFollowAlert = actor.addComponent(new LogicFollowAlert()) as LogicFollowAlert;
 			logicGiveAwayAutoChat = actor.addComponent(new LogicGiveawayAutoChat(logicListenToChat)) as LogicGiveawayAutoChat;
-			logicGameWisp = actor.addComponent(new LogicIsSubToLachhh()) as LogicIsSubToLachhh;
+			logicIsSubToLachhh = actor.addComponent(new LogicIsSubToLachhh()) as LogicIsSubToLachhh;
 			logicListenForEmotes = LogicListenForEmotes.addToActor(actor, logicListenToChat);
 			
 			logicVIPAccess = actor.addComponent(new LogicVIPAccess()) as LogicVIPAccess;
@@ -83,26 +82,19 @@ package com.giveawaytool.components {
 			logicSubAlert.mergeTwitchSubsInSavedList();
 			
 			
-			logicGameWisp.connect(new Callback(onGameWispDone, this, null));
+			logicIsSubToLachhh.connect(new Callback(onSubToLachhhDone, this, null));
 		}
 		
-		public function onGameWispDone():void {
+		public function onSubToLachhhDone():void {
 			
-			//if(TwitchConnection.instance.isLachhhAndFriends()) {
-				//UI_Loading.show("Refreshing DB because you're Lachhh");
-				//MetaServerProgress.instance.refreshTwitchSub(TwitchConnection.instance.accessToken, new Callback(onAllDone, this, null), new Callback(onAllDone, this, null));
-			//} else {
-				UI_Loading.show("Checking if you're sub to Lachhh");
-				MetaServerProgress.instance.refreshTwitchSubLachhh(TwitchConnection.instance.accessToken, TwitchConnection.getAccountId(),  new Callback(onAllDone, this, null), new Callback(onAllDone, this, null));
-			//}
-			
-			
+			UI_Loading.show("Checking if you're sub to Lachhh");
+			MetaServerProgress.instance.refreshTwitchSubLachhh(TwitchConnection.instance.accessToken, TwitchConnection.getAccountId(),  new Callback(onAllDone, this, null), new Callback(onAllDone, this, null));
 		}
 		
 		private function onAllDone():void {
 			UI_Loading.hide();
 			
-			logicGameWisp.checkToShowAds();
+			logicIsSubToLachhh.checkToShowAds();
 			
 			UIBase.manager.refresh();
 		}

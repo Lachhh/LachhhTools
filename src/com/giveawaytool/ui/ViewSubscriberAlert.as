@@ -10,23 +10,23 @@ package com.giveawaytool.ui {
 	 * @author LachhhSSD
 	 */
 	public class ViewSubscriberAlert extends ViewBase {
-		public var viewGameWispSubAlert : ViewGameWispSubAlert;
+		//public var viewGameWispSubAlert : ViewGameWispSubAlert_DEPRECATED;
 		public function ViewSubscriberAlert(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
-			viewGameWispSubAlert = new ViewGameWispSubAlert(screen, gameWispConnectMc);
+			//viewGameWispSubAlert = new ViewGameWispSubAlert_DEPRECATED(screen, gameWispConnectMc);
 			screen.registerClick(newSubBtn, onNewSub);
 			screen.registerClick(resubBtn, onReSub);
-			screen.registerClick(viewGameWispSubAlert.newSubGamewispBtn, onNewSubGameWisp);
+			//screen.registerClick(viewGameWispSubAlert.newSubGamewispBtn, onNewSubGameWisp);
 			
 			
 		}
 
 		
 
-		private function onNewSubGameWisp() : void {
+		/*private function onNewSubGameWisp() : void {
 			MetaGameProgress.instance.metaSubsConfig.alertOnGameWispSub = !MetaGameProgress.instance.metaSubsConfig.alertOnGameWispSub;
 			refresh();
-		}
+		}*/
 
 		private function onReSub() : void {
 			MetaGameProgress.instance.metaSubsConfig.alertOnReSub = !MetaGameProgress.instance.metaSubsConfig.alertOnReSub;
@@ -43,8 +43,8 @@ package com.giveawaytool.ui {
 			
 			setCheckBox(MetaGameProgress.instance.metaSubsConfig.alertOnNewSub, newSubBtn);
 			setCheckBox(MetaGameProgress.instance.metaSubsConfig.alertOnReSub, resubBtn);
-			setCheckBox(MetaGameProgress.instance.metaSubsConfig.alertOnGameWispSub, viewGameWispSubAlert.newSubGamewispBtn);
-			viewGameWispSubAlert.refresh();
+			//setCheckBox(MetaGameProgress.instance.metaSubsConfig.alertOnGameWispSub, viewGameWispSubAlert.newSubGamewispBtn);
+			//viewGameWispSubAlert.refresh();
 		}
 
 		public function setCheckBox(value : Boolean, btn : MovieClip) : void {

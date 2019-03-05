@@ -1,4 +1,6 @@
 package com.giveawaytool.io.playerio {
+	import com.giveawaytool.MainGame;
+	import com.giveawaytool.effect.CallbackTimerEffect;
 	import playerio.Message;
 
 	import com.giveawaytool.io.PlayerIOLachhhRPGController;
@@ -9,8 +11,8 @@ package com.giveawaytool.io.playerio {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class GameWispConnection {
-		static public var instance: GameWispConnection; 
+	public class GameWispConnection_DEPRECATEDDD {
+		static public var instance: GameWispConnection_DEPRECATEDDD; 
 		
 		public var accessTokenClient : String;
 		public var isServerTokenValid : Boolean = false;
@@ -22,9 +24,9 @@ package com.giveawaytool.io.playerio {
 		public var metaChannelInfo : MetaGameWispChannelInfo;
 		public var metaChannelSubsGroup : MetaGameWispSubGroup = new MetaGameWispSubGroup();
 
-		static public function getInstance() : GameWispConnection {
+		static public function getInstance() : GameWispConnection_DEPRECATEDDD {
 			if(instance == null) {
-				instance = new GameWispConnection();
+				instance = new GameWispConnection_DEPRECATEDDD();
 			}
 			return instance;
 		}
@@ -37,17 +39,11 @@ package com.giveawaytool.io.playerio {
 		}
 		
 		public function fecthNewAccessToken(cOnSuccess:Callback, cOnError:Callback) : void {
-			UI_Menu.instance.logicNotification.logicSendToWidgetAuth.setModelForGameWisp();
-			callbackOnSuccess = cOnSuccess;
-			callbackOnError = cOnError;
-			Utils.navigateToURLAndRecord(getConnectURL());
+			//GameWisp is ded
+			CallbackTimerEffect.addWaitCallbackToActor(MainGame.dummyActor, cOnSuccess, 1);
+			
 		}
 
-		private function getConnectURL() : String {
-			return "https://api.gamewisp.com/pub/v1/oauth/authorize?client_id=" + VersionInfoDONTSTREAMTHIS.GAMEWISP_ID + 
-				   "&redirect_uri=" + VersionInfoDONTSTREAMTHIS.GAMEWISP_CLIENT_REDIRECT +
-				   "&response_type=code&scope=read_only,subscriber_read_limited&state=ASKDLFJsisisks23k"; 
-		}
 		
 		public function setCodeFromWebSocket(code : String) : void {
 			authCode = code;
@@ -119,7 +115,7 @@ package com.giveawaytool.io.playerio {
 		}
 		
 		public function refreshSubs(onComplete:Callback, pMetaChannelInfo:MetaGameWispChannelInfo) : void {
-			GameWispConnection.getInstance().metaChannelSubsGroup.clear();
+			GameWispConnection_DEPRECATEDDD.getInstance().metaChannelSubsGroup.clear();
 			var gameWispRequest : GameWispRequestFetchMySubs = new GameWispRequestFetchMySubs(accessTokenClient, pMetaChannelInfo);
 			gameWispRequest.callbackOnSuccess = new Callback(onRefreshSub, this, [gameWispRequest, onComplete]);
 			gameWispRequest.callbackOnError = new Callback(onRefreshSub, this, [gameWispRequest, onComplete]);

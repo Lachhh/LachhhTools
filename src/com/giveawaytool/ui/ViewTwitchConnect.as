@@ -1,6 +1,4 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.io.playerio.MetaGameWispSub;
-	import com.giveawaytool.io.playerio.GameWispConnection;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.io.Callback;
@@ -33,7 +31,7 @@ package com.giveawaytool.ui {
 			TwitchConnection.instance.onConnectError = new Callback(onError, this, null);
 			TwitchConnection.instance.accessToken = MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5;
 			
-			GameWispConnection.getInstance().validateClientToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, null);
+			//GameWispConnection_DEPRECATED.getInstance().validateClientToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, null);
 			refresh();
 		}
 

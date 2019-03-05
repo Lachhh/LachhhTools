@@ -75,7 +75,7 @@ package com.giveawaytool.io.playerio {
 			if(obj == null) return null;
 			var result : MetaGameWispSub = new MetaGameWispSub();
 			var tierId:String = obj["tier_id"];
-			var metaTier:MetaGameWispTier = GameWispConnection.getInstance().metaChannelInfo.metaTiers.getFromId(tierId);
+			var metaTier:MetaGameWispTier = GameWispConnection_DEPRECATEDDD.getInstance().metaChannelInfo.metaTiers.getFromId(tierId);
 			result.name = obj["user"]["data"]["username"];
 			result.status = obj.status;
 			result.tierCostStr = metaTier.tierCost;

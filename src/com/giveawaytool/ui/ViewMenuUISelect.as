@@ -1,6 +1,6 @@
 package com.giveawaytool.ui {
 	import com.animation.exported.UI_GIVEAWAY;
-	import com.giveawaytool.io.playerio.LogicServerGameWispCheck;
+	import com.giveawaytool.io.playerio.LogicServerGameWispCheck_DEPRECATED;
 	import com.giveawaytool.effect.EffectKickBackUI;
 	import com.giveawaytool.effect.LogicAlphaOnOff;
 	import com.giveawaytool.io.twitch.TwitchConnection;
@@ -128,7 +128,7 @@ package com.giveawaytool.ui {
 		}
 		
 		private function refreshConnectedServerTxt() : void {
-			var serverCheck : LogicServerGameWispCheck = UI_Menu.instance.logicNotification.logicGameWisp.logicServerGameWisp;
+			var serverCheck : LogicServerGameWispCheck_DEPRECATED = UI_Menu.instance.logicNotification.logicIsSubToLachhh.logicServerGameWisp;
 			connectedTxt.text = getTextOfConnected();
 			
 			if(serverCheck.isConnected()) {
@@ -139,7 +139,7 @@ package com.giveawaytool.ui {
 		}
 		
 		public function getTextOfConnected():String {
-			if(!UI_Menu.instance.logicNotification.logicGameWisp.logicServerGameWisp.isConnected()) return "GameWisp failed";
+			if(!UI_Menu.instance.logicNotification.logicIsSubToLachhh.logicServerGameWisp.isConnected()) return "GameWisp failed";
 			return "Connected";
 		}
 		

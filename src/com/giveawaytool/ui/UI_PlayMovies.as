@@ -1,5 +1,5 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.io.playerio.ViewGameWispServer;
+	import com.giveawaytool.io.playerio.ViewGameWispServer_DEPRECATED;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.meta.MetaPlayMovie;
 	import com.giveawaytool.ui.views.ViewFireworksOptions;
@@ -17,7 +17,7 @@ package com.giveawaytool.ui {
 	public class UI_PlayMovies extends UIBase {
 		public var viewTwitter : ViewTweetTimer;
 		public var viewFireworksOptions : ViewFireworksOptions;
-		private var viewGameWispServer : ViewGameWispServer;
+		private var viewGameWispServer : ViewGameWispServer_DEPRECATED;
 
 		public function UI_PlayMovies() {
 			super(AnimationFactory.ID_UI_PLAYMOVIE);
@@ -26,7 +26,7 @@ package com.giveawaytool.ui {
 			viewTwitter.metaTweetAlertConfig = MetaGameProgress.instance.metaTweetAlertConfig;
 			
 			viewFireworksOptions = new ViewFireworksOptions(this, fireworksPanel);
-			viewGameWispServer = new ViewGameWispServer(this, gameWispMc);
+			viewGameWispServer = new ViewGameWispServer_DEPRECATED(this, gameWispMc);
 			
 			createSendMovieBtn(0, "JustDoIt", "Just Do It");
 			createSendMovieBtn(1, "VanDammeHit", "VanDamme Hit");

@@ -45,7 +45,7 @@ package com.giveawaytool.components {
 		public function canSendDonationIfNotLive():Boolean {return /*isSilverTier() || !TwitchConnection.instance.isLive || */ true;}
 		
 		public function isBronzeTier():Boolean {
-			if(UI_Menu.instance.logicNotification.logicGameWisp.isBronzeTier()) return true;
+			if(UI_Menu.instance.logicNotification.logicIsSubToLachhh.isBronzeTier()) return true;
 			if(googleSheetData.isInBronze(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			if(googleSheetData.isInSilver(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			if(googleSheetData.isInGold(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
@@ -55,8 +55,8 @@ package com.giveawaytool.components {
 		
 		public function isSilverTier():Boolean {
 			if(isAdminAccess()) return true;
-			if(UI_Menu.instance.logicNotification.logicGameWisp.isBronzeTier()) return true;
-			if(UI_Menu.instance.logicNotification.logicGameWisp.isSilverTier()) return true;
+			if(UI_Menu.instance.logicNotification.logicIsSubToLachhh.isBronzeTier()) return true;
+			if(UI_Menu.instance.logicNotification.logicIsSubToLachhh.isSilverTier()) return true;
 			if(googleSheetData.isInSilver(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			if(googleSheetData.isInGold(TwitchConnection.getNameOfAccountWithTwitchPrefix())) return true;
 			return false;

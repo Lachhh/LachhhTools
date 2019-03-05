@@ -1,6 +1,4 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.io.playerio.GameWispRequestFetchMySubs;
-	import com.giveawaytool.io.playerio.GameWispConnection;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewCustomAnimBtn;
@@ -30,7 +28,7 @@ package com.giveawaytool.ui {
 			viewTestFirst.metaHasBeenTested = MetaGameProgress.instance.metaSubsConfig.metaHasBeenTested;
 			
 			viewSubscriberAlert = new ViewSubscriberAlert(screen, subAlertsMc);
-			viewSubscriberAlert.viewGameWispSubAlert.callbackOnConnectionChanged = new Callback(onRefresh, this, null);
+			//viewSubscriberAlert.viewGameWispSubAlert.callbackOnConnectionChanged = new Callback(onRefresh, this, null);
 			//viewSubscriberGoal = new ViewSubscriberGoal(screen, goalsMc);
 			viewSubscriberList = new ViewSubscribersList(screen, lastSubscriptionMc);
 			viewSubscriberToolTip = new ViewSubscriberToolTip(screen, toolTipSubscriberMc);
@@ -66,13 +64,7 @@ package com.giveawaytool.ui {
 			viewSubscriberList.showLoading(false);
 			
 			var crntTwitch:int = TwitchConnection.instance.listOfSubs.subscribers.length;
-			var crntGameWisp:int = GameWispConnection.getInstance().metaChannelSubsGroup.listOfSub.length;
-			
-			if(GameWispConnection.getInstance().isConnected()) {
-				crntTxt.text = "Twitch : " + crntTwitch + " - GameWisp : " + crntGameWisp;
-			} else {
-				crntTxt.text = "Total Subs : " + crntTwitch;
-			}
+			crntTxt.text = "Total Subs : " + crntTwitch;
 		}
 		
 

@@ -220,7 +220,7 @@ package com {
 				
 				if(msgStr.indexOf("msg-id=sub") >= 0){
 					isResubAlert = true;
-					resubMonths = 1;
+					result.setResubMonthIfHigher(1);
 					continue;
 				}
 				
@@ -230,11 +230,22 @@ package com {
 					continue;
 				}
 				
-				if(msgStr.indexOf("msg-param-months=") >= 0){
-					resubMonths = int(msgStr.replace("msg-param-months=", ""));
-					if(resubMonths <= 0) resubMonths = 1;
+				
+				if (msgStr.indexOf("msg-param-cumulative-months=") >= 0) {
+					resubMonths = int(msgStr.replace("msg-param-cumulative-months=", ""));
+					result.setResubMonthIfHigher(resubMonths);
+					
 					continue;
 				}
+				
+				if(msgStr.indexOf("msg-param-months=") >= 0){
+					resubMonths = int(msgStr.replace("msg-param-months=", ""));
+					result.setResubMonthIfHigher(resubMonths);
+					continue;
+				}
+				
+				
+				
 				if(msgStr.indexOf("emotes=") >= 0){
 					decodeEmotes(msgStr, result);
 				}
@@ -254,7 +265,6 @@ package com {
 			if(isResubAlert){
 				result.name = "twitchnotify";
 				result.text = "";
-				result.resubMonths = resubMonths;
 				result.resubName = username;
 			} else {
 				result.name = username;
@@ -280,6 +290,11 @@ package com {
 			//result.text = msg.substring(messageStartIndex + 1, msg.length);
 			
 			return result;
+		}
+
+		private function setResubMonthIfHigher(n : int) : void {
+			if(n < resubMonths) return ; 
+			resubMonths = n; 
 		}
 		
 		static private function fromUserType(msgStr:String):String {

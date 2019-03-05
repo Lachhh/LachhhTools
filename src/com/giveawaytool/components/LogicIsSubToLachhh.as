@@ -3,7 +3,7 @@ package com.giveawaytool.components {
 
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.io.PlayerIOLachhhRPGController;
-	import com.giveawaytool.io.playerio.LogicServerGameWispCheck;
+	import com.giveawaytool.io.playerio.LogicServerGameWispCheck_DEPRECATED;
 	import com.giveawaytool.io.playerio.MetaGameWispSub;
 	import com.giveawaytool.io.playerio.MetaServerProgress;
 	import com.giveawaytool.io.playerio.ModelExternalPremiumAPIEnum;
@@ -25,13 +25,13 @@ package com.giveawaytool.components {
 	public class LogicIsSubToLachhh extends ActorComponent {
 		
 		private var isLoaded : Boolean = false;
-		public var logicServerGameWisp : LogicServerGameWispCheck;
+		public var logicServerGameWisp : LogicServerGameWispCheck_DEPRECATED;
 		private var success : Callback;
 
 		public function LogicIsSubToLachhh() {
 			super();
 			PlayerIOLachhhRPGController.InitInstance(MainGame.instance, ModelExternalPremiumAPIEnum.TWITCH, VersionInfo.pioDebug);
-			logicServerGameWisp = new LogicServerGameWispCheck();
+			logicServerGameWisp = new LogicServerGameWispCheck_DEPRECATED();
 		}
 				
 
@@ -56,16 +56,16 @@ package com.giveawaytool.components {
 		
 			isLoaded = true;
 			if(LogicVIPAccess.isAdminAccess()) {
-				logicServerGameWisp.fetchServerData();
+				//logicServerGameWisp.fetchServerData();
 			} else {
-				logicServerGameWisp.validateToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, new Callback(onValidate, this, null));
+				//logicServerGameWisp.validateToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, new Callback(onValidate, this, null));
 			}
 			
 			if(success) success.call();
 		}
 
 		private function onValidate() : void {
-			MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = "";
+			//MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = "";
 		}
 		
 		public function checkToShowAds():void {

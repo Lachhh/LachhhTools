@@ -1,10 +1,9 @@
 package com.giveawaytool.ui {
-	import com.lachhh.utils.Utils;
-	import com.giveawaytool.io.playerio.GameWispConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
+	import com.lachhh.utils.Utils;
 
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -13,10 +12,10 @@ package com.giveawaytool.ui {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ViewGameWispSubAlert extends ViewBase {
+	public class ViewGameWispSubAlert_DEPRECATED extends ViewBase {
 		public var callbackOnConnectionChanged : Callback;
 
-		public function ViewGameWispSubAlert(pScreen : UIBase, pVisual : DisplayObject) {
+		public function ViewGameWispSubAlert_DEPRECATED(pScreen : UIBase, pVisual : DisplayObject) {
 			super(pScreen, pVisual);
 			visualMc.gotoAndStop(1);
 			screen.registerClick(logoutBtn, onLogOut);
@@ -31,7 +30,6 @@ package com.giveawaytool.ui {
 		}
 
 		private function logOut() : void {
-			GameWispConnection.getInstance().logout();
 			MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = "";
 			if (callbackOnConnectionChanged) callbackOnConnectionChanged.call();
 			refresh();
@@ -39,12 +37,12 @@ package com.giveawaytool.ui {
 
 		private function connect() : void {
 			UI_PopUp.createOkOnly("A webpage should be opened.  Authorize the LachhhTools there and come back!", null);
-			GameWispConnection.getInstance().fecthNewAccessToken(new Callback(onSuccess, this, null), new Callback(onError, this, null));
+			//GameWispConnection_DEPRECATED.getInstance().fecthNewAccessToken(new Callback(onSuccess, this, null), new Callback(onError, this, null));
 		}
 
 		private function onSuccess() : void {
-			MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = GameWispConnection.instance.accessTokenClient;
-			MetaGameProgress.instance.metaGameWispConnection.channelInfo.decode(GameWispConnection.instance.metaChannelInfo.encode());
+			//MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = GameWispConnection_DEPRECATED.instance.accessTokenClient;
+			//MetaGameProgress.instance.metaGameWispConnection.channelInfo.decode(GameWispConnection_DEPRECATED.instance.metaChannelInfo.encode());
 			MetaGameProgress.instance.saveToLocal();
 
 			UI_PopUp.closeAllPopups();
@@ -87,7 +85,7 @@ package com.giveawaytool.ui {
 		}
 
 		private function isConnected() : Boolean {
-			return GameWispConnection.getInstance().isConnected();
+			return false;
 		}
 
 		public function get logoutBtn() : MovieClip {

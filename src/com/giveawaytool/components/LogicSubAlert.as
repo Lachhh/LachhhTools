@@ -1,19 +1,15 @@
 package com.giveawaytool.components {
-	import com.giveawaytool.ui.ModelSubcriberSourceEnum;
-	import com.giveawaytool.ui.MetaSubscriber;
-	import com.giveawaytool.io.playerio.MetaGameWispSub;
 	import com.MetaIRCMessage;
 	import com.giveawaytool.effect.CallbackTimerEffect;
-	import com.giveawaytool.io.playerio.GameWispConnection;
+	import com.giveawaytool.io.playerio.MetaGameWispSub;
 	import com.giveawaytool.io.playerio.MetaGameWispSubGroup;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.MetaSubcriberAlert;
+	import com.giveawaytool.ui.MetaSubscriber;
+	import com.giveawaytool.ui.ModelSubcriberSourceEnum;
 	import com.giveawaytool.ui.UI_FollowSubAlert;
 	import com.giveawaytool.ui.UI_Menu;
-	import com.giveawaytool.ui.views.MetaFollower;
-	import com.giveawaytool.ui.views.MetaFollowerList;
-	import com.giveawaytool.ui.views.MetaSubscribersList;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.actor.Actor;
 	import com.lachhh.lachhhengine.components.ActorComponent;
@@ -45,14 +41,14 @@ package com.giveawaytool.components {
 		}
 
 		public function refreshSubsOnGameWisp() : void {
-			if(!GameWispConnection.getInstance().isConnected()) return ;
-			GameWispConnection.getInstance().refreshSubs(new Callback(OnDataLoaded, this, null), MetaGameProgress.instance.metaGameWispConnection.channelInfo);
+			//if(!GameWispConnection_DEPRECATED.getInstance().isConnected()) return ;
+			//GameWispConnection_DEPRECATED.getInstance().refreshSubs(new Callback(OnDataLoaded, this, null), MetaGameProgress.instance.metaGameWispConnection.channelInfo);
 		}
 		
 		public function OnDataLoaded():void{
-			var metaData:MetaGameWispSubGroup = GameWispConnection.getInstance().metaChannelSubsGroup;
+			/*var metaData:MetaGameWispSubGroup = GameWispConnection_DEPRECATED.getInstance().metaChannelSubsGroup;
 			
-			HandleGameWispSub(metaData);
+			HandleGameWispSub(metaData);*/
 			
 			trace("Looking for new followers...");
 		}
@@ -132,13 +128,13 @@ package com.giveawaytool.components {
 		
 		private function refreshSubOnGameWisp():void {
 			
-			if(GameWispConnection.getInstance().isConnected()) {
-				GameWispConnection.getInstance().refreshSubs(new Callback(onGameWispSubRefresh, this, null), MetaGameProgress.instance.metaGameWispConnection.channelInfo);
+		/*	if(GameWispConnection_DEPRECATED.getInstance().isConnected()) {
+				GameWispConnection_DEPRECATED.getInstance().refreshSubs(new Callback(onGameWispSubRefresh, this, null), MetaGameProgress.instance.metaGameWispConnection.channelInfo);
 			} else {
-				GameWispConnection.getInstance().metaChannelSubsGroup.clear();
+				GameWispConnection_DEPRECATED.getInstance().metaChannelSubsGroup.clear();
 				mergeTwitchSubsInSavedList();
 				UIBase.manager.refreshAll(UI_FollowSubAlert);
-			}
+			}*/
 			
 		}
 		
@@ -148,12 +144,12 @@ package com.giveawaytool.components {
 		}
 		
 		public function mergeTwitchSubsInSavedList():void {
-			var listOfTwitchSub:MetaSubscribersList = TwitchConnection.instance.listOfSubs;
-			var listOfGameWispSub:MetaSubscribersList = GameWispConnection.getInstance().metaChannelSubsGroup.toMetaSubList();
+			/*var listOfTwitchSub:MetaSubscribersList = TwitchConnection.instance.listOfSubs;
+			var listOfGameWispSub:MetaSubscribersList = GameWispConnection_DEPRECATED.getInstance().metaChannelSubsGroup.toMetaSubList();
 			
 			MetaGameProgress.instance.metaSubsConfig.listOfSubs.appendIfNotSameNameAndSource(listOfTwitchSub);
 			MetaGameProgress.instance.metaSubsConfig.listOfSubs.appendIfNotSameNameAndSource(listOfGameWispSub);
-			MetaGameProgress.instance.metaSubsConfig.listOfSubs.sortByDate();
+			MetaGameProgress.instance.metaSubsConfig.listOfSubs.sortByDate();*/
 		}
 
 		public function collectNew():void {

@@ -1,7 +1,6 @@
 package com.giveawaytool.components {
 	import com.giveawaytool.MainGame;
 	import com.giveawaytool.effect.CallbackTimerEffect;
-	import com.giveawaytool.io.playerio.GameWispConnection;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.io.twitch.emotes.MetaEmoteGroup;
 	import com.giveawaytool.io.twitch.streamlabs.StreamLabsConnection;
@@ -29,8 +28,6 @@ package com.giveawaytool.components {
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.events.ServerSocketConnectEvent;
-	import flash.filesystem.FileMode;
-	import flash.filesystem.FileStream;
 	import flash.net.ServerSocket;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
@@ -143,8 +140,6 @@ package com.giveawaytool.components {
 					TwitchConnection.instance.setCodeFromWebSocket(code);
 				} else if(modelAPIToGetCodeFrom == MODEL_STREAMLABS) {
 					StreamLabsConnection.instance.setCodeFromWebSocket(code);
-				} else if(modelAPIToGetCodeFrom == MODEL_GAMEWISP) {
-					GameWispConnection.instance.setCodeFromWebSocket(code);
 				}
 				///clearShitOnURL();
 				
