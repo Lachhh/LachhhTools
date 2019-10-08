@@ -12,7 +12,7 @@ package com.giveawaytool.ui {
 	 */
 	public class UI_News extends UIBase {
 		public var logicInfernaxBossExplode : LogicInfernaxBossExplode;
-		private var allNewsNonPG:Array = [AnimationFactory.ID_FX_NEWS_7_ZOMBIDLE, AnimationFactory.ID_FX_NEWS_3_WHOISLACHHH, AnimationFactory.ID_FX_NEWS_4_JSB, AnimationFactory.ID_FX_NEWS_1_FOLLOWMSG];
+		private var allNewsNonPG:Array = [AnimationFactory.ID_FX_NEWS_6_CHARITYMOUSTACHE, AnimationFactory.ID_FX_NEWS_3_WHOISLACHHH, AnimationFactory.ID_FX_NEWS_4_JSB, AnimationFactory.ID_FX_NEWS_1_FOLLOWMSG];
 		private var allNewsPG:Array = [AnimationFactory.ID_FX_NEWS_7_ZOMBIDLEPG13, AnimationFactory.ID_FX_NEWS_3_WHOISLACHHH, AnimationFactory.ID_FX_NEWS_4_JSB, AnimationFactory.ID_FX_NEWS_1_FOLLOWMSGADOBE];
 		private var allNews:Array = allNewsNonPG;
 		private var WAIT_BETWEEN_NEWS:Number = 60000*5;

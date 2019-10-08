@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.views.MetaSubscribersList;
 	import com.MetaIRCMessage;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.playerio.MetaGameWispSub;
@@ -123,7 +124,7 @@ package com.giveawaytool.components {
 		}
 
 		public function refreshSubsFromTwitch(c : Callback) : void {
-			TwitchConnection.instance.refreshSub(new Callback(refreshSubOnGameWisp, this, null), c);
+			TwitchConnection.instance.refreshSub(new Callback(onGameWispSubRefresh, this, null), c);
 		}
 		
 		private function refreshSubOnGameWisp():void {
@@ -144,12 +145,12 @@ package com.giveawaytool.components {
 		}
 		
 		public function mergeTwitchSubsInSavedList():void {
-			/*var listOfTwitchSub:MetaSubscribersList = TwitchConnection.instance.listOfSubs;
-			var listOfGameWispSub:MetaSubscribersList = GameWispConnection_DEPRECATED.getInstance().metaChannelSubsGroup.toMetaSubList();
+			var listOfTwitchSub:MetaSubscribersList = TwitchConnection.instance.listOfSubs;
+			//var listOfGameWispSub:MetaSubscribersList = GameWispConnection_DEPRECATED.getInstance().metaChannelSubsGroup.toMetaSubList();
 			
 			MetaGameProgress.instance.metaSubsConfig.listOfSubs.appendIfNotSameNameAndSource(listOfTwitchSub);
-			MetaGameProgress.instance.metaSubsConfig.listOfSubs.appendIfNotSameNameAndSource(listOfGameWispSub);
-			MetaGameProgress.instance.metaSubsConfig.listOfSubs.sortByDate();*/
+			//MetaGameProgress.instance.metaSubsConfig.listOfSubs.appendIfNotSameNameAndSource(listOfGameWispSub);
+			MetaGameProgress.instance.metaSubsConfig.listOfSubs.sortByDate();
 		}
 
 		public function collectNew():void {

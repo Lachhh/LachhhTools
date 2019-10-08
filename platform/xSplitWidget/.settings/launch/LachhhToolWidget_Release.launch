@@ -35,7 +35,7 @@
 <stringAttribute key="PUBLISHER_ID" value=""/>
 <booleanAttribute key="START_DEBUGGER" value="true"/>
 <booleanAttribute key="START_SWF_ENABLED" value="true"/>
-<stringAttribute key="START_SWF_LOCATION" value="release/lachhhWidget.swf"/>
+<stringAttribute key="START_SWF_LOCATION" value="release/lachhhWidget_withads.swf"/>
 <stringAttribute key="START_SWF_WITH" value="Adobe Flash Player"/>
 <booleanAttribute key="SUPPRESS_EXCEPTION_POPUP" value="false"/>
 <booleanAttribute key="USE_PROJECT_COMPILER_ARGUMENTS" value="true"/>
