@@ -1,7 +1,7 @@
 package com.giveawaytool.components {
 	import playerio.DatabaseObject;
 
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.io.PlayerIOLachhhRPGController;
 	import com.giveawaytool.io.playerio.LogicServerGameWispCheck_DEPRECATED;
 	import com.giveawaytool.io.playerio.MetaGameWispSub;
@@ -23,14 +23,14 @@ package com.giveawaytool.components {
 	 * @author LachhhSSD
 	 */
 	public class LogicIsSubToLachhh extends ActorComponent {
-		
+		static public var DEBUG_AlwaysShowAds = false;
 		private var isLoaded : Boolean = false;
 		public var logicServerGameWisp : LogicServerGameWispCheck_DEPRECATED;
 		private var success : Callback;
 
 		public function LogicIsSubToLachhh() {
 			super();
-			PlayerIOLachhhRPGController.InitInstance(MainGame.instance, ModelExternalPremiumAPIEnum.TWITCH, VersionInfo.pioDebug);
+			PlayerIOLachhhRPGController.InitInstance(MainGameTools.instance, ModelExternalPremiumAPIEnum.TWITCH, VersionInfo.pioDebug);
 			logicServerGameWisp = new LogicServerGameWispCheck_DEPRECATED();
 		}
 				
@@ -73,16 +73,18 @@ package com.giveawaytool.components {
 			if(!shouldShowAnnoying()) return ;
 			/*new UI_LachhhToolsAds2();
 			return ;*/ 
-			if(Math.random() < 0.33) {
+			if(Math.random() < 0.5) {
 				new UI_AnnoyingPopup();
-			} else if(Math.random() < 0.5) { 
-				new UI_LachhhToolsAds();
+			/*} else if(Math.random() < 0.5) { 
+				new UI_LachhhToolsAds();*/
 			} else {
 				new UI_LachhhToolsAds2();
 			}
 		}
 		
 		public function shouldShowAnnoying():Boolean {
+			if(DEBUG_AlwaysShowAds) return true;
+			
 			if(!MetaGameProgress.instance.atLeastOneHasBeenTested()) return false;
 			if(!isLoaded) return false;
 			if(isBronzeTier()) return false;

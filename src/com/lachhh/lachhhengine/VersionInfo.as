@@ -15,10 +15,13 @@ package com.lachhh.lachhhengine {
 		
 		static public var donationSource:ModelDonationSource = ModelDonationSourceEnum.STREAM_TIP;
 		static public var URL_TWITCH_LF:String = "http://www.twitch.tv/Lachhh";
+		static public var URL_TWITCH_LF_SUB:String = "http://www.twitch.tv/lachhh/subscribe?ref=lachhhTools";
 		static public var URL_TWITCH_FAMILYJULES_7X:String = "http://www.twitch.tv/FamilyJules7x";
 		static public var URL_YOUTUBE_FAMILYJULES_7X:String = "https://www.youtube.com/user/FamilyJules7X";
 		static public var URL_TUTORIAL_GIVEAWAY:String = "https://www.youtube.com/embed/0wchRe2zQR8";
 		static public var URL_TUTORIAL_V2_WIDGETALERTS:String = "https://www.youtube.com/embed/lriJRWupSDE";
+		static public var URL_TUTORIAL_V3_WIDGETALERTS:String = "https://www.youtube.com/embed/9nl1f9EsudQ";
+
 		static public var URL_TUTORIAL_PROMO:String = "https://www.youtube.com/embed/ZSs5WGxl0_A";
 		static public var URL_STREAMRPG:String = "https://www.patreon.com/StreamRPG";
 		static public var URL_GAMEWISP_LACHHHTOOLS:String = "https://www.gamewisp.com/LachhhTools";

@@ -1,5 +1,5 @@
 package com.giveawaytool.effect {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.GameSpeed;
 	import com.lachhh.lachhhengine.components.ActorComponent;
@@ -33,7 +33,7 @@ package com.giveawaytool.effect {
 			_sprite.graphics.drawRect(-1000,-1000, 3000, 3000);
 			_sprite.graphics.endFill();
 			_sprite.alpha = prct;
-			MainGame.instance.addChild(_sprite);
+			MainGameTools.instance.addChild(_sprite);
 		}
 		
 		public function Init():void {
@@ -68,7 +68,7 @@ package com.giveawaytool.effect {
 			result.prct = 1;
 			result.prctDelta = 1/fadeOutTime;
 			result.color = color;
-			MainGame.dummyActor.addComponent(result);
+			MainGameTools.dummyActor.addComponent(result);
 			return result;
 		}
 		
@@ -79,7 +79,7 @@ package com.giveawaytool.effect {
 			result.color = color;
 			result.prct = prct;
 			result.start();
-			MainGame.dummyActor.addComponent(result);
+			MainGameTools.dummyActor.addComponent(result);
 			return result;
 		}
 	}

@@ -1,5 +1,5 @@
 package com.giveawaytool.effect {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.lachhhengine.GameSpeed;
 	import com.lachhh.lachhhengine.actor.Actor;
 	import com.lachhh.lachhhengine.components.ActorComponent;
@@ -37,13 +37,13 @@ package com.giveawaytool.effect {
 				if(fps < 30) {
 					nbUnderThreshold++;
 					if(nbUnderThreshold >= 10) {
-						switch(MainGame.instance.stage.quality) {
+						switch(MainGameTools.instance.stage.quality) {
 							case StageQuality.LOW:
 							case StageQuality.MEDIUM:
 								//MainGame.instance.stage.quality = StageQuality.LOW;
 								break;
 							default : 
-								MainGame.instance.stage.quality = StageQuality.MEDIUM;
+								MainGameTools.instance.stage.quality = StageQuality.MEDIUM;
 								break;
 						}
 						

@@ -1,5 +1,5 @@
 package com.lachhh.flash {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.lachhhengine.actor.Actor;
 	import com.lachhh.lachhhengine.components.ActorComponent;
 
@@ -15,7 +15,7 @@ package com.lachhh.flash {
 
 		override public function start() : void {
 			super.start();
-			MainGame.instance.addEventListener(Event.DEACTIVATE, onDeactivate);
+			MainGameTools.instance.addEventListener(Event.DEACTIVATE, onDeactivate);
 		}
 
 		private function onDeactivate(event : Event) : void {
@@ -25,7 +25,7 @@ package com.lachhh.flash {
 		
 		override public function destroy() : void {
 			super.destroy();
-			MainGame.instance.removeEventListener(Event.DEACTIVATE, onDeactivate);
+			MainGameTools.instance.removeEventListener(Event.DEACTIVATE, onDeactivate);
 		}
 		
 		static public function addToActor(actor:Actor):LogicLostFocus {

@@ -1,5 +1,5 @@
 package com.lachhh.flash.debug {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.scenes.GameSceneManager;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.ActorObjectManager;
@@ -56,7 +56,7 @@ package com.lachhh.flash.debug {
 			
 			AddAnimationChild();
 			
-			AddGameSceneManagerChild(MainGame.instance.gameSceneManager); 
+			AddGameSceneManagerChild(MainGameTools.instance.gameSceneManager); 
 	
 			
 			AddManagerChild(UIBase.manager);
@@ -195,26 +195,26 @@ package com.lachhh.flash.debug {
 		}
 		
 		static private function CamPos(child:DebugTree):void {
-			if(MainGame.instance.gameSceneManager.hasAScene) {
-				_objPos.x = MainGame.instance.gameSceneManager.gameScene.camera.px ;
-				_objPos.y = MainGame.instance.gameSceneManager.gameScene.camera.py;
+			if(MainGameTools.instance.gameSceneManager.hasAScene) {
+				_objPos.x = MainGameTools.instance.gameSceneManager.gameScene.camera.px ;
+				_objPos.y = MainGameTools.instance.gameSceneManager.gameScene.camera.py;
 			}
 	
 			child.name = "Camera Position : " + "(" + Math.round(_objPos.x) + "," + Math.round(_objPos.y) + ")";
 		}
 		
 		static private function MousePos(child:DebugTree):void {
-			_objPos.x = MainGame.instance.mouseX;
-			_objPos.y = MainGame.instance.mouseY;
+			_objPos.x = MainGameTools.instance.mouseX;
+			_objPos.y = MainGameTools.instance.mouseY;
 	
 			child.name = "Mouse Position : " + "(" + Math.round(_objPos.x) + "," + Math.round(_objPos.y) + ")";
 		}
 		
 		static private function MousePosInWorld(child:DebugTree):void {
-			if(MainGame.instance.gameSceneManager.hasAScene) {
-				var cam:CameraFlash = MainGame.instance.gameSceneManager.gameScene.camera;
-				_objPos.x = MainGame.instance.mouseX + cam.boundsFOV.x;
-				_objPos.y = MainGame.instance.mouseY + cam.boundsFOV.y;
+			if(MainGameTools.instance.gameSceneManager.hasAScene) {
+				var cam:CameraFlash = MainGameTools.instance.gameSceneManager.gameScene.camera;
+				_objPos.x = MainGameTools.instance.mouseX + cam.boundsFOV.x;
+				_objPos.y = MainGameTools.instance.mouseY + cam.boundsFOV.y;
 			}
 	
 			child.name = "Mouse Position In World: " + "(" + Math.round(_objPos.x) + "," + Math.round(_objPos.y) + ")";

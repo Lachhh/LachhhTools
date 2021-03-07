@@ -1,5 +1,5 @@
 package com.giveawaytool.scenes {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.lachhhengine.ActorObjectManager;
 	import com.lachhh.lachhhengine.camera.CameraFlash;
 	/**
@@ -27,7 +27,7 @@ package com.giveawaytool.scenes {
 		}
 		
 		public function start():void {
-			camera = new CameraFlash(MainGame.instance);
+			camera = new CameraFlash(MainGameTools.instance);
 			
 			enemyManager = createManagers("Enemies");
 			heroManager = createManagers("Heroes");

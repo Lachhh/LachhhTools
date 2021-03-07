@@ -25,8 +25,8 @@ package com.giveawaytool.ui {
 			registerClick(theBtnMc, onBerzerk);
 			registerClick(berzerkCircleMc, onBerzerk);
 			
-			registerClick(gameWispCircleMc, onGameWisp);
-			registerClick(gameWispBtn, onGameWisp);
+			registerClick(gameWispCircleMc, onLachhSub);
+			registerClick(gameWispBtn, onLachhSub);
 
 			px = ResolutionManager.getGameWidth() * 0.5;
 			py = ResolutionManager.getGameHeight()*0.5;
@@ -44,8 +44,8 @@ package com.giveawaytool.ui {
 			Utils.navigateToURLAndRecord(VersionInfo.URL_BERZERK);
 		}
 
-		private function onGameWisp() : void {
-			Utils.navigateToURLAndRecord(VersionInfo.URL_GAMEWISP_LACHHHTOOLS);
+		private function onLachhSub() : void {
+			Utils.navigateToURLAndRecord(VersionInfo.URL_TWITCH_LF_SUB);
 		}
 
 		private function onX() : void {
@@ -71,7 +71,7 @@ package com.giveawaytool.ui {
 		public function get theBtnMc() : MovieClip { return berzerkMc.getChildByName("theBtnMc") as MovieClip;}
 		public function get berzerkCircleMc() : MovieClip { return berzerkMc.getChildByName("circleMc") as MovieClip;}
 		
-		public function get gameWispBtn() : MovieClip { return gameWispMc.getChildByName("gameWispBtn") as MovieClip;}
+		public function get gameWispBtn() : MovieClip { return gameWispMc.getChildByName("subTwitchMc") as MovieClip;}
 		public function get gameWispCircleMc() : MovieClip { return gameWispMc.getChildByName("circleMc") as MovieClip;}
 		
 	}

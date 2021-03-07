@@ -1,5 +1,5 @@
 package com.lachhh.flash {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.ResolutionManager;
 	import com.lachhh.io.KeyManager;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
@@ -14,8 +14,8 @@ package com.lachhh.flash {
 		private var _wasSoundMuted:Boolean ; 
 		public function UILostFocus() {
 			super(AnimationFactory.ID_UI_LOSTFOCUS);
-			if(MainGame.instance.gameSceneManager.hasAScene && MainGame.instance.gameSceneManager.gameScene.enabled) {
-				MainGame.instance.gameSceneManager.gameScene.pause(true);
+			if(MainGameTools.instance.gameSceneManager.hasAScene && MainGameTools.instance.gameSceneManager.gameScene.enabled) {
+				MainGameTools.instance.gameSceneManager.gameScene.pause(true);
 				_wasMusicMuted = JukeBox.MUSIC_MUTED;
 				_wasSoundMuted = JukeBox.SFX_MUTED;
 				JukeBox.MUSIC_MUTED = true;
@@ -30,7 +30,7 @@ package com.lachhh.flash {
 		override public function update() : void {
 			super.update();
 			if(KeyManager.IsMouseDown()) {
-				MainGame.instance.gameSceneManager.gameScene.pause(false);
+				MainGameTools.instance.gameSceneManager.gameScene.pause(false);
 				JukeBox.MUSIC_MUTED = _wasMusicMuted;
 				JukeBox.SFX_MUTED = _wasSoundMuted ;
 				destroy();

@@ -1,5 +1,5 @@
 package com.flashinit {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.ui.UI_GiveawayMenu;
 	import com.giveawaytool.ui.UI_Updater;
 	import com.lachhh.lachhhengine.VersionInfo;
@@ -13,7 +13,7 @@ package com.flashinit {
 		public function ReleaseInit() {
 			
 			VersionInfo.isDebug = false;
-			var m:MainGame = new MainGame();
+			var m:MainGameTools = new MainGameTools();
 			stage.addChild(m);
 			m.init();
 			new UI_Updater("http://lachhhtools.com/dl/update_flash.xml");

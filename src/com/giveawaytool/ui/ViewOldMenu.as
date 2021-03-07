@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import flash.display.StageScaleMode;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.lachhh.lachhhengine.ui.UIBase;
 	import com.lachhh.lachhhengine.ui.views.ViewBase;
@@ -46,6 +47,7 @@ package com.giveawaytool.ui {
 		private function setFullscreen():void {
 			if(visual.stage.displayState == StageDisplayState.FULL_SCREEN_INTERACTIVE) return ;
 			visual.stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+			visual.stage.scaleMode = StageScaleMode.SHOW_ALL;
 			
 		}
 		

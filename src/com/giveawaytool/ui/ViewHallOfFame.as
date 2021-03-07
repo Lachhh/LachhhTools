@@ -69,7 +69,8 @@ package com.giveawaytool.ui {
 			metaManual = MetaGameProgress.instance.metaLachhhToolGameWispSub.listOfSub;
 			metaTotal = MetaGameProgress.instance.metaLachhhToolGameWispSub.listOfSub;
 			addIfNotInList(metaTotal, metaManual);
-			//metaTotal = metaTotal.concat(metaManual);
+			removeLachhh();
+			// metaTotal = metaTotal.concat(metaManual);
 			MetaGameWispSubGroup.sortNext(metaTotal);
 			
 			crntPageTxt.text = crntPage + "";
@@ -92,6 +93,16 @@ package com.giveawaytool.ui {
 			//pageMc.visible = (totalPages > 1);
 			
 			createViews();
+		}
+
+		private function removeLachhh() : void {
+			for (var i : int = 0; i < metaTotal.length; i++) {
+				var sub : MetaGameWispSub = metaTotal[i];
+				if(sub.name == "lachhh") {
+					metaTotal.removeAt(i);
+					return;
+				}
+			}
 		}
 		
 		private function addIfNotInList(result:Vector.<MetaGameWispSub>, src:Vector.<MetaGameWispSub>):void {

@@ -11,12 +11,14 @@
     <AS3Classpath generateProblems="false" sdkBased="true" type="lib" useAsSharedCode="false">frameworks/libs/air/applicationupdater_ui.swc</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="true" type="lib" useAsSharedCode="false">frameworks/libs/air/servicemonitor.swc</AS3Classpath>
     <AS3Classpath generateProblems="true" sdkBased="false" type="source" useAsSharedCode="false">src</AS3Classpath>
-    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/Interfaces.swc</AS3Classpath>
-    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/Music.swc</AS3Classpath>
-    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/Interface_Continue.swc</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/as3crypto.swc</AS3Classpath>
-    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/Flash-Socket.IO.swc</AS3Classpath>
-    <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/Firc.swc</AS3Classpath>
-    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/PlayerIOClient.swc</AS3Classpath>
     <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/analytics_flash.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/Firc.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/Flash-Socket.IO.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/Interface_Continue.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/Interfaces.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/Music.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/PlayerIOClient.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/JFlvs.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" sdkBased="false" type="lib" useAsSharedCode="false">lib/SimpleCountdown.swc</AS3Classpath>
 </AS3Classpath>

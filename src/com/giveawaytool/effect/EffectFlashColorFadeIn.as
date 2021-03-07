@@ -1,5 +1,5 @@
 package com.giveawaytool.effect {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.GameSpeed;
 	import com.lachhh.lachhhengine.camera.CameraFlash;
@@ -32,7 +32,7 @@ package com.giveawaytool.effect {
 			_sprite.graphics.drawRect(-200,-200, 2000, 1200);
 			_sprite.graphics.endFill();
 			_sprite.alpha = 0;
-			MainGame.instance.addChild(_sprite);
+			MainGameTools.instance.addChild(_sprite);
 		}
 		
 		override public function update() : void {
@@ -65,7 +65,7 @@ package com.giveawaytool.effect {
 			result.fadeOutTime = fadeOutTime;
 			result.color = color;
 			result.callback = c;
-			MainGame.dummyActor.addComponent(result);
+			MainGameTools.dummyActor.addComponent(result);
 			return result;
 		}
 	}

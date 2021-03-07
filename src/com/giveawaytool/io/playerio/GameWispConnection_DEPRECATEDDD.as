@@ -1,5 +1,5 @@
 package com.giveawaytool.io.playerio {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import playerio.Message;
 
@@ -40,7 +40,7 @@ package com.giveawaytool.io.playerio {
 		
 		public function fecthNewAccessToken(cOnSuccess:Callback, cOnError:Callback) : void {
 			//GameWisp is ded
-			CallbackTimerEffect.addWaitCallbackToActor(MainGame.dummyActor, cOnSuccess, 1);
+			CallbackTimerEffect.addWaitCallbackToActor(MainGameTools.dummyActor, cOnSuccess, 1);
 			
 		}
 

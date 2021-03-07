@@ -1,15 +1,17 @@
 package com.giveawaytool.ui {
-	import com.lachhh.io.Callback;
 	import com.TwitchLachhhIsLiveSimpleCheckUp;
+	import com.flashinit.WidgetInWindow;
 	import com.giveawaytool.DefaultMainGame;
 	import com.giveawaytool.components.LogicNotifications;
 	import com.giveawaytool.effect.ui.EffectShakeUI;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
+	import com.lachhh.io.Callback;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.ui.UIBase;
 
 	import flash.display.MovieClip;
+	import flash.events.Event;
 
 	/**
 	 * @author LachhhSSD
@@ -23,7 +25,8 @@ package com.giveawaytool.ui {
 		public var viewTwitchConnect : ViewTwitchConnect;
 		public var viewChatConnect : ViewChatConnect;
 		public var viewOldMenu : ViewOldMenu;
-		static public var instance:UI_Menu;
+		static public var instance : UI_Menu;
+		private var windowWidget : WidgetInWindow;
 
 		public function UI_Menu() {
 			super(AnimationFactory.ID_UI_MENU);
@@ -48,6 +51,8 @@ package com.giveawaytool.ui {
 			viewOldMenu = new ViewOldMenu(this, oldMenuMc);
 			TwitchLachhhIsLiveSimpleCheckUp.checkIfDevsAreLive();
 			TwitchLachhhIsLiveSimpleCheckUp.onRefreshed = new Callback(viewCredits.refresh, this, null);
+			
+			checkForNewWindow();
 			refresh();
 		}
 
@@ -91,6 +96,12 @@ package com.giveawaytool.ui {
 		public function shakeAll() : void {
 			EffectShakeUI.addToActor(this, visual, 50, 50);
 			EffectShakeUI.addToActor(this, viewMenuUISelect.uiCrnt.visual, 50, 50);
+		}
+		
+		
+		private function checkForNewWindow() : void {
+			if(windowWidget != null) return;
+			windowWidget = new WidgetInWindow();
 		}
 		
 	}

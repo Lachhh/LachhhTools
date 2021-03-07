@@ -1,5 +1,5 @@
 package com.giveawaytool.enemy {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.components.ShadowRenderComponent;
 	import com.giveawaytool.effect.LogicDestroyOutsideOfBounds;
 	import com.giveawaytool.physics.CollisionCircleComponent;
@@ -18,7 +18,7 @@ package com.giveawaytool.enemy {
 		public var destroyWhenOOB:Boolean;
 		public function Enemy() {
 			super();
-			MainGame.instance.gameSceneManager.gameScene.enemyManager.add(this);
+			MainGameTools.instance.gameSceneManager.gameScene.enemyManager.add(this);
 			renderComponent = ShadowRenderComponent.addToActor(this, CameraFlashContainers.instance.ammoVisual, -1);
 			circleColComponent = CollisionCircleComponent.addToActor(this);
 			collisionComponent = circleColComponent;

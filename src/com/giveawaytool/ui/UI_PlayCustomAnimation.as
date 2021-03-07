@@ -1,5 +1,5 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.giveawaytool.meta.MetaGameProgress;
@@ -35,7 +35,7 @@ package com.giveawaytool.ui {
 			metaSelectAnimation = pAnimation;
 			values = pValues;
 			
-			visual.stage.focus = MainGame.instance;
+			visual.stage.focus = MainGameTools.instance;
 			SwfLoaderManager.loadSwf(metaSelectAnimation.pathToSwf, new Callback(onSwfLoaded, this, null), new Callback(onSwfLoadedError, this, null));
 			UI_Menu.instance.show(false);
 		}
@@ -100,7 +100,7 @@ package com.giveawaytool.ui {
 				} 
 			}
 			
-			MainGame.instance.stage.focus = null;
+			MainGameTools.instance.stage.focus = null;
 		}
 
 		private function onCountdownFail(event : Event) : void {

@@ -3,7 +3,7 @@ package com.giveawaytool.ui {
 	import com.lachhh.utils.Utils;
 	import com.giveawaytool.DefaultMainGame;
 	import flash.geom.Point;
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.ResolutionManager;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.ui.UIOpenClose;
@@ -41,7 +41,7 @@ package com.giveawaytool.ui {
 		}
 
 		private function onDiscord() : void {Utils.navigateToURLAndRecord(VersionInfo.URL_DISCORD);}
-		private function onTutoAlerts() : void {new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS); close();}	
+		private function onTutoAlerts() : void {new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V3_WIDGETALERTS); close();}	
 		
 		private function onClickAdobeLink() : void {
 			Utils.navigateToURLAndRecord(VersionInfo.URL_ADOBE_LINK);

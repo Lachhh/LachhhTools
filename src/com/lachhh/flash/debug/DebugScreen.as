@@ -1,5 +1,5 @@
 package com.lachhh.flash.debug {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.io.KeyManager;
 	import com.lachhh.lachhhengine.animation.AnimationManager;
 	import com.lachhh.lachhhengine.ui.UIBase;

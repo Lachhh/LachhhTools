@@ -1,5 +1,5 @@
 package com {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.lachhh.flash.FlashUtils;
 	import com.lachhh.io.Callback;
@@ -39,7 +39,7 @@ package com {
 		
 		static public function checkIfDevsAreLive():void{
 			if(checkTimer) return;
-			checkTimer = CallbackTimerEffect.addWaitCallbackToActor(MainGame.dummyActor, new Callback(onTimer, TwitchLachhhIsLiveSimpleCheckUp, null), 1000*60*5);
+			checkTimer = CallbackTimerEffect.addWaitCallbackToActor(MainGameTools.dummyActor, new Callback(onTimer, TwitchLachhhIsLiveSimpleCheckUp, null), 1000*60*5);
 			checkTimer.isLoop = true;
 			onTimer();
 		}

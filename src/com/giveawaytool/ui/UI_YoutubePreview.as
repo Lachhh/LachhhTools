@@ -2,7 +2,7 @@ package com.giveawaytool.ui {
 	import com.lachhh.utils.Utils;
 	import com.giveawaytool.DefaultMainGame;
 	import flash.geom.Point;
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.lachhh.ResolutionManager;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.ui.UIOpenClose;
@@ -33,6 +33,13 @@ package com.giveawaytool.ui {
 			refresh();
 		}
 
+		override public function start() : void {
+			super.start();
+			var newUrl:String = idUrl.split("embed/").join("watch?v=");
+			Utils.navigateToURLAndRecord(newUrl);
+			destroy();
+		}
+
 		private function onClickYoutube() : void {
 			var newUrl:String = idUrl.split("embed/").join("watch?v=");
 			Utils.navigateToURLAndRecord(newUrl);
@@ -58,7 +65,7 @@ package com.giveawaytool.ui {
 			
 			rect = new Rectangle(p.x,p.y,wt,ht);
 			
-			webview.stage = MainGame.instance.stage;
+			webview.stage = MainGameTools.instance.stage;
 			webview.viewPort = rect;
 			webview.loadURL(url);
 		}

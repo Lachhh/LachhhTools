@@ -1,5 +1,5 @@
 package com.flashinit {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.lachhhengine.VersionInfo;
 
@@ -12,7 +12,7 @@ package com.flashinit {
 			super();
 			VersionInfo.pioDebug = true;
 			VersionInfo.isDebug = true;
-			var m:MainGame = new MainGame();
+			var m:MainGameTools = new MainGameTools();
 			stage.addChild(m);
 			m.init();
 			new UI_Menu();

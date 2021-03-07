@@ -1,15 +1,15 @@
 package com.lachhh.flash {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	/**
 	 * @author LachhhSSD
 	 */
 	public class Screen {
 		static public function get width():int {
-			 return MainGame.instance.stage.stageWidth;
+			 return MainGameTools.instance.stage.stageWidth;
 		}
 		
 		static public function get height():int {
-			 return MainGame.instance.stage.stageHeight;
+			 return MainGameTools.instance.stage.stageHeight;
 		}
 	}
 }

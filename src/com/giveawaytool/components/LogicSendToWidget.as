@@ -1,5 +1,5 @@
 package com.giveawaytool.components {
-	import com.giveawaytool.MainGame;
+	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.io.twitch.emotes.MetaEmoteGroup;
@@ -76,7 +76,7 @@ package com.giveawaytool.components {
 				serverSocket.addEventListener(ServerSocketConnectEvent.CONNECT, onConnect);
 				serverSocket.listen();
 			} catch(e:Error) {
-				CallbackTimerEffect.addWaitCallFctToActor(MainGame.dummyActor, tryToConnect, 10000);
+				CallbackTimerEffect.addWaitCallFctToActor(MainGameTools.dummyActor, tryToConnect, 10000);
 			}
 		}
 		

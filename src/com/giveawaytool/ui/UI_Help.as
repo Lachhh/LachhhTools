@@ -36,7 +36,7 @@ package com.giveawaytool.ui {
 		}
 
 		private function onDiscord() : void {Utils.navigateToURLAndRecord(VersionInfo.URL_DISCORD);}		
-		private function onTutoAlerts() : void {new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V2_WIDGETALERTS);}	
+		private function onTutoAlerts() : void {new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_V3_WIDGETALERTS);}	
 		private function onTutoGiveaway() : void {new UI_YoutubePreview(VersionInfo.URL_TUTORIAL_GIVEAWAY);}
 		
 		
