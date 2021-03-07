@@ -1,4 +1,5 @@
 package com.flashinit {
+	import flash.system.SecurityDomain;
 	import flash.desktop.NativeApplication;
 	import flash.display.Loader;
 	import flash.display.NativeWindow;
@@ -62,17 +63,20 @@ package com.flashinit {
 		
 		
 		private function loadSwf(event : Event) : void {
+			try {Security.allowDomain("*");}catch (e) { };
+			
 			aLoader = new Loader();
 			var lc:LoaderContext = new LoaderContext(false, new ApplicationDomain(null)); 
 			lc.allowCodeImport = true;
 			lc.allowLoadBytesCodeExecution = true;
+			//lc.securityDomain = SecurityDomain.currentDomain;
 			
 			newWindow.stage.addChild(aLoader);
 			// Load SWF as usual:
 			aLoader.load(new URLRequest("lachhhtools_widget.swf"), lc);
 			aLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onComplete);
 			
-			try {Security.allowDomain("*");}catch (e) { };
+			
 		}
 
 		private function onComplete(event : Event) : void {
