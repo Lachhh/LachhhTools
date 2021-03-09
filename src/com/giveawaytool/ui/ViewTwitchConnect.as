@@ -57,6 +57,7 @@ package com.giveawaytool.ui {
 			TwitchConnection.instance.accessToken = "";
 			MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5 = "";
 			MetaGameProgress.instance.saveToLocal();
+			refresh();
 		}
 
 		private function onConnected() : void {
