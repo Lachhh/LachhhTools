@@ -54,6 +54,9 @@ package com.giveawaytool.ui {
 			UI_Loading.hide();
 			UI_PopUp.createOkOnly("Oops! Something went wrong... : " + TwitchConnection.instance.connectErrorMsg, null);
 			firstAutoSign = false;
+			TwitchConnection.instance.accessToken = "";
+			MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5 = "";
+			MetaGameProgress.instance.saveToLocal();
 		}
 
 		private function onConnected() : void {
