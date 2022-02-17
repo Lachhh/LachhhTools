@@ -74,6 +74,7 @@ package com.flashinit {
 			newWindow.stage.addChild(aLoader);
 			// Load SWF as usual:
 			aLoader.load(new URLRequest("lachhhtools_widget.swf"), lc);
+			//aLoader.load(new URLRequest("lachhhtools_widget.swf"), lc);
 			aLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onComplete);
 			
 			

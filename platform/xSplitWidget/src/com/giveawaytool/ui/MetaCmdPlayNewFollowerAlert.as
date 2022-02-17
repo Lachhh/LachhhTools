@@ -21,6 +21,7 @@ package com.giveawaytool.ui {
 		}
 
 		override public function execute(pMetaConfig:MetaDonationsConfig):void {
+			if(pMetaConfig == null) return;
 			JukeBox.MUSIC_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewFollow.volume;
 			JukeBox.SFX_VOLUME = pMetaConfig.metaCustomAnim.metaCustomAnimNewFollow.volume;
 			

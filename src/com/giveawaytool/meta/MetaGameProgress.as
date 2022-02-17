@@ -37,6 +37,7 @@ package com.giveawaytool.meta {
 		public var metaEmoteFireworksSettings : MetaEmoteFireworksSettings;
 		private var saveData : Dictionary = new Dictionary();
 		public var metaGameWispClientSubToLachhhTools : MetaGameWispSub;
+		public var firstLogin : Boolean = false;
 
 		public function MetaGameProgress() {			
 			clear();
@@ -138,6 +139,7 @@ package com.giveawaytool.meta {
 		
 		public function loadFromLocal():void {
 			if(DataManager.isEmpty) {
+				firstLogin = true;
 				return ;
 			}
 			

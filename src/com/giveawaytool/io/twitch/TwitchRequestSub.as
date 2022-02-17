@@ -15,7 +15,8 @@ package com.giveawaytool.io.twitch {
 	 * @author LachhhSSD
 	 */
 	public class TwitchRequestSub {
-		private var offSetSub : int;
+		private var batchOf : int = 100;
+		private var offSetSub : String = "";
 		private var listOfSubs : MetaSubscribersList;
 		private var twitchConnection : TwitchConnection;
 		public var onConnectCallback:Callback;
@@ -27,15 +28,16 @@ package com.giveawaytool.io.twitch {
 		}
 
 		public function fetchListOfSubsAdmin() : void {
-			offSetSub = 0;
+			offSetSub = "";
 			listOfSubs = new MetaSubscribersList();
 			fecthByBatchOf100();
 		}
 		
 		private function fecthByBatchOf100():void {
-			var url:String = "https://api.twitch.tv/kraken/channels/" + TwitchConnection.getAccountId() + "/subscriptions?oauth_token=" + twitchConnection.accessToken + "&api_version=5&scope=channel_subscriptions&limit=100&offset="+offSetSub;
+			var url:String = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=" + TwitchConnection.getAccountId() + "&first="+batchOf+"&after="+offSetSub;
 			var loader:URLLoader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			var headers :Array = twitchConnection.getHeaders();
+			
 			var request:URLRequest = new URLRequest(url);
 			request.requestHeaders = headers;
 			loader.load(request);
@@ -52,26 +54,28 @@ package com.giveawaytool.io.twitch {
 		private function onFetchListOfSubsAdmin(event : Event) : void {
 			var rawData:String = event.target.data;
 			var d:Dictionary = DataManager.stringToDictionnary(rawData);
-			var subs:Dictionary = d.subscriptions;
+			var subs:Dictionary = d.data;
 			var i:int = 0;
 			
 			while(subs[i] != null) {
 				var aSub:Dictionary = subs[i];
-				var aUser:Dictionary = aSub.user;
-				var userName:String = aUser.name;
-				var created_at:String = aSub.created_at;
+				//var aUser:Dictionary = aSub.user;
+				var userName:String = aSub.user_name;
+				/*var created_at:String = aSub.created_at;
 				created_at = created_at.substr(0, 10);
 				var a:Array = created_at.split("-");
 				var dateOfSubStart:Date = new Date(a[0], a[1], a[2]);
-				var numMonthInaRow:int = getNumMonth(dateOfSubStart, thisDate);
-				var metaSub:MetaSubscriber = MetaSubscriber.create2(userName, numMonthInaRow+1);
-				metaSub.date = dateOfSubStart;
+				var numMonthInaRow:int = getNumMonth(dateOfSubStart, thisDate);*/
+				var metaSub:MetaSubscriber = MetaSubscriber.create2(userName, 1);
+				//metaSub.date = dateOfSubStart;
 				listOfSubs.add(metaSub);
 				i++;
 			}
+			var pagination = d["pagination"];
+			var cursor = pagination["cursor"];
+			offSetSub = (cursor != null ? cursor : "");
 			
-			if(i >= 100) {
-				offSetSub += 100;
+			if(i >= batchOf) {
 				fecthByBatchOf100();
 			} else {
 				if(onConnectCallback) onConnectCallback.call();

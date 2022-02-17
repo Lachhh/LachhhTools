@@ -10,6 +10,7 @@ package com.giveawaytool.io.twitch {
 	public class MetaTwitchChannelData {
 		public var rawData : String ;
 		public var urlLogo : String ;
+		public var broadcaster_type : String ;
 		public var isPartner : Boolean ;
 		public var name : String;
 		public var logoBmpData : BitmapData;
@@ -17,14 +18,18 @@ package com.giveawaytool.io.twitch {
 		public var numFollowers:int = 0;
 		public var channedId:String = "";
 
-		public function decode(data : String) : void {
-			rawData = data;
-			var d:Dictionary = DataManager.stringToDictionnary(data);
-			urlLogo = d["logo"];
-			isPartner = d["partner"];
-			name = d["name"];
-			numFollowers = d["followers"];
-			channedId = d["_id"];
+		public function decode(pRawData : String) : void {
+			rawData = pRawData;
+			var d:Dictionary = DataManager.stringToDictionnary(rawData);
+			var data:Dictionary = d["data"];
+			var data0:Dictionary = data[0];
+			
+			urlLogo = data0["profile_image_url"];
+			broadcaster_type = data0["broadcaster_type"];
+			isPartner = (broadcaster_type == "partner");
+			name = data0["login"];
+			channedId = data0["id"];
+			
 			/*_id		
 			_links		
 			broadcaster_language		

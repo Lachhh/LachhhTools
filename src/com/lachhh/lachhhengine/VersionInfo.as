@@ -26,6 +26,7 @@ package com.lachhh.lachhhengine {
 		static public var URL_STREAMRPG:String = "https://www.patreon.com/StreamRPG";
 		static public var URL_GAMEWISP_LACHHHTOOLS:String = "https://www.gamewisp.com/LachhhTools";
 		static public var URL_JSB:String = "http://www.justshapesandbeats.com";
+		static public var URL_IX:String = "http://www.infernax.com";
 		static public var URL_ADOBE_LINK:String = "https://get.adobe.com/flashplayer/otherversions/";
 		static public var URL_OBS_BROWSER_LINK:String = "https://obsproject.com/forum/resources/browser-plugin.115/";
 		

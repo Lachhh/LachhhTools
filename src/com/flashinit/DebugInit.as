@@ -1,4 +1,5 @@
 package com.flashinit {
+	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.components.LogicIsSubToLachhh;
 	import com.giveawaytool.MainGameTools;
 	import com.giveawaytool.ui.UI_Menu;
@@ -32,7 +33,7 @@ package com.flashinit {
 			stage.addChild(m);
 			m.init();
 			new UI_Menu();
-			
+			MetaGameProgress.instance.firstLogin = true;
 			//LogicIsSubToLachhh.DEBUG_AlwaysShowAds = true;
 		}
 	}

@@ -339,7 +339,7 @@ package com {
 		
 		public function isModsRequest():Boolean {
 			if((rawMsg.indexOf("msg-id=room_mods") != 1)) return false;
-			if((rawMsg.indexOf(":The moderators of this room are:") == -1)) return false;
+			if((rawMsg.indexOf(":The moderators of this channel are:") == -1)) return false;
 			return true;
 		}
 		

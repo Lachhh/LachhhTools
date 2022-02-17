@@ -46,7 +46,7 @@ package com.giveawaytool.ui {
 			windowOptions.transparent = false;
 			windowOptions.resizable   = true;
 			windowOptions.minimizable = false;
-			windowOptions.renderMode = NativeWindowRenderMode.DIRECT;	
+			windowOptions.renderMode = NativeWindowRenderMode.GPU;	
 			
 			htmlLoader = HTMLLoader.createRootWindow(  true, windowOptions, false, new Rectangle( 610, 78, 780, 480) );
 			//htmlLoader.paintsDefaultBackground = false;

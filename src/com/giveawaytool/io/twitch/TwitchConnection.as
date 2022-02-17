@@ -103,7 +103,7 @@ package com.giveawaytool.io.twitch {
 			windowOptions.resizable = true;
 			windowOptions.minimizable = false;
 			
-			windowOptions.renderMode = NativeWindowRenderMode.DIRECT;	
+			windowOptions.renderMode = NativeWindowRenderMode.GPU;	
 			
 			
 			htmlLoader = HTMLLoader.createRootWindow(  true, windowOptions, false, new Rectangle( 610, 78, 780, 680) );
@@ -233,7 +233,14 @@ package com.giveawaytool.io.twitch {
 		
 		public function getConnectURL():String {
 			var redirect:String = VersionInfoDONTSTREAMTHIS.TWITCH_REDIRECT_URI;
-			var url:String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&api_version=5&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID + "&redirect_uri=" + redirect + "&force_verify=true&scope=user_read";
+			//var url:String = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&api_version=5&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID + "&redirect_uri=" + redirect + "&force_verify=true&scope=user_read";
+			
+			//https://id.twitch.tv/oauth2/authorize
+    /*?client_id=<your client ID>
+    &redirect_uri=<your registered redirect URI>
+    &response_type=<type>
+    &scope=<space-separated list of scopes>*/
+			var url:String = "https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID + "&redirect_uri=" + redirect + "&force_verify=true&scope=user_read";
 			url = url + "+channel_commercial";
 			url = url + "+chat_login";
 			url = url + "+user_subscriptions";
@@ -282,9 +289,10 @@ package com.giveawaytool.io.twitch {
 		}
 		
 		public function connectStep2FetchUsername():void {
-			var url:String = "https://api.twitch.tv/kraken?oauth_token=" + accessToken + "&scope=user_read&api_version=5";
+			var url:String = "https://api.twitch.tv/helix/users?scope=user_read";
 			var loader:URLLoader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			var headers :Array = getHeaders();
+			 
 			var request:URLRequest = new URLRequest(url);
 			request.requestHeaders = headers;
 			loader.load(request);
@@ -295,23 +303,27 @@ package com.giveawaytool.io.twitch {
 
 		private function onFetchUsername(event : Event) : void {
 			var rawData:String = event.target.data;
-			var d:Dictionary = DataManager.stringToDictionnary(rawData);
-			var token:Dictionary = d["token"];
-			var isValid:Boolean = token["valid"];
+			
+			channelData.decode(rawData);
+			
+			/*var isValid:Boolean = token["valid"];
 			if(!isValid) {
 				connectErrorMsg = "Looks like there a problem with twitch,  valid=false.";
 				onErrorConnectOnTwitch(null);
 				return ;
-			}
+			}*/
 			
-			username = token["user_name"];
-			userId = token["user_id"];
+			username = channelData.name;
+			userId = channelData.channedId;
 			isLoggedIn = true;
 			
 			checkIfIsLive();
 			
+			
 			if(isAdminConnect) {
-				checkIfPartnered();	
+				//checkIfPartnered();
+				
+				refreshSub(onConnect, onConnect);	
 			} else {
 				if(onConnect) onConnect.call();
 			}
@@ -319,10 +331,12 @@ package com.giveawaytool.io.twitch {
 		
 		
 		public function checkIfIsLive():void  {
-			var url:String = "https://api.twitch.tv/kraken/streams/" + getAccountId() + "?api_version=5";
+			var url:String = "https://api.twitch.tv/helix/streams?user_id=" + getAccountId() ;
+			//var url:String = "https://api.twitch.tv/helix/streams?user_login=" ;
+			
 			var loader:URLLoader = new URLLoader() ;
 			var request : URLRequest = new URLRequest(); 
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			var headers :Array = getHeaders();
 			request.requestHeaders = headers;
 			request.method = URLRequestMethod.GET; 
 			request.url = url;
@@ -335,15 +349,17 @@ package com.giveawaytool.io.twitch {
 		private function onCheckIfIsLive(event : Event) : void {
 			var rawData:String = event.target.data;
 			var d:Dictionary = DataManager.stringToDictionnary(rawData);
-			isLive = (d["stream"] != null);
+			var data = d["data"];
+			if(data == null) return;
+			isLive = (data[0] != null); 
 			
 		}
 		
-		private function checkIfPartnered():void  {
-			var url:String = "https://api.twitch.tv/kraken/channels/" + getAccountId()  + "?api_version=5";
+		/*private function checkIfPartnered():void  {
+			var url:String = "https://api.twitch.tv/helix/channels/" + getAccountId() ;
 			var loader:URLLoader = new URLLoader() ;
 			var request : URLRequest = new URLRequest(); 
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			var headers :Array = getHeaders();
 			request.requestHeaders = headers;
 			request.method = URLRequestMethod.GET; 
 			request.url = url;
@@ -351,9 +367,16 @@ package com.giveawaytool.io.twitch {
 			connectErrorMsg = "Problem looking if you're partnered";
 			loader.addEventListener(Event.COMPLETE, onCheckIfPartner);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onErrorConnectOnTwitch);
+		}*/
+		
+		public function getHeaders():Array {
+			var result :Array = [
+			new URLRequestHeader("Authorization",  "Bearer " + accessToken), 
+			new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			return result;
 		}
 
-		private function onCheckIfPartner(event : Event) : void {
+		/*private function onCheckIfPartner(event : Event) : void {
 			var rawData:String = event.target.data;
 			
 			channelData.decode(rawData);
@@ -363,7 +386,7 @@ package com.giveawaytool.io.twitch {
 			} else {
 				if(onConnect) onConnect.call();
 			}
-		}
+		}*/
 		
 		
 		

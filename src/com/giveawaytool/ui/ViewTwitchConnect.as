@@ -29,7 +29,7 @@ package com.giveawaytool.ui {
 			TwitchConnection.instance = new TwitchConnection(true);
 			TwitchConnection.instance.onConnect = new Callback(onConnected, this, null);
 			TwitchConnection.instance.onConnectError = new Callback(onError, this, null);
-			TwitchConnection.instance.accessToken = MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5;
+			TwitchConnection.instance.accessToken = MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenHelix;
 			
 			//GameWispConnection_DEPRECATED.getInstance().validateClientToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, null);
 			refresh();
@@ -55,7 +55,7 @@ package com.giveawaytool.ui {
 			UI_PopUp.createOkOnly("Oops! Something went wrong... : " + TwitchConnection.instance.connectErrorMsg, null);
 			firstAutoSign = false;
 			TwitchConnection.instance.accessToken = "";
-			MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5 = "";
+			MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenHelix = "";
 			MetaGameProgress.instance.saveToLocal();
 			refresh();
 		}
@@ -66,7 +66,7 @@ package com.giveawaytool.ui {
 			UI_Loading.hide();
 			UI_PopUp.closeAllPopups();
 			MetaGameProgress.instance.metaTwitchConnection.lastNameLogin = TwitchConnection.getNameOfAccount();
-			MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenV5 = TwitchConnection.instance.accessToken;
+			MetaGameProgress.instance.metaTwitchConnection.lastAccessTokenHelix = TwitchConnection.instance.accessToken;
 			
 			MetaGameProgress.instance.saveToLocal();
 			UI_Menu.instance.logicNotification.onConectedToTwitch();
@@ -77,9 +77,9 @@ package com.giveawaytool.ui {
 		}
 
 		private function onLogout() : void {
-			TwitchConnection.instance.logout(new Callback(onLogoutSuccess, this, null));
 			MetaGameProgress.instance.metaTwitchConnection.clear();
 			MetaGameProgress.instance.saveToLocal();
+			TwitchConnection.instance.logout(new Callback(onLogoutSuccess, this, null));
 		}
 
 		private function onLogoutSuccess() : void {

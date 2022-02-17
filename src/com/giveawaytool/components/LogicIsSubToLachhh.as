@@ -85,7 +85,7 @@ package com.giveawaytool.components {
 		public function shouldShowAnnoying():Boolean {
 			if(DEBUG_AlwaysShowAds) return true;
 			
-			if(!MetaGameProgress.instance.atLeastOneHasBeenTested()) return false;
+			if(MetaGameProgress.instance.firstLogin) return false;
 			if(!isLoaded) return false;
 			if(isBronzeTier()) return false;
 			if(isSilverTier()) return false;

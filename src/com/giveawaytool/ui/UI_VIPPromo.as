@@ -22,11 +22,14 @@ package com.giveawaytool.ui {
 			registerClick(lachhhBtn, onClickPatreon);
 			
 			registerClick(jsbBtn, onClickJSB);
-			registerClick(btn_googlePlay, onGooglePlay);
-			registerClick(btn_ios, oniOs);
+			registerClick(ixBtn, onClickIX);
+			
+			//registerClick(btn_googlePlay, onGooglePlay);
+			//registerClick(btn_ios, oniOs);
 			//registerClick(promoteBtn, onPromote);
 
 			setNameOfDynamicBtn(jsbBtn, "Website");
+			setNameOfDynamicBtn(ixBtn, "Website");
 			
 			refresh();
 		}
@@ -47,6 +50,10 @@ package com.giveawaytool.ui {
 			Utils.navigateToURLAndRecord(VersionInfo.URL_JSB);
 		}
 		
+		private function onClickIX() : void {
+			Utils.navigateToURLAndRecord(VersionInfo.URL_IX);
+		}
+		
 		private function onClickPatreon() : void {
 			Utils.navigateToURLAndRecord(VersionInfo.URL_TWITCH_LF);
 			CallbackTimerEffect.addWaitCallFctToActor(this, showSubMsg, 3000);
@@ -62,8 +69,10 @@ package com.giveawaytool.ui {
 		public function get lachhhBtn() : MovieClip { return visual.getChildByName("lachhhBtn") as MovieClip;}
 		public function get jsbBtn() : MovieClip { return visual.getChildByName("jsbBtn") as MovieClip;}
 		
-		public function get btn_googlePlay() : MovieClip { return visual.getChildByName("btn_googlePlay") as MovieClip;}
-		public function get btn_ios() : MovieClip { return visual.getChildByName("btn_ios") as MovieClip;}
+		/*public function get btn_googlePlay() : MovieClip { return visual.getChildByName("btn_googlePlay") as MovieClip;}
+		public function get btn_ios() : MovieClip { return visual.getChildByName("btn_ios") as MovieClip;}*/
+		
+		public function get ixBtn() : MovieClip { return visual.getChildByName("ixBtn") as MovieClip;}
 		public function get promoteBtn() : MovieClip { return visual.getChildByName("promoteBtn") as MovieClip;}
 		public function get hallOfFameMc() : MovieClip { return visual.getChildByName("hallOfFameMc") as MovieClip;}
 		
