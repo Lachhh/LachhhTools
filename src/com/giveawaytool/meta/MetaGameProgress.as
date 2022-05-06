@@ -1,7 +1,7 @@
 package com.giveawaytool.meta {
 	import com.giveawaytool.io.playerio.MetaGameWispSub;
 	import com.giveawaytool.io.twitch.MetaGameWispConnection;
-	import com.giveawaytool.io.playerio.MetaGameWispSubGroup;
+	import com.giveawaytool.io.playerio.MetLachhhToolSubGroup;
 	import com.giveawaytool.io.twitch.MetaTwithConnection;
 	import com.giveawaytool.meta.donations.MetaDonationsConfig;
 	import com.lachhh.lachhhengine.DataManager;
@@ -30,8 +30,8 @@ package com.giveawaytool.meta {
 		public var metaTwitchConnection : MetaTwithConnection;
 		
 		public var metaTwitchChat : MetaTwitchChat;
-		public var metaLachhhToolGameWispSub:MetaGameWispSubGroup;
-		public var metaMyGameWispSub:MetaGameWispSubGroup;
+		public var metaLachhhToolGameWispSub:MetLachhhToolSubGroup;
+		public var metaMyGameWispSub:MetLachhhToolSubGroup;
 		public var metaGameWispConnection : MetaGameWispConnection;
 		
 		public var metaEmoteFireworksSettings : MetaEmoteFireworksSettings;
@@ -64,8 +64,8 @@ package com.giveawaytool.meta {
 			metaCheerAlertConfig = new MetaCheerConfig();
 			metaHostAlertConfig = new MetaHostConfig();
 			metaEmoteFireworksSettings = new MetaEmoteFireworksSettings(); 
-			metaLachhhToolGameWispSub = new MetaGameWispSubGroup();
-			metaMyGameWispSub = new MetaGameWispSubGroup();
+			metaLachhhToolGameWispSub = new MetLachhhToolSubGroup();
+			metaMyGameWispSub = new MetLachhhToolSubGroup();
 			metaGameWispConnection = new MetaGameWispConnection();
 		}
 		

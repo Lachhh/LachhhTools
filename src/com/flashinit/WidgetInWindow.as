@@ -48,8 +48,9 @@ package com.flashinit {
 			newWindow.activate();
 			newWindow.bounds = new Rectangle(0,0, 1280, 720);
 			newWindow.title = "LachhhTools OBS ALERTS";
-			newWindow.orderInBackOf(mainWindow); 
-			
+		
+			newWindow.orderInBackOf(mainWindow);
+	
 			newWindow.activate();
 			loadSwf(null);
 			//newWindow.stage.addChild(new ReleaseDonationInit());

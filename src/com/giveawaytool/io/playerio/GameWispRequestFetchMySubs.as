@@ -17,7 +17,7 @@ package com.giveawaytool.io.playerio {
 		public var callbackOnSuccess : Callback;
 		public var callbackOnError : Callback;
 		private var accessToken : String;
-		public var metaChannelSubsGroup : MetaGameWispSubGroup;
+		public var metaChannelSubsGroup : MetLachhhToolSubGroup;
 		private var metaChannelInfo : MetaGameWispChannelInfo;
 		private var cursor : String;
 		private var limit : int = 50;
@@ -29,7 +29,7 @@ package com.giveawaytool.io.playerio {
 
 		public function loadRequest() : void {		
 			cursor = "";	
-			metaChannelSubsGroup = new MetaGameWispSubGroup();
+			metaChannelSubsGroup = new MetLachhhToolSubGroup();
 			loadRequestNextCursor();
 		}
 		
@@ -47,11 +47,11 @@ package com.giveawaytool.io.playerio {
 		}
 
 		private function onComplete(event : Event) : void {
-			var metaChannelSubsGroupBatch:MetaGameWispSubGroup = new MetaGameWispSubGroup();
+			var metaChannelSubsGroupBatch:MetLachhhToolSubGroup = new MetLachhhToolSubGroup();
 			try {
 				rawData = event.target.data;
 				var d:Dictionary = DataManager.stringToDictionnary(rawData);
-				metaChannelSubsGroupBatch = MetaGameWispSubGroup.createFromRawData(d);
+				metaChannelSubsGroupBatch = MetLachhhToolSubGroup.createFromRawData(d);
 			} catch(e:Error) {
 				
 			}

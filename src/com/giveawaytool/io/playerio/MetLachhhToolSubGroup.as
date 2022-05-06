@@ -7,11 +7,11 @@ package com.giveawaytool.io.playerio {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class MetaGameWispSubGroup {
+	public class MetLachhhToolSubGroup {
 		public var isLoaded : Boolean = false;
 		public var listOfSub : Vector.<MetaGameWispSub> = new Vector.<MetaGameWispSub>();
 
-		public function MetaGameWispSubGroup() {
+		public function MetLachhhToolSubGroup() {
 			//DEBUG_FillWithDummy();
 		}
 
@@ -22,7 +22,7 @@ package com.giveawaytool.io.playerio {
 		}
 		
 		public function fetchSubOnServers():void {
-			 MetaServerProgress.instance.loadAllGameWishSub(this, new Callback(removeInactive, this, null), null);
+			 MetaServerProgress.instance.loadAllLachhhToolsSub(this, new Callback(removeInactive, this, null), null);
 		}
 		
 		private function removeInactive():void {
@@ -95,7 +95,7 @@ package com.giveawaytool.io.playerio {
 			}
 		}
 		
-		public function append(metaChannelSubsGroupBatch : MetaGameWispSubGroup) : void {
+		public function append(metaChannelSubsGroupBatch : MetLachhhToolSubGroup) : void {
 			listOfSub = new Vector.<MetaGameWispSub>();
 			for (var i : int = 0; i < metaChannelSubsGroupBatch.listOfSub.length; i++) {
 				listOfSub.push(metaChannelSubsGroupBatch.listOfSub[i]);
@@ -112,8 +112,8 @@ package com.giveawaytool.io.playerio {
 			 return result;
 		}
 		
-		static public function createFromRawData(d:Dictionary):MetaGameWispSubGroup {
-			var result:MetaGameWispSubGroup = new MetaGameWispSubGroup();
+		static public function createFromRawData(d:Dictionary):MetLachhhToolSubGroup {
+			var result:MetLachhhToolSubGroup = new MetLachhhToolSubGroup();
 			if(d == null) return result;
 			if(d["data"] == null) return result;
 			var listObj:Object = d["data"];

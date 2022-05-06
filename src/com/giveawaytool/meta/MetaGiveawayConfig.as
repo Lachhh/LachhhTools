@@ -89,6 +89,21 @@ package com.giveawaytool.meta {
 			return result;
 		}
 		
+		public function removeSub():Array {
+			var result:Array = new Array();
+			if(!TwitchConnection.isLoggedIn()) return result;
+			for (var i : int = 0; i < participants.length; i++) {
+				var metaParticipant:MetaParticipant = participants[i];
+				if(TwitchConnection.instance.listOfSubs.containsName(metaParticipant.name)) {
+					result.push(metaParticipant);
+					participants.splice(i, 1);
+					i--;
+				}
+			}
+			
+			return result;
+		}
+		
 		public function removeNonMod():Array {
 			var result:Array = new Array();
 			if(!TwitchConnection.isLoggedIn()) return result;

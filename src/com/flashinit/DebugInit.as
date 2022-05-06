@@ -33,8 +33,9 @@ package com.flashinit {
 			stage.addChild(m);
 			m.init();
 			new UI_Menu();
-			MetaGameProgress.instance.firstLogin = true;
-			//LogicIsSubToLachhh.DEBUG_AlwaysShowAds = true;
+			//MetaGameProgress.instance.firstLogin = true;
+			LogicIsSubToLachhh.DEBUG_AlwaysShowAds = true;
+			
 		}
 	}
 }

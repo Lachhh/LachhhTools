@@ -68,5 +68,11 @@ package com.giveawaytool.components {
 			if(TwitchConnection.instance.isUserAmemberOfKOTS()) return true;
 			return false;
 		}
+		
+		static public function isLachhh():Boolean {
+			if(TwitchConnection.instance == null) return false;
+			if(TwitchConnection.instance.isLachhhAndFriends()) return true;
+			return false;
+		}
 	}
 }

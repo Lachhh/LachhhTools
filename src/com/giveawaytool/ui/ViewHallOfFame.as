@@ -1,5 +1,5 @@
 package com.giveawaytool.ui {
-	import com.giveawaytool.io.playerio.MetaGameWispSubGroup;
+	import com.giveawaytool.io.playerio.MetLachhhToolSubGroup;
 	import com.giveawaytool.io.playerio.MetaGameWispSub;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.views.ViewScrollBar;
@@ -71,7 +71,7 @@ package com.giveawaytool.ui {
 			addIfNotInList(metaTotal, metaManual);
 			removeLachhh();
 			// metaTotal = metaTotal.concat(metaManual);
-			MetaGameWispSubGroup.sortNext(metaTotal);
+			MetLachhhToolSubGroup.sortNext(metaTotal);
 			
 			crntPageTxt.text = crntPage + "";
 			totalPagesTxt.text = "/ " + totalPages;

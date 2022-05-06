@@ -33,11 +33,14 @@ package com.giveawaytool.ui.views {
 			new ViewNeedToBeOnline(screen, needOnlineMc3);
 			new ViewNeedToBeOnline(screen, needOnlineMc4);
 			new ViewNeedToBeOnline(screen, needOnlineMc5);
+			new ViewNeedToBeOnline(screen, needOnlineMc6);
+			
 			
 			uiMainMenu = (screen as UI_GiveawayMenu);
 			screen.setNameOfDynamicBtn(addFromListBtn, "Add Manually");
 			screen.setNameOfDynamicBtn(fetchFromIRCBtn, "Add Viewers");
 			screen.setNameOfDynamicBtn(addSubsBtn, "Add Subs");
+			screen.setNameOfDynamicBtn(removeSubBtn, "Remove\nSubs");
 			screen.setNameOfDynamicBtn(keepOnlySubBtn, "Remove\nnon-subs");
 			screen.setNameOfDynamicBtn(addModBtn, "Add Mods");
 			screen.setNameOfDynamicBtn(keepOnlyModBtn, "Remove\nnon-mod");
@@ -45,9 +48,12 @@ package com.giveawaytool.ui.views {
 			
 			
 			
+			
+			
 			pScreen.registerClick(addFromListBtn, onAddFromList);
 			pScreen.registerClick(fetchFromIRCBtn, onIRC);
 			pScreen.registerClick(addSubsBtn, onAddSubs);
+			pScreen.registerClick(removeSubBtn, onRemoveSubs);
 			pScreen.registerClick(keepOnlySubBtn, onKeepSubsOnly);
 			pScreen.registerClick(clearBtn, onClear);
 
@@ -132,6 +138,20 @@ package com.giveawaytool.ui.views {
 			uiMainMenu.viewGiveaway.viewNameList.refresh();
 			refresh();
 		}
+		
+		private function onRemoveSubs() : void {
+			if(uiMainMenu.viewGiveaway.viewNameList.isLoading()) return ;
+			if(!TwitchConnection.isLoggedIn()) {
+				UI_PopUp.createTwitchLoginRequired();
+				return ;
+			}
+			
+			var trimmedNames:Array = MetaGameProgress.instance.metaGiveawayConfig.removeSub();
+			uiMainMenu.viewGiveaway.viewNameList.removeViewFromNames(trimmedNames);
+			uiMainMenu.viewGiveaway.viewNameList.setNames(MetaGameProgress.instance.metaGiveawayConfig.participants);
+			uiMainMenu.viewGiveaway.viewNameList.refresh();
+		}
+
 		
 		private function onSubRefreshError() : void {
 			uiMainMenu.viewGiveaway.viewNameList.showLoading(false);
@@ -300,6 +320,8 @@ package com.giveawaytool.ui.views {
 		public function get addModBtn() : ButtonSelect { return visual.getChildByName("addModBtn") as ButtonSelect;}
 		public function get keepOnlyModBtn() : ButtonSelect { return visual.getChildByName("keepOnlyModBtn") as ButtonSelect;}
 		public function get clearBtn() : ButtonSelect { return visual.getChildByName("clearBtn") as ButtonSelect;}
+		public function get removeSubBtn() : ButtonSelect { return visual.getChildByName("removeSubBtn") as ButtonSelect;}
+		
 		
 		
 		
@@ -309,7 +331,8 @@ package com.giveawaytool.ui.views {
 		public function get needOnlineMc2() : MovieClip { return visual.getChildByName("needOnlineMc2") as MovieClip;}
 		public function get needOnlineMc3() : MovieClip { return visual.getChildByName("needOnlineMc3") as MovieClip;}
 		public function get needOnlineMc4() : MovieClip { return visual.getChildByName("needOnlineMc4") as MovieClip;}
-		public function get needOnlineMc5() : MovieClip { return visual.getChildByName("needOnlineMc5") as MovieClip;}	
+		public function get needOnlineMc5() : MovieClip { return visual.getChildByName("needOnlineMc5") as MovieClip;}
+		public function get needOnlineMc6() : MovieClip { return visual.getChildByName("needOnlineMc6") as MovieClip;}	
 		
 	}
 }

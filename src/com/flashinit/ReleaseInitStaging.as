@@ -9,14 +9,16 @@ package com.flashinit {
 	/**
 	 * @author LachhhSSD
 	 */
-	public class ReleaseInitEXE extends Sprite {
-		public function ReleaseInitEXE() {
+	public class ReleaseInitStaging extends Sprite {
+		public function ReleaseInitStaging() {
 			
 			VersionInfo.isDebug = false;
 			var m:MainGameTools = new MainGameTools();
 			stage.addChild(m);
 			m.init();
-			new UI_Updater("http://lachhhAndFriends.com/twitchTool/update_flashEXE.xml");
+			//new UI_Updater("http://lachhhAndFriends.com/twitchTool/update_flashEXE.xml");
+			new UI_Updater("http://lachhhtools.com/dl/staging/update_flash.xml");
+			
 		}				
 	}
 }

@@ -1,4 +1,5 @@
 package com.giveawaytool.components {
+	import com.giveawaytool.ui.UI_PopUp;
 	import playerio.DatabaseObject;
 
 	import com.giveawaytool.MainGameTools;
@@ -55,8 +56,10 @@ package com.giveawaytool.components {
 			MetaGameProgress.instance.metaGameWispClientSubToLachhhTools = MetaGameWispSub.createFromDb(db); 
 		
 			isLoaded = true;
-			if(LogicVIPAccess.isAdminAccess()) {
-				//logicServerGameWisp.fetchServerData();
+			
+			if (LogicVIPAccess.isLachhh()) {
+				MetaServerProgress.instance.refreshTwitchSubAdmin(TwitchConnection.instance.accessToken, new Callback(onSuccessRefreshSubAdmin, this, null), new Callback(onLoginError, this, null));
+				// logicServerGameWisp.fetchServerData();
 			} else {
 				//logicServerGameWisp.validateToken(MetaGameProgress.instance.metaGameWispConnection.lastAccessToken, new Callback(onValidate, this, null));
 			}
@@ -64,7 +67,13 @@ package com.giveawaytool.components {
 			if(success) success.call();
 		}
 
+		private function onSuccessRefreshSubAdmin() : void {
+			//UI_PopUp.createOkOnly("Sub Database refreshed, Lachhh!", null);
+			trace("Sub Database refreshed, Lachhh!");
+		}
+
 		private function onValidate() : void {
+			
 			//MetaGameProgress.instance.metaGameWispConnection.lastAccessToken = "";
 		}
 		
@@ -73,13 +82,13 @@ package com.giveawaytool.components {
 			if(!shouldShowAnnoying()) return ;
 			/*new UI_LachhhToolsAds2();
 			return ;*/ 
-			if(Math.random() < 0.5) {
+			
+			new UI_AnnoyingPopup();
+			/*if(Math.random() < 0.5) {
 				new UI_AnnoyingPopup();
-			/*} else if(Math.random() < 0.5) { 
-				new UI_LachhhToolsAds();*/
 			} else {
 				new UI_LachhhToolsAds2();
-			}
+			}*/
 		}
 		
 		public function shouldShowAnnoying():Boolean {

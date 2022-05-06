@@ -1,4 +1,5 @@
 package com.giveawaytool.ui {
+	import flash.desktop.NativeApplication;
 	import air.update.ApplicationUpdater;
 	import air.update.events.DownloadErrorEvent;
 	import air.update.events.StatusUpdateErrorEvent;
@@ -9,11 +10,12 @@ package com.giveawaytool.ui {
 	import com.giveawaytool.effect.EffectFlashColor;
 	import com.giveawaytool.effect.EffectFlashColorFadeIn;
 	import com.lachhh.io.Callback;
+	import com.lachhh.lachhhengine.VersionInfo;
 	import com.lachhh.lachhhengine.animation.AnimationFactory;
 	import com.lachhh.lachhhengine.ui.UIBase;
+	import com.lachhh.utils.Utils;
 
 	import flash.display.MovieClip;
-	import flash.display.NativeWindow;
 	import flash.events.ErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.text.TextField;
@@ -114,10 +116,14 @@ package com.giveawaytool.ui {
 		}
 		//start the download of the new version
 		function startDownload():void {
-			appUpdater.downloadUpdate();
+			Utils.navigateToURLAndRecord(VersionInfo.URL_LACHHHTOOLS);
+			NativeApplication.nativeApplication.exit();
+			//closeWindow();
+			
+			/*appUpdater.downloadUpdate();
 			loadingSpinMc.visible = true;
 			updateTxt.text = "Downloading...(0%)";
-			skipBtn.visible = false;
+			skipBtn.visible = false;*/
 			//createWindow();
 			//windowContent.bar.visible = true;
 			//windowContent.bar.setProgress(0, 100);

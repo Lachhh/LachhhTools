@@ -32,6 +32,7 @@ package com.giveawaytool.ui {
 			super(AnimationFactory.ID_UI_MENU);
 			instance = this;
 			
+						
 			renderComponent.animView.stop();
 			renderComponent.animView.addChildOnNewParent(DefaultMainGame.UI_CONTAINER_ABOVE);
 

@@ -1,4 +1,5 @@
 package com.giveawaytool.io.playerio {
+	import com.giveawaytool.io.twitch.TwitchConnection;
 	import playerio.Client;
 	import playerio.Connection;
 	import playerio.Message;
@@ -90,7 +91,7 @@ package com.giveawaytool.io.playerio {
 		public function SecureConnectTwitch(pAuthToken:String, success : Callback, error : Callback):void {
 			partner = "twitch";
 			msgAuthType = "authTwitch";
-			userId = "twitchUser";
+			userId = TwitchConnection.getAccountId();
 			authToken = pAuthToken;
 			
 			SecureConnect(success, error);

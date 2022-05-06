@@ -13,8 +13,8 @@ package com.giveawaytool.io.playerio {
 			
 		}
 		
-		public function refreshTwitchSub(authCode:String,success : Callback, failure : Callback) : void {
-			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.refreshTwitchSub(authCode, success, failure);
+		public function refreshTwitchSubAdmin(authCode:String,success : Callback, failure : Callback) : void {
+			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.refreshTwitchSubAdmin(authCode, success, failure);
 		}
 		
 		public function refreshTwitchSubLachhh(authCode:String,userId:String, success : Callback, failure : Callback) : void {
@@ -29,9 +29,9 @@ package com.giveawaytool.io.playerio {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getStreamLabsAccesssToken(authCode, success, failure);
 		}
 		
-		public function getGameWispAccessToken(authCode:String, success : Callback, failure : Callback) : void {
+		/*public function getGameWispAccessToken(authCode:String, success : Callback, failure : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.getGamewispAccessToken(authCode, success, failure);
-		}
+		}*/
 		
 		public function sendNewGamewispToken_DEPRECATED(accessToken:String, success : Callback, failure : Callback) : void {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.connectionGameRoom.SendNewGameWispToken(accessToken, success, failure);
@@ -45,8 +45,8 @@ package com.giveawaytool.io.playerio {
 			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.LoadMySub(str, success, errorCall);
 		}
 		
-		public function loadAllGameWishSub(m:MetaGameWispSubGroup, success : Callback, errorCall : Callback) : void {
-			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.LoadAllGameWispDub(m, success, errorCall);
+		public function loadAllLachhhToolsSub(m:MetLachhhToolSubGroup, success : Callback, errorCall : Callback) : void {
+			PlayerIOLachhhRPGController.getInstance().mySecuredConnection.LoadAllLachhhToolsSub(m, success, errorCall);
 		}
 		
 		

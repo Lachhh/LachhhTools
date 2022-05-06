@@ -64,10 +64,10 @@ package com.giveawaytool.io.playerio {
 			connection.send("getTwitchAccessToken", authCode);
 		}
 		
-		public function refreshTwitchSub(authCode: String, success : Callback, failure : Callback) : void {
+		public function refreshTwitchSubAdmin(authCode: String, success : Callback, failure : Callback) : void {
 			refreshTwitchSubSuccess.onMsg = success;
 			refreshTwitchSubFailure.onMsg = failure;
-			connection.send("refreshTwitchSub", authCode);
+			connection.send("refreshTwitchSubAdmin", authCode);
 		}
 		
 		public function refreshTwitchSubLachhh(authCode: String, userId: String, success : Callback, failure : Callback) : void {
@@ -95,11 +95,11 @@ package com.giveawaytool.io.playerio {
 			connection.send("getGamewispData");
 		}
 
-		public function getGamewispAccessToken(authCode : String, success : Callback, failure : Callback) : void {
+		/*public function getGamewispAccessToken(authCode : String, success : Callback, failure : Callback) : void {
 			getGamewispTokenSuccess.onMsg = success;
 			getGamewispTokenFailure.onMsg = failure;
 			connection.send("getGamewispAccessToken", authCode);
-		}
+		}*/
 	}
 }
 

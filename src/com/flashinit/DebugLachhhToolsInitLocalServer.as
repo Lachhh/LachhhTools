@@ -1,5 +1,6 @@
 package com.flashinit {
 	import com.giveawaytool.MainGameTools;
+	import com.giveawaytool.components.LogicIsSubToLachhh;
 	import com.giveawaytool.ui.UI_Menu;
 	import com.lachhh.lachhhengine.VersionInfo;
 
@@ -16,6 +17,7 @@ package com.flashinit {
 			stage.addChild(m);
 			m.init();
 			new UI_Menu();
+			LogicIsSubToLachhh.DEBUG_AlwaysShowAds = true;
 		}
 	}
 }

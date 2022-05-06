@@ -13,10 +13,9 @@ package com.giveawaytool.io.twitch {
 	 * @author LachhhSSD
 	 */
 	public class TwitchRequestFollower {
-		const TWITCH_API_BASE:String = "https://api.twitch.tv/kraken/";
-		const TWITCH_API_VERSION:String = "application/vnd.twitchtv.v3+json";
+		const TWITCH_API_BASE:String = "https://api.twitch.tv/helix/users/follows";
 		
-		private var offSetFollow : int;
+		private var offSetFollow : String;
 		private var twitchConnection : TwitchConnection;
 		public var onSuccessCallback:Callback;
 		public var onErrorCallback:Callback;
@@ -30,22 +29,20 @@ package com.giveawaytool.io.twitch {
 		}
 
 		public function fetchLast100Followers() : void {
-			offSetFollow = 0;
+			offSetFollow = "";
 			fecthByBatchOf100();
 		}
 		
 		private function fecthByBatchOf100():void {
-			var parameters:String = "?direction=DESC"; // newest to oldest
-			parameters += "&limit=" + 100; // how many objects returned. 25 = default, 100 = max
-			parameters += "&offset=" + offSetFollow; // where to start in the list
-			parameters += "&api_version=5"; // where to start in the list
-			parameters += "&client_id=" + VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID; // for good measure
+			var parameters:String = "?to_id=" + TwitchConnection.getAccountId(); // newest to oldest
+			parameters += "&first=" + 100; // how many objects returned. 25 = default, 100 = max
+			parameters += "&after=" + offSetFollow; // where to start in the list
 			
-			var request:URLRequest = new URLRequest(TWITCH_API_BASE + "channels/" + TwitchConnection.getAccountId() + "/follows" + parameters);
-			request.contentType = TWITCH_API_VERSION;
+			var request:URLRequest = new URLRequest(TWITCH_API_BASE + parameters);
+			//request.contentType = TWITCH_API_VERSION;
 			
 			loader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			var headers :Array = twitchConnection.getHeaders();
 			
 			request.requestHeaders = headers;
 			

@@ -3,7 +3,7 @@ package com.giveawaytool.components {
 	import com.MetaIRCMessage;
 	import com.giveawaytool.effect.CallbackTimerEffect;
 	import com.giveawaytool.io.playerio.MetaGameWispSub;
-	import com.giveawaytool.io.playerio.MetaGameWispSubGroup;
+	import com.giveawaytool.io.playerio.MetLachhhToolSubGroup;
 	import com.giveawaytool.io.twitch.TwitchConnection;
 	import com.giveawaytool.meta.MetaGameProgress;
 	import com.giveawaytool.ui.MetaSubcriberAlert;
@@ -54,7 +54,7 @@ package com.giveawaytool.components {
 			trace("Looking for new followers...");
 		}
 		
-		public function HandleGameWispSub(metaData:MetaGameWispSubGroup):void{
+		public function HandleGameWispSub(metaData:MetLachhhToolSubGroup):void{
 			
 			//TEST_removeFlamingStatusLocally();
 			

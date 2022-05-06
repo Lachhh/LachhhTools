@@ -129,7 +129,7 @@ package com.giveawaytool.io.playerio {
 			TraceMsg("Loading Data...");
 		}
 		
-		public function LoadAllGameWispDub(m:MetaGameWispSubGroup, success:Callback, errorCall:Callback):void {
+		public function LoadAllLachhhToolsSub(m:MetLachhhToolSubGroup, success:Callback, errorCall:Callback):void {
 			if(!connected) return; 
 			var offset:int = 0;
 			_client.bigDB.loadRange("GamewispData","ByName", null, null, null, 1000,   

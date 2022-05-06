@@ -30,6 +30,7 @@ package com.lachhh.lachhhengine {
 		static public var URL_ADOBE_LINK:String = "https://get.adobe.com/flashplayer/otherversions/";
 		static public var URL_OBS_BROWSER_LINK:String = "https://obsproject.com/forum/resources/browser-plugin.115/";
 		
+		static public var URL_LACHHHTOOLS:String = "http://www.lachhhtools.com/";
 		static public var URL_DISCORD:String = "http://www.lachhhtools.com/discord";
 		
 		static public var URL_SUB_ALERT:String = "https://www.youtube.com/embed/4WArVMN5Q2s";

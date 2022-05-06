@@ -1,4 +1,5 @@
 package com.giveawaytool.ui.views {
+	import com.giveawaytool.io.twitch.TwitchConnection;
 	import flash.utils.Dictionary;
 	/**
 	 * @author LachhhSSD
@@ -126,12 +127,17 @@ package com.giveawaytool.ui.views {
 		static public function createFromTwitchData(data:String):MetaFollowerList {
 			var jsonData:Object = JSON.parse(data);
 			var result:MetaFollowerList = new MetaFollowerList();
-			var rawFollowObjects:Array = jsonData["follows"];
+			var rawFollowObjects:Array = jsonData["data"];
+			var pagination:Object = jsonData["pagination"];
+			var total:int = jsonData["total"] as int;
+			var cursorString = pagination["cursor"];
+			TwitchConnection.instance.channelData.numFollowers = total;
+			
 			var i:int;
 			if(rawFollowObjects == null) return result;
 			for(i = 0; i < rawFollowObjects.length; i++){
-				var name:String = rawFollowObjects[i]["user"]["name"];
-				var rawDateString:String = rawFollowObjects[i]["created_at"];
+				var name:String = rawFollowObjects[i]["from_name"];
+				var rawDateString:String = rawFollowObjects[i]["followed_at"];
 				var date:Date = parseDateFromTwitchFormat(rawDateString);
 				var metaFollow:MetaFollower = MetaFollower.create2(name, date);
 				metaFollow.isNew = false;

@@ -31,7 +31,7 @@ package com.giveawaytool.io.twitch {
 			
 			var url:String = getUrl();
 			var loader:URLLoader = new URLLoader() ;
-			var headers :Array = [ new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			var headers :Array = getHeaders();
 			var request:URLRequest = new URLRequest(url);
 			request.requestHeaders = headers;
 			loader.load(request);
@@ -43,13 +43,41 @@ package com.giveawaytool.io.twitch {
 		private function onBadgeURLoaded(event : Event) : void {
 			
 			var d:Dictionary = DataManager.stringToDictionnary(event.target.data);
-			var sub:Dictionary = d["subscriber"];
-			var urlBadge:String = sub["image"];
-			DataManager.loadImage(urlBadge, new Callback(onBmpLoaded, this, null), new Callback(onIOError, this, null));
+			var data:Dictionary = d["data"];
+			var data0:Dictionary = findSubBadge(data);
+			if(data0 == null) {
+				onIOError(null);
+				return;
+			}
+			var versions:Dictionary = data0["versions"];
+			var urlBadge1x:String = versions[0]["image_url_1x"];
+			var urlBadge2x:String = versions[0]["image_url_2x"];
+			var urlBadge4x:String = versions[0]["image_url_4x"];
+			DataManager.loadImage(urlBadge1x, new Callback(onBmpLoaded, this, null), new Callback(onIOError, this, null));
+		}
+		
+		private function findSubBadge(dataArray:Dictionary):Dictionary {
+			if(dataArray == null) return null;
+			var i:int = 0;
+			var dataI:Dictionary = dataArray[i];
+			while(dataI != null) {
+				var set_id:String = dataI["set_id"];
+				if(set_id == "subscriber") return dataI;
+				i++;
+				dataI = dataArray[i];
+			}
+			return dataArray[0];
 		}
 		
 		private function getUrl():String {
-			return "https://api.twitch.tv/kraken/chat/" + TwitchConnection.getAccountId() + "/badges?api_version=5";
+			return "https://api.twitch.tv/helix/chat/badges?broadcaster_id="+TwitchConnection.getAccountId();
+		}
+		
+		public function getHeaders():Array {
+			var result :Array = [
+			new URLRequestHeader("Authorization",  "Bearer " + twitchConnection.accessToken), 
+			new URLRequestHeader("Client-ID",  VersionInfoDONTSTREAMTHIS.TWITCH_CLIENT_ID)];
+			return result;
 		}
 		
 		

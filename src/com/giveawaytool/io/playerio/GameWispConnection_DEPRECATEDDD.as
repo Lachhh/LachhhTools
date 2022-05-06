@@ -22,7 +22,7 @@ package com.giveawaytool.io.playerio {
 		private var callbackOnSuccess : Callback;
 		private var callbackOnError : Callback;
 		public var metaChannelInfo : MetaGameWispChannelInfo;
-		public var metaChannelSubsGroup : MetaGameWispSubGroup = new MetaGameWispSubGroup();
+		public var metaChannelSubsGroup : MetLachhhToolSubGroup = new MetLachhhToolSubGroup();
 
 		static public function getInstance() : GameWispConnection_DEPRECATEDDD {
 			if(instance == null) {
@@ -52,7 +52,7 @@ package com.giveawaytool.io.playerio {
 
 		private function onStep1Done() : void {
 			isClientTokenValid = false;
-			MetaServerProgress.instance.getGameWispAccessToken(authCode, new Callback(onAuthSuccess, this, null), new Callback(onAuthError, this, null));
+			//MetaServerProgress.instance.getGameWispAccessToken(authCode, new Callback(onAuthSuccess, this, null), new Callback(onAuthError, this, null));
 			
 		}
 
